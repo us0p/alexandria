@@ -1,0 +1,3 @@
+[ ] - Blueprints
+[ ] - Testing patterns
+[ ] - Application patterns

@@ -1,0 +1,61 @@
+reverse(viewname, urlconf=None, args=None, kwargs=None, current_app=None)
+Produces the url for a given viewname or URL name.
+
+If no match can be made, reverse() raises a NoReverseMatch exception.
+args and kwargs cannot be used at the same time.
+
+- viewname: Can be a URL pattern name or the callable view object. Passing 
+  a callable object is discouraged because itsn't possible to reverse 
+  namespaced views this way.
+- urlconf: The urlconf argument is the URLconf module containing the URL 
+  patterns to use for reversing. By default, the root URLconf for the 
+  current thread is used.
+- args: Represents URL arguments.
+- kwargs: Same as args but in form of a dictionary.
+- current_app: Is used as a hint to resolve application namespaces into 
+  URLs on specific application instances, according to the namespaced URL 
+  resolution strategy.
+
+The string returned by reverse() is already urlquoted. 
+
+
+reverse_lazy(viewname, urlconf=None, args=None, kwargs=None, current_app=None)
+A lazy evaluated version of reverse().
+
+It is useful for when you need to use a URL reversal before your project’s 
+URLConf is loaded. Some common cases where this function is necessary are:
+
+- providing a reversed URL as the url attribute of a generic 
+  class-based view.
+- providing a reversed URL to a decorator (such as the login_url 
+  argument for the django.contrib.auth.decorators.permission_required()
+  decorator).
+- providing a reversed URL as a default value for a parameter in a 
+  function’s signature.
+
+
+resolve(path, urlconf=None)
+Can be used for resolving URL paths to the corresponding view functions.
+
+- path: is the URL path you want to resolve.
+- urlconf: The urlconf argument is the URLconf module containing the URL 
+  patterns to use for reversing. By default, the root URLconf for the 
+  current thread is used.
+
+Returns a ResolverMatch object that allows you to access various metadata 
+about the resolved URL.
+
+If the URL does not resolve, the function raises a Resolver404 exception.
+
+
+get_script_prefix()
+If your application constructs part of the URL hierarchy itself, you may 
+occasionally need to generate URLs. In that case, you need to be able to 
+find the base URL of the Django project within its web server (normally, 
+reverse() takes care of this for you). In that case, you can call 
+get_script_prefix(), which will return the script prefix portion of the URL
+for your Django project. If your Django project is at the root of its web 
+server, this is always "/".
+
+This function cannot be used outside of the request-response cycle since it
+relies on values initialized during that cycle.

@@ -1,0 +1,9 @@
+Exception handling
+Django automatically converts exceptions raised by the view or by 
+middleware into an appropriate HTTP response with an error status code. 
+Certain exceptions are converted to 4xx status codes, while an unknown 
+exception is converted to a 500 status code.
+This conversion takes place before and after each middleware (you can think
+of it as the thin film in between each layer of the onion), so that every 
+middleware can always rely on getting some kind of HTTP response back from 
+calling its get_response callable

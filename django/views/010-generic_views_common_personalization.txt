@@ -1,0 +1,133 @@
+More detailed information at: https://docs.djangoproject.com/en/5.1/ref/class-based-views/
+
+Adding extra context
+Often you need to present some extra information beyond that provided by 
+the generic view.
+
+The answer is to subclass the generic view and provide your own 
+implementation of the get_context_data method. The default implementation 
+adds the object being displayed to the template, but you can override it to
+send more:
+
+```python
+from django.views.generic import DetailView
+from books.models import Book, Publisher
+
+
+class PublisherDetailView(DetailView):
+    model = Publisher
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+
+        # Add in a QuerySet of all the books
+        context["book_list"] = Book.objects.all()
+        return context
+```
+
+Note: Generally, get_context_data will merge the context data of all parent
+      classes with those of the current class. To preserve this behavior in
+      your own classes where you want to alter the context, you should be 
+      sure to call get_context_data on the super class.
+
+
+Viewing subsets of objects
+The model argument, which specifies the database model that the view will 
+operate upon, is available on all the generic views that operate on a 
+single object or a collection of objects. However, the model argument is 
+not the only way to specify the objects that the view will operate upon – 
+you can also specify the list of objects using the queryset argument:
+
+```python
+from django.views.generic import DetailView
+from books.models import Publisher
+
+
+class PublisherDetailView(DetailView):
+    context_object_name = "publisher"
+    queryset = Publisher.objects.all()
+```
+
+Specifying model = Publisher is shorthand for saying 
+
+queryset = Publisher.objects.all()
+
+However, by using queryset to define a filtered list of objects you can be 
+more specific about the objects that will be visible in the view.
+
+Dynamic filtering
+Another common need is to filter down the objects given in a list page by 
+some key in the URL.
+Handily, the ListView has a get_queryset() method we can override. By 
+default, it returns the value of the queryset attribute, but we can use it 
+to add more logic.
+The key part to making this work is that when class-based views are called,
+various useful things are stored on self; as well as the request 
+(self.request) this includes the positional (self.args) and name-based 
+(self.kwargs) arguments captured according to the URLconf.
+
+Example
+
+urls.py
+```python
+from django.urls import path
+from books.views import PublisherBookListView
+
+urlpatterns = [
+    path("books/<publisher>/", PublisherBookListView.as_view()),
+]
+```
+
+views.py
+```python
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView
+from books.models import Book, Publisher
+
+
+class PublisherBookListView(ListView):
+    template_name = "books/books_by_publisher.html"
+
+    def get_queryset(self):
+        self.publisher = get_object_or_404(Publisher, name=self.kwargs["publisher"])
+        return Book.objects.filter(publisher=self.publisher)
+```
+
+To do the same for DetailViews, you would override the get_object() method.
+Note that for DetailViews, the default get_object() method expects a 
+"<int:pk>" named group in your URL by default it indicates the model's primary
+key and will be used to perform the filtering.
+If you want to call the group something else, you can set pk_url_kwarg on 
+the view.
+
+Example - Retrieving author and updating it.
+
+urls.py
+```python
+from django.urls import path
+from books.views import AuthorDetailView
+
+urlpatterns = [
+    # ...
+    path("authors/<int:pk>/", AuthorDetailView.as_view(), name="author-detail"),
+]
+```
+
+views.py
+```python
+from django.utils import timezone
+from django.views.generic import DetailView
+from books.models import Author
+
+
+class AuthorDetailView(DetailView):
+    queryset = Author.objects.all()
+
+    def get_object(self):
+        obj = super().get_object()
+        # Record the last accessed date
+        obj.last_accessed = timezone.now()
+        obj.save()
+        return obj
+```

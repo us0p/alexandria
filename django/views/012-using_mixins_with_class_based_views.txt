@@ -1,0 +1,15 @@
+More:
+https://docs.djangoproject.com/en/5.1/topics/class-based-views/mixins/
+
+Not all mixins can be used together, and not all generic class based views
+can be used with all other mixins.
+
+Each of your views should use only mixins or views from one of the groups
+of generic class-based views: detail, list, editing and date. For example
+it’s fine to combine TemplateView (built in view) with MultipleObjectMixin
+(generic list), but you’re likely to have problems combining
+SingleObjectMixin (generic detail) with MultipleObjectMixin (generic list).
+
+If you need a class-based view that implement more than one mixin. You
+should create different classes for each mixin and groups the expected
+behaviour under another class by calling each views .as_view() method.

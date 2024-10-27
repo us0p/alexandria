@@ -1,0 +1,72 @@
+Returning Errors
+There are subclasses of HttpResponse for a number of common HTTP status 
+codes other than 200 (which means “OK”),  these subclasses live in 
+django.http.
+Return an instance of one of those subclasses instead of a normal 
+HttpResponse in order to signify an error:
+
+- HttpResponseRedirect: Returns an HTTP status code 302.
+
+- HttpResponsePermanentRedirect: Like HttpResponseRedirect, but it returns 
+  a permanent redirect (HTTP status code 301) instead of a “found” redirect
+  (status code 302).
+
+- HttpResponseNotModified: Use this to designate that a page hasn’t been 
+  modified since the user’s last request (status code 304).
+
+- HttpResponseBadRequest: Acts just like HttpResponse but uses a 400 status
+  code.
+
+- HttpResponseNotFound: Acts just like HttpResponse but uses a 404 status 
+  code.
+
+- HttpResponseForbidden: Acts just like HttpResponse but uses a 403 status 
+  code.
+
+- HttpResponseNotAllowed: Like HttpResponse, but uses a 405 status code. 
+
+- HttpResponseGone: Acts just like HttpResponse but uses a 410 status 
+  code.
+
+- HttpResponseServerError: Acts just like HttpResponse but uses a 500 
+  status code.
+
+There isn’t a specialized subclass for every possible HTTP response code.
+However, you can also pass the HTTP status code into the constructor for 
+HttpResponse to create a return class for any status code you like.
+
+```python
+from django.http import HttpResponse
+
+
+def my_view(request):
+    # ...
+
+    # Return a "created" (201) response code.
+    return HttpResponse(status=201)
+```
+
+The Http404 Exception
+If you raise Http404 at any point in a view function, Django will catch it 
+and return the standard error page for your application, along with an HTTP
+error code 404.
+
+```python
+from django.http import Http404
+from django.shortcuts import render
+from polls.models import Poll
+
+
+def detail(request, poll_id):
+    # ...
+    raise Http404("Poll does not exist")
+    # ...
+```
+
+In order to show customized HTML when Django returns a 404, you can create 
+an HTML template named 404.html and place it in the top level of your 
+template tree. This template will then be served when DEBUG is set to 
+False.
+When DEBUG is True, you can provide a message to Http404 and it will appear
+in the standard 404 debug template. Use these messages for debugging 
+purposes;

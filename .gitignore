@@ -1,0 +1,10 @@
+/python/*/venv
+/python/*/__pycache__
+/django/*/venv
+/django/*/__pycache__
+/flask/*/venv
+/flask/*/__pycache__
+
+/C/*/*.sh
+
+/go/*/*.sh

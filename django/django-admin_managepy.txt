@@ -1,0 +1,62 @@
+django-admin and manage.py
+django-admin is Django’s command-line utility for administrative tasks. 
+This document outlines all it can do.
+In addition, manage.py is automatically created in each Django project. It
+does the same thing as django-admin but also sets the 
+DJANGO_SETTINGS_MODULE environment variable so that it points to your 
+project’s settings.py file.
+
+Generally, when working on a single Django project, it’s easier to use 
+manage.py than django-admin. If you need to switch between multiple Django
+settings files, use django-admin with DJANGO_SETTINGS_MODULE or the 
+--settings command line option.
+
+Usefull commands:
+This is just a brief list of the commands that i found to be more ulsefull
+considering the common scenarios during every day, they have just a simple
+description about what they do.
+If you want to use the command:
+    - $ [django-admin|manage.py] -h
+    - https://docs.djangoproject.com/en/5.0/ref/django-admin/
+
+dbshell: Runs the command-line client for the database engine specified in
+         your ENGINE setting, with the connection parameters specified in 
+	 your USER, PASSWORD, etc., settings.
+dumpdata: Outputs to standard output all data in the database associated 
+          with the named application(s).
+loaddata: Searches for and loads the contents of the named fixture into the
+          database. You usually will use the output of dumpdata as input
+	  for this command.
+inspectdb: Use this if you have a legacy database with which you’d like to
+           use Django. The script will inspect the database and create a 
+	   model for each table within it.
+makemigrations: Creates new migrations based on the changes detected to 
+                your models.
+migrate: Synchronizes the database state with the current set of models and
+         migrations.
+	 To undo migrations, you can pass the number of previous migration
+	 to the one you want to undo, to undo all migration you can pass
+	 $ ... manage.py migrate zero.
+runserver: Starts a lightweight development web server on the local 
+           machine. By default, the server runs on port 8000 on the IP 
+	   address 127.0.0.1. You can pass in an IP address and port number
+	   explicitly.
+startapp: Creates a Django app directory structure for the given app name 
+          in the current directory or the given destination.
+startproject: Creates a Django project directory structure for the given 
+              project name in the current directory or the given 
+	      destination.
+test: Runs tests for all installed apps.
+testserver: Runs a Django development server (as in runserver) using data 
+            from the given fixture(s).
+
+Commands provided by applications:
+Some commands are only available when the django.contrib application that 
+implements them has been enabled.
+
+django.contrib.auth
+changepassword: Allows changing a user’s password.
+createsuperuser: Creates a superuser account.
+
+django.contrib.sessions
+clearsession: Can be run as a cron job to clean out expired sessions.

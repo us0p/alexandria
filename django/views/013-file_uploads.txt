@@ -1,0 +1,62 @@
+When django handles a file upload, the file data ends up placed in 
+request.FILES which is a dictionary which each entry is an UploadedFile 
+object (or a subclass).
+
+Note that request.FILES will only contain data if the request has the 
+"multipart/form-data" header.
+
+
+UploadedFile
+
+Attributes:
+    - name: The name of the uploaded file.
+    - size: The size, in bytes, of the uploaded file.
+    - 
+
+Methods:
+    - read(): Read the entire uploaded data from the file. If the uploaded 
+      file is huge it can overwhelm your system.
+    - chunks(chunk_size=None): A generator returning chunks of the file. In
+      practice, it's often easiest to use chunks() all the time. Looping 
+      over chunks() instead of using read() ensures that large files don't 
+      overwhelm your system's memory.
+
+Subclasses of UploadedFile include:
+- TemporaryUploadedFile: A file uploaded to a temporary location. This 
+  class is used by the TemporaryFileUploadHandler. It has one aditional 
+  method:
+    - temporary_file_path(): Returns the full path to the temporary 
+      uploaded file.
+- InMemoryUploadedFile: A file uploaded into memory. This class is used by 
+  the MemoryFileUploadHandler.
+
+Built-in upload handlers
+Together the MemoryFileUploadHandler and TemporaryFileUploadHandler provide
+Django's default file upload behavior. They are located in 
+django.core.files.uploadhandler.
+
+- MemoryFileUploadHandler: File upload handler to stream uploads into 
+  memory (used for small files).
+- TemporaryFileUploadHandler: Upload handler that streams data into a 
+  temporary file using TemporaryUploadedFile.
+
+All file upload handlers should be subclasses of 
+django.core.files.uploadhandler.FileUploadHandler.
+You can define your own custom upload handlers by extending it.
+
+More: https://docs.djangoproject.com/en/5.1/ref/files/uploads/#writing-custom-upload-handlers
+
+Note that upload handlers are initially defined in the FILE_UPLOAD_HANDLERS
+setting.
+
+A common way you might handle an uploaded file:
+
+```python
+def handle_uploaded_file(f):
+    with open("some/file/name.txt", "wb+") as destination:
+	for chunk in f.chunks():
+	    destination.write(chunk)
+```
+
+Looping over UploadedFile.chunks() instead of using read() ensures that 
+large files don't overwhelm your system's memory.

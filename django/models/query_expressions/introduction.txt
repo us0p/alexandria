@@ -1,0 +1,19 @@
+Query expressions
+Describe a value or a computation that can be used as part of an update, 
+create, filter, order by, annotation, or aggregate. When an expression 
+outputs a boolean value, it may be used directly in filters. Expressions 
+can be combined, or in some cases nested, to form more complex 
+computations.
+
+Output field
+Many of the expressions in this section support an optional 
+output_field parameter. If given, Django will load the value into that 
+field after retrieving it from the database.
+output_field takes a model field instance, like IntegerField() or 
+BooleanField(). Usually, the field doesn’t need any arguments, like 
+max_length, since field arguments relate to data validation which will not
+be performed on the expression’s output value.
+output_field is only required when Django is unable to automatically 
+determine the result’s field type, such as complex expressions that mix 
+field types. For example, adding a DecimalField() and a FloatField() 
+requires an output field, like output_field=FloatField().

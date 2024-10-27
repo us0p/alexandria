@@ -1,0 +1,116 @@
+Middleware is a framework of hooks into Django request/response processing.
+
+Each middleware component is responsible for doing some specific function.
+
+Writing your own middleware
+A middleware factory is a callable that takes a get_response callable and 
+returns a middleware. A middleware is a callable that takes a request and 
+returns a response, just like a view.
+
+```python
+def simple_middleware(get_response):
+    # One-time configuration and initialization.
+
+    def middleware(request):
+	# Code to be executed for each request before
+	# the view (and later middleware) are called.
+
+	response = get_response(request)
+
+	# Code to be executed for each request/response
+	# after the view is called.
+
+	return response
+
+    return middleware
+```
+
+Or it can be written as a class whose instances are callable
+
+```python
+class SimpleMiddleware:
+    def __init__(self, get_response):
+	self.get_response = get_resposne
+	# One-time configuration and initialization.
+
+    def __call__(self, request):
+	# Code to be executed for each request before 
+	# the view (and lather middleware) are called.
+
+	response = self.get_response(request)
+
+	# Code to be executed for each request/response
+	# after the view is called.
+
+	return response
+```
+
+The get_response callable provided by Django might be the next middleware 
+in the chain. The current middleware doesn't need to know or care what 
+exactly it is, just that it represents whatever comes next.
+
+The last get_response callable in the middleware chain will be a wrapper 
+method from the handller which takes care of applying view middleware, 
+calling the view with appropriate URL arguments, and applying 
+template-respone and exception middleware.
+
+Middleware can either support only synchronous Python (default), only 
+asynchronous Python or both.
+
+Marking middleware as unused
+It's sometimes useful to determine at startup time whether a piece of 
+middleware should be used. In these cases, your middleware's __init__() 
+method may raise MiddlewareNotUsed. Django will then remove that middleware
+from the middleware process and log a debug message to the django.request 
+logger when DEBUG is True.
+
+Activating Middleware
+To activate a middleware component, add it to the MIDDLEWARE list in your 
+Django settings.
+In MIDDLEWARE, each middleware component is represented by a string, the 
+full Python path to the middleware factory's class or function name.
+
+A Django installation doesn’t require any middleware — MIDDLEWARE can be 
+empty, if you’d like — but it’s strongly suggested that you at least use 
+CommonMiddleware.
+The order in MIDDLEWARE matters because a middleware can depend on other 
+middleware.middleware
+
+Middleware order and layering
+During the request phase, before calling the view, Django applies 
+middleware in the order it’s defined in MIDDLEWARE, top-down.
+
+Other middleware hooks
+You can add three other special methods to class-based middleware:
+- process_view(
+    request,
+    view_func,
+    view_args,
+    view_kwargs
+  ): This method is called just before Django calls the view. If it 
+     returns an HttpResponse object, Django won't bother calling the 
+     appropriate view; it'll apply response middleware to that HttpResponse
+     and return the result.
+- process_exception(request, exception): Django calls process_exception() 
+  when a view raises an exception. . If it returns an HttpResponse object, 
+  the template response and response middleware will be applied and the 
+  resulting response returned to the browser. Otherwise, default exception 
+  handling kicks in. Because middleware are run in reverse order during the
+  response phase, which includes process_exception. If an exception 
+  middleware returns a response, the process_exception methods of the 
+  middleware classes above that middleware won't be called.
+- process_template_response(request, response: TemplateResponse): Is 
+  called  just after the view has finished executing, if the response 
+  istance has a render() method, indicating that it is a TemplateResponse 
+  or equivalent.
+  It must return a response object that implements a render method.
+
+process_view() and process_exception() should return either None or an 
+HttpResponse object. If it returns None, Django will continue processing 
+this request, executing any other process_view() middleware and, then, the 
+appropriate view.
+
+Accessing request.POST inside middleware before the view runs or in 
+process_view() will prevent any view running after the middleware from 
+being able to modify the upload handlers for the request, and should 
+normally be avoided.

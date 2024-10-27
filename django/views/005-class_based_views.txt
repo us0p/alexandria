@@ -1,0 +1,80 @@
+Class-based views provide an alternative way to implement views as Python 
+objects instead of functions. They do not replace function-based views, but
+have certain differences and advantages when compared to function-based 
+views:
+- Organization of code related to specific HTTP methods (GET, POST, etc.) 
+  can be addressed by separate methods instead of conditional branching.
+- Object oriented techniques such as mixins (multiple inheritance) can be 
+  used to factor code into reusable components.
+
+
+A class-based view allows you to respond to different HTTP request methods 
+with different class instance methods, instead of conditionally branching 
+code inside a single view function.
+What your method returns is identical to what you return from a 
+function-based view.
+
+Example - view function:
+```python
+from django.http import HttpResponse
+
+
+def my_view(request):
+    if request.method == "GET":
+        # <view logic>
+        return HttpResponse("result")
+```
+
+Example - class-based view:
+```python
+from django.http import HttpResponse
+from django.views import View
+
+
+class MyView(View):
+    def get(self, request):
+        # <view logic>
+        return HttpResponse("result")
+```
+
+Django URL resolver expects to send the request and associated arguments to
+a callable function.
+class-based views have an as_view() class method which returns a function 
+that can be called when a request arrives. The function creates an instance
+of the class, calls setup() to initialize its attributes, and then calls 
+its dispatch() method. dispatch looks at the request to determine whether 
+it is a GET, POST, etc, and relays the request to a matching method if one 
+is defined, or raises HttpResponseNotAllowed if not:
+
+```python
+from django.urls import path
+from myapp.views import MyView
+
+urlpatterns = [
+    path("about/", MyView.as_view()),
+]
+```
+
+Class attributes are useful in many class-based designs, and there are two 
+ways to configure or set class attributes:
+- The standard Python way of subclassing and overriding attributes and 
+  methods in the subclass.
+- Configure class attributes as keyword arguments to the as_view() call in 
+  the URLconf.
+  While your class is instantiated for each request dispatched to it, class
+  attributes set through the as_view() entry point are configured only once
+  at the time your URLs are imported.
+  Arguments passed this way will be assigned onto the instance that is used
+  to service a request. This means that the argument will be available by 
+  using "self". Arguments must correspond to attributes that already exist 
+  on the class (return True on a hasattr check).
+
+Each request served by a class-based view has an independent state; 
+therefore, it is safe to store state variables on the instance (i.e., 
+self.foo = 3 is a thread-safe operation).
+
+```python
+urlpatterns = [
+    path("about/", GreetingView.as_view(greeting="G'day")),
+]
+```

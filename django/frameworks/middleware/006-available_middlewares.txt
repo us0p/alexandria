@@ -1,0 +1,93 @@
+Available middlewares
+
+Cache middlewares:
+- UpdateCacheMiddleware
+- FetchFromCacheMiddleware
+
+Enable site-wide cache. If these are enabled, each Django-powered page will
+be cached for as long as the CACHE_MIDDLEWARE_SECONDS setting defines.
+
+Common middlewares:
+- CommonMiddleware
+  - response_redirect_class: Defaults to HttpResponsePermanentRedirect.
+
+- BrokenLinkEmailsMiddleware
+  Sends broken link notification emails to MANAGERS.  
+
+GZip middlewares:
+- GZipMiddleware
+  Compress content for browsers that understand GZip compression.
+  This middleware should be placed before any other middleware that need to
+  read or write the response body so that compression happens afterward.
+
+  It will NOT compress content if any of the following are true:
+    - The content body is less than 200 bytes long.
+    - The response has already set the Content-Encoding header.
+    - The request hasn't sent an Accept-Encoding header containing gzip.
+
+  You can apply GZip compression to individual views using the gzip_page()
+  decorator.
+
+  - max_random_bytes: Defaults to 100.
+
+Conditional GET middlewares:
+- ConditionalGetMiddleware
+  Handles conditional GET operations.
+
+Local middlewares:
+- LocalMiddleware
+  Enables language selection based on data from the request.
+  - response_redirect_class: Defaults to HttpResponseRedirect.
+
+Message middlewares:
+- MessageMiddleware
+  Enable cookie and session-based message support.
+
+Security middlewares:
+- SecurityMiddleware
+  Provides several security enhancements to the request/response cycle.
+
+Session middlewares:
+- SessionMiddleware
+  Enables session support.
+
+Site middlewares:
+- CurrentSiteMiddleaware
+  Adds the site attribute representing the current site to every incoming 
+  HttpRequest object.
+
+Authentication middlewares:
+- AuthenticationMiddleware
+  Adds the user atribute, representing the currently-logged-in user, to 
+  every incoming HttpRequest object.
+
+- LoginRequiredMiddleware
+  Redirects all unauthenticated requests to a login page, expect for views
+  excluded with login_not_required() decorator.
+  The login page defaults to settings.LOGIN_URL.
+  Enable this middleware by adding it to the MIDDLEWARE setting after 
+  AuthenticationMiddleware.
+  Subclass the middleware and override the following attributes and methods
+  to customize behaviour for unauthenticated requests.
+  - redirect_field_name: Defaults to "next".
+  - get_login_url(): Returns the URL that unauthenticated requests will be
+    redirected to.
+  - get_redirect_field_name(): Returns the name of the query parameter that
+    contains the URL the user should be redirected to after a successful 
+    login.
+
+- RemoteUserMiddleware
+  Middleware for utilizing web server provided authentication.
+
+- PersistentRemoteUserMiddleware
+  Middleware for utilizing web server provided authentication when enabled
+  only on the login page.
+
+CSRF protection middlwares:
+- CsrfViewMiddlware
+  Adds protection agains Cross Site Request Forgeries by adding hidden form
+  fields to POST forms and checking requests for the correct value.
+
+X-Frame-Options middleware
+- XFrameOptionsMiddleare
+  Simple clickjacking protection via the X-Frame-Options header.

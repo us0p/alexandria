@@ -1,0 +1,66 @@
+$ pip install Django
+
+To generate the setup code for your django project:
+django-admin startproject <project_name>
+
+Will generate:
+<project_name>/ - Project container, can be renamed.
+    manage.py - Command line utility used to interact with this project.
+    <project_name>/ - Actual package of your project.
+	__init__.py - Package definition.
+	settings.py - Settings.
+	urls.py - URLs.
+	asgi.py - Entry point for ASGI-compatible web servers.
+	wsgi.py - Entry point for WSGI-compatible web servers.
+
+
+In addition to a database backend (DBMS Servers), you’ll need to make sure
+your Python database bindings are installed.
+
+bindings reference:
+https://docs.djangoproject.com/en/5.0/topics/install/#get-your-database-running
+
+If you plan to use Django’s manage.py migrate command to automatically 
+create database tables for your models, you’ll need to ensure that Django
+has permission to create and alter tables in the database you’re using; if
+you plan to manually create the tables, you can grant Django SELECT, 
+INSERT, UPDATE and DELETE permissions. After creating a database user with 
+these permissions, you’ll specify the details in your project’s settings 
+file.
+If you’re using Django’s testing framework to test database queries, 
+Django will need permission to create a test database.
+
+Projects vs. apps
+An app is a web application that does something – e.g., a blog system, a 
+database of public records or a small poll app. A project is a collection
+of configuration and apps for a particular website. A project can contain 
+multiple apps. An app can be in multiple projects.
+
+Each application you write in Django consists of a Python package that 
+follows a certain convention. Django comes with a utility that 
+automatically generates the basic directory structure of an app.
+
+To create your app:
+python3 manage.py startapp <app_name>
+
+Will generate:
+<app_name>/
+    __init__.py
+    admin.py
+    apps.py
+    migrations/
+	__init__.py
+    models.py
+    tests.py
+    views.py
+
+This is the directory structure that will house your application.
+
+You can manage you database configuration and installed apps in your
+project's settings.py file
+Some of the default installed apps use at least one db table, so you need
+to create the tables in the database before you can use them:
+python3 manage.py migrate
+
+Running the development server:
+python3 manage.py runserver

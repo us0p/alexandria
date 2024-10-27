@@ -1,0 +1,46 @@
+In Django, web pages and other contents are delivered by views. Each view
+is represented by a Python function (or method, in the case of class-based
+views). Django will choose a view by examining the URL that's requested.
+To get from a URL to a view, Django uses what are known as 'URLconfs'. A
+URLconf maps URL patterns to views.
+
+The views defined in your app's view.py file are imported in your app's
+urls.py file to map url to views.
+
+You can add variable parameters to your url with the pattern:
+<converter:param_name>
+where:
+    - converter: is how the received param will be converted, it can be:
+	- int.
+	- str.
+    - param_name: the name of the expected parameter.
+
+in your view, you'll receive keyword arguments named after the
+param_name that you've defined in your URL schema.
+def example_view(response, param_name):
+    ...
+
+Views must return an HttpResponse object or raise an exception.
+
+Templates
+To separate the presentation from the logic Django uses templates.
+Templates are looked by default in the /templates directory in your app.
+
+Your project’s TEMPLATES setting describes how Django will load and render
+templates. The default settings file configures a DjangoTemplates backend 
+whose APP_DIRS option is set to True. By convention DjangoTemplates looks 
+for a “templates” subdirectory in each of the INSTALLED_APPS.
+While loading the template, Django will choose the first template it finds
+whose name matches, and if you had a template with the same name in a 
+different application, Django would be unable to distinguish between them.
+To avoid that is a common practice to create a subdirectory inside
+/templates with the same name of your app and within the template loader
+you reffer to it as <app_name>/<template_name>.html.
+
+Generic Views
+A common case in web development is: getting data from the database
+according to a parameter passed in the URL, loading a template and
+returning the rendered template.
+Django provides a shortcut, called the Generic Views system, which are
+a group of abstract classes (e.g.: ListView and DetailView) that can be
+extended to add behaviour over those two common patterns.

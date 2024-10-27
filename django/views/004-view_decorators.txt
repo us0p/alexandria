@@ -1,0 +1,13 @@
+Django provides several decorators that can be applied to views to support 
+various HTTP features.
+
+Allowed HTTP methods
+A group of decorators that can be used to restrict access to views based on
+the request method.
+Can be imported from django.views.decorators.http:
+
+- require_http_methods(request_method_list): require that a view only accepts listed methods. Methods should be in uppercase.
+- require_GET(): require that view only accepts the GET method.
+- require_POST(): require that view only accepts the POST method.
+
+more decorators at: https://docs.djangoproject.com/en/5.1/topics/http/decorators/

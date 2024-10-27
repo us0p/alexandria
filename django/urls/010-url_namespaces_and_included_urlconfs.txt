@@ -1,0 +1,82 @@
+Application namespaces of included URLconfs can be specified in two ways.
+
+Firstly, you can set an app_name attribute in the included URLconf module, 
+at the same level as the urlpatterns attribute. You have to pass the actual
+module, or a string reference to the module, to include(), not the list of 
+urlpatterns itself.
+
+Example:
+
+polls/urls.py
+```python
+from django.urls import path
+
+from . import views
+
+app_name = "polls"
+urlpatterns = [
+    path("", views.IndexView.as_view(), name="index"),
+    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
+    ...,
+]
+```
+
+urls.py
+```python
+from django.urls import include, path
+
+urlpatterns = [
+    path("polls/", include("polls.urls")),
+]
+```
+
+Secondly, you can include an object that contains embedded namespace data. 
+If you include() a list of path() or re_path() instances, the URLs 
+contained in that object will be added to the global namespace. However, 
+you can also include() a 2-tuple containing:
+
+(<list of path()/re_path() instances>, <application namespace>)
+
+Example:
+
+urls.py
+```python
+from django.urls import include, path
+
+from . import views
+
+polls_patterns = (
+    [
+        path("", views.IndexView.as_view(), name="index"),
+        path("<int:pk>/", views.DetailView.as_view(), name="detail"),
+    ],
+    "polls",
+)
+
+urlpatterns = [
+    path("polls/", include(polls_patterns)),
+]
+```
+
+The instance namespace can be specified using the namespace argument to 
+include(). If the instance namespace is not specified, it will default to 
+the included URLconf’s application namespace. This means it will also be 
+the default instance for that namespace.
+
+Example:
+
+urls.py
+```python
+from django.urls import include, path
+
+urlpatterns = [
+    path(
+	"author-polls/",
+	include("polls.urls", namespace="author-polls")
+    ),
+    path(
+	"publisher-polls/",
+	include("polls.urls", namespace="publisher-polls")
+    ),
+]
+```

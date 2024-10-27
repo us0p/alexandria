@@ -1,0 +1,25 @@
+The path() function can take an optional third argument which should be a 
+dictionary of extra keyword arguments to pass to the view function.
+
+Example:
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("blog/<int:year>/", views.year_archive, {"foo": "bar"}),
+]
+```
+
+In this example, for a request to /blog/2005/, Django will call 
+views.year_archive(request, year=2005, foo='bar').
+
+Note:
+    1. It's possible to have conflicts between the captured arguments in the 
+       url and in the dictionary. When this happens, the arguments in the 
+       dictionary will be used instead of the arguments captured in the URL.
+    2. You can also pass extra options to include() and each line in 
+       the included URLconf will be passed the extra options.
+       This technique is only useful if you’re certain that every view in 
+       the included URLconf accepts the extra options you’re passing.

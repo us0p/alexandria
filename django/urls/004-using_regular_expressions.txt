@@ -1,0 +1,44 @@
+If the paths and converters syntax isn’t sufficient for defining your URL 
+patterns, you can also use regular expressions. To do so, use re_path() 
+instead of path().
+
+In Python regular expressions, the syntax for named regular expression 
+groups is (?P<name>pattern), where name is the name of the group and 
+pattern is some pattern to match.
+
+Note:
+    1. Each captured argument is sent to the view as a string, regardless of 
+       what sort of match the regular expression makes.
+    2. Django processes regular expressions in the urlpatterns list which 
+       is compiled the first time it’s accessed. Subsequent requests use 
+       the cached configuration via the URL resolver.
+
+```python
+from django.urls import path, re_path
+
+from . import views
+
+urlpatterns = [
+    path("articles/2003/", views.special_case_2003),
+    re_path(r"^articles/(?P<year>[0-9]{4})/$", views.year_archive),
+    re_path(r"^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$", views.month_archive),
+    re_path(
+        r"^articles/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/(?P<slug>[\w-]+)/$",
+        views.article_detail,
+    ),
+]
+```
+
+When switching from using path() to re_path() or vice versa, it’s 
+particularly important to be aware that the type of the view arguments may 
+change, and so you may need to adapt your views.
+
+Using unnamed regular expression groups
+As well as the named group syntax, e.g. (?P<year>[0-9]{4}), you can also 
+use the shorter unnamed group, e.g. ([0-9]{4}).
+
+This usage isn’t recommended.
+
+In either case, using only one style within a given regex is recommended. 
+When both styles are mixed, any unnamed groups are ignored and only named 
+groups are passed to the view function.

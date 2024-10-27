@@ -1,0 +1,31 @@
+When given a namespaced URL (e.g. 'polls:index') to resolve, Django splits 
+the fully qualified name into parts and then tries the following lookup:
+
+1. First, Django looks for a matching application namespace 
+   (in this example, 'polls'). This will yield a list of instances of that 
+   application.
+2. If there is a current application defined, Django finds and returns the 
+   URL resolver for that instance.
+   The url template tag uses the namespace of the currently resolved view 
+   as the current application in a RequestContext. You can override this 
+   default by setting the current application on the request.current_app 
+   attribute.
+3. If there is no current application, Django looks for a default 
+   application instance. Which is the one that has an instance namespace 
+   matching the application namespace in this example, an instance of polls
+   called 'polls'.
+4. If there is no default application instance, Django will pick the last 
+   deployed instance of the application, whatever its instance name may be.
+5. If the provided namespace doesn’t match an application namespace in step
+   1, Django will attempt a direct lookup of the namespace as an instance 
+   namespace.
+
+If there are nested namespaces, these steps are repeated for each part of 
+the namespace until only the view name is unresolved. The view name will 
+then be resolved into a URL in the namespace that has been found.
+
+Note:
+    1. current application: is the application that is been rendering,
+       (e.g. 'author-polls'-'polls:index'), is rendering the 'index' page
+       of the 'author-pools' instance of the 'polls' app. The current 
+       application is 'author-polls'.

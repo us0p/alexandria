@@ -1,0 +1,11 @@
+Using Mixins
+Mixins are a form of multiple inheritance where behaviors and attributes of
+multiple parent classes can be combined.
+Mixins are an excellent way of reusing code across multiple classes, but 
+they come with some cost. The more your code is scattered among mixins, the
+harder it will be to read a child class and know what exactly it is doing, 
+and the harder it will be to know which methods from which mixins to 
+override if you are subclassing something that has a deep inheritance tree.
+Note also that you can only inherit from one generic view - that is, only 
+one parent class may inherit from View and the rest (if any) should be 
+mixins.

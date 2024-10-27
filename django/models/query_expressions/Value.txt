@@ -1,0 +1,16 @@
+Value()
+A Value() object represents the smallest possible component of an 
+expression: a simple value. When you need to represent the value of an 
+integer, boolean, or string within an expression, you can wrap that value 
+within a Value().
+You will rarely need to use Value() directly. When you write the expression
+F('field') + 1, Django implicitly wraps the 1 in a Value(), allowing simple
+values to be used in more complex expressions. You will need to use Value()
+when you want to pass a string to an expression. Most expressions interpret
+a string argument as the name of a field, like Lower('name').
+The value argument describes the value to be included in the expression, 
+such as 1, True, or None. Django knows how to convert these Python values 
+into their corresponding database type.
+If no output_field is specified, it will be inferred from the type of the 
+provided value for many common types. For example, passing an instance of 
+datetime.datetime as value defaults output_field to DateTimeField.

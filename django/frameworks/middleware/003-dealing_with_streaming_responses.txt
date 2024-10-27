@@ -1,0 +1,11 @@
+Dealing with streaming responses
+Unlike HttpResponse, StreamingHttpResponse does not have a content 
+attribute. As a result, middleware can no longer assume that all responses 
+will have a content attribute. If they need access to the content, they 
+must test for streaming responses and adjust their behavior accordingly
+
+streaming_content should be assumed to be too large to hold in memory.
+Response middleware may wrap it in a new generator, but must not consume 
+it.
+StreamingHttpResponse allows both synchronous and asynchronous iterators.
+The wrapping func tion must match.

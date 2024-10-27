@@ -1,0 +1,16 @@
+Func()
+Func() expressions are the base type of all expressions that involve 
+database functions like COALESCE and LOWER, or aggregates like SUM.
+It can be used directly:
+
+from django.db.models import F, Func
+queryset.annotate(field_lower=Func(F("field"), function="LOWER"))
+
+Or it can be used to expand its functionality:
+class Lower(Func):
+    function = "LOWER"
+    A class attribute describing the function that will be generated. 
+    Specifically, the function will be interpolated as the function 
+    placeholder within template. Defaults to None.
+
+queryset.annotate(field_lower=Lower("field"))

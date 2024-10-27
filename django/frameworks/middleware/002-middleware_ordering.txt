@@ -1,0 +1,51 @@
+Some hints about the ordering of various Django middleware classes:
+
+01. SecurityMiddleware
+    It should go near the top of the list if you’re going to turn on the 
+    SSL redirect as that avoids running through a bunch of other 
+    unnecessary middleware.
+02. UpdateCacheMiddleware
+    Before those that modify the Vary header (SessionMiddleware, 
+    GZipMiddleware, LocaleMiddleware).
+03. GZipMiddleware
+    Before any middleware that may change or use the response body.
+    After UpdateCacheMiddleware: Modifies Vary header.
+04. SessionMiddleware
+    Before any middleware that may raise an exception to trigger an error 
+    view (such as PermissionDenied) if you’re using CSRF_USE_SESSIONS.
+    After UpdateCacheMiddleware: Modifies Vary header.
+05. ConditionalGetMiddleware
+    Before any middleware that may change the response (it sets the ETag 
+    header).
+    After GZipMiddleware so it won’t calculate an ETag header on gzipped 
+    contents.
+06. LocaleMiddleware
+    One of the topmost, after SessionMiddleware (uses session data) and 
+    UpdateCacheMiddleware (modifies Vary header).
+07. CommonMiddleware
+    Before any middleware that may change the response (it sets the 
+    Content-Length header). A middleware that appears before 
+    CommonMiddleware and changes the response must reset Content-Length.
+    Close to the top: it redirects when APPEND_SLASH or PREPEND_WWW are set
+    to True.
+    After SessionMiddleware if you’re using CSRF_USE_SESSIONS.
+08. CsrfViewMiddleware
+    Before any view middleware that assumes that CSRF attacks have been 
+    dealt with.
+    Before RemoteUserMiddleware, or any other authentication middleware 
+    that may perform a login, and hence rotate the CSRF token, before 
+    calling down the middleware chain.
+    After SessionMiddleware if you’re using CSRF_USE_SESSIONS.
+09. AuthenticationMiddleware
+    After SessionMiddleware: uses session storage.
+10. LoginRequiredMiddleware
+    After AuthenticationMiddleware: uses user object.
+11. MessageMiddleware
+    After SessionMiddleware: can use session-based storage.
+12. FetchFromCacheMiddleware
+    After any middleware that modifies the Vary header: that header is used
+    to pick a value for the cache hash-key.
+13. FlatpageFallbackMiddleware
+    Should be near the bottom as it’s a last-resort type of middleware.
+14. RedirectFallbackMiddleware
+    Should be near the bottom as it’s a last-resort type of middleware.

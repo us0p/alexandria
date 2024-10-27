@@ -1,0 +1,58 @@
+At any point, your urlpatterns can “include” other URLconf modules. This 
+essentially “roots” a set of URLs below other ones.
+
+```python
+from django.urls import include, path
+
+urlpatterns = [
+    # ... snip ...
+    path("community/", include("aggregator.urls")),
+    path("contact/", include("contact.urls")),
+    # ... snip ...
+]
+```
+
+Whenever Django encounters include(), it chops off whatever part of the URL
+matched up to that point and sends the remaining string to the included 
+URLconf for further processing.
+
+Another possibility is to include additional URL patterns by using a list 
+of path() instances.
+
+This can be used to remove redundancy from URLconfs where a single pattern 
+prefix is used repeatedly.
+
+Example - redundant
+
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("<page_slug>-<page_id>/history/", views.history),
+    path("<page_slug>-<page_id>/edit/", views.edit),
+    path("<page_slug>-<page_id>/discuss/", views.discuss),
+    path("<page_slug>-<page_id>/permissions/", views.permissions),
+]
+```
+
+Example - without redundancy
+
+```python
+from django.urls import include, path
+from . import views
+
+urlpatterns = [
+    path(
+        "<page_slug>-<page_id>/",
+        include(
+            [
+                path("history/", views.history),
+                path("edit/", views.edit),
+                path("discuss/", views.discuss),
+                path("permissions/", views.permissions),
+            ]
+        ),
+    ),
+]
+```

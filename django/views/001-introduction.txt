@@ -1,0 +1,18 @@
+A view function, or view for short, is a Python function that takes a web 
+request and returns a web response. The view itself contains whatever 
+arbitrary logic is necessary to return that response. This code can live 
+anywhere you want, as long as it’s on your Python path. For the sake of 
+putting the code somewhere, the convention is to put views in a file called
+views.py, placed in your project or application directory.
+
+Each view function takes an HttpRequest object as its first parameter, 
+which is typically named request.
+The view returns an HttpResponse object that contains the generated 
+response. Each view function is responsible for returning an HttpResponse 
+object.
+
+```python
+from django.http import HttpRespose
+
+...
+```

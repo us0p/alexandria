@@ -1,0 +1,12 @@
+Aggregate()
+An aggregate expression is a special case of a Func() expression that 
+informs the query that a GROUP BY clause is required. All of the aggregate
+functions, like Sum() and Count(), inherit from Aggregate().
+
+Since Aggregates are expressions and wrap expressions, you can represent 
+some complex computations:
+
+from django.db.models import Count
+Company.objects.annotate(
+    managers_required=(Count("num_employees") / 4) + Count("num_managers")
+)

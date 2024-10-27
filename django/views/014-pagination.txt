@@ -1,0 +1,18 @@
+Django provides high-level and low-level ways to help you manage paginated
+data.
+
+Under the hood, all methods of pagination use the Paginator class. It does
+all the heavy lifting of actually splliting a QuerySet into Page objects.
+
+```python
+from django.core.paginator import Paginator
+
+objects = ["john","paul","george","ringo"]
+p = Paginator(
+	objects, # a list of objects to paginate.
+	2        # the number of items on each page.
+    )
+```
+
+Note that you can give Paginator a list/tuple, a Django QuerySet or any 
+other object with a coun() or __len__() method.

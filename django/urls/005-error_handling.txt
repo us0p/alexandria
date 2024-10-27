@@ -1,0 +1,19 @@
+When Django can’t find a match for the requested URL, or when an exception 
+is raised, Django invokes an error-handling view.
+
+The views to use for these cases are specified by four variables. Their 
+default values should suffice for most projects, but further customization 
+is possible by overriding their default values.
+
+Such values can be set in your root URLconf. Setting these variables in any
+other URLconf will have no effect.
+
+Values must be callables, or strings representing the full Python import 
+path to the view that should be called to handle the error condition at 
+hand.
+
+The variables are:
+    handler400 = "<app_name>.<views_module>.<view_name>"
+    handler403 = "<app_name>.<views_module>.<view_name>"
+    handler404 = "<app_name>.<views_module>.<view_name>"
+    handler500 = "<app_name>.<views_module>.<view_name>"

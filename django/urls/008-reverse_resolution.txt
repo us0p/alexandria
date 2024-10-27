@@ -1,0 +1,56 @@
+URL reversing is the act of using the view to get the full URL attached to 
+that particular view.
+
+Django provides tools for performing URL reversing that match the different
+layers where URLs are needed:
+1. In templates: Using the url template tag.
+2. In Python code: Using the reverse() function.
+3. In higher level code related to handling of URLs of Django model 
+   instances: The get_absolute_url() method.
+
+In order to perform URL reversing, you’ll need to use named URL patterns. 
+The string used for the URL name can contain any characters you like.
+When naming URL patterns, choose names that are unlikely to clash with 
+other applications’ choice of names. If you call your URL pattern comment 
+and another application does the same thing, the URL that reverse() finds 
+depends on whichever pattern is last in your project’s urlpatterns list.
+You can deliberately choose the same URL name as another application if you
+want to override a view.
+You may also use the same name for multiple URL patterns if they differ in 
+their arguments. In addition to the URL name, reverse() matches the number 
+of arguments and the names of the keyword arguments.
+
+Example:
+
+urls.py
+```python
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path(
+	"articles/<int:year>/",
+	views.year_archive,
+	name="news-year-archive"
+    ),
+]
+```
+
+template
+```html
+<a href="{% url 'news-year-archive' 2012 %}">2012 Archive</a>
+```
+
+view
+```python
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
+def redirect_to_year(request):
+    # ...
+    year = 2006
+    # ...
+    return HttpResponseRedirect(reverse("news-year-archive", args=(year,)))
+```

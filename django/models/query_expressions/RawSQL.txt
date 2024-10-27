@@ -1,0 +1,15 @@
+RawSQL()
+
+from django.db.models.expressions import RawSQL
+queryset.annotate(
+    val=RawSQL(
+	"select col from sometable where othercol = %s",
+	(param,)
+    )
+)
+
+To protect against SQL injection attacks, you must escape any parameters 
+that the user can control by using params. params is a required argument to
+force you to acknowledge that you’re not interpolating your SQL with 
+user-provided data.
+You also must not quote placeholders in the SQL string.

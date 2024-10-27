@@ -1,0 +1,84 @@
+F()
+An F() object represents the value of a model field, transformed value of a
+model field, or annotated column. It makes it possible to refer to model 
+field values and perform database operations using them without actually 
+having to pull them out of the database into Python memory.
+Instead, Django uses the F() object to generate an SQL expression that 
+describes the required operation at the database level.
+
+Example
+reporter = Reporters.objects.get(name="Tintin")
+reporter.stories_filed += 1 # common way
+reporter.stories_filed = F("stories_filed") + 1
+reporter.save()
+
+In the "common way", we have pulled the value of reporter.stories_filed 
+from the database into memory and manipulated it using familiar Python 
+operators, and then saved the object back to the database.
+
+Although reporter.stories_filed = F('stories_filed') + 1 looks like a 
+normal Python assignment of value to an instance attribute, in fact it’s an
+SQL construct describing an operation on the database.
+When Django encounters an instance of F(), it overrides the standard Python
+operators to create an encapsulated SQL expression; in this case, one which
+instructs the database to increment the database field represented by 
+reporter.stories_filed.
+Whatever value is or was on reporter.stories_filed, Python never gets to 
+know about it - it is dealt with entirely by the database. All Python does,
+through Django’s F() class, is create the SQL syntax to refer to the field
+and describe the operation.
+
+To access the new value saved this way, the object must be reloaded:
+reporter.refresh_from_db().
+
+Remember that F() objects generate a SQL expression, if it's assigned to 
+model fields, the expression will be applied on each save().
+So in the example above if we call save() again on the same instance, the
+final reporter.stories_filed value would be 3.
+This persistence can be avoided by reloading the model object after saving
+it with reporter.refresh_from_db().
+
+Advantages:
+- The database does the work.
+- Reduce the number of queries some operations require.
+- Avoid race conditions by letting the database do the work.
+
+When referencing relational fields such as ForeignKey, F() returns the 
+primary key value rather than a model instance.
+
+Use F() and the nulls_first or nulls_last keyword argument to 
+Expression.asc() or desc() to control the ordering of a field’s null 
+values. By default, the ordering depends on your database.
+For example, to sort companies that haven’t been contacted 
+(last_contacted is null) after companies that have been contacted:
+
+from django.db.models import F
+Company.objects.order_by(F("last_contacted").desc(nulls_last=True))
+
+F() expressions that output BooleanField can be logically negated with the
+inversion operator ~F(). For example, to swap the activation status of 
+companies:
+
+from django.db.models import F
+Company.objects.update(is_active=~F("is_active"))
+
+You can use F objects in filters and annotations.
+In annotations, if the fields that you’re combining are of different types
+you’ll need to tell Django what kind of field will be returned. Most 
+expressions support output_field for this case, but since F() does not, you
+will need to wrap the expression with ExpressionWrapper:
+
+from django.db.models import DateTimeField, ExpressionWrapper, F
+
+Ticket.objects.annotate(
+    expires=ExpressionWrapper(
+        F("active_at") + F("duration"), output_field=DateTimeField()
+    )
+)
+
+ExpressionWrapper()
+surrounds another expression and provides access to properties, such as
+output_field, that may not be available on other expressions. 
+ExpressionWrapper is necessary when using arithmetic on F() expressions 
+with different types.
+

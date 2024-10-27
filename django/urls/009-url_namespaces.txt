@@ -1,0 +1,60 @@
+URL namespaces allow you to uniquely reverse named URL patterns even if 
+different applications use the same URL names.
+Similarly, it also allows you to reverse URLs if multiple instances of an 
+application are deployed. In other words, since multiple instances of a 
+single application will share named URLs, namespaces provide a way to tell 
+these named URLs apart.
+Django applications that make proper use of URL namespacing can be deployed
+more than once for a particular site.
+
+A URL namespace comes in two parts, both of which are strings:
+
+1. application namespace: This describes the name of the application that 
+   is being deployed. Every instance of a single application will have the 
+   same application namespace.
+2. instance namespace: This identifies a specific instance of an 
+   application. Instance namespaces should be unique across your entire 
+   project. However, an instance namespace can be the same as the 
+   application namespace. This is used to specify a default instance of an 
+   application. For example, the default Django admin instance has an 
+   instance namespace of 'admin'.
+
+Note: 
+    1. Namespaced URLs are specified using the ':' operator. For example, 
+       the main index page of the admin application is referenced using 
+       'admin:index'. This indicates a namespace of 'admin', and a named 
+       URL of 'index'.
+    2. Namespaces can also be nested. The named URL 'sports:polls:index' 
+       would look for a pattern named 'index' in the namespace 'polls' that
+       is itself defined within the top-level namespace 'sports'.
+
+Example:
+
+urls.py
+```python
+from django.urls import include, path
+
+urlpatterns = [
+    path(
+	"author-polls/",
+	include("polls.urls", namespace="author-polls")
+    ),
+    path(
+	"publisher-polls/",
+	include("polls.urls", namespace="publisher-polls")
+    ),
+]
+```
+
+app/urls.py
+```python
+from django.urls import path
+
+from . import views
+
+app_name = "polls"
+urlpatterns = [
+    path("", views.IndexView.as_view(), name="index"),
+    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
+]
+```

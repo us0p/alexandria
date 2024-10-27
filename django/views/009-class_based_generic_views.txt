@@ -1,0 +1,61 @@
+Django’s generic views were developed to abstract certain patterns that are
+common during web development. They take certain common idioms and patterns
+found in view development and abstract them so that you can quickly write 
+common views of data without having to write too much code.
+
+Django ships with generic views to do the following:
+- Display list and detail pages for a single object. If we were creating an
+  application to manage conferences then a TalkListView and a 
+  RegisteredUserListView would be examples of list views. A single talk 
+  page is an example of what we call a “detail” view.
+- Present date-based objects in year/month/day archive pages, associated 
+  detail, and “latest” pages.
+- Allow users to create, update, and delete objects – with or without 
+  authorization.
+
+The recommended way to extend generic views is to subclass them, and 
+override their attributes or methods.
+
+That said, generic views will have a limit. If you find you’re struggling 
+to implement your view as a subclass of a generic view, then you may find 
+it more effective to write just the code you need, using your own 
+class-based or functional views.
+
+Generic views of objects
+
+Example - List of objects
+The following implementation will display a list of Publisher objects.
+
+```python
+from django.views.generic import ListView
+from books.models import Publisher
+
+
+class PublisherListView(ListView):
+    model = Publisher
+```
+
+We could explicitly tell the view which template to use by adding a 
+template_name attribute to the view, but in the absence of an explicit 
+template Django will infer one from the object’s name. In this case, the 
+inferred template will be "books/publisher_list.html" – the “books” part 
+comes from the name of the app that defines the model, while the 
+“publisher” bit is the lowercased version of the model’s name.
+
+This template will be rendered against a context containing a variable 
+called object_list that contains all the publisher objects. A template 
+might look like this:
+
+```html
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Publishers</h2>
+    <ul>
+        {% for publisher in object_list %}
+            <li>{{ publisher.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+```
+

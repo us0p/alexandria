@@ -1,0 +1,50 @@
+Django entirely automates creation of admin interfaces for models.
+Site managers use the system to add information, and that content is
+displayed on the public site.
+The admin isn't intended to be used by site visitors. It's for site
+managers.
+
+Creating an admin user:
+python3 manage.py createsuperuser
+
+The admin interface is located at "/admin".
+After login, you should see a few types of editable content: groups and 
+users. They are provided by django.contrib.auth, the authentication 
+framework shipped by Django.
+
+Making your app modifiable in the admin
+If you want your app to be modifiable in the admin interface, you need to
+tell the admin that your models objects have an admin interface. To do
+this, open your app admin.py file and add:
+
+...
+from .models import <model_name>
+admin.site.register(model_name)
+...
+
+This interface allows you to perform CRUD operations on your models.
+If you don't want the admin interface in your app you can just remove it
+from the list of installed apps in your project settings.py file.
+
+Customize admin look and feel
+You can change the look and feel of the admin site with Django's template
+system.
+The templates for the admin site resides within the templates folder in
+your project directory. Remember to follow standart template folder 
+practice.
+Remember to add the templates folder of your project to your project
+configuration under the TEMPLATES > DIRS setting.
+e.g.:
+TEMPLATES = [{
+    ...,
+    This is a list of directories to check when loading Django templates,
+    it's a search path.
+    "DIRS": [BASE_DIR / "templates"],
+    ...
+}]
+
+Within this project templates/admin folder you'll find a base_site.html
+file, which shows how to override default templates.
+In an actual project, you would probably use the 
+django.contrib.admin.AdminSite.<property> attribute to more easily make 
+a particular customization.

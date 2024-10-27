@@ -1,0 +1,12 @@
+validators
+model metadata configuration
+QuerySet
+Manager
+
+https://docs.djangoproject.com/en/5.1/topics/db/queries/
+https://docs.djangoproject.com/en/5.1/topics/http/urls/#naming-url-patterns
+https://docs.djangoproject.com/en/5.1/ref/urlresolvers/#django.urls.reverse
+https://docs.djangoproject.com/en/5.1/topics/serialization/#serialization-formats-json
+https://docs.djangoproject.com/en/5.1/topics/testing/overview/
+https://docs.djangoproject.com/en/5.1/topics/testing/tools/
+https://docs.djangoproject.com/en/5.1/topics/testing/advanced/#django.test.RequestFactory

@@ -1,0 +1,21 @@
+go 1.21.1
+
+use (
+	./00-practing-projects/dice_rolling_simulator
+	./00-practing-projects/go-server
+	./00-practing-projects/rss-agreggator
+	./01-hello_world
+	./02-integers
+	./03-repetition
+	./04-arrays_slices
+	./05-structs_methods_interfaces
+	./06-pointers_and_errors
+	./07-more_about_slices/
+	./09-type_assertions
+	./10-maps
+	./11-errors
+	./12-functions
+	./13-channels
+	./14-mutexes
+	./15-generics
+)

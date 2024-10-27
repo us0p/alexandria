@@ -1,0 +1,89 @@
+Decorating class-based views
+Since class-based views aren’t functions, decorating them works differently
+depending on if you’re using as_view() or creating a subclass.
+
+Decorating in URLconf
+You can adjust class-based views by decorating the result of the as_view() 
+method. The easiest place to do this is in the URLconf where you deploy 
+your view.
+This approach applies the decorator on a per-instance basis:
+
+```python
+from django.contrib.auth.decorators import login_required, permission_required
+from django.views.generic import TemplateView
+
+from .views import VoteView
+
+urlpatterns = [
+    path(
+	"about/",
+	login_required(TemplateView.as_view(template_name="secret.html"))
+    ),
+    path(
+	"vote/",
+	permission_required("polls.can_vote")(VoteView.as_view())
+    ),
+]
+```
+
+Decorating the class
+To decorate every instance of a class-based view, you need to decorate the 
+class definition itself. To do this you apply the decorator to the 
+dispatch() method of the class.
+
+A method on a class isn’t quite the same as a standalone function, so you 
+can’t just apply a function decorator to the method – you need to transform
+it into a method decorator first. The method_decorator decorator transforms
+a function decorator into a method decorator so that it can be used on an 
+instance method.
+method_decorator passes *args and **kwargs as parameters to the decorated 
+method on the class. If your method does not accept a compatible set of 
+parameters it will raise a TypeError exception.
+
+```python
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
+
+
+class ProtectedView(TemplateView):
+    template_name = "secret.html"
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+```
+
+Or, more succinctly, you can decorate the class instead and pass the name 
+of the method to be decorated as the keyword argument name:
+
+```python
+@method_decorator(login_required, name="dispatch")
+class ProtectedView(TemplateView):
+    template_name = "secret.html"
+```
+
+If you have a set of common decorators used in several places, you can 
+define a list or tuple of decorators and use this instead of invoking 
+method_decorator() multiple times. These two classes are equivalent:
+
+```python
+decorators = [never_cache, login_required]
+
+
+@method_decorator(decorators, name="dispatch")
+class ProtectedView(TemplateView):
+    template_name = "secret.html"
+
+
+@method_decorator(never_cache, name="dispatch")
+@method_decorator(login_required, name="dispatch")
+class ProtectedView(TemplateView):
+    template_name = "secret.html"
+```
+
+The decorators will process a request in the order they are passed to the 
+decorator. In the example, never_cache() will process the request before 
+login_required().
+In this example, every instance of ProtectedView will have login 
+protection.
