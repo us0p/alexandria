@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// What's the difference between the loops?
+
 int main(void) {
   printf("For loop\n");
   for (int i = 0; i <= 10; i++) {
@@ -10,10 +12,10 @@ int main(void) {
 
   printf("\nWhile loop\n");
   while (x < 10) {
-    if(x == 1) {
-        printf("skipping x == 1\n");
-    x++;
-        continue;
+    if (x == 1) {
+      printf("skipping x == 1\n");
+      x++;
+      continue;
     }
     printf("x: %d\n", x);
 
@@ -26,8 +28,8 @@ int main(void) {
   do {
     printf("y: %d\n", y);
 
-    if (y == 2){
-        printf("Breaking in y == 2\n");
+    if (y == 2) {
+      printf("Breaking in y == 2\n");
       break;
     }
 

@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+// [ ] - Default arguments
+// [ ] - inline functions
+// [ ] - function overloading
+// [ ] - prime factorization
+
 // You can't create functions inside a function in C;
 // And as C compiler read files top to bottom, this means that to our main
 // function be able to call our function, we should declare our functions before

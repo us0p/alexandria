@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+// [ ] - Structure Alignment
+// [ ] - Padding
+// [ ] - Union
+
 // Type definitions:
 // The type created with typedef is usually uppercase;
 // The typedef allows you to define new types:

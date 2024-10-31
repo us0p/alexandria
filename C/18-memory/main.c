@@ -63,7 +63,7 @@ void memory_leak_example() {
   printf("p address: %p, p value: %d\n", p, *p);
   p = &x;
   printf("p address: %p, p value: %d\n", p, *p);
-  free(p);
+  // free(p); -> seg fault, &x weren't malloced;
   puts("Even if we free p now, our program would still leak memory as the "
        "reference to our allocated memory was lost");
   puts("You can check this by running the program through valgrind");
