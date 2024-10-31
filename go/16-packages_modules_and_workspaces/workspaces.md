@@ -12,8 +12,8 @@ determined by the current workspace.
   
 ## How workspace is determined
 A command determines whether it is in a workspace context by:
-1. Examining the GOWORK environment variable. If GOWORK is set to off, the
-   command will be in a single-module context.
+1. Examining the `GOWORK` environment variable. If `GOWORK` is set to off, 
+   the command will be in a single-module context.
 2. If the `GOWORK` env is empty or not provided, the command will search 
    the current working directory, and then successive parent directories, 
    for a file `go.work`. If a file is found, the command will operate in 
