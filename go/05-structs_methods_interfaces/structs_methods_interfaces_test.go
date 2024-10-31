@@ -48,8 +48,9 @@ func TestArea(t *testing.T) {
 	}
 
 	for _, tt := range areTests {
-		// By wrapping each case in a t.Run you will have clearer test output on failures as it will print the name of the case;
-        // And you can run specific tests within your table with go test -run TestArea/Rectangle;
+		// By wrapping each case in a t.Run you will have clearer test
+		// output on failures as it will print the name of the case;
+		// And you can run specific tests within your table with go test -run TestArea/Rectangle;
 		t.Run(tt.name, func(t *testing.T) {
 			got := tt.shape.Area()
 			if got != tt.hasArea {

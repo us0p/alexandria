@@ -49,12 +49,12 @@ func (c Circle) Area() float64 {
 }
 
 type Triangle struct {
-    Base float64
-    Height float64
+	Base   float64
+	Height float64
 }
 
 func (t Triangle) Area() float64 {
-    return (t.Base * t.Height) * 0.5
+	return (t.Base * t.Height) * 0.5
 }
 
 // Interfaces:
@@ -76,42 +76,53 @@ type Shape interface {
 
 // We can name our interface arguments to make more clear what we expect in each method.
 type Copier interface {
-    Copy(sourceFile, destinationFile string) (bytesCopied int)
+	Copy(sourceFile, destinationFile string) (bytesCopied int)
 }
 
 // Tips:
-// Keep interfaces small -> Interfaces are meant to define the minimal behavior necessary to accurately represent an idea or concept.
-// They shouldn’t be aware of any types that happen to satisfy the interface at design time. Instead, you should use type assertion to 
-// derive the underlying type when given an instance of the car interface.
+// Keep interfaces small -> Interfaces are meant to define the minimal
+// behavior necessary to accurately represent an idea or concept.
+// They shouldn’t be aware of any types that happen to satisfy the
+// interface at design time. Instead, you should use type assertion to
+// derive the underlying type.
 
 // Interfaces on pointers don't extend the implementation to the underlying type:
 type InterfacePointer interface {
-    width() int
-    height() int
+	width() int
+	height() int
 }
 
 type square struct {
-    lenght int
+	lenght int
 }
 
 func (s *square) width() int {
-    return s.lenght
+	return s.lenght
 }
 
 func (s *square) height() int {
-    return s.lenght
+	return s.lenght
 }
 
 func GetArea(form InterfacePointer) int {
-    return form.width() * form.height()
+	return form.width() * form.height()
 }
 
-// var a = square{1}
-// GetArea(a)
-// Note that trying to use a in this GetArea call can't be done because the underlying type square doesn't implement the methods, only the *square type.
-// Trying to make this call would yeld:
-// cannot use a (variable of type square) as InterfacePointer value in argument to GetArea: square doesn't implement InterfacePointer (method height has pointer receiver).
+// Example:
+// var sq = square{1}
+// GetArea(sq)
 
-// Here's ok, b is a *square, so it implements the InterfacePointer interface.
-// var b = &square{1}
+// Note that trying to use `sq` in this `GetArea` call can't be done
+// because the underlying type square doesn't implement the methods, only
+// the *square type.
+// Trying to make this call would yeld:
+// cannot use a (variable of type square) as InterfacePointer value in
+// argument to GetArea: square doesn't implement InterfacePointer (method
+// height has pointer receiver).
+
+// Here's ok, `sq2` is a *square, so it implements the InterfacePointer
+// interface.
+
+// Example:
+// var sq2 = &square{1}
 // GetArea(b)

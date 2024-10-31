@@ -22,19 +22,19 @@ type Bitcoin int
 // This is very useful when you want to add some domain specific
 // functionality on top of existing types.
 
-// This is not really necessary, but i let it here to remember that
+// This is not really necessary, but i'll let it here to remember that
 // any value that implements a String method will fall withing the
 // Stringer interface which is used internally to define the "native"
 // format for that value.
 type Stringer interface {
-    String() string
+	String() string
 }
 
 // This interface is defined in the fmt package and lets you define
 // how your type is printed when used with the %s format string in prints.
 
 func (b Bitcoin) String() string {
-    return fmt.Sprintf("%d BTC", b)
+	return fmt.Sprintf("%d BTC", b)
 }
 
 type Wallet struct {
@@ -68,11 +68,11 @@ func (w *Wallet) Balance() Bitcoin {
 var ErrInsufficientFunds = errors.New("cannot withdraw, insufficient funds")
 
 func (w *Wallet) Withdraw(total Bitcoin) error {
-    if total > w.balance {
-        // This creates a new error with a message of your choosing.
-        return ErrInsufficientFunds
-    }
+	if total > w.balance {
+		// This creates a new error with a message of your choosing.
+		return ErrInsufficientFunds
+	}
 
-    w.balance -= total
-    return nil
+	w.balance -= total
+	return nil
 }

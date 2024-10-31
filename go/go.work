@@ -1,9 +1,6 @@
 go 1.21.1
 
 use (
-	./00-practing-projects/dice_rolling_simulator
-	./00-practing-projects/go-server
-	./00-practing-projects/rss-agreggator
 	./01-hello_world
 	./02-integers
 	./03-repetition
