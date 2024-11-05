@@ -1,4 +1,4 @@
-go 1.21.1
+go 1.23.2
 
 use (
 	./01-hello_world
@@ -15,4 +15,5 @@ use (
 	./13-channels
 	./14-mutexes
 	./15-generics
+	./17-context
 )
