@@ -16,4 +16,5 @@ use (
 	./14-mutexes
 	./15-generics
 	./17-context
+	./18-testing
 )

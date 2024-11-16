@@ -3,3 +3,5 @@
 - docker network
 - docker volumes
 - docker bind mount
+- what is an image
+- how to create an image
