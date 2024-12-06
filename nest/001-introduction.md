@@ -21,12 +21,12 @@ npm i -g @nestjs/cli
 nest new <project-name>
 ```
 
-This command should create a folder with `<project-name` with the following
-files
+This command should create a folder with `<project-name>` with the 
+following files
 
 ```plaintext
 src
-|-app.controller.spect.ts
+|-app.controller.spec.ts
 |-app.controller.ts
 |-app.module.ts
 |-app.service.ts
@@ -56,8 +56,8 @@ disable the option `abortOnError`.
 
 ## Platform
 Nest aims to be a platform-agnostic framework. Technically, Nest is able to
-work with an Node HTTP framework once an apdapter is created. The platforms
-supported out-of-the-box are:
+work with any Node HTTP framework once an apdapter is created. The 
+platforms supported out-of-the-box are:
 - Expess
 - Fastfy
 Whichever platform is used, it exposes its own application interface. These
@@ -86,9 +86,11 @@ npm run start:dev
 ```
 
 ## Linting and formatting
-A generated Nest project comes with both a code linter and formatter preinstalled,
-`eslint` and `prettier`.
-For headless environments where an IDE is not relevant (Continuous Integration, Git hooks, etc.) a Nest project comes with ready-to-use `npm` scripts.
+A generated Nest project comes with both a code linter and formatter 
+preinstalled, `eslint` and `prettier`.
+For headless environments where an IDE is not relevant (Continuous 
+Integration, Git hooks, etc.) a Nest project comes with ready-to-use `npm` 
+scripts.
 ```bash
 # Lint and autofix with eslint
 npm run list

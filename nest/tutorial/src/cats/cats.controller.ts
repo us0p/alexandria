@@ -1,12 +1,14 @@
-import { Controller, Get, Post, Query, Req } from "@nestjs/common";
+import { Controller, Get, Post, Req, Body } from "@nestjs/common";
 import { Request } from 'express'
+import { Cat } from "./dto"
 
 const DEFAULT_ERROR_MESSAGE = '<p>Error fetching your cat :(</p>'
 
 @Controller('cats')
 export class CatsController {
 	@Post()
-	mockCreateCat(): string {
+	mockCreateCat(@Body() cat: Cat): string {
+		console.log(cat)
 		return 'Cat added'
 	}
 
