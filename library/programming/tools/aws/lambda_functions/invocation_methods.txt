@@ -1,0 +1,34 @@
+There are several ways to invoke your deployed lambda function:
+- Lambda console: Use the Lambda console to quickly create a test 
+  event to invoke your function.
+- AWS SDK: Use the AWS SDK to programmatically invoke your function.
+- The Invoke API: Use the Lambda Invoke API to directly invoke your 
+  function.
+- AWS CLI: Use the aws lambda invoke AWS CLI command to directly 
+  invoke your function from the command line.
+- A function URL HTTP(S) endpoint: Use function URLs to create a dedicated
+  HTTP(S) endpoint that you can use to invoke your function.
+
+Some services can invoke a Lambda function with each new event. This is 
+called a trigger. For stream and queue-based services, Lambda invokes the 
+function with batches of records. This is called an event source mapping.
+
+When you invoke a function, you can choose to invoke it synchronously or 
+asynchronously. With synchronous invocation, you wait for the function to 
+process the event and return a response. With asynchronous invocation, 
+Lambda queues the event for processing and returns a response immediately.
+The InvocationType request parameter in the Invoke API determines how 
+Lambda invokes your function. A value of RequestResponse indicates 
+synchronous invocation, and a value of Event indicates asynchronous 
+invocation.
+
+Invoking your function over IPv6:
+(dual-stack endpoints also works for IPv4)
+Lambda dual-stack endpoints: <protocol>://lambda.<us-east-1>.api.aws
+Lambda Function URLs: https://<url-id>.lambda-url.<us-east-1>.on.aws
+
+Error result:
+Sync: View the error message in the response and retry the invocation 
+      manually.
+Async: Lambda handles retries automatically and can send invocation records
+       to a destination.

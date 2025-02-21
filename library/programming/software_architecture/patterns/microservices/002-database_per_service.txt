@@ -1,0 +1,59 @@
+Database per service
+What is the database architecture in a microservices application?
+
+Problems
+- Services must be loosely coupled so that they can be developed, deployed 
+  and scaled independently.
+- Some business transactions must enforce invariants that span multiple 
+  services. Other business transactions, must update data owned by multiple
+  services.
+- Some business transactions need to query data that is owned by multiple 
+  services.
+- Some queries must join data that is owned by multiple services.
+- Databases must sometimes be replicated and sharded in order to scale.
+- Different services have different data storage requirements. For some 
+  services, a relational database is the best choice. Other services might 
+  need a NoSQL database.
+
+Solution
+Keep each microservice’s persistent data private to that service and 
+accessible only via its API. A service’s transactions only involve its 
+database.
+The service’s database is effectively part of the implementation of that 
+service. It cannot be accessed directly by other services.
+
+Benefits
+- Helps ensure that the services are loosely coupled. Changes to one 
+  service’s database does not impact any other services.
+- Each service can use the type of database that is best suited to its 
+  needs.
+
+Drawbacks
+- Implementing business transactions that span multiple services is not 
+  straightforward. Distributed transactions are best avoided because of the
+  CAP theorem.
+- Implementing queries that join data that is now in multiple databases is 
+  challenging.
+- Complexity of managing multiple SQL and NoSQL databases.
+
+Shared databases
+By using a (single) database that is shared by multiple services. Each 
+service freely accesses data owned by other services using local ACID 
+transactions.
+
+Benefits
+- A developer uses familiar and straightforward ACID transactions to 
+  enforce data consistency.
+- A single database is simpler to operate.
+
+Drawbacks
+- Development time coupling: a developer working on, for example, the 
+  OrderService will need to coordinate schema changes with the developers 
+  of other services that access the same tables. This coupling and 
+  additional coordination will slow down development.
+- Runtime coupling: because all services access the same database they can 
+  potentially interfere with one another. For example, if long running 
+  CustomerService transaction holds a lock on the Order table then the 
+  OrderService will be blocked.
+- Single database might not satisfy the data storage and access 
+  requirements of all services.

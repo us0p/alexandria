@@ -1,0 +1,22 @@
+Asymptotic Analysis:
+Is a method of describing limiting behavior.
+
+Bit O Notation:
+Big O Notation describes, how well an algorithm scales with the input size.
+It is used to describe the worst case scenario of an algorithm. One can 
+also say that it describes the upper bound of an algorithm.
+When working with Big O you need to drop all constants. Big O is used to
+measure the worst case of an algorithm, constants will become irrelevant.
+
+Big Omega Notation:
+Big ꭥ Notation is used to describe the lower bound of a function. It is 
+the opposite of Big O notation. While Big O is used to describe the worst 
+case scenario of an algorithm, Big ꭥ is used to describe the best case 
+scenario of an algorithm.
+In Omega Notation you need to take constants into consideration as they will
+be of much difference with small inputs.
+
+Bit Theta Notation:
+Big 𝜃 Notation is used to describe the average case of an algorithm. In
+other words what is the average scenario or the average number of inputs
+the algorithm would end up processing.

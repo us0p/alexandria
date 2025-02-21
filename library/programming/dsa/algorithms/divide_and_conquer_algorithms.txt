@@ -1,0 +1,51 @@
+Divide and Conquer
+Is a problem-solving technique used to solve problems by dividing the main 
+problem into subproblems, solving them individually and then merging them 
+to find solution to the original problem.
+
+Divide and Conquer steps:
+1. Divide
+   - Break down the original problem into smaller subproblems.
+   - Each subproblem should represent a part of the overrall problem.
+   - The goal is to divide the problem until no further division is possible.
+2. Conquer
+   - Solve each of the smaller subproblems individually.
+   - If a subproblem is small enough (often referred as "base case"), we solve
+     it directly without further recursion.
+   - The goal is to find solutions fot these subproblems independently.
+3. Merge
+   - Combine the sub-problems to get the final solution of the whole problem.
+   - Once the smaller subproblems are solved, we recursively combine their
+     solutions to get the solution of larger problem.
+   - The goal is to formulate a solution for the original problem by mergin
+     the results from the subproblems.
+
+Advantages:
+- Solving difficult problems: Divide and conquer technique is a tool for 
+  solving difficult problems conceptually.
+- Algorithm efficiency: The divide-and-conquer algorithm often helps in the 
+  discovery of efficient algorithms. It is the key to algorithms like 
+  Quick Sort and Merge Sort, and fast Fourier transforms.
+- Parallelism: Normally Divide and Conquer algorithms are used in 
+  multi-processor machines having shared-memory systems where the communication 
+  of data between processors does not need to be planned in advance, because 
+  distinct sub-problems can be executed on different processors.
+- Memory access: These algorithms naturally make an efficient use of memory 
+  caches. Since the subproblems are small enough to be solved in cache without 
+  using the main memory that is slower one. Any algorithm that uses cache 
+  efficiently is called cache oblivious. 
+
+Disadvantages:
+- Overhead: The process of dividing the problem into subproblems and then 
+  combining the solutions can require additional time and resources. This 
+  overhead can be significant for problems that are already relatively small or 
+  that have a simple solution.
+- Complexity: Dividing a problem into smaller subproblems can increase the 
+  complexity of the overall solution. This is particularly true when the 
+  subproblems are interdependent and must be solved in a specific order.
+- Difficulty of implementation: Some problems are difficult to divide into 
+  smaller subproblems or require a complex algorithm to do so. In these cases, 
+  it can be challenging to implement a divide and conquer solution.
+- Memory limitations: When working with large data sets, the memory requirements 
+  for storing the intermediate results of the subproblems can become a limiting 
+  factor.

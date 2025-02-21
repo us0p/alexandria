@@ -1,0 +1,55 @@
+Recursion
+It's the process in which a function calls itself directly or indirectly.
+A recursive function solves a particular problem by calling a copy of itself 
+and solving smaller subproblems of the original problems. 
+It is essential to know that we should provide a certain case in order to 
+terminate this recursion process. Every time the function calls itself, it 
+has with a simpler version of the original problem.
+
+Properties:
+- Performing the same operations multiple times with different inputs.
+- Try smaller inputs in every step to make the problem smaller.
+- Base condition is needed to stop the recursion otherwise infinite loop 
+  will occur.
+
+How are recursive functions stored in memory?
+Recursion uses more memory, because the recursive function adds to the stack 
+with each recursive call, and keeps the values there until the call is 
+finished. The recursive function uses LIFO (LAST IN FIRST OUT) Structure 
+just like the stack data structure.
+Thus recursive functions are usually slower than iterative ones because of
+the memory overhead of recursive functions calls.
+
+What is the difference between tailed and non-tailed recursion? 
+A recursive function is tail recursive when a recursive call is the last 
+thing executed by the function.
+The tail recursive functions are considered better than non-tail recursive 
+functions as tail-recursion can be optimized by the compiler.
+The idea used by compilers to optimize tail-recursive functions is simple, 
+since the recursive call is the last statement, there is nothing left to do 
+in the current function, so saving the current function’s stack frame is of 
+no use
+
+Note that although the last statement of the function is the recursive step
+this function isn't tail recursive because the value returned by fact(n-1) 
+is used in fact(n) and call to fact(n-1) is not the last thing done by 
+fact(n).
+
+int fact(int n) {
+    if (n <= 0)
+        return 1;
+ 
+    return n * fact(n - 1);
+}
+
+Rewriting fact as tail recursive:
+
+fact(int n, int a) {
+    if (n <= 1)
+        return a;
+ 
+    return fact(n - 1, n * a);
+}
+
+The idea is to use one more argument and accumulate the factorial value 
+in the second argument. When n reaches 0, return the accumulated value.

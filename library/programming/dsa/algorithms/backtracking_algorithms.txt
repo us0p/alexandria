@@ -1,0 +1,35 @@
+Backtracking
+Is a problem-solving algorithmic technique that involves finding a solution 
+incrementally by trying different options and undoing them if they lead to 
+a dead end.
+It is commonly used in situations where you need to explore multiple 
+possibilities to solve a problem, like searching for a path in a maze or 
+solving puzzles like Sudoku. When a dead end is reached, the algorithm 
+backtracks to the previous decision point and explores a different path 
+until a solution is found or all possibilities have been exhausted.
+
+Backtraking steps:
+1. Choose an initial solution.
+2. Explore all possible extensions of the current solution.
+3. If an extension leads to a solution, return that solution.
+4. If an extension does not lead to a solution, backtrack to the previous 
+   solution and try a different extension.
+5. Repeat steps 2-4 until all possible solutions have been explored.
+
+When to Use a Backtracking Algorithm:
+- There are multiple possible solutions to the problem.
+- The problem can be broken down into smaller subproblems.
+- The subproblems can be solved independently.
+
+Types of Backtracking Problems
+- Decision Problems: Here, we search for a feasible solution.
+- Optimization Problems: For this type, we search for the best solution.
+- Enumeration Problems: We find set of all possible feasible solutions to 
+  the problems of this type.
+
+Applications:
+- Solving puzzles (e.g., Sudoku, crossword puzzles)
+- Finding the shortest path through a maze
+- Scheduling problems
+- Resource allocation problems
+- Network optimization problems

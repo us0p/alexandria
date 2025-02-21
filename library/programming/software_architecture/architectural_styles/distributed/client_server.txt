@@ -1,0 +1,114 @@
+Client-Server
+
+The client-server architecture is a common architecture pattern used 
+in distributed systems, where a client (or multiple clients) send requests 
+to a server, and the server responds to those requests. The client and 
+server are separate entities that communicate over a network, such as the 
+Internet or a local network.
+The client is responsible for presenting the user interface and handling 
+user input, while the server is responsible for processing the requests and
+returning the appropriate response. The server can also handle tasks such 
+as data storage, security, and business logic.
+The servers need not to know about clients, but the clients must know the 
+identity of servers.
+
+Advantages
+1. Single point of administration.
+2. Implementing security measures is easier with centralized control over
+   data and access permissions.
+3. Access control, user permissions can be strictly managed to prevent
+   unauthorized access.
+4. Data backup.
+5. Server redundancy.
+
+Disadivantages
+1. Could be a greater potential for failure because of centralized control.
+2. Particularly vulnerable to Denial of Service (DOS) attacks because the
+   number of servers is considerably smaller than the number of clients.
+3. Very expensive to install and manage the network.
+
+The Different Types of Client-Server Architecture
+- 1-Tier: Business logic, presentation, and data layers appear as a single 
+  package since they are stored on the same shared storage or a single 
+  device. An example is the desktop app working offline and storing 
+  all its data within the same device of operation.
+
+- 2-Tier: Here, the database operates as a separate entity. Business logic 
+  and presentation layer storage is on the client, and the data layer is 
+  on the server. An example is a desktop app requesting one to log in to an
+  online account.
+
+- 3-Tier: Storage of the presentation layer is on the client; one server 
+  hosts the business logic layer, and a different layer hosts the data 
+  layer. A middleware that controls the application layer exists. Client 
+  devices have full control over the presentation layer, while the server 
+  controls the database layer. An example can be a smartphone app. The 
+  middleware receives a request from the client device and presents it to 
+  the server. The request is then received and processed by the server. 
+  There is more security and data integrity here.
+
+- N-Tier: This model splits the business logic layer into several layers to
+  ensure performance, stability, and management. The different functions like 
+  application processing, data management, and display may fall into different 
+  layers. E-commerce system is the best example here.
+
+When to use:
+- When you need centralized data storage and logic processing.
+- Whenever there is a need for scalability since this model scales more 
+  effectively.
+- In the cases where better security is a requirement, and you also want to
+  have strict access control.
+- Go for this when you need to have modules and separate data processing 
+  and business logic from the user interface.
+- Client-server architecture is good at handling resource-intensive chores,
+  leading to performance optimization. The client remains fast and 
+  responsive since most activities are offloaded to the server.
+- Client-server architecture provides a unified solution when there is a 
+  need to support various types of clients like desktop apps, mobile 
+  applications, and web browsers.
+- In a situation where multiple users want to collaborate in real-time, 
+  this architecture comes in handy when we have a central server managing 
+  all the data.
+
+Stateful x Stateless
+Stateful: In stateful applications, the server keeps track of the state of 
+	  each user session, and maintains information about the user's 
+	  interactions and past requests. They’re performed with the 
+	  context of previous transactions and the current transaction may 
+	  be affected by what happened during previous transactions. For 
+	  these reasons, stateful apps use the same servers each time they 
+	  process a request from a user.
+	  An example of stateful applicaiton are session-based web 
+	  applications that use session management, such as login sessions.
+	  They need to maintain the state of user sessions, including 
+	  authentication and authorization information.
+
+Stateless: There is no stored knowledge of or reference to past 
+	   transactions. Each transaction is made as if from scratch for 
+	   the first time. 
+	   Stateless applications provide one service or function and use a
+	   content delivery network (CDN), web, or print servers to process
+	   these short-term requests.
+	   An example of a stateless transaction would be doing a search 
+	   online to answer a question you’ve thought of. You type your 
+	   question into a search engine and hit enter. If your transaction
+	   is interrupted or closed accidentally, you just start a new one.
+
+Comparison
+- Scalability: Stateless applications are generally more scalable, as each 
+  request is independent and can be handled by any available server. 
+  Stateful applications may require more complex mechanisms for load 
+  balancing and session management.
+- Fault tolerance: Stateless applications can be more fault-tolerant, as 
+  the loss of a server doesn't impact user sessions. In stateful 
+  applications, the loss of a server can result in the loss of session data
+  unless additional measures, such as session replication or clustering, 
+  are in place.
+- Resource utilization: Stateless applications often have lower resource 
+  utilization because there is no need to store and manage session data. 
+  Stateful applications may require more memory and processing power to 
+  handle and maintain session information.
+- Development complexity: Stateless applications can be simpler to develop 
+  and maintain, as there is no need to manage state across multiple 
+  requests. Stateful applications, on the other hand, require careful 
+  handling of session data and state management.

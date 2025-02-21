@@ -1,0 +1,33 @@
+CI/CD (Continuous Integration/Continuour Delivery)
+
+It combines the practices of continuous integration and continuous delivery. CI/CD 
+automates much or all of the manual human intervention traditionally needed to 
+get new code from a commit into production, encompassing the build, test (including 
+integration tests, unit tests, and regression tests), and deploy phases, as well 
+as infrastructure provisioning. With a CI/CD pipeline, development teams can make 
+changes to code that are then automatically tested and pushed out for delivery 
+and deployment. 
+
+CI (Continuous Integration):
+is the practice of integrating all your code changes into the 
+main branch of a shared source code repository early and often, automatically testing 
+each change when you commit or merge them, and automatically kicking off a build. 
+With continuous integration, errors and security issues can be identified and fixed 
+more easily, and much earlier in the development process.
+By merging changes frequently and triggering automatic testing and validation processes, 
+you minimize the possibility of code conflict, even with multiple developers working on 
+the same application. A secondary advantage is that you don't have to wait long for 
+answers and can, if necessary, fix bugs and security issues while the topic is still 
+fresh in your mind.
+Common code validation processes start with a static code analysis that verifies the 
+quality of the code. Once the code passes the static tests, automated CI routines package 
+and compile the code for further automated testing. CI processes should have a version 
+control system that tracks changes so you know the version of the code used.
+
+CD (Continuous Delivery):
+is a software development practice that works in conjunction with CI to automate the 
+infrastructure provisioning and application release process.
+Once code has been tested and built as part of the CI process, CD takes over during the 
+final stages to ensure it's packaged with everything it needs to deploy to any environment 
+at any time. CD can cover everything from provisioning the infrastructure to deploying the 
+application to the testing or production environment.

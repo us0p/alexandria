@@ -1,0 +1,24 @@
+Two Pointers
+Used to search pairs in a sorted array.
+The algorithm basically uses the fact that the input array is sorted and
+conditionally move both pointers.
+
+example:
+Find if there is any pair of elements such that their sum is equal to X.
+
+int x = 17;
+int arr[7] = {2, 3, 5, 8, 9, 10, 11};
+for(int i = 0; j = 7 - 1; i < 7;) {
+    int sum = arr[i] + arr[j];
+    if (sum == x) {
+	printf("elements at position %d and %d sum up to %d\n", i, j, x);
+	return;
+    }
+    if (sum < x) i++;
+    if (sum > x) j++;
+}
+
+The running time of this algorithm is O(n) as we run over each element 
+once.
+The common approach would be to run the whole array for each element to
+check for sums, which would have a O(n²) runtime.

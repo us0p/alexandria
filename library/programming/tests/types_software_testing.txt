@@ -1,0 +1,89 @@
+Types of software testing techniques
+
+The types of software testing techniques are divided into two groups,
+Functional testing and Non-functional testing.
+
+Functional testing:
+Functional Testing is a type of software testing that validates the 
+software system against the functional requirements/specifications.
+Functional testing is divided into four types:
+- Unit testing - test each component/unit of the system.
+- Integration testing - individual component/units are integrated and tested.
+- System testing - tests system hardware and software as a whole.
+- Acceptance testing - validate if the system is ready for delivery aka alpha and beta tests.
+
+Non-functional testing:
+Is an approach used to test attributes of the software such as performance,
+usability, security, realiability.
+Non-functional testing is divided into four types:
+- Performance testing - tests if the system is able to handle an increased workload.
+- Security testing - checks for security vulnerabilities.
+- Usability testing - checks for usability and user friendliness of the software.
+- Compatibility testing - tests the compatibility with other OSes, browsers and so on.
+
+Unit testing:
+Is a type of software testing where individual units or components of a software are tested. 
+The purpose is to validate that each unit of the software code performs as expected. 
+Unit Testing is done during the development of an application by the developers. 
+Unit Tests isolate a section of code and verify its correctness. 
+A unit may be an individual function, method, procedure, module, or object.
+
+- Cases should be independent. changes to external dependencies shouldn't affect 
+  unit tests.
+- Test only one code at a time.
+- In case of a change in code in any module, ensure there is a corresponding unit Test 
+  Case for the module, and the module passes the tests before changing the implementation.
+
+Unit testing approaches:
+- Branch coverage - aims to test individual branches or decision points in the code.
+- Path coverage - aims to test various combination of branches.
+
+Branch coverage is easy to achieve.
+Path coverage is more complex to implement and analyse due to large number of possible paths.
+Branch coverage is suitable for simple decision points and when you want to ensure basic 
+coverage of different outcomes. Path coverage is used for more critical or complex code where 
+exhaustive testing is required.
+
+Integration testing:
+Is defined as a type of testing where software modules are integrated logically and tested as 
+a group.
+The purpose of this level of testing is to expose defects in the interaction between these 
+software modules when they are integrated.
+It focuses mainly on the interfaces & flow of data/information between the modules. Here 
+priority is to be given for the integrating links rather than the unit functions which 
+are already tested.
+
+Integration testing approaches:
+- Big bang testing 
+    - All modules are integrated at once and then tested as an unit.
+	- advantages:
+	    - good for small systems.
+	- disadvantages:
+	    - fault localization is difficult.
+	    - can easily miss some interfaces.
+	    - it's not possible to isolate priority test cases.
+- Incremental testing 
+    - integrates two or more modules that are logically related.
+      Then other related modules are integrated incrementally until
+      all the logically related modules are integrated and tested.
+    - this approach can be carried out by two methods:
+	- Bottom Up 
+	    - starts by testing lower level modules, which are then used to facilitate the 
+	      testing of higher level modules.
+	      - advantages:
+		- fault localization is easies.
+		- doesn't need to wait all modules to be developed.
+	      - disadvantages:
+		- critical modules which control the flow of application are tested last.
+		- an early prototype is not possible.
+	- Top Down
+	    - The higher level modules are tested first following the control flow of
+	      software application and then lower level modules are tested and integrated 
+	      in order to check the software functionality.
+	      - advantages:
+		- fault localization is easier.
+		- possibly to obtain an early prototype.
+		- critical modules are tested on priority.
+	      - disadvantages:
+		- needs many stubs.
+		- modules at a lower level are tested inadequately.

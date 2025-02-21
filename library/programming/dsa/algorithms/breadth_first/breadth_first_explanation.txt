@@ -1,0 +1,13 @@
+Breadth First
+Breadth First, is a type of traversal, in this type of traversal you visit 
+every node, left to right, within a given level of the tree before going to 
+the next.
+In this traversal is common to use a Queue to store the correct order to be
+traversed.
+
+When Performing a Breadth First opeartion in a graph you need to check every
+vertice of a given node before going to the next edge.
+
+Time Complexity: 
+    tree: O(h)
+    graph: O(v + e)

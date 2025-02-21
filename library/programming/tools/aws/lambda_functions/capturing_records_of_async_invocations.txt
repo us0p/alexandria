@@ -1,0 +1,37 @@
+Capturint records of Async invocations
+Lambda can send records of async invocations to one of the following 
+services:
+
+- Amazon SQS – A standard SQS queue.
+- Amazon SNS – A standard SNS topic.
+- AWS Lambda – A Lambda function.
+- Amazon EventBridge – An EventBridge event bus.
+
+The invocation record contains details about the request and response in 
+JSON format. You can configure separate destinations for events that are 
+processed successfully, and events that fail all processing attempts. 
+Alternatively, you can configure a standard Amazon SQS queue or standard 
+Amazon SNS topic as a dead-letter queue for discarded events. For 
+dead-letter queues, Lambda only sends the content of the event, without 
+details about the response.
+If Lambda can't send a record to a destination you have configured, it 
+sends a DestinationDeliveryFailures metric to Amazon CloudWatch. This can 
+happen if your configuration includes an unsupported destination type. 
+Delivery errors can also occur due to permissions errors and size limits.
+Each function can have multiple destinations, so you can configure separate
+destinations for successful and failed events. Like error handling 
+settings, you can configure destinations on a function, function version, 
+or alias.
+As an alternative to an on-failure destination, you can configure your 
+function with a dead-letter queue to save discarded events for further 
+processing. A dead-letter queue acts the same as an on-failure destination 
+in that it is used when an event fails all processing attempts or expires 
+without being processed. However, you can only add or remove a dead-letter 
+queue at the function level.
+To reprocess events in a dead-letter queue, you can set it as an event 
+source for your Lambda function. Alternatively, you can manually retrieve 
+the events.
+If Lambda can't send a message to the dead-letter queue, it deletes the 
+event and emits the DeadLetterErrors metric. This can happen because of 
+lack of permissions, or if the total size of the message exceeds the limit 
+for the target queue or topic.

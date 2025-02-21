@@ -1,0 +1,41 @@
+Comon Runtime
+Runtime describe how fast an algorithm is in comparison with the input size.
+
+Constant Runtime - O(1):
+Constant time algorithms are the simplest and most efficient algorithms. 
+They are algorithms that always take the same amount of time to run, 
+regardless of the size of the input. This is the best case scenario for an 
+algorithm, and is the goal of all algorithms.
+
+Logarithmic Runtime - O(log n):
+Logarithmic runtimes are ofter characterized by the halving of the input
+size, they are faster than linar runtimes but slower than constant time.
+
+Linear Runtime - O(n):
+Linear algorithms are algorithms that have a runtime that is directly 
+proportional to the size of the input. This means that the runtime of the 
+algorithm will increase linearly with the size of the input.
+
+Linearithmic Runtime - O(n log n):
+Represent algorithmns that will process each element of the input a log n
+amount of times.
+
+Quadratic Runtime - O(n²):
+Represent algoritims what will process each element of the input n amount
+of times.
+
+Exponential Runtime - O(2^n):
+Exponential algorithms are those that grow at a rate of 2^n. This means 
+that for each additional input, the algorithm will take twice as long to 
+run.
+
+Factorial Runtime - O(n!):
+The runtime of these algorithms is proportional to the factorial of the 
+input size, denoted as O(n!). Algorithms with factorial runtime are 
+extremely inefficient and become impractical even for moderately sized 
+inputs.
+
+Polynomial Runtime - O(n^k):
+Polynomial algorithms are algorithms that have a runtime that is a 
+polynomial function of the input size. This means that the runtime is a 
+function of the form n^k where k is a constant.

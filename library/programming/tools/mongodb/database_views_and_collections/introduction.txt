@@ -1,0 +1,14 @@
+Database and Collections
+If a database does not exist, MongoDB creates the database when you first 
+store data for that database.
+
+Documet validation
+By default, a collection does not require its documents to have the same 
+schema;
+However, you can enforce document validation rules for a collection
+during update and insert operations.
+
+Unique identifiers
+Collections are assigned an immutable UUID. The collection UUID remains 
+the same across all members of a replica set and shards in a sharded 
+cluster.

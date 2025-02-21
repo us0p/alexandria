@@ -1,0 +1,29 @@
+Microkernel Architecture
+A microkernel is an architectural pattern in operating system design that 
+aims to minimize the amount of code running in kernel mode 
+(i.e., privileged mode with direct access to hardware resources) and 
+instead move as much functionality as possible into user mode. This is done
+by providing a small, minimalistic core kernel that only handles basic 
+tasks such as memory management, process scheduling, and inter-process 
+communication (IPC), and leaving all other functionality to be implemented 
+in user-mode processes.
+
+Architecture perspective
+The microkernel architecture pattern (sometimes referred to as the plug-in 
+architecture pattern) is a natural pattern for implementing product-based 
+applications. A product-based application is one that is packaged and made 
+available for download in versions as a typical third-party product. 
+However, many companies also develop and release their internal business 
+applications like software products, complete with versions, release notes,
+and pluggable features. These are also a natural fit for this pattern. The 
+microkernel architecture pattern allows you to add additional application 
+features as plug-ins to the core application, providing extensibility as 
+well as feature separation and isolation.
+The microkernel architecture pattern consists of two types of architecture 
+components: a core system and plug-in modules. Application logic is divided
+between independent plug-in modules and the basic core system, providing 
+extensibility, flexibility, and isolation of application features and 
+custom processing logic. 
+The core system of the microkernel architecture pattern traditionally 
+contains only the minimal functionality required to make the system 
+operational.

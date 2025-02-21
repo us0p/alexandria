@@ -1,0 +1,64 @@
+Layered
+In software architecture, layered architecture is a design approach in 
+which a software system is divided into a set of layers, each of which 
+has a specific responsibility and communicates with the other layers 
+through well-defined interfaces. This approach allows for a more modular 
+and flexible design, where each layer can be developed, tested, and 
+deployed independently, making it easier to add new features, modify 
+existing ones, and maintain the system.
+A layered architecture is often used for large and complex systems, where 
+the need for scalability and flexibility is high.
+
+The idea behind Layered Architecture is that modules or components with 
+similar functionalities are organized into horizontal layers.
+The layered architecture style does not have a restriction on the number 
+of layers that the application can have, as the purpose is to have layers 
+that promote the concept of separation of concerns.
+Implementing a layered architecture involves creating distinct areas of 
+responsibility within your code.
+
+Vocabulary
+- The connector between each layer can be a function call, a query request,
+  a data object or any connector that conveys request or information.
+- The naming of layers is quite flexible, but usually a presentation layer,
+  a business layer and a data layer are always present.
+- The presentation layer contains all of the classes responsible for 
+  presenting the UI/visualization to the end-user and handling bowser 
+  communication logic.
+- The business/logic layer contains all the logic that is required by the 
+  application to meet its functional requirements. This is where the main 
+  logic of the application is represented.
+- The data layer is where retrievable information is stored. This layer 
+  consists of both logical and physical aspects. While the logical schema 
+  specifies conceptual model of data, the physical schema implements the 
+  logical model into physical database platform.
+
+Topological constraints
+- Connectors only interact with two layers, and usually, no skipping of 
+  layers is allowed.
+- Communication is usually between one user and one interface/system.
+- Data flow goes two ways (user to system, and back).
+
+Advantages
+- Since the separation of concerns is the main property of the 
+  architecture, each layer of software has a specific function. This makes 
+  updating individual layers easy, and also allows teams to separate 
+  workloads.
+
+Disadvantages
+- Layered software usually results in tightly coupled software components,
+  and monolithic applications.
+- Security can become an issue if bypassing layers is allowed. The Business
+  Layer usually acts as an integrity check for passing data.
+- If not properly designed and managed, communication between layers can 
+  become complicated.
+- Data must travel through every layer and processed, slowing down the
+  performance.
+
+When to Use Layered Architectures
+- You need a system that is inherently modular, which allows for each 
+  component to be developed and maintained in isolation.
+- Your project demands scalability, be it adding new functionalities or 
+  handling more users without a major overhaul.
+- There's a high likelihood of reusing core pieces of the application 
+  across different projects, maximizing efficiency and consistency.

@@ -1,4 +1,0 @@
-- testing
-- working with files
-- threads
-- memory leaks

@@ -1,2 +1,0 @@
-- general overview
-- configuration and tsconfig.json file

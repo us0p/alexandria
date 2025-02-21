@@ -1,0 +1,50 @@
+Dijkstra Shortest Path
+It's a greedy algorithmn, which means that it'll run over every element in 
+the structure, even if you only want to process a few of them.
+It's used to discover the shortest path from one edge (source) to another
+edge (sink) in the graph.
+This algorithm uses the weight of the edge to determine if a connection
+is further away than another, thus, a graph with negative weights can't be
+used in this algorithmn, as there's no such thing as negative distances.
+
+Dijkstra Shortest Path Steps:
+1. create a prev stack structure, it'll be used to map the path from one
+   edge to another, it stores the index of each edge.
+2. create a seen boolean array, it'll be used to tell if an edge has been
+   seen or not, this array has the same number of elements as your graph
+   has edges.
+3. create a dist number array, it'll be used to measure the distance
+   betwen one edge and another, this array has the same number of 
+   elements as your graph has edges. Each element starts at Infinity except
+   the source, the source always starts at 0.
+4. loop over the edges of your graph until you have seen every edge.
+5. in every loop, get the nearest unseen edge (always start at sorce,
+   which distance starts at 0).
+6. mark the edge as seen.
+7. loop over every edge of the edge.
+8. if the edge which the current edge points too is arealdy seen,
+   continue.
+9. calculate the new distance, which is equivalent to the distance to the
+   current edge plus the distance of the connection.
+10. check if the calculated distance is less than the distance of the edge 
+   which the edge points to.
+11. if the distance is less, add the current edge to the previous stack as 
+    the previous edge before the edge the edge points to and update the 
+    distance of the edge the current edge points to to the calculated 
+    new distance.
+
+After visiting every edge and every edge in your graph, the previous
+stack is a reversed map of the shortest path from the source to the sink.
+To get the correct order you need only to reverse the stack.
+
+Time Complexity: O(V² + E):
+1. Creating the seen and dists array take O(V) amount of time for each one.
+2. Checking for is has unseen vertices and getting the lowest unseen vertice
+3. O(V) each as they check the whole seen array.
+4. Perfoming those checking within the loop will yield a O(V²) as they will
+   run over every V a V amount of times.
+5. The for loop has a running time of O(E) as we are running over the 
+   available edges of each vertice (we only check each edge once). If we 
+   we’re using an Adjacency Matrix instead of a an Adjacency List, we would 
+   have a running time of O(V * E) as we would check every connection twice.
+

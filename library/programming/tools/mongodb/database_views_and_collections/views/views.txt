@@ -1,0 +1,58 @@
+Views
+A MongoDB view is a read-only queryable object whose contents are defined 
+by an aggregation pipeline on other collections or views.
+- Views are read-only.
+- Views do not maintain timestamps of collection changes and do not support
+  point-in-time or snapshot read isolation.
+- You cannot rename a view once it is created.
+
+On-Demand Materialized Views x Views
+MongoDB provides two different view types: standard views and on-demand 
+materialized views.
+- Standard views are computed when you read the view, and are not stored 
+  to disk.
+- On-demand materialized views are stored on and read from disk. They use a
+  $merge or $out stage to update the saved data.
+- On-demand materialized views provide better read performance than 
+  standard views because they are read from disk instead of computed as 
+  part of the query. This performance benefit increases based on the 
+  complexity of the pipeline and size of the data being aggregated.
+
+Indexes
+Standard views use the indexes of the underlying collection. As a result, 
+you cannot create, drop or re-build indexes on a standard view directly, 
+nor get a list of indexes on the view.
+You can create indexes directly on on-demand materialized views because 
+they are stored on disk.
+
+View Pipelines
+The view's underlying aggregation pipeline is subject to the 100 megabyte 
+memory limit for blocking sort and blocking group operations.
+
+Time Series Collections
+Time series collections are writable non-materialized views. Limitations 
+for views apply to time series collections.
+You cannot create a view from a time series bucket collection namespace 
+(namely, a collection prefixed with system.buckets).
+
+View Collation Behavior
+Collation allows you to specify language-specific rules for string 
+comparison, such as rules for letter-case and accent marks.
+You can specify a default collation for a view at creation time. If no 
+collation is specified, the view's default collation is the "simple" 
+binary comparison collator. That is, the view does not inherit the 
+collection's default collation.
+- If creating a view from another view, you cannot specify a collation that
+  differs from the source view's collation.
+- If performing an aggregation that involves multiple views, the views must 
+  have the same collation.
+
+Use a view to Join two collections
+You can use $lookup to create a view over two collections and then run 
+queries against the view. Applications can query the view without having 
+to construct or maintain complex pipelines.
+
+Modify a view
+You can either:
+- Drop and recreate the view.
+- Use the collMod command.

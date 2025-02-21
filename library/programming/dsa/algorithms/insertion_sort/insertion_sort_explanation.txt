@@ -1,0 +1,24 @@
+Insertion Sort
+The core idea of this algorithm is "an array of 1 element is always sorted".
+It starts with a view of one element, at each iteration it "inserts" one
+element to the view.
+Every new element inserted into the view is swaped with its previous 
+element (that's why the first element is always treated as sorted) if 
+smaller, until the new element reaches the right position.
+
+In this implementation, at each interation the current element is sorted 
+alogside the previous sorted elements, always placing the smallest element 
+at the beginning.
+
+Time Complexity: O(n²)
+
+Pseudo code:
+1. Create an outer loop that starts at i = 1 (the element at 0 is
+   treated as sorted) and goes until the end of the array.
+2. Store the value of array[i] (unordered element).
+2. Create a inner loop which will start at j = i - 1 (the previous element 
+   of the unordered element), and will run backwards checking the already 
+   sorted elements.
+3. If the element at array[j] is greater than the unordered element, swap their
+   positions, thus, array[j] should receive the smaller element and array[j + 1]
+   should receive the biggest element.

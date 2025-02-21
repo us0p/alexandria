@@ -1,0 +1,42 @@
+Peer to Peer
+
+Peer-to-peer (P2P) architecture is a distributed computing architecture 
+in which each node (peer) in the network acts as both a client and a server. 
+In P2P architecture, there is no central authority or server that manages the 
+network, and each node communicates directly with other nodes to exchange 
+information, share resources, and perform computations.
+The main advantage of using P2P architecture is that it allows for a more 
+decentralized and fault-tolerant system. As there is no central authority, 
+there is no single point of failure, and the network can continue to function 
+even if some nodes fail. Additionally, P2P architecture can also improve 
+scalability as the number of nodes in the network increases.
+
+However, not all peers are necessarily equal. Super peers may have more 
+resources and can contribute more than they consume. Edge peers do not 
+contribute any resources, they only consume from the network.
+In its purest form, P2P architecture is completely decentralized. However, 
+in application, sometimes there is a central tracking server layered on top
+of the P2P network to help peers find each other and manage the network.
+
+P2P works best if the workload is split into small chunks that can be 
+reassembled later. This way, a large number of peers can work 
+simultaneously on one task and each peer has less work to do. In the case 
+of P2P file-sharing, a file can be broken down so that a peer can download 
+many chunks of the file from different peers at the same time
+
+Advantages:
+    - No central server.
+    - No network operating system.
+    - No single point of failure.
+    - Resilient, decreasing in the number of available peers might not
+      impact the network, depending on the network size.
+    - Scalability - The network is very easy to scale up.
+    - Efficiency - The network uses available resources of peers, who
+      wouldn't contribute anything in a typical client-server 
+      architecture.
+    - Adaptability - The network can be used for a variety of use cases,
+      and it can easily start up another network if on is taken down,
+      which means there is no single point of failure.
+Disadvantages:
+    - Viruses can be easily spread.
+    - Permission management becomes difficult as the network gets bigger.

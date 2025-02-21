@@ -1,0 +1,18 @@
+Selection Sort
+
+You can think in this algorithm as the inverse of bubble sort.
+Instead of putting the largest element at the end of the array, it puts the
+smallest ellement at the beginning of the array at each interation.
+
+Selection Sort Steps:
+1. Loops over the array.
+2. Create a min_index variable that starts at i.
+3. Create a inner loop that will loop from the position i+1 until the end of
+   the array.
+4. If the element at position j is smaller than the element at position i, 
+   update the min_index to j.
+5. When the inner loop exits, you'll have fount the smallest element index,
+   Now, if min_index is different than i you need to swap the element at 
+   min_index index with element at i index.
+
+Time Complexity: O(n²);

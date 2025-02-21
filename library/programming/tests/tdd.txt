@@ -1,0 +1,16 @@
+Test Driven Development
+It's a practice where you first write the test and then write the code which should
+passes the tests.
+In TDD you achieve 100% test coverage.
+You should know why you are testing something and at what level it should be tested.
+
+TDD is divided into 4 steps:
+- Write the test.
+- Make the test pass.
+- Refactor your code to be efficient and clean.
+- Repeat.
+
+Benefits of TDD:
+- Early bug notification.
+- Better designed, cleaner and more extensible code.
+- Confidence to refactor.

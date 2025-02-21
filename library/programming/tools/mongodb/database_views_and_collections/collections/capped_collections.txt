@@ -1,0 +1,90 @@
+Capped Collections
+Are fixed-size collections that insert and retrieve documents based on 
+insertion order. Capped collections work similarly to circular buffers: 
+once a collection fills its allocated space, it makes room for new 
+documents by overwriting the oldest documents in the collection.
+
+Restrictions
+    - Capped collections cannot be sharded.
+    - You cannot create capped collections on serverless instances.
+    - Capped collections are not supported in Stable API V1.
+    - You cannot write to capped collections in transactions.
+    - The $out aggregation pipeline stage cannot write results to a capped 
+      collection.
+    - You cannot use read concern "snapshot" when reading from a capped 
+      collection.
+
+Creating a capped collection
+You must create a capped collection explicitly.
+
+db.createCollection(
+    <col_name>,
+    {
+	capped: true,
+	size: <size_in_bytes>,
+	[max: <number_of_documents>]
+    }
+)
+
+You can optionally specify a maximum number of documents for the 
+collection. MongoDB removes older documents if the collection reaches the 
+maximum size limit before it reaches the maximum document count.
+Note that you must provide the size even if the number of documents is
+pre-defined.
+
+Use Cases
+Generally, TTL (Time To Live) indexes offer better performance and more 
+flexibility than capped collections. TTL indexes expire and remove data 
+from normal collections based on the value of a date-typed field and a TTL
+value for the index.
+Capped collections serialize write operations and therefore have worse 
+concurrent insert, update, and delete performance than non-capped 
+collections. Before you create a capped collection, consider if you can use
+a TTL index instead.
+
+The most common use case for a capped collection is to store log 
+information.
+
+Details
+- Oplog Collection: A capped collection that stores an ordered history of 
+  logical writes to a MongoDB database. The oplog is the basic mechanism 
+  enabling replication in MongoDB.
+  Unlike other capped collections, the oplog can grow past its configured 
+  size limit to avoid deleting the majority commit point. 
+- _id Index: Capped collections have an _id field and an index on the _id 
+  field by default.
+- Updates: Capped collections are fixed-size, updates can cause your data 
+  to expand beyond the collection's allocated space, which can cause 
+  unexpected behavior.
+- Query Efficiency: Use natural ordering to retrieve the most recently 
+  inserted elements from the collection efficiently.
+- Tailable Cursor: As new documents are inserted into the capped 
+  collection, you can use the tailable cursor to continue retrieving 
+  documents.
+- Multiple Concurrent Writes: If there are concurrent writers to a capped 
+  collection, MongoDB does not guarantee that documents are returned in 
+  insertion order.
+
+Query a Capped Collection
+When you query a capped collection without specifying a sort order, MongoDB
+returns results in the same order that they were inserted, meaning the 
+oldest documents are returned first.
+Use natural ordering to retrieve the most recently inserted elements from 
+the collection efficiently.
+
+Returns the inserted documents in reversed insertion order.
+db.<collName>.find().sort({$natural: -1})
+
+Change the size of a capped collection
+To change the size of a capped collection, use the collMod command's 
+cappedSize option. cappedSize is specified in bytes, and must be greater 
+than 0 and less than or equal to 1024^5 (1 PB).
+
+Change the maximum number of documents in a capped collection
+To change the maximum number of documents in a capped collection, use the 
+collMod command's cappedMax option.
+    - If cappedMax is less than or equal to 0, there is no maximum document
+      limit.
+    - If cappedMax is less than the current number of documents in the 
+      collection, MongoDB removes the excess documents on the next insert 
+      operation.

@@ -1,0 +1,109 @@
+Dynamic Programming
+Dynamic Programming (DP) is a method used in mathematics and computer science 
+to solve complex problems by breaking them down into simpler subproblems. By 
+solving each subproblem only once and storing the results, it avoids redundant 
+computations, leading to more efficient solutions for a wide range of problems.
+
+How Does Dynamic Programming (DP) Work?
+- Identify Subproblems: Divide the main problem into smaller, independent 
+  subproblems.
+- Store Solutions: Solve each subproblem and store the solution in a table or 
+  array.
+- Build Up Solutions: Use the stored solutions to build up the solution to the 
+  main problem.
+- Avoid Redundancy: By storing solutions, DP ensures that each subproblem is 
+  solved only once, reducing computation time.
+
+Fibonacci Series using Dynamic Programming
+- Subproblems: F(0), F(1), F(2), F(3), …
+- Store Solutions: Create a table to store the values of F(n) as they are 
+  calculated.
+- Build Up Solutions: For F(n), look up F(n-1) and F(n-2) in the table and add 
+  them.
+- Avoid Redundancy: The table ensures that each subproblem (e.g., F(2)) is 
+  solved only once.
+
+By using DP, we can efficiently calculate the Fibonacci sequence without having 
+to recompute subproblems.
+
+When to use Dynamic Programming:
+Dynamic programming is an optmization technique used when soling problems that
+consists of the following characteristics:
+1. Optimal Substructure: A given problem is said to have Optimal Substructure 
+   Property if the optimal solution of the given problem can be obtained by 
+   using the optimal solution to its subproblems instead of trying every 
+   possible way to solve the subproblems. 
+   Note that in problems that need to try all possible solutions, the optimal 
+   solution for subproblems may not surely give the solution to the entire 
+   problem. Thus in these problems, Recursion and Backtracking are the way to go.
+2. Overlappint Subproblems: The same subproblems are solved repeatedly in
+   different parts of the problem. Take the fibonacci example.
+
+Approaches of Dynamic Programming:
+1. Top-Down (memoization): We start with the final solution and recursively break
+   it down into smaller subproblems. To avoid redundant calculations, we store the
+   results of solved subproblems in a memoization table.
+2. Bottom-Up (tabulation): We start with the smallest subproblem and gradually build
+   up to the final solution. We store the results of solved subproblems in a table to
+   avoid redundant calculations.
+
+Memoization:
+Is a specific form of caching that is used in DP. It stores the the previously
+calculated result of the subproblem and uses the stored result fot the same subproblem.
+Memoization is usually used when the use of previously-calculated results comes into
+the picture. Usually beeing applied to problems that implement recursion, specially
+with problems that involve overlapping subproblems.
+
+Example with factorials:
+Lets say that you have a function factorial:
+
+int factorial(unsigned int n) {
+   if (n == 0)
+       return 1;
+   return n * factorial(n – 1);
+}
+
+The running time of this function is O(n), if you call the function K times, your
+program will have an overall runninf time of O(n * k).
+Notice tough that to calculate the factorial of let's say, 9, you'll also have to
+calculate the factorial of 1, 2, 3, 4, 5, 6, 7, and 8.
+This is when memoization comes into the scene, if you perform only one call to
+factorial(100) and store each result of the subproblems, you can retrieve
+any call to factorial(1..100) in O(1) time, which would improve the overall running
+time of your program to O(n).
+Note that in memoization, the entries in the lookup aren't necessarilly filled. The
+cache is filled on demmand.
+
+Types of memoization:
+The Implementation of memoization depends upon the changing parameters that are 
+responsible for solving the problem.
+We usually use an array with dimesions varying accordingly to the number of
+changing parameters.
+Thus, memoization is well-suited for problems that have a relatively small set of
+inputs.
+
+Tabulation:
+We store the results of the subproblems in a table and use these results to solve 
+larger subproblems until we solve the entire problem. It is used when we can define 
+the problem as a sequence of subproblems and the subproblems do not overlap. 
+Tabulation is typically implemented using iteration and is well-suited for problems 
+that have a large set of inputs.
+Tabulation is a bottom-up approach as the name itself suggests starting from the 
+bottom and accumulating answers to the top.
+In tabulation, starting from the first entry, all entries are filled one by one.
+
+Example with factorials:
+
+int maind(void) {
+    int dp[MAXN];
+
+    // base case
+    int dp[0] = 1;
+    for (int i = 1; i< =n; i++) {
+        dp[i] = dp[i-1] * i;
+    }
+}
+The above code clearly follows the bottom-up approach as it starts its transition 
+from the bottom-most base case dp[0] and reaches its destination state dp[n]. Here, 
+we may notice that the DP table is being populated sequentially and we are directly 
+accessing the calculated states from the table itself

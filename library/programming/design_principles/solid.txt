@@ -1,0 +1,69 @@
+SOLID: https://khalilstemmler.com/articles/solid-principles/solid-typescript/
+It's an acronym that stands for five principles of object-oriented 
+software development.
+The broad goal of SOLID principles is to reduce dependencies so that 
+engineers change one area of software without impacting others. 
+Additionally, they’re intended to make designs easier to understand, 
+maintain, and extend.
+
+Single Responsibility Principle (SRP)
+Open/Closed Principles (OCP)
+Liskov Substitution Principle (LSP)
+Interface Segregation Principle (ISP)
+Dependency Inversion Principle (DIP)
+
+SRP:
+Each class should solve only one problem.
+It helps to avoid unpredictable side effects of future changes.
+
+OCP:
+existing, classes will need to be modified when something needs to be 
+added. Yet, changing classes can lead to problems or bugs. Instead of 
+changing the class, you simply want to extend it. 
+You should be able to extend a class’s behavior without modifying it.
+Your class complies with this principle if it is:
+- Open for extension, meaning that the class’s behavior can be extended.
+- Closed for modification, meaning that the source code is set and cannot 
+  be changed.
+
+The way to comply with these principles and to make sure that your class 
+is easily extendable without having to modify the code is through the use 
+of abstractions. Using inheritance or interfaces that allow polymorphic 
+substitutions is a common way to comply with this principle.
+
+LSP:
+Objects of a supperclass should be replaceable with objects of its 
+subclasses without affecting the correctness of the program.
+this principle ensures that derived classes extend the base class without 
+changing behavior.
+Following this principle helps to avoid unexpected consequences of changes 
+and avoids having to open a closed class in order to make changes.
+
+ISP:
+It's better to have a lot of smaller interfaces than a few bigger ones.
+Make fine grained interfaces that are client-specific. Clients should not 
+be forced to implement interfaces they do not use.
+You don’t want to just start with an existing interface and add new 
+methods. 
+Instead, start by building a new interface and then let your class 
+implement multiple interfaces as needed. 
+Smaller interfaces mean that developers should have a preference for 
+composition over inheritance and for decoupling over coupling.
+
+DIP:
+This principle offers a way to decouple software modules.
+Depend on abstractions, not on concretions. High level modules should not 
+depend upon low level modules. Both should depend on abstractions. 
+Abstractions should not depend on details. Details should depend upon 
+abstractions.
+We can't never reference concrete classes. That's how we actually hook 
+things up to get stuff to happen. These are called Main components. 
+They're messy but they're necessary.
+However, we shouldn't refer to concrete classes from another concrete class 
+directly.
+When we need to include a class as a dependency, we should try to refrain 
+from referring to concrete classes (the actual implementation), but 
+instead, refer to abstractions, like the interfaces or abstract classes 
+that the concrete classes implement or subclass.
+When we refer to the abstractions rather than the concrete classes, the 
+flow of dependencies gets inverted.

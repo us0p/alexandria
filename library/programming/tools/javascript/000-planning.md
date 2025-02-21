@@ -1,0 +1,11 @@
+- [x] - introduction to JavaScript.
+- [ ] - All about variables.
+    - [x] var
+    - [x] let
+    - [x] const
+    - [ ] tidy var, let, and const content
+    - [ ] Hoisting
+    - [ ] Unqualified identifier assignment
+    - [ ] Binding
+    - [ ] Block statement
+    - [ ] Static initialization blocs

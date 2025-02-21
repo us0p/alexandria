@@ -1,0 +1,96 @@
+Monolithic
+
+In software architecture, monolithic architecture is a design approach in 
+which a software system is built as a single, integrated, and 
+self-contained unit. 
+In a monolithic architecture, all the components of the system are tightly 
+coupled and depend on each other. This means that changes in one part of 
+the system may affect other parts of the system.
+A monolithic architecture is often used for small to medium-sized systems, 
+where the complexity of the system is manageable and the need for 
+scalability and flexibility is not as high. In a monolithic architecture, 
+the entire system is typically built, deployed, and executed as a single 
+unit, which can make it easier to understand and manage the system.
+
+The advantages of a monolithic architecture include: 
+1. Easy deployment – One executable file or directory makes deployment 
+   easier.
+2. Development – When an application is built with one code base, it is 
+   easier to develop.
+3. Performance – In a centralized code base and repository, one API can 
+   often perform the same function that numerous APIs perform with 
+   microservices.
+4. Simplified testing – Since a monolithic application is a single, 
+   centralized unit, end-to-end testing can be performed faster than with a
+   distributed application. 
+5. Easy debugging – With all code located in one place, it’s easier to 
+   follow a request and find an issue.
+
+Monolithic applications can be quite effective until they grow too large 
+and scaling becomes a challenge.
+
+The disadvantages of a monolith include: 
+1. Slower development speed – A large, monolithic application makes 
+   development more complex and slower.
+2. Scalability – You can’t scale individual components.
+3. Reliability – If there’s an error in any module, it could affect the 
+   entire application’s availability.
+4. Barrier to technology adoption – Any changes in the framework or 
+   language affects the entire application, making changes often expensive
+   and time-consuming.
+5. Lack of flexibility – A monolith is constrained by the technologies 
+   already used in the monolith.
+6. Deployment – A small change to a monolithic application requires the 
+   redeployment of the entire monolith.
+
+Scalling a monolith
+Vertical Scaling: Usually, the obvious solution for scaling is to scale-up 
+                  (vertical). This generally means increasing resources. 
+		  Increasing CPU, Memory, Network, Storage, etc, for higher
+		  performance, allows you to perform more work and handle 
+		  more load.
+Horizontal Scaling: Scale-out (horizontal) scaling is distributing the 
+                    workload over many resources. Loosely coupled systems 
+		    allow you to distribute the system over different 
+		    resources and provide better availability.
+Load Balancers: Requests are handled by a load balancer, which then 
+                distributes the requests to the application. There are a 
+		variety of ways a load balancer distributes requests, the 
+		most common being Round Robin.
+
+Load Balancing conclusions:
+Target Groups: By spliting the codebase into several boundaries, we can 
+create load balancing rules to create groups of servers that will only 
+handle requests for a specific boundary. These are called Target Groups.
+With well-defined boundaries, you can decide how to scale and route traffic
+with a load balancer to a target-group that handles that boundary. Although
+each server has all the code in our monolith, it is really only using the 
+boundary that it’s handling. All other boundaries are basically dead code.
+
+Database scaling: You can also make these same types of scaling decisions 
+at the database layer.
+If one boundary has to handle more load, you could scale each database 
+vertically differently. Or you may choose to scale horizontally at the 
+database level by adding read replicas or a cluster.
+
+Migrating Strategies:
+Migrating from a monolithic architecture to a microservices architecture 
+can be a significant challenge. Here are the strategies with examples:
+
+- Strangler Pattern: If you miggrate your monolithic architecture all at 
+  once your service could become disrupted. In the Strangler pattern you 
+  identify the most flexible and least dependent module, create a 
+  corresponding microservice, and then gradually route the traffic from the
+  old module to the new one. Continue this process until all the modules 
+  are replaced by microservices.
+- Anti-Corruption Layer: If you have areas of your monolithic architecture 
+  that can't change you can create an anti-corruption layer — a sort of 
+  adapter that translates the communication between the new microservice 
+  and the old monolithic system, ensuring that changes in the monolith do 
+  not affect the new microservice.
+- Parallel Run: A bank wants to move its monolithic transaction processing 
+  system to a microservices architecture. To minimize risks, they choose a 
+  parallel run. They create a new microservice that runs alongside the old 
+  system. For a while, all transactions are processed by both systems to 
+  ensure the new service works correctly. Once they are confident in the 
+  new system’s functionality and reliability, they retire the old system.

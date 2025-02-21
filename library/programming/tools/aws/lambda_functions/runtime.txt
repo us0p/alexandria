@@ -1,0 +1,19 @@
+Lambda runtime
+Lambda supports multiple languages through the use of runtimes. A runtime 
+provides a language-specific environment that relays invocation events, 
+context information, and responses between Lambda and the function. You can
+use runtimes that Lambda provides, or build your own.
+For a function defined as a container image, you choose a runtime and the 
+Linux distribution when you create the container image. To change the 
+runtime, you create a new container image.
+When you use a .zip file archive for the deployment package, you choose a 
+runtime when you create the function. To change the runtime, you can update
+your function's configuration. The runtime is paired with one of the Amazon
+Linux distributions. The underlying execution environment provides 
+additional libraries and environment variables that you can access from 
+your function code.
+Lambda invokes your function in an execution environment. The execution 
+environment provides a secure and isolated runtime environment that manages
+the resources required to run your function. Lambda re-uses the execution 
+environment from a previous invocation if one is available, or it can 
+create a new execution environment.

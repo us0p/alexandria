@@ -1,0 +1,6 @@
+Architectural Styles - Structural
+
+Structural architecture in software refers to the organization and design 
+of the components of a software system, and how they interact with each other. 
+It deals with the physical organization of the system, and the relationships 
+between the different components.

@@ -1,0 +1,20 @@
+DRY (Don't Repeat Yourself):
+
+Is a software development principle that suggests that code should 
+not have duplicated functionality. The idea is to keep the codebase 
+as simple as possible by eliminating redundancy and duplication.
+The DRY principle is closely related to the Single Responsibility 
+Principle (SRP) and the Open-Closed Principle (OCP). 
+The DRY principle aims to reduce the amount of duplicate code by 
+creating abstractions that can be reused across the system.
+
+You shouldn't avoid CODE duplication but knowledge duplication.
+This means that means that your should avoid having two different
+parts of your code with the same code for the same reason.
+It's not a problem to have the same code in different places if the
+reason is different, as if you merged then into one, as soon as a 
+change needs to be done into one of them, your would probably need
+to split them again, as the reason for the code are different.
+
+Every piece of knowledge must have a single, unambiguous, authoritative 
+representation within a system

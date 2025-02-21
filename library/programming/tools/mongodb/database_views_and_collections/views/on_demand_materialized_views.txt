@@ -1,0 +1,8 @@
+On-Demand Materialized Views
+An on-demand materialized view is a pre-computed aggregation pipeline 
+result that is stored on and read from disk. On-demand materialized views 
+are typically the results of a $merge or $out stage.
+
+Note that as this view is stored on disk, to have updated values you need
+to manually update its registers, for example, running the same pipeline
+used to create the view.

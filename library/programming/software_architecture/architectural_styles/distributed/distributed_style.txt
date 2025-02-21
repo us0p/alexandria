@@ -1,0 +1,45 @@
+Architectural Styles - Distributed
+
+Distributed systems refer to the design and organization of software 
+components that are distributed across multiple devices or locations, 
+connected via a network, and work together to achieve a common goal. 
+The main challenge in designing distributed systems is dealing with 
+the inherent complexity that arises from the distribution of components 
+and the communication between them, and it requires techniques such as 
+load balancing, replication, and partitioning to improve scalability, 
+fault-tolerance, and performance. Additionally, security and 
+coordination are also important aspects of distributed systems.
+
+In this architecture, information processing is not confined to a single 
+machine rather it is distributed over several independent computers.
+A distributed system can be demonstrated by the client-server architecture
+which forms the base for multi-tier architectures
+
+In a distributed system, the following forms of transparency are present:
+- Access: Hides the way in which resources are accessed and the diferences 
+  in data platform.
+- Location: Hides where resources are located.
+- Technology: Hides different technologies such as programming language and
+  OS from user.
+- Migration / Relocation: Hide resources that may be moved to another 
+  location which are in use.
+- Replication: Hide resources that may be copied at several location.
+- Concurrency: Hide resources that may be shared with other users.
+- Failure: Hides failure and recovery of resources from user.
+- Persistence: Hides whether a resource ( software ) is in memory or disk.
+
+Advantages:
+    - Resource sharing − Sharing of hardware and software resources.
+    - Openness − Flexibility of using hardware and software of different 
+      vendors.
+    - Concurrency − Concurrent processing to enhance performance.
+    - Scalability − Increased throughput by adding new resources.
+    - Fault tolerance − The ability to continue in operation after a fault
+      has occurred.
+
+Disadvantages:
+    - Complexity − They are more complex than centralized systems.
+    - Security − More susceptible to external attack.
+    - Manageability − More effort required for system management.
+    - Unpredictability − Unpredictable responses depending on the system 
+      organization and network load.

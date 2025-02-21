@@ -1,0 +1,57 @@
+Architectural Styles - Messaging
+
+Messaging is a key concept in several architectural styles, including 
+event-driven architecture (EDA), microservices, and message-driven 
+architecture (MDA).
+In general, messaging is a powerful concept that allows for the decoupling
+and scalability of systems and it’s used in different architectural styles
+to improve the flexibility and scalability of the system by allowing for 
+loose coupling between components and making it easier to add new features 
+or modify existing ones.
+
+Message exchange architectures
+Patterns that are relevant to the mechanism for transmitting messages
+between a sender and a receiver.
+
+Pub-Sub
+A publisher sends a message to a inbox on a message broker. A subscriber
+binds to the indox and receives messages from the inbox in an asynchronous
+manner.
+This pattern is well suited for providing event information to interested
+parties.
+
+Fanout
+A publisher sends a message to a inbox on a message broker. Interested
+parties binds to the inbox and receives the messages.
+The difference here is that an inbox can have many subscribers.
+The Fanout pattern will send a copy of a message to all interested 
+parties.
+
+Unidirectional streaming
+A sender (publisher) emits data continuously to a receiver (subscriber).
+
+Bidirectional streaming
+A continuous flow of messages is sent between sender and receiver as well
+as between receiver and sender.
+
+Routing
+Messaging patterns that describe the different ways to route messages
+between a sender and a receiver.
+
+Unicast
+A message gets routed from a sender to a designated receiver. A well-known
+example of the unicast pattern is an HTTP request/response exchange.
+
+Broadcast
+A sender emits a message to all receivers on the network. The network
+router does the work of discovering devices on the network and forwarding
+the message accordignly.
+
+Multicast
+Forwards a message from a sender to a specific group of receivers.
+
+Anycast
+The router sends a message to a receiver that meets the conditions set 
+forth in a set of determining factors. Typically the Anycast pattern is
+used to route a message from sender to receiver based on proximity of
+geolocation.

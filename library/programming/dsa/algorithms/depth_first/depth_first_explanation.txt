@@ -1,0 +1,27 @@
+Depth First
+Is a traversl strategies used in tree and graphs structures.
+Its name is due the fact that strategies which implement it, go all the way
+down one side of the tree, before starting to process the value of each node.
+Thus when we are talking about recursion, In-order and Post-order strategies
+are classified as Depth First traversals.
+
+There are three points in which a recursive function can perform the processing
+of its data:
+- Pre-order: when the recursive function perform the processing before the
+  recursive steps.
+- In-order: when the recursive function perform the processing between the
+  recursive steps.
+- Post-order: when the rescursive function perform the processing after the
+  recursive steps.
+
+As you can see both, In-order and Post-order strategies perform the processing
+of the data after a recursive step, this recurvise step is used to visit the
+last node of a branch of the tree, which makes it a depth first strategy.
+
+When performing a Depth First operation in a graph you'll follow the connection
+of a given edge vertice until the end before following other vertices the same
+edge.
+
+Time Complexity: 
+    tree: O(h)
+    graph: O(v + e)

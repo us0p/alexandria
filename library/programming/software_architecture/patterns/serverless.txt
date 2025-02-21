@@ -1,0 +1,96 @@
+Serverless
+Is a cloud-native development model that allows developers to build and run 
+applications without having to manage servers.
+There are still servers in serverless, but they are abstracted away from 
+app development. A cloud provider handles the routine work of 
+provisioning, maintaining, and scaling the server infrastructure. 
+Developers can simply package their code in containers for deployment.
+Once deployed, serverless apps respond to demand and automatically scale up
+and down as needed.
+
+With serverless, routine tasks such as managing the operating system and 
+file system, security patches, load balancing, capacity management, 
+scaling, logging, and monitoring are all offloaded to a cloud services 
+provider.
+
+Serverless computing offerings typically fall into two groups, 
+- Backend-as-a-Service (BaaS): BaaS gives developers access to a variety of 
+  third-party services and apps. For instance, a cloud-provider may offer 
+  authentication services, extra encryption, cloud-accessible databases, 
+  and high-fidelity usage data. With BaaS, serverless functions are usually 
+  called through application programming interfaces (APIs).
+- Function-as-a-Service (FaaS): Under FaaS, developers still write custom 
+  server-side logic, but it’s run in containers fully managed by a cloud 
+  services provider. In contrast to BaaS, FaaS affords a greater degree of 
+  control to the developers, who create custom apps rather than relying on 
+  a library of prewritten services.
+
+Serverless architecture is ideal for asynchronous, stateless apps that can 
+be started instantaneously. Likewise, serverless is a good fit for use 
+cases that see infrequent, unpredictable surges in demand or real-time data
+processing IoT and with even-driven architecture.
+
+Pros
+- Serverless computing can increase developer productivity and reduce 
+  operational costs. By offloading the routine tasks of provisioning and 
+  managing servers, developers have more time to focus on their apps. 
+- It’s possible to streamline app development even further by incorporating 
+  entire components from third-party BaaS offerings.
+- Operational costs are reduced in a serverless model because you can pay 
+  for cloud-based compute time as it’s needed, as opposed to running and 
+  managing your own servers all the time.
+
+Cons
+- Not running your own server or controlling your own server-side logic can 
+  have drawbacks.
+- Cloud providers may have strict constraints on how their components can 
+  be interacted with, in turn affecting how flexible and customized your 
+  own systems can be. In the case of BaaS environments, developers may be 
+  beholden to services whose code is outside their control.
+- Ceding control of these aspects of your IT stack also opens you up to 
+  vendor lock-in. Deciding to change providers will also likely come with 
+  the cost of upgrading your systems to adhere to the new vendor’s 
+  specifications.
+
+Managing State in Serverless
+- External State Stores: Services such as Amazon DynamoDB, Redis, or other 
+  database solutions can be used to store and retrieve application state. 
+  These services are designed to handle high throughput and provide 
+  low-latency access to data, which makes them ideal for serverless 
+  environments.
+- Stateful Workflows: For complex operations that require maintaining state
+  across multiple serverless function invocations, you can use workflow 
+  services like AWS Step Functions. These services allow you to orchestrate
+  multiple Lambda functions and keep track of execution state as the 
+  workflow progresses.
+- In-Memory Caching: In-memory caching solutions like Amazon ElastiCache 
+  can be used to store transient state information. While not suitable for 
+  long-term persistence, caching can significantly improve performance for 
+  frequently accessed data that doesn't require permanent storage.
+- Event Sourcing: Event sourcing involves storing a sequence of events that
+  represent changes to the application's state. By replaying these events, 
+  you can reconstruct the application's state at any point in time. This 
+  approach is particularly beneficial for applications that require 
+  auditing or complex business transactions.
+- Utilize Serverless Components with Built-in State: Some serverless 
+  components come with built-in mechanisms for preserving state. For 
+  example, AWS AppSync uses GraphQL subscriptions to maintain a consistent 
+  state across distributed systems by leveraging real-time data 
+  synchronization.
+
+Serverless Security
+Instead of focusing on network inspection and access control lists, the 
+serverless model shifts the focus of security to IAM permissions, 
+behavioral protection and strong code.
+severless architecture has an increased attack surface as each event input 
+might include different message formats, and various parts of these event 
+messages can contain attacker-controlled or otherwise dangerous inputs. The
+rich set of event sources increases the potential attack surface and 
+introduces complexities when attempting to protect serverless functions 
+against event-data injections.
+The main security measure that a serverless function can have is:
+
+- Access and permissions: Maintain least-privileged access for serverless 
+  functions and other services. For example, if an AWS Lambda function 
+  needs to access a DynamoDB table, make sure it can only perform the 
+  specific action the business logic requires.

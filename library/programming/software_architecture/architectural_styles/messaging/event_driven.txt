@@ -1,0 +1,108 @@
+Event-Driven
+
+Event-driven architecture (EDA) is a software design pattern in which 
+the system reacts to specific events that occur, rather than being 
+continuously polled for changes. In EDA, events are messages that are 
+sent asynchronously between components, and the components react to 
+the events they are interested in.
+The main advantage of using EDA is that it allows for a clear separation 
+of concerns between the components, and it can improve the scalability 
+and fault-tolerance of the system. Additionally, it allows for loose 
+coupling between components, meaning that the components are not aware 
+of each other’s existence, and can be developed, deployed, and scaled 
+independently.
+
+It's important to differentiate between EDA and MDA:
+- EDA: Are decoupled from their consumers. It's used to send a state
+  change or ocurrence.
+- MDA: Are coupled with their consumers. It's used to send a instruction
+  or request.
+
+Event-driven architecture models:
+1. Pub/Sub: This is a messaging infrastructure based on subscriptions to
+   an event stream.
+2. Event streaming: Events are written to a log. Event consumers don't
+   subscribe to an event stream. Instead, they can read from any part of
+   the stream and can join the stream at any time.
+
+Benefits:
+- Loose coupling of producers and consumers: the producer of the event does
+  not need to know who the consumer is, and the consumer need not know who 
+  the producer is. Events are processed asynchronously as they occur and 
+  there is no dependency on other services.
+  The independent and autonomous nature of decoupled producers and 
+  consumers also reduces the risk of changing one without necessitating a 
+  change to others.
+- Superior fault tolerance: Decoupled services also means if one service 
+  fails, it does not cause others to fail. Service instances can be quickly 
+  added to scale because it doesn’t result in downtime for the whole system,
+  thus, availability and scalability are improved.
+- Fan out and less technical debt: Event-driven architecture is push-based,
+  so if multiple downstream systems need to act based on the occurrence of 
+  the event, then the event can be fanned out to these systems in parallel 
+  without the need for custom code.
+
+Drawbacks:
+- Increased complexity: Developers perceive event-driven architecture to be
+  inherently complex. With too many events, producers and consumers 
+  associated with different business processes and workflows can be 
+  daunting to manage.
+- Debugging and troubleshooting challenges: With the distributed and 
+  decoupled nature of event driven applications, it can be hard to trace an
+  event from source to destination.
+- Difficulties with monitoring:  Since the services are independent of each
+  other, you need a proper design to understand how they interact with each
+  other and also a proper alerting mechanism to understand the knock-on 
+  effect should a service fail.
+
+Use cases:
+- Sales and billing services.
+- Payment transactions.
+- Realtime data analysis: Logistics dashboards.
+- IoT: Shipment monitoring devices.
+
+Pitfals:
+- Ignoring Ordering Guarantees: Event-driven systems often process events 
+  out of order, especially in distributed settings. Ensure you handle 
+  potential out-of-order processing or provide a mechanism to guarantee an 
+  order when necessary.
+  Maintaining a state can be challenging in a distributed event-driven 
+  system. If order matters, consider using stateful stream processing 
+  solutions or sequence numbers in events to reconstruct the proper order.
+- Lack of Idempotency: Ensure that event handlers are idempotent, meaning 
+  they can process the same message more than once without side effects. 
+  This ensures reliability during retries or duplicated messages.
+  Design your event consumers to be stateless whenever possible, meaning a 
+  repeated event will not produce a different outcome.
+  Unique Event IDs: Assign unique IDs to events. Before processing an 
+  event, check if its ID has been processed recently to prevent duplicate 
+  processing.
+- Neglecting Dead-letter Queues: You risk losing data without a way to 
+  handle events that can’t be processed. Dead-letter queues capture these 
+  events so they can be analyzed and acted upon.
+  Regularly inspect your dead-letter queues. They often point to issues in 
+  your system that need addressing.
+  Integrate alerting mechanisms. If events start piling up in a dead-letter 
+  queue, it can indicate a critical problem.
+- Skipping Monitoring and Logging: EDAs can be hard to debug due to their 
+  asynchronous nature. Comprehensive monitoring, logging, and tracing are 
+  essential to diagnosing issues.
+  Implement distributed tracing to help you trace the journey of a 
+  particular event across services.
+  Monitor metrics like event processing times, queue lengths, and error 
+  rates to identify bottlenecks or issues proactively.
+- Ignoring Event Schema Evolution: Over time, the structure or content of 
+  your events might need to change. Design your system to handle event 
+  schema changes gracefully through versioning or flexible parsing.
+  Backwards and Forward Compatibility: Ensure that new versions of events 
+  are backwards compatible (new consumers can read old events) and forward 
+  consistent (old consumers can ignore or handle new data in the 
+  circumstances).
+- Forgetting about Back Pressure: If a service can’t keep up with incoming 
+  events, it might crash or drop data. Implement backpressure handling to 
+  ensure your system can gracefully degrade under high load.
+- Not Defining Clear Contracts: Events serve as contracts between producers
+  and consumers. Ensure these contracts (event structures, meanings, etc.) 
+  are clear, documented, and agreed upon.
+  Implement a system where consumers of events specify their expectations. 
+  This helps in verifying that changes won’t break existing consumers.

@@ -1,0 +1,54 @@
+Troubleshoot
+
+Deploy Errors
+When you deploy updates to your function directly with the Lambda API or 
+with a client such as the AWS CLI, you can see errors from Lambda directly
+in the output. If you use services like AWS CloudFormation, AWS CodeDeploy,
+or AWS CodePipeline, look for the response from Lambda in the logs or event
+stream for that service.
+
+Invocations errors
+When you invoke a Lambda function, Lambda validates the request and checks
+for scaling capacity before sending the event to your function or, for 
+asynchronous invocation, to the event queue. Invocation errors can be 
+caused by issues with request parameters, event structure, function 
+settings, user permissions, resource permissions, or limits.
+If you invoke your function directly, you see any invocation errors in the
+response from Lambda. If you invoke your function asynchronously with an 
+event source mapping or through another service, you might find errors in 
+logs, a dead-letter queue, or a failed-event destination. Error handling 
+options and retry behavior vary depending on how you invoke your function 
+and on the type of error.
+
+Execution errors
+When the Lambda runtime runs your function code, the event might be 
+processed on an instance of the function that's been processing events for
+some time, or it might require a new instance to be initialized. Errors can
+occur during function initialization, when your handler code processes the
+event, or when your function returns (or fails to return) a response.
+Function execution errors can be caused by issues with your code, function
+configuration, downstream resources, or permissions. If you invoke your 
+function directly, you see function errors in the response from Lambda. If 
+you invoke your function asynchronously, with an event source mapping, or 
+through another service, you might find errors in logs, a dead-letter 
+queue, or an on-failure destination. Error handling options and retry 
+behavior vary depending on how you invoke your function and on the type of
+error.
+When your function code or the Lambda runtime return an error, the status 
+code in the response from Lambda is 200 OK. The presence of an error in the
+response is indicated by a header named X-Amz-Function-Error. 400 and 
+500-series status codes are reserved for invocation errors.
+
+Network errors
+By default, Lambda runs your functions in an internal virtual private cloud
+(VPC) with connectivity to AWS services and the internet. To access local 
+network resources, you can configure your function to connect to a VPC in 
+your account. When you use this feature, you manage the function's internet
+access and network connectivity with Amazon Virtual Private Cloud 
+(Amazon VPC) resources.
+Network connectivity errors can result from issues with your VPC's routing
+configuration, security group rules, AWS Identity and Access Management 
+(IAM) role permissions, or network address translation (NAT), or from the 
+availability of resources such as IP addresses or network interfaces. 
+Depending on the issue, you might see a specific error or timeout if a 
+request can't reach its destination.

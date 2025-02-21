@@ -1,0 +1,22 @@
+When not to user Lambda
+- Long-running tasks: Lambda functions have a maximum execution time limit 
+  of 15 minutes (configurable up to 15 minutes). If your task requires more
+  time to complete, consider using a different compute service like EC2 or 
+  ECS.
+- High-performance computing: Lambda functions are designed for 
+  event-driven, short-lived workloads. If you need high-performance 
+  computing, such as scientific simulations, data processing, or machine 
+  learning, consider using EC2, ECS, or specialized services like AWS Batch
+  or AWS SageMaker.
+- Stateful applications: Lambda functions are designed to be stateless, 
+  which means they don't maintain state between invocations. If your 
+  application requires a persistent state, consider using a stateful 
+  service like EC2, ECS, or a database.
+- Low-latency requirements: While Lambda functions can respond quickly, 
+  they might not be suitable for applications that require extremely low 
+  latency (e.g., real-time systems, high-frequency trading). In such 
+  cases, consider using a service like EC2 or a containerized solution.
+- Large file processing: Lambda functions have limits on the size of files 
+  they can process (up to 250 MB). If you need to process large files, 
+  consider using a service like S3, EC2, or a specialized service like AWS 
+  Elemental MediaConvert.

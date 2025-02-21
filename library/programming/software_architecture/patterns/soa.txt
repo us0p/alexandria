@@ -1,0 +1,105 @@
+Service Oriented Architecture - SOA
+
+Is an architectural pattern that is used to design and organize 
+software systems as a collection of services that can be accessed 
+over a network, each service provides a business capability.
+These services are autonomous, self-contained units of functionality that 
+can be reused and combined to create new functionality.
+
+Services are designed to be loosely coupled, meaning that they do not 
+depend on the implementation details of other services, they communicate
+with each other through well-defined interfaces, usually using a protocol
+such as HTTPP. 
+
+The SOA environment comprises a single data storage layer shared by other 
+connected services. Different enterprise applications access and reuse the 
+same data in SOA implementations. This means that the database is shared
+amongst services.
+
+With SOA, developers break down the software functionalities into service 
+provider and service consumer layers. These layers communicate and exchange
+data through an enterprise service bus (ESB).
+
+Enterprise Service Bus - ESB
+Centralized software component that performs integrations between 
+applications.
+It performs transformations of data models, handles connectivity and 
+messaging, performs routing, converts communication protocols and 
+potentially manages the composition of multiple requests.
+The ESB can make these integrations and transformations available as a 
+service interface for reuse by new applications.
+The ESB is used to connect diverse services with multiple messaging 
+protocols like SOAP for example.
+ESB also possess message-oriented middleware capabilities, supporting
+asynchronous message delivery through mechanisms like message queues.
+Ideally, the ESB should be able to replace all direct contact with the 
+applications on the bus, so that all communication takes place via the 
+ESB.
+If the ESB fails, all SOA services will be impacted.
+
+SOA provides four different service types:
+- Functional services (that is, business services), which are critical for 
+  business applications.
+- Enterprise services, which serve to implement functions.
+- Application services, which are used to develop and deploy apps.
+- Infrastructure services, which are instrumental for backend processes 
+  like security and authentication.
+
+Each service consists of three components:
+- The interface, which defines how a service provider executes requests 
+  from a service consumer.
+- The contract, which defines how the service provider and service consumer
+  should interact.
+- The implementation, which is the service code.
+
+Benefits:
+- Reusability: Multiple applications use the same service.
+- Fault tolerance: If a service is down only that business capability would
+  become offline, rather than the entire application like in monolithic 
+  systems.
+- Governance: The nature of SOA, involving shared resources, enable the 
+  implementation of common data governance standards across all services.
+
+Drawbacks:
+- The enterprise service bus (ESB) connects multiple services together, 
+  which makes it a single point of failure.
+- All services share a common data base. This makes the services difficult 
+  to manage individually. 
+- Every service has a broad scope, each service provides a busines 
+  capability. So, if one of the services fails, the entire business 
+  workflow will be affected.
+- It can be challenging to deploy SOA services because they’re coupled to a
+  certain degree. SOA applications cannot take full advantage of 
+  containerization, which abstracts the application from operating systems 
+  and hardware.
+
+When to use:
+SOA provide a way for organizations to migrate from a monolithic architecture
+to cloud environments.
+It's well suited for organizations with legacy enterprise applications.
+
+SOA vs Microservices:
+Microservices architecture is an evolution of the SOA architectural style. 
+While each SOA service is a full business capability, each microservice is 
+a much smaller software component that specializes in a single task only.
+
+For example, inventory management would be an SOA service of an ecommerce 
+system. But the microservice approach would break inventory management down
+into smaller services, such as availability checker, fulfillment, and 
+accountings.
+
+Microservices doesn't need an ESB to manage the communication between 
+internal services. Here the communication is done directly via the 
+service's API.
+
+ESB vs API Gateway:
+ESB is commonly used for integrating various systems and applications 
+within an enterprise, focusing on complex internal integration scenarios.
+
+On the other hand, API gateway, concentrates on managing and exposing 
+external APIs, ensuring security, and providing functionalities like 
+monitoring and authentication.
+
+API Gateways prioritizes real-time synchronous communication and processing
+of API requests. API gateway is designed to handle client requests 
+directly.

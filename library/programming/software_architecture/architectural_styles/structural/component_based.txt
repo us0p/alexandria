@@ -1,0 +1,46 @@
+Component Based Design
+In CBD, a software system is divided into a set of components, each of 
+which has a well-defined interface containing methods, events, and 
+properties. It provides a higher level of abstraction and divides the 
+problem into sub-problems, each associated with component partitions. 
+These components can be developed, tested, and deployed independently, 
+making it easier to add new features, modify existing ones, and maintain 
+the system.
+
+What is a Component?
+A component is a modular, portable, replaceable, and reusable set of 
+well-defined functionality that encapsulates its implementation and 
+exporting it as a higher-level interface.
+
+Views of a Component
+A component can have three different views − object-oriented view, 
+conventional view, and process-related view.
+
+Object-oriented view
+A component is viewed as a set of one or more cooperating classes. Each 
+problem domain class (analysis) and infrastructure class (design) are 
+explained to identify all attributes and operations that apply to its 
+implementation. It also involves defining the interfaces that enable 
+classes to communicate and cooperate.
+
+Conventional view
+It is viewed as a functional element or a module of a program that 
+integrates the processing logic, the internal data structures that are 
+required to implement the processing logic and an interface that enables 
+the component to be invoked and data to be passed to it.
+
+Characteristics of Components
+1. Reusability − Components are usually designed to be reused in different 
+   situations in different applications. However, some components may be 
+   designed for a specific task.
+2. Replaceable − Components may be freely substituted with other similar 
+   components.
+3. Not context specific − Components are designed to operate in different 
+   environments and contexts.
+4. Extensible − A component can be extended from existing components to 
+   provide new behavior.
+5. Encapsulated − A A component depicts the interfaces, which allow the 
+   caller to use its functionality, and do not expose details of the 
+   internal processes or any internal variables or state.
+6. Independent − Components are designed to have minimal dependencies on 
+   other components.

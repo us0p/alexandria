@@ -1,0 +1,28 @@
+MongoDB
+Is a document database designed for ease of application development and
+scaling.
+MongoDB Atlas is the fully managed service for MongoDB deployments in the
+cloud.
+
+Document Database
+A record in MongoDB is a document, which is a data structure composed of
+field and values pairs (BSON document).
+MongoDB documents are similar to JSON objects. The values of fields may 
+include other documents, arrays, and arrays of documents.
+Embedded documents and arrays reduce need for expensive joins.
+
+Collections/Views/On-Demand Materialized Views
+MongoDB store documents in collections. Collections are analogous to
+tables in relational databases.
+It also supports:
+- Read-only Views.
+- On-Demand Materialized Views.
+
+High Availability
+MongoDB's replication facility, called replica set, is a group of MongoDB
+servers that maintain the same data set, providing redundancy and 
+increasing data availability.
+
+Horizontal Scalability
+MongoDB provides horizontal scalability as part of its core functionality.
+- Sharding distributes data across a cluster of machines.

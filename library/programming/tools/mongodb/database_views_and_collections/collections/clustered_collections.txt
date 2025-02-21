@@ -1,0 +1,48 @@
+Clustered collections
+Clustered collections store indexed documents in the same WiredTiger file 
+as the index specification. Storing the collection's documents and index in
+the same file provides benefits for storage and performance compared to 
+regular indexes.
+
+Clustered collections are created with a clustered index. The clustered 
+index specifies the order in which documents are stored.
+
+Benefits
+- Clustered collections can eliminate the need for a secondary TTL 
+  (Time To Live) index.
+  A clustered index is also a TTL index if you specify the 
+  expireAfterSeconds field.
+  To be used as a TTL index, the _id field must be a supported date type.
+  If you use a clustered index as a TTL index, it improves document delete 
+  performance and reduces the clustered collection storage size.
+- Clustered collections have additional performance improvements for 
+  inserts, updates, deletes, and queries.
+    - A non-clustered collection stores the _id index separately from the 
+      documents. This requires two writes for inserts, updates, and 
+      deletes, and two reads for queries.
+    - A clustered collection stores the index and the documents together in
+      _id value order. This requires one write for inserts, updates, and 
+      deletes, and one read for queries.
+
+Behaviour
+Clustered collections store documents ordered by the clustered index key 
+value. The clustered index key must be { _id: 1 }.
+You can only have one clustered index in a collection because the documents
+can be stored in only one order. Only collections with a clustered index 
+store the data in sorted order.
+You can have a clustered index and add secondary indexes to a clustered 
+collection. Clustered indexes differ from secondary indexes:
+    - A clustered index can only be created when you create the collection.
+    - The clustered index keys are stored with the collection. The 
+      collection size returned by the collStats command includes the 
+      clustered index size.
+
+Limitations
+- You cannot transform a non-clustered collection to a clustered 
+  collection, or the reverse. Instead, you can:
+    - Read documents from one collection and write them to another 
+      collection using an aggregation pipeline with an $out stage or a 
+      $merge stage.
+    - Export collection data with mongodump and import the data into 
+      another collection with mongorestore.
+- Clustered collections may not be capped collections.

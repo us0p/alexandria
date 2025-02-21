@@ -1,0 +1,5 @@
+Linear Search
+Loops over every item in the structure (usually an array) until it finds what's
+looking for.
+
+Time complexity: O(n)

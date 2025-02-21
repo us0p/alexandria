@@ -1,0 +1,64 @@
+Replication
+A replica set in MongoDB is a group of mongod processes that maintain the 
+same data set. Replica sets provide redundancy and high availability, and 
+are the basis for all production deployments.
+
+Replication in MongoDB
+A replica set contains several data bearing nodes and optionally one 
+arbiter node. Of the data bearing nodes, one and only one member is deemed 
+the primary node, while the other nodes are deemed secondary nodes.
+Each replica set node must belong to one, and only one, replica set. 
+Replica set nodes cannot belong to more than one replica set.
+The primary node receives all write operations. A replica set can have only
+one primary capable of confirming writes with { w: "majority" } write 
+concern;
+The secondaries replicate the primary's oplog and apply the operations to 
+their data sets such that the secondaries' data sets reflect the primary's 
+data set. If the primary is unavailable, an eligible secondary will hold an
+election to elect itself the new primary.
+
+Asynchronous Replication
+Secondaries replicate the primary's oplog and apply the operations to their
+data sets asynchronously.
+
+Replication Lag and Flow Control
+Replication lag is a delay between an operation on the primary and the 
+application of that operation from the oplog to the secondary.
+Starting in MongoDB 4.2, administrators can limit the rate at which the 
+primary applies its writes with the goal of keeping the majority committed 
+lag under a configurable maximum value flowControlTargetLagSeconds.
+By limiting the rate at which the primary applies its writes, as the lag 
+grows close to the flowControlTargetLagSeconds writes on the primary must 
+obtain tickets before taking locks to apply writes. By limiting the number 
+of tickets issued per second, the flow control mechanism attempts to keep 
+the lag under the target.
+
+Automatic Failover
+When a primary does not communicate with the other members of the set for 
+more than the configured electionTimeoutMillis period (10 seconds by 
+default), an eligible secondary calls for an election to nominate itself as
+the new primary. The cluster attempts to complete the election of a new 
+primary and resume normal operations.
+
+Read operations
+By default, clients read from the primary; however, clients can specify a 
+read preference to send read operations to secondaries.
+Asynchronous replication to secondaries means that reads from secondaries 
+may return data that does not reflect the state of the data on the primary.
+Distributed transactions that contain read operations must use read 
+preference primary. All operations in a given transaction must route to the
+same member.
+
+Data Visibility
+Depending on the read concern, clients can see the results of writes before
+the writes are durable.
+When a transaction writes to multiple shards, not all outside read 
+operations need to wait for the result of the committed transaction to be 
+visible across the shards. For example, if a transaction is committed and 
+write 1 is visible on shard A but write 2 is not yet visible on shard B, an
+outside read at read concern "local" can read the results of write 1 
+without seeing write 2.
+
+mongod - is the primary daemon process for the MongoDB system. It handles 
+         data requests, manages data access, and performs background 
+	 management operations.

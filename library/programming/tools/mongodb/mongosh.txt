@@ -1,0 +1,28 @@
+mongosh
+is a JavaScript and Node.js REPL environment for interacting with MongoDB 
+deployments in Atlas , locally, or on another remote host.
+
+To use system variable, add $$ to the start of the variable name.
+e.g.: USER_ROLES -> $$USER_ROLES
+
+use <db_name> -> switches to database;
+db.<collection>.insertOne -> inserts a record in the given collection;
+db.<collection>.intertMany -> receives an array of documents to insert in
+			      the collection.
+db.<collection>.isCapped -> Returns if a collection is capped or not.
+db.createCollection -> explicitly create a collection with various 
+                       options. If you're not specifying these options
+		       you shouldn't create the collection explicitly;
+db.getCollectionInfos -> returns a list with all of your collections and
+                         views widh information about the objects such as
+			 its type, UUID and options.
+db.getCollectionNames -> returns a list with the names of the existing
+			 collections.
+db.createView -> creates a view in your database;
+db.createRole -> used to create roles for specific databases and 
+		 collections, these roles are used for access limiting.
+db.createUsers -> create users that can login in the database.
+db.auth -> logs with another user.
+db.adminCommand -> executes the provided admin commands, it can be used
+		   to list the existing databases for example:
+		   db.adminCommand({listDatabases:1})

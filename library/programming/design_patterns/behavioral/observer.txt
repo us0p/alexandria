@@ -1,0 +1,66 @@
+Observer - Event-Subscriber/Listener
+
+Lets you define a subscription mechanism to notify multiple objects 
+about any events that happen to the object they’re observing.
+
+Problem:
+You want to notify some object about something but you doesn't know
+which objects are interested in that notification and isn't viable for
+the client to make pooling to seek notification about what he wants.
+
+Solution:
+The object that has some interesting state is often called subject, but 
+since it’s also going to notify other objects about the changes to its 
+state, we’ll call it publisher. All other objects that want to track 
+changes to the publisher’s state are called subscribers.
+The Observer pattern suggests that you add a subscription mechanism to 
+the publisher class so individual objects can subscribe to or unsubscribe 
+from a stream of events coming from that publisher.
+The publisher class must:
+1 - have an map of events to a list of subscribers.
+2 - public methods which allow adding and removinb subscribers.
+Now, whenever an important event happens to the publisher, it goes over 
+its subscribers and calls the specific notification method on their objects.
+Real apps might have dozens of different subscriber classes that are interested 
+in tracking events of the same publisher class. You wouldn’t want to couple the 
+publisher to all of those classes.
+That’s why it’s crucial that all subscribers implement the same interface and 
+that the publisher communicates with them only via that interface. This interface 
+should declare the notification method along with a set of parameters that the 
+publisher can use to pass some contextual data along with the notification.
+If your app has several different types of publishers and you want to make your 
+subscribers compatible with all of them, you can go even further and make all 
+publishers follow the same interface. This interface would only need to describe 
+a few subscription methods. The interface would allow subscribers to observe 
+publishers’ states without coupling to their concrete classes.
+
+Structure:
+class Publisher:
+    - issues events of interest to other objects. Publishers contain a infraestructure
+      that lets new subscribers join and current subscribers leave the list.
+
+interface Subscriber:
+    - declare the notification interface.
+
+class ConcreteSubscriber implements Subscriber:
+    - perform some action in response to notifications issued by the publisher.
+    - subscribers usually need some contextual information to handle the update.
+      For this reason, publishers often pass some context data as arguments of
+      the notification method. The publisher can pass itself as an argument,
+      letting subscribers fetch any required data directly.
+
+Applicability:
+- Use the Observer pattern when changes to the state of one object may require 
+  changing other objects, and the actual set of objects is unknown beforehand 
+  or changes dynamically.
+- Use the pattern when some objects in your app must observe others, but only 
+  for a limited time or in specific cases.
+
+Advantages:
+- Open/Closed Principle. You can introduce new subscriber classes without 
+  having to change the publisher’s code (and vice versa if there’s a publisher 
+  interface).
+- You can establish relations between objects at runtime.
+
+Disadvantages:
+- Subscribers are notified in random order.

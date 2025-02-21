@@ -1,0 +1,22 @@
+What is Docker?
+Docker is a platform that simplifies the process of creating, deploying, 
+and managing containers. It provides developers and administrators with a 
+set of tools and APIs to manage containerized applications. With Docker, 
+you can build and package application code, libraries, and dependencies 
+into a container image, which can be distributed and run consistently in 
+any environment that supports Docker.
+
+What is Docker Compose?
+Docker is used to create, deploy and manage containers individually, as
+your application grows, you'll at some point, deploy some other services
+like a cache or a queue to attend your application needs.
+Docker Compose a platform used to manage many containers at once with a
+single command.
+With Compose you can define all of your containers and their 
+configurations in a single YAML file.
+
+Dockerfile versus Compose file
+A Dockerfile provides instructions to build a container image while a 
+Compose file defines your running containers. Quite often, a Compose file 
+references a Dockerfile to build an image to use for a particular service.
+

@@ -1,0 +1,64 @@
+Greedy Algorithms
+Is a class of algorithms that make locally optimal choices at each step with
+the hope of finding a global optimum solution.
+The greedy technique is used for optimization problems (where we have to find 
+the maximum or minimum of something).
+The choice made by a Greedy algorithm may depend on earlier choices but not 
+on the future.
+
+Greedy algorithms steps:
+1. Define the problem.
+2. Identify the greedy choice: Determine the locally optimal choice at each
+   step based on the current state.
+3. Make the greedy choice: Select the greedy choice and update the state.
+4. Repeat.
+
+Disadvantages of using greedy algorithms:
+- Greedy algorithms may not always find the best possible solution.
+- The order in which the elements are considered can significantly impact the
+  outcome.
+- Greedy algorithms aren't applicable to problems where the greedy choice does
+  not lead to an optimal solution.
+
+Advantages: 
+- The greedy approach is easy to implement.
+- Typically have less time complexity.
+- Greedy algorithms are often faster than other optimization algorithms, such as 
+  dynamic programming or branch and bound, because they require less computation 
+  and memory.
+- The greedy approach can be used to solve problems in real-time, such as scheduling 
+  problems or resource allocation problems, because it does not require the solution 
+  to be computed in advance.
+- Greedy algorithms are often used as a first step in solving optimization problems, 
+  because they provide a good starting point for more complex optimization algorithms.
+
+Disadvantages:
+- The local optimal solution may not always be globally optimal.
+- The greedy approach relies heavily on the problem structure and the choice of 
+  criteria used to make the local optimal choice. If the criteria are not chosen 
+  carefully, the solution produced may be far from optimal.
+- Greedy algorithms may require a lot of preprocessing to transform the problem into 
+  a form that can be solved by the greedy approach.
+- Greedy algorithms may not be applicable to problems where the optimal solution 
+  depends on the order in which the inputs are processed.
+- Greedy algorithms may not be able to handle constraints on the solution space, such 
+  as constraints on the total weight or capacity of the solution.
+- Greedy algorithms may be sensitive to small changes in the input, which can result 
+  in large changes in the output. This can make the algorithm unstable and 
+  unpredictable in some cases.
+
+Applications:
+- Network design: Greedy algorithms can be used to design efficient networks, 
+  such as minimum spanning trees, shortest paths, and maximum flow networks. 
+- Machine learning: Greedy algorithms can be used in machine learning 
+  applications, such as feature selection, clustering, and classification
+- Image processing: Greedy algorithms can be used to solve a wide range of image 
+  processing problems, such as image compression, denoising, and segmentation. 
+- Combinatorial optimization: Greedy algorithms can be used to solve combinatorial 
+  optimization problems, such as the traveling salesman problem, graph coloring, 
+  and scheduling. Although these problems are typically NP-hard, greedy algorithms 
+  can often provide close-to-optimal solutions that are practical and efficient.
+- Game theory: Greedy algorithms can be used in game theory applications, such as 
+  finding the optimal strategy for games like chess or poker. 
+- Financial optimization: Greedy algorithms can be used in financial applications, 
+  such as portfolio optimization and risk management.

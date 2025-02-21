@@ -1,0 +1,16 @@
+Architectural principles 
+Refer to a set of guidelines or rules that are used to guide the design and
+development of a software architecture. These principles are intended to 
+ensure that the resulting architecture is maintainable, scalable, and easy
+to understand and modify. Some common architectural principles include:
+- Separation of concerns: This principle asserts that software should be 
+  separated based on the kinds of work it performs. For instance, consider
+  an application that includes logic for identifying noteworthy items to 
+  display to the user, and which formats such items in a particular way to
+  make them more noticeable. The behavior responsible for choosing which 
+  items to format should be kept separate from the behavior responsible for
+  formatting the items, since these behaviors are separate concerns that 
+  are only coincidentally related to one another.
+- Modularity.
+- Loose coupling.
+- Hish cohesion.

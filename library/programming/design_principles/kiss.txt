@@ -1,0 +1,28 @@
+KISS (Keep It Simple, Stupid)
+
+Is a design principle that suggests simplicity should be a key goal in 
+design, development, and other fields, advocating for straightforward 
+and uncomplicated solutions over unnecessarily complex ones.
+
+Implications:
+- Simplicity.
+- Clarity.
+- Efficiency.
+- Usability.
+- Flexbility.
+- Risk reduction.
+
+Kiss in Software Development:
+- Maintainability.
+- Debugging.
+- Scalabitliy.
+- Performance.
+- Reduced Technical Debt.
+
+How to KISS:
+- Identify core objectives.
+- Focus on essentials.
+- Simplify Design and workflow.
+- Prioritize clarity and undertandability.
+- Iterate and refine.
+- Use simple tools and techniques.

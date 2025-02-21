@@ -1,0 +1,13 @@
+Component Principles
+Component principles in software architecture refer to guidelines for 
+designing and implementing software components that are modular, reusable,
+and easy to understand, test, and maintain. Some of the key component 
+principles in software architecture include:
+- High cohesion
+- Low coupling
+- Separation of concerns
+- Interface-based design
+- Reusability
+- Testability
+- Modularity
+- Interoperability

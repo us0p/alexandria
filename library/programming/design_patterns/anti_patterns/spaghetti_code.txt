@@ -1,0 +1,41 @@
+Spaghetti Code
+Spaghetti Code appears as a program or system that contains very little 
+software structure. Coding and progressive extensions compromise the 
+software structure to such an extent that the structure lacks clarity, even
+to the original developer
+The software may include a small number of objects that contain methods 
+with very large implementations that invoke a single, multistage process 
+flow.
+The system is very difficult to maintain and extend, and there is no 
+opportunity to reuse the objects and modules in other similar systems.
+
+Symptoms And Consequences
+- Mining Spaghetti Code can often be a poor return on investment;
+- Methods are very process-oriented; frequently, in fact, objects are named
+  as processes.
+- The flow of execution is dictated by object implementation, not by the 
+  clients of the objects.
+- Minimal relationships exist between objects.
+- Many object methods have no parameters, and utilize class or global 
+  variables for processing.
+- Code is difficult to reuse, and when it is, it is often through cloning. 
+  In many cases, however, code is never considered for reuse.
+- Benefits of object orientation are lost; inheritance is not used to 
+  extend the system; polymorphism is not used.
+- Follow-on maintenance efforts contribute to the problem.
+- Software quickly reaches a point of diminishing returns; the effort 
+  involved in maintaining an existing code base is greater than the cost of
+  developing a new solution from the ground up.
+
+Typical Causes
+- Inexperience with object-oriented design technologies.
+- No mentoring in place; ineffective code reviews.
+- No design prior to implementation.
+
+Exceptions
+software concerns usually are subservient to business concerns, and, on 
+occasion, business success is contingent on delivering a software product 
+as rapidly as possible. If the domain is not familiar to the software 
+architects and developers, it may be better to develop products to gain an
+understanding of the domain with the intention of designing products with 
+an improved architecture at some later date.

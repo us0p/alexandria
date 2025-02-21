@@ -1,0 +1,16 @@
+Read Uncommited And Single Document Atomicity
+Write operations are atomic with respect to a single document; i.e. if a 
+write is updating multiple fields in the document, a read operation will 
+never see the document with only some of the fields updated. However, 
+although a client may not see a partially updated document, read 
+uncommitted means that concurrent read operations may still see the updated
+document before the changes are made durable.
+
+Read Uncommitted And Multiple Document Write
+When a single write operation (e.g. db.collection.updateMany()) modifies 
+multiple documents, the modification of each document is atomic, but the 
+operation as a whole is not atomic.
+For situations that require atomicity of reads and writes to multiple 
+documents (in a single or multiple collections), MongoDB supports 
+distributed transactions, including transactions on replica sets and 
+sharded clusters.

@@ -1,0 +1,74 @@
+Factory Method
+
+It provides an interface for creating objects in a superclass, 
+but allows subclasses to alter the type of objects that will 
+be created.
+The factory method helps decouple the logic from the base class.
+
+The Factory Method pattern suggests that you replace direct object 
+construction calls with calls to a special factory method. 
+This method is defined in a abstract class and must be overrided 
+in its subclasses to have an concrete implementation for each product.
+
+Product is an interface which is implemented by the objects returned 
+by a facroty method.
+
+Structure:
+interface Product:
+    - doStuff()
+
+class ConcreteProductA implements Product:
+    - ...
+    - doStuff() (A concrete implementation)
+
+class ConcreteProductB implements Product:
+    - ...
+    - doStuff() (B concrete implementation)
+
+abstract class Creator:
+    - ...
+    - createProduct(): Product
+
+class ConcreteCreatorA extends Creator:
+    - ...
+    - createProduct(): Product (A concrete implementation)
+
+class ConcreteCreatorB extends Creator:
+    - ...
+    - createProduct(): Product (B concrete implementation)
+
+Note that product creation might not be the primary responsibility
+of the Creator class, thus, it might be a concrete class which might
+for example, return a default object in its product creation method.
+
+Applicability:
+- Use the factory method when you don't know beforehand the exact 
+  types and dependencies of the objects your code should work with.
+  - The Factory Method separates product construction code from the 
+    code that actually uses the product. Therefore it’s easier to 
+    extend the product construction code independently from the rest 
+    of the code.
+- Use the Factory Method when you want to provide users of your 
+  library or framework with a way to extend its internal components.
+  - Inheritance is probably the easiest way to extend the default 
+    behavior of a library or framework. The solution is to reduce 
+    the code that constructs components across the framework into a 
+    single factory method and let anyone override this method in 
+    addition to extending the component itself.
+- Use the Factory Method when you want to save system resources by 
+  reusing existing objects instead of rebuilding them each time.
+  - You often experience this need when dealing with large, 
+    resource-intensive objects such as database connections, file 
+    systems, and network resources, the created object is stored in
+    a object pool to be reused when necessary.
+
+Advantages:
+- Avoid coupling between the creator and the concrete products.
+- Single responsibility principle. You can move product creation code
+  into one place in the program, making the code easier to support.
+- Open/Closed principle. You can introduce new types of products into
+  the program without breaking existing client code.
+
+Disadvantages:
+- The code may become more complicated since you need to introduce a 
+  lot of new subclasses to implement the pattern.
