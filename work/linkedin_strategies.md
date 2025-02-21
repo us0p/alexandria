@@ -1,3 +1,11 @@
+## Notes
+1. You should aim for positions at bigger companies as they unlock more opportunities. It's not about what you know, but where are you from.
+2. Increase your [SSI score](https://www.linkedin.com/sales/ssi?src=or-search&veh=www.google.com).
+3. At least 5 likes and comments every day.
+4. Focusing on easy apply opportunities, you should apply to at least 10 every day.
+
+---
+
 Picking a language:
 If you use stackoverflow survey you can track the least popular languages
 with the highest paying rate in the last year, and, if the language is

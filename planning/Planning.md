@@ -46,23 +46,17 @@
 	    - [ ] DDD
     - [ ] Event
 - [ ] lambda
-- [ ] Authentication
-    - [ ] OAuth2
-    - [ ] SAML
 - [ ] Queue concepts
     - [ ] Kafka
 - [ ] Kubernetes
 - [ ] Application gateway 
     - [ ] Kong
 - [ ] Network basics
-    - [ ] Cloud Flare
-    - [ ] Proxy reverso 
-        - [ ] Nginx
 - [ ] CI/CD pipelines
-- [ ] GitHub actions
+	- [ ] GitHub actions
 - [ ] Infrastructure as Code (IAC)
-- [ ] Terraform
+	- [ ] Terraform
 - [ ] Observability
-- [ ] Prometheus
+	- [ ] Prometheus
 - [ ] Backend: overall backend knowledge
 - [ ] DSA

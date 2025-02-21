@@ -13,3 +13,5 @@
 [C# design patterns projects](https://github.com/dodyg/practical-aspnetcore)
 [Microservice sample projects](https://github.com/mjebrahimi/Awesome-Microservices-DotNet?tab=readme-ov-file#sample-projects)
 [Distributed sample projects](https://github.com/roma-glushko/awesome-distributed-system-projects)
+## Videos
+[Web AI: Client Side Machine Learning](https://goo.gle/WebAIVideos)
