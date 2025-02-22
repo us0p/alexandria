@@ -10,3 +10,5 @@
 /go/*/*.sh
 
 *.class
+
+.obsidian

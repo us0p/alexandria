@@ -108,7 +108,7 @@ Common responsibilities:
 - Perform validation to ensure that the object isn't in a invalid state.
 - Validation is usually made in the constructor by throwing an error if
   the provided state is invalid, this create less responsibility on the 
-  developer to remember to call validation methods.
+  developer to remember to call validation methods. You must consider the impact of this practice, for example, in your repositories, your data is going to be valid during entity construction?
 - Objects contain behaviours that are common to all use cases across the
   system.
 
@@ -170,7 +170,7 @@ handling.
   
 **Gateways:** Responsible for accessing external data sources, shuch as 
 databases or web services. It's an adapter between a data source and a 
-particular domain object (Repository).
+particular domain object (e.g. Repository).
 - Repositories are defined in the domain layer and implemented in the 
   framework and drivers layer. Some implementation allows repositories to 
   return entities if strictly used inside use cases to avoid conversion 
@@ -210,17 +210,6 @@ response to a query. We might call this a RowStructure. We don’t want to
 pass that row structure inwards across a boundary. That would violate The 
 Dependency Rule because it would force an inner circle to know something 
 about an outer circle.
-
-## Common used patterns
-- Repository
-- CQRS
-- Unity of work
-- Mediator
-- Result
-- Dependency Injection
-- Inversion of Control
-- OOP -> Dependency Inversion
-
 ## Entity x Model
 Entity represents the core business logic and data for a domain object 
 (note the relation with DDD), residing in the domain layer.
@@ -234,63 +223,42 @@ Essentially, an entity is the "pure" business concept, while a model is a
 tailored representation of that concept for a specific context.
 
 ## Plain Old Java/JavaScript Object - POJO
-Is a simple object that doesn't adhere to any specific framework or 
-requirement. Typically represents and encapsulates data. No need to 
-implement interfaces or extend classes. May contain business logic but 
-better to keep as simple as possible. Can be defined in any layer as it's 
-just a data container but it's better to define it in the domain layer to 
-enable a simple data structure as communication amongst the application. 
-Using POJOS creates the need to convert entities to POJOs which can 
-increase complexity but it allows for clearer contracts.
+Is a simple object that doesn't adhere to any specific framework or  requirement. Typically represents and encapsulates data. No need to  implement interfaces or extend classes. May contain business logic but  better to keep as simple as possible.
 
+Can be defined in any layer as it's  just a data container but it's better to define it in the domain layer to  enable a simple data structure as communication amongst the application.
+
+Using POJOS creates the need to convert entities to POJOs which can  increase complexity but it allows for clearer contracts.
+As Randy Stafford said in P of EAA “Don't underestimate the cost of using DTOs.... It's significant, and it's painful - perhaps second only to the cost and pain of object-relational mapping”.
 ## Data Access Object - DAO
-Provides an abstract interface for accessing data from a persistent storage
-mechanism like a database. It encapsulates data access logic.
+Provides an abstract interface for accessing data from a persistent storage mechanism like a database. It encapsulates data access logic.
 
 **DAO x Repository**
   - DAO is an abstraction of data persistance.
   - Repository is an abstraction of a collection of objects it has a narrower interface.
-  - A Repository can be implemented using a DAO but a DAO shouldn't be 
-    implemented by using a Repository.
+  - A Repository can be implemented using a DAO but a DAO shouldn't be  implemented by using a Repository.
   - a method like Update is appropriate on a DAO, but not in a Repository.
-  - DAO doesn't restrict you to store data of the same type, thus you can 
-    easily have a DAO that deals with related objects.
+  - DAO doesn't restrict you to store data of the same type, thus you can  easily have a DAO that deals with related objects.
   - Repositories handle only one type of objects.
-
 ## Data Transfer Object - DTO
   - An object that carries data between processes.
-  - Useful when you want to transfer data across different layers of an 
-    application or over the network.
-
+  - Useful when you want to transfer data across different layers of an  application or over the network.
   - are often immutable.
-  - should be used when you have a significant mismatch between the model 
-    in your presentation layer and the underlaing domain.
+  - should be used when you have a significant mismatch between the model  in your presentation layer and the underlaing domain.
   - the whole purpose is to shift data in expensive remote calls.
-
-  - using it for more than network communication can lead to conversions 
-    from DTO to Domain objects and back which increases complexity.
-  - It doesn't include business logic, but it can include some methods to 
-    format data like serialization and deserialization mechanisms for 
-    transfering data over the wire.
-  - Often requires conversion from and to POJOs or entities, which can be a
-    costly process.
-  - most commonly used in the services layer (?) in a N-tier application to 
-    transfer data between itself and the UI layer, the service layer must 
-    control what data leaves the application layer.
-  - some DTOs belong in the interface adapters layer when they are specific
-    to UI representation, Framework, external services, or if the response 
-    format is differente from the use case (e.g. must be snake_case instead
-    of camelCase).
-
+  - using it for more than network communication can lead to conversions  from DTO to Domain objects and back which increases complexity.
+  - It doesn't include business logic, but it can include some methods to  format data like serialization and deserialization mechanisms for  transfering data over the wire.
+  - Often requires conversion from and to POJOs or entities, which can be a costly process.
+  - most commonly used in the services layer in a N-tier application to  transfer data between itself and the UI layer, the service layer must  control what data leaves the application layer.
+  - some DTOs belong in the interface adapters layer when they are specific to UI representation, Framework, external services, or if the response  format is differente from the use case (e.g. must be snake_case instead of camelCase).
 ## DTO x POJO
-|               |POJO                                         |DTO                                                            |
-|---------------|---------------------------------------------|---------------------------------------------------------------|
-|Purpose        |Temporary structure to hold data             |Defined explicitly for data transfer                           |
-|Layers         |Domain or Use Case                           |Use Case or Interface                                          |
-|Dependency     |No external dependencies                     |Might be used with libraries                                   |
-|Behavior       |Usually has no additional logic              |May contain formatting, transformation, serialization, etc     |
-|Reusability    |Typically ad-hoc and speficic to the use case|Explicitly structure to match API contracts or external systems|
-|Maintainability|Can be easily modified within the use case   |Acts as a stable contract, ensuring API consistency            |
+|                 | POJO                                          | DTO                                                             |
+| --------------- | --------------------------------------------- | --------------------------------------------------------------- |
+| Purpose         | Temporary structure to hold data              | Defined explicitly for data transfer                            |
+| Layers          | Domain or Use Case                            | Use Case or Interface                                           |
+| Dependency      | No external dependencies                      | Might be used with libraries                                    |
+| Behavior        | Usually has no additional logic               | May contain formatting, transformation, serialization, etc      |
+| Reusability     | Typically ad-hoc and speficic to the use case | Explicitly structure to match API contracts or external systems |
+| Maintainability | Can be easily modified within the use case    | Acts as a stable contract, ensuring API consistency             |
 
 ## Comon Folder Structure
   - Domain

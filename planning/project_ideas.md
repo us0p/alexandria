@@ -1,3 +1,4 @@
+# Project ideas
 ## Stay up to date
 A software that pulls updates about specified techs from many sources to 
 give you the most recent information about the tech world.
