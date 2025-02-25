@@ -35,10 +35,10 @@
     - [ ] strategy
 - [ ] Node.js
     - [ ] Event Loop
+    - [ ] Buffer
     - [ ] Event Emitters
     - [ ] Streams
     - [ ] child_process
-    - [ ] Workers Threads
     - [ ] Clusters
     - [ ] Memory Leaks
     - [ ] Scaling a node server.
@@ -50,14 +50,16 @@
 - [ ] Queue concepts
     - [ ] Kafka
 - [ ] Kubernetes
-- [ ] Application gateway 
-    - [ ] Kong
-- [ ] Network basics
+- [ ] Redis
+- [ ] Nest.js
 - [ ] CI/CD pipelines
 	- [ ] GitHub actions
+- [ ] Network basics
+- [ ] Backend: overall backend knowledge
+- [ ] Application gateway 
+    - [ ] Kong
 - [ ] Infrastructure as Code (IAC)
 	- [ ] Terraform
 - [ ] Observability
 	- [ ] Prometheus
-- [ ] Backend: overall backend knowledge
 - [ ] DSA

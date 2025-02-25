@@ -81,3 +81,19 @@ Avoid anything that can be used against you:
 - name your document as follow: fname_lname_position.pdf
 - don't let information break in awkward ways:
 ![[Pasted image 20250224111002.png]]
+
+## Linkedin
+Linkedin is a social network, you can use it to find job opportunities by doing an active search, or you can receive passive offers, when the recruiters contact you.
+To perform active search you'll be sending your resume which need to be tailored for each opportunity, thus, your linkedin needs to be aligned with the contents of your resume, but, your linkedin cannot be specific, otherwise it's going to be harder for the recruiters to find you.
+So you want your Linkedin profile rather generic towards a specific area or position, keeping it aligned with your resume which should align your experience with the opportunity requirements.
+This should keep your Linkedin easy to find while avoid constantly maintenance to keep it aligned with your resume.
+## Linkedin - About
+- summary of experience & expertise
+- highlight the skills you want to be known for and skills that recruiters can search for.
+- highlight your achievements, provide metrics if possible.
+
+## Linkedin - Experiences
+- should list responsibilities as bullet points
+- should list the achievements as bullet points
+- the responsibilities should hook with the technologies to provide further context
+- the achievements should be placed at the top and the keywords at the bottom, this way you can add all the keywords necessary, without bloating your description, making it easy to read.
