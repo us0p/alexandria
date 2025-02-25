@@ -1,0 +1,1 @@
+Um número é [primo](Termos%20gerais.md#Número%20Primo) se divisões sucessivas por números [primo](Termos%20gerais.md#Número%20Primo) resultarem resto diferente de zero até o divisor ser maior ou igual ao [quociente](Termos%20gerais.md#Quociente).

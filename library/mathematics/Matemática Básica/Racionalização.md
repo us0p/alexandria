@@ -1,0 +1,4 @@
+Racionalizar o [denominador](Termos%20gerais.md#Denominador) de uma [fração](Frações) significa eliminar os [radicais](Termos%20gerais.md#Radical%20da%20raiz) do [denominador](Termos%20gerais.md#Denominador) sem alterá-la.
+![[Pasted image 20250225133148.png]]
+Uma [fração](Frações) com o [denominador](Termos%20gerais.md#Denominador) formado por dois [termos](Termos%20gerais.md#Termos) e pelo menos um desses dois [termos](Termos%20gerais.md#Termos) for um [radicais](Termos%20gerais.md#Radical%20da%20raiz), a racionalização é feita pela multiplicação do [conjugado](Termos%20gerais.md#Conjugado) da expressão que se encontra no [denominador](Termos%20gerais.md#Denominador).
+![[Pasted image 20250225133829.png]]

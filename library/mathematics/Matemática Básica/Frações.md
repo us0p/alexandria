@@ -10,7 +10,7 @@ Representação de [frações equivalentes](Termos%20gerais.md#Frações%20equiv
 - [denominadores](Termos%20gerais.md#Denominador) são iguais:
 	- Conserva-se o [denominador](Termos%20gerais.md#Denominador) e realiza operações com os [numeradores](Termos%20gerais.md#Numerador)
 - [denominadores](Termos%20gerais.md#Denominador) são diferentes:
-	- É necessário a redução dos denominadores à um [denominador](Termos%20gerais.md#Denominador) comum pela utilização do [MMC](Termos%20gerais.md#MMC)
+	- É necessário a redução dos denominadores à um [denominador](Termos%20gerais.md#Denominador) comum pela utilização do [MMC](Máximo%20Divisor%20Comum%20(MDC))
 ## Multiplicação
 Simplesmente multiplique todos os [numeradores](Termos%20gerais.md#Numerador) e depois multiplique todos os [denominadores](Termos%20gerais.md#Denominador).
 $$

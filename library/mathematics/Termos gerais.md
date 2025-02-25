@@ -14,8 +14,6 @@ Fração onde o [Numerador](#Numerador) é menor que o [Denominador](#Denominado
 Fração onde o [Numerador](#Numerador) é maior que o [Denominador](#Denominador).
 ## Frações equivalentes
 Fração diferentes que representam a mesma quantidade do "todo".
-## MMC
-Mínimo Múltiplo Comum é uma operação realizada para encontrar o menor múltiplo comum a dois ou mais números, geralmente utilizada na redução de frações a um mesmo denominador comum.
 ## Número misto
 É um número representado pela forma $3 \text{ }1/2$, geralmente presente em receitas para representar a quantidade de algum ingrediente. Não indica a multiplicação dos [termos](#Termos) e sim a soma. No caso do exemplo $3 \text{ }1/2$, a fração correspondente seria $\frac{7}{2}$.
 Por exemplo: `Três colheres e meia de açúcar.`
@@ -33,3 +31,9 @@ Por exemplo, na raiz $\sqrt[n]{a}$, $n$ é o índice.
 ## Radicando da raiz
 É o número representado do lado interno da raiz.
 Por exemplo, na raiz $\sqrt[n]{a}$, $a$ é o radicando.
+## Conjugado
+O conjugado de um número é o número mas com o sinal oposto.
+## Número Composto
+Possuí mais de dois divisores naturais distintos.
+## Número Primo
+Um número natural primo é aquele que possui somente dois divisores naturais distintos: o número um e ele mesmo.
