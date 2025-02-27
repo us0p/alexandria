@@ -3,6 +3,8 @@
 [Dependency Injection](https://angular.dev/guide/di)
 [Formatting vs. Linters](https://prettier.io/docs/en/comparison.html)
 [Using Netrw as file explorer](https://vonheikemen.github.io/devlog/tools/using-netrw-vim-builtin-file-explorer/)
+[36 JavaScript concepts](https://rubenmarcus.medium.com/36-conceitos-para-se-tornar-um-expert-em-javascript-98c4598ba316)
+[Stop saying technical debt](https://stackoverflow.blog/2023/12/27/stop-saying-technical-debt/)
 ## Sites
 [JavaScript The Right Way](https://jstherightway.org)
 ## Courses

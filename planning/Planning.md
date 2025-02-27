@@ -18,12 +18,22 @@
 - [ ] Testing strategies
     - [ ] Technical debt
     - [x] Test priorization
-    - [ ] Testing approaches
+    - [x] Testing approaches
     - [ ] Testing Techniques
         - [ ] TDD
         - [ ] BDD
-    - [ ] Test objects
-    - [ ] Jest
+    - [x] Test objects
+- [ ] Nest.js
+- [ ] Redis
+- [ ] lambda
+- [ ] Kafka
+- [ ] Kubernetes
+- [ ] GitHub actions
+- [ ] Architecture
+	- [ ] Microservices
+	    - [ ] DDD
+    - [ ] Event
+- [ ] Evolutionary Architecture
 - [ ] Design Patterns
     - [ ] factory
     - [ ] builder
@@ -42,24 +52,6 @@
     - [ ] Clusters
     - [ ] Memory Leaks
     - [ ] Scaling a node server.
-- [ ] Architecture
-	- [ ] Microservices
-	    - [ ] DDD
-    - [ ] Event
-- [ ] lambda
-- [ ] Queue concepts
-    - [ ] Kafka
-- [ ] Kubernetes
-- [ ] Redis
-- [ ] Nest.js
-- [ ] CI/CD pipelines
-	- [ ] GitHub actions
 - [ ] Network basics
 - [ ] Backend: overall backend knowledge
-- [ ] Application gateway 
-    - [ ] Kong
-- [ ] Infrastructure as Code (IAC)
-	- [ ] Terraform
-- [ ] Observability
-	- [ ] Prometheus
 - [ ] DSA
