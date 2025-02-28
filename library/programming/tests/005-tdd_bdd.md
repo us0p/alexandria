@@ -1,1 +1,0 @@
-BDD was originally developed by my colleague Daniel Terhorst-North as a technique to better help people learn Test Driven Development by focusing on how TDD operates as a design technique. This led to renaming tests as behaviors to better explore where TDD helps with thinking about what an object needs to do.

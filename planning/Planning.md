@@ -16,13 +16,20 @@
 - [x] SOLID
 - [x] Clean Architecture
 - [ ] Testing strategies
-    - [ ] Technical debt
+    - [x] Technical debt
     - [x] Test priorization
     - [x] Testing approaches
-    - [ ] Testing Techniques
-        - [ ] TDD
-        - [ ] BDD
+    - [x] Test isolation
+    - [x] Testing Techniques
+        - [x] TDD
+        - [x] BDD
     - [x] Test objects
+    - [x] unit testing
+    - [ ] unit testing implications, should you use?
+    - [x] integration testing
+	    - [ ] examples
+	- [ ] Integration testing implications, should you use?
+	- [ ] review and summary all the information
 - [ ] Nest.js
 - [ ] Redis
 - [ ] lambda
