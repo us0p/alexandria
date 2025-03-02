@@ -30,6 +30,7 @@
 	    - [ ] examples
 	- [ ] Integration testing implications, should you use?
 	- [ ] review and summary all the information
+	- [ ] Test fixtures
 - [ ] Nest.js
 - [ ] Redis
 - [ ] lambda
