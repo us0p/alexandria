@@ -13,6 +13,8 @@ Test isolation utilizes test doubles to simulate the behavior of external depend
 - Web services
 - Network connections
 - External libraries
+- Environment
+- File system
 
 Mock objects or stubs are commonly used to achieve this isolation.
 ### Test Isolation in End-to-End Testing

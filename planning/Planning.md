@@ -24,13 +24,30 @@
         - [x] TDD
         - [x] BDD
     - [x] Test objects
+	- [ ] Test fixtures
+	- [ ] patching
+	- [ ] monkey patching
+	- [ ] Snapshot testing
     - [x] unit testing
     - [ ] unit testing implications, should you use?
     - [x] integration testing
 	    - [ ] examples
 	- [ ] Integration testing implications, should you use?
+	- [ ] Mock objects in JS
+		- [ ] Proxy
+		- [ ] Reflect
+	- [ ] Node.js testing frameworks
+		- [ ] Node.js test runner
+		- [ ] Jest
+		- [ ] Mocha
+		- [ ] Sinon.js
+		- [ ] Chai
+		- [ ] Faker.js
+		- [ ] DaSpec
+		- [ ] Jasmine
+		- [ ] Yadda
+		- [ ] Selenium
 	- [ ] review and summary all the information
-	- [ ] Test fixtures
 - [ ] Nest.js
 - [ ] Redis
 - [ ] lambda
