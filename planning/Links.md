@@ -5,6 +5,7 @@
 [Using Netrw as file explorer](https://vonheikemen.github.io/devlog/tools/using-netrw-vim-builtin-file-explorer/)
 [36 JavaScript concepts](https://rubenmarcus.medium.com/36-conceitos-para-se-tornar-um-expert-em-javascript-98c4598ba316)
 [Stop saying technical debt](https://stackoverflow.blog/2023/12/27/stop-saying-technical-debt/)
+[Essential CLI/TUI tools for developers](https://www.freecodecamp.org/news/essential-cli-tui-tools-for-developers/)
 ## Sites
 [JavaScript The Right Way](https://jstherightway.org)
 ## Courses
