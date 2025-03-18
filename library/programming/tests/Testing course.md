@@ -159,3 +159,6 @@ You can patch a function in two ways:
 - Replacing a function with another function, a.k.a. side effect.
 ### Mock object
 Is an object that simulates the behavior of a real object in ways that you can control. Use mock sparingly, make sure you're testing your code and not your mocks.
+## Table Driven Tests
+Each table entry is a complete test case with inputs and expected results, and additional information such as the test name to make the test output easily readable.
+Given a table of tests, the actual test simply iterates through all table entries and for each entry performs the necessary tests. The test code is written once and amortized over all table entries, so it makes sense to write a careful test with good error messages.

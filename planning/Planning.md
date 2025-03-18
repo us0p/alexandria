@@ -24,30 +24,31 @@
         - [x] TDD
         - [x] BDD
     - [x] Test objects
-	- [ ] Test fixtures
-	- [ ] patching
-	- [ ] monkey patching
-	- [ ] Snapshot testing
+	- [x] Test fixtures
+	- [x] patching
+	- [x] monkey patching
+	- [x] Snapshot testing
     - [x] unit testing
-    - [ ] unit testing implications, should you use?
+    - [x] unit testing implications, should you use?
     - [x] integration testing
-	    - [ ] examples
-	- [ ] Integration testing implications, should you use?
-	- [ ] Mock objects in JS
-		- [ ] Proxy
-		- [ ] Reflect
+	    - [x] examples
+	- [x] Integration testing implications, should you use?
 	- [ ] Node.js testing frameworks
-		- [ ] Node.js test runner
-		- [ ] Jest
-		- [ ] Mocha
+		- [x] Node.js test runner
+		- [x] Jest
 		- [ ] Sinon.js
-		- [ ] Chai
-		- [ ] Faker.js
-		- [ ] DaSpec
-		- [ ] Jasmine
-		- [ ] Yadda
-		- [ ] Selenium
+		- [x] Faker.js
+		- [x] Cucumber.js
 	- [ ] review and summary all the information
+- [ ] Node.js
+    - [ ] Event Loop
+    - [ ] Buffer
+    - [ ] Event Emitters
+    - [ ] Streams
+    - [ ] child_process
+    - [ ] Clusters
+    - [ ] Memory Leaks
+    - [ ] Scaling a node server.
 - [ ] Nest.js
 - [ ] Redis
 - [ ] lambda
@@ -68,15 +69,6 @@
     - [ ] proxy
     - [ ] command
     - [ ] strategy
-- [ ] Node.js
-    - [ ] Event Loop
-    - [ ] Buffer
-    - [ ] Event Emitters
-    - [ ] Streams
-    - [ ] child_process
-    - [ ] Clusters
-    - [ ] Memory Leaks
-    - [ ] Scaling a node server.
 - [ ] Network basics
 - [ ] Backend: overall backend knowledge
 - [ ] DSA
