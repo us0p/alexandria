@@ -13,6 +13,8 @@ Looks for:
 Is a technique in which the tests are created execute all the lines of the code. It also include some different coverage techniques.
 - statement coverage: test that each line in the code is called.
 - branch coverage: test that each condition in the code is executed, 100% branch coverage  means 100% statement coverage but not the opposite.
+## Test Coverage
+The percentage of lines of code executed during tests. It reveal which lines of code were not tested. Even with 100% test coverage your code can still have bugs.
 ## Boundaries
 Tests how the code performs when input values are in the boundaries or extreme values.
 
@@ -26,3 +28,6 @@ Input values are divided into different classes based on its similarity in the o
 Focus on the values at boundaries as it is found that many applications have a high amount of issues on the boundaries. Also ensures that any value in the testing range is valid/invalid.
 ## Decision Table
 If there's conditions, the tester should identify the output for each condition and create a table that relates an input with the desired output for each condition.
+## Table Driven Tests
+Each table entry is a complete test case with inputs and expected results, and additional information such as the test name to make the test output easily readable.
+Given a table of tests, the actual test simply iterates through all table entries and for each entry performs the necessary tests. The test code is written once and amortized over all table entries, so it makes sense to write a careful test with good error messages.

@@ -15,7 +15,7 @@
 - [x] OOP
 - [x] SOLID
 - [x] Clean Architecture
-- [ ] Testing strategies
+- [x] Testing strategies
     - [x] Technical debt
     - [x] Test priorization
     - [x] Testing approaches
@@ -39,7 +39,8 @@
 		- [ ] Sinon.js
 		- [x] Faker.js
 		- [x] Cucumber.js
-	- [ ] review and summary all the information
+	- [x] review and summary all the information
+- [ ] AI Agents
 - [ ] Node.js
     - [ ] Event Loop
     - [ ] Buffer

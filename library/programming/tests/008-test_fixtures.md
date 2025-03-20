@@ -7,3 +7,8 @@ Preconfigures tests into a known state at start instead of working from a previo
 The purpose of a test fixture is to ensure that there is a well known and fixed environment in which tests are tun so that results are repeatable.
 
 A fixture encompasses everything necessary to establish the state required for testing the SUT. In the context of Test Automation, it's the setup phase of the test.
+## Test Fixtures
+- Stablishes an initial state before or after running tests.
+- Runs tests in isolation.
+- Ensures repeatable results.
+- If you need to provide data to your fixtures, it's common to create a folder named "fixtures" and add the data inside it in any file format deemed acceptable. It makes clear that files inside that folder are related to fixtures.
