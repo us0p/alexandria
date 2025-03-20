@@ -11,6 +11,19 @@ Every model represents some aspect of reality. It is a simplification. It's an i
 
 Every software program relates to some activity or interest of its user. That subject area to which the user applies the program is the "domain" of the software.
 
-To create  valuable software, we must bring a to bear a body of knowledge related to the activities the software will be involved in. The amount of knowledge can be overwhelming. This is when a team can use modeling to wrestle with that overload.
+To create  valuable software, we must bring to bear a body of knowledge related to the activities the software will be involved in. The amount of knowledge can be overwhelming. This is when a team can use modeling to wrestle with that overload.
 
 Domain modeling is not a matter of making as "realistic" a model as possible. Nor is it just the construction of a software mechanism that gives the necessary results. It is more like movie making, loosely representing reality to a particular purpose. Just as a moviemaker selects aspects of experience and presents them in an idiosyncratic way to tell a story or make a point, a domain model is chosen for its utility.
+
+There are three basic uses that determine the choice of a model:
+1. The model dictates the form of the design of the heart of the software.a It is the intimate link between the model and the implementation that makes the model relevant. This binding of model and implementation also helps maintenance and continuing development because the code can be interpreted based on understanding the model.
+2. The model is the backbone of a language used by all team members. Developers can communicate with domain experts without translation.
+3. The model is distilled knowledge. The team's agreed-upon way of structuring domain knowledge and distinguishing the elements of most interest. A model captures how we choose to think about the domain. The shared language allows effective collaboration of developers and domain experts to wrestle information into this form.
+
+>Most talented developers do not have much interest in learning about the specific domain they are working in, much less making a major commitment to expand their domain modeling skill. Technical people enjoy quantifiable technical problems that exercise their technical skill. The domain is messy and demands a lot of complicated new knowledge that doesn't seem to develop a computer scientist's capabilities.
+
+Often having the clients tell exactly what the software should do is a bad idea. Clients are professional of other areas their software ideas are not as accurate as one of a developer. Often not leading to any productivity increase.
+
+The construction of a model is based on the interaction between domain experts and developers and is done by constantly corrections made by the experts until the developer starts to learn. You should strive to reduce collisions and ambiguities in their terminologies and differences between their technical opinions so they can learn and explain things more precisely and consistently as well.
+You limit yourselves and explore one feature at the time.
+The construction of the model is a process of brainstorming and refining; questioning and explaining.

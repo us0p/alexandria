@@ -9,8 +9,7 @@ Provide default answers to calls made during the test, usually not responding at
 ## Spies
 Are stubs that also record some information based on how they were called.
 ## Mocks
-Pre-programmed with expectations which form a specification of the calls they are expected to receive. They ensure they received all the calls they were expecting  with all the required parameters. They enforce the behavior of the mocked object.
-
+Pre-programmed with a specification of the calls they are expected to receive often extending an existing object. They ensure they received all the calls they were expecting  with all the required parameters. They enforce the behavior of the mocked object.
 ## Difference between Mocks and other test doubles
 Mocks uses behavior verification while other test doubles often uses state verification but can also use behavior testing.
 

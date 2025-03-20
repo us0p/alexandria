@@ -13,7 +13,7 @@ console.log = function(...args) {
 }
 ```
 ## Monkey patching with commonjs modules
-commonjs modules are chaced and we can easily change the properties or methods of the module within this cache. After the change, the module will be used with the new properties or methods and when the module is required again it will be used with the new properties or methods thanks to the cache.
+commonjs modules are cached and we can easily change the properties or methods of the module within this cache. After the change, the module will be used with the new properties or methods and when the module is required again it will be used with the new properties or methods thanks to the cache.
 commonjs share the same instance of the module when required multiple times, which is the singleton pattern.
 ```javascript
 // counter.js
@@ -66,9 +66,3 @@ log.call = function() { // patch its call method
 log("Hello"); // Patched log! Hello
 console.log(log.patched); // true
 ```
-### Mock patching
-Allows you to change the behavior of a function call, it's specially usefull if the function is not under your control. Also usefull when you want to simulate error conditions but you can't actually cause those errors while under test.
-It's a mocking technique by which developers change the behavior of a function call.
-You can patch a function in two ways:
-- Patching its return value.
-- Replacing a function with another function, a.k.a. side effect.

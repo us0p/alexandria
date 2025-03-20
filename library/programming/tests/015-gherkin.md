@@ -9,7 +9,7 @@ To improve readability, you can also use the `And, But` keywords instead of chai
 - **But**: State what should not occur.
 In the description of each step, any double quoted term is used to represent something that should be present in the behavior.
 
-Features represent use stories ans you can have as many features as needed. Usually each feature has its own specification file.
+Features represent use stories and you can have as many features as needed. Usually each feature has its own specification file.
 Always write the feature files as if you were explaining how to use the feature not what the feature does undercover.
 
 Each scenario should describe a single and complete behavior of the feature.
