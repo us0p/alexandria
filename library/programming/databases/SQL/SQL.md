@@ -28,3 +28,9 @@ Relational databases are ACID complient, thus keeping tables in sync and
 ensuring transactions.
 In relational databases you usually don't want to have duplicated data, as
 you'll be utilizing the stablished relations to join related data.
+
+---
+SQL keywords are capitalized by convention to make queries easier to read.
+SQL treats any number of space or a line break to be the same thing.
+SQL return column names as lower case, if you want to return them capitalized, wrap the column name in double quotes.
+SQL uses single quote to reference column values.

@@ -1,3 +1,4 @@
+# Work Planning - Database Engineer
 [PostgreSQL Exercises](https://pgexercises.com/gettingstarted.html)
 [Crunchydata PostgreSQL Playground](https://www.crunchydata.com/developers/tutorials)
 [PostgreSQL Docs: Tutorial & Other Resources](https://www.postgresql.org/docs/online-resources/)
@@ -23,6 +24,14 @@ https://roadmap.sh/kubernetes -> GENERAL UNDERSTANDING
 [Data Model Patterns: Conventions of Thought](https://www.amazon.com/Data-Model-Patterns-Conventions-Thought-ebook/dp/B00E0LASDY/ref=sr_1_3?crid=A78EI5PKI63P&keywords=data+model+patterns&qid=1642385541&s=books&sprefix=data+model+patterns%2Cstripbooks%2C130&sr=1-3)
 [The Data Model Resource Book, Vol. 1](https://www.amazon.com/Data-Model-Resource-Book-Vol/dp/0471380237/ref=pd_sim_b_3?ie=UTF8&refRID=08T9TEZJNZM2EMKZV3AB)
 Database Design for Mere Mortals
+## Database high level concepts
+[Consistency without Clocks: The Fauna Distributed Transaction Protocol](https://fauna.com/blog/consistency-without-clocks-faunadb-transaction-protocol)
+[Fast Distributed Transactions for Partitioned Database Systems](http://cs.yale.edu/homes/thomson/publications/calvin-sigmod12.pdf)
+[What is a distributed database and when should you use one](https://fauna.com/blog/what-is-a-distributed-database-and-when-should-you-use-one)
+[Demystifying Database Systems, Part 1: An introduction to Transaction Isolation Levels](https://fauna.com/blog/introduction-to-transaction-isolation-levels)
+[Demystifying Database Systems, Part 2: Correctness Anomalies Under Serializable Isolation](https://fauna.com/blog/demystifying-database-systems-correctness-anomalies-under-serializable-isolation)
+[Demystifying Database Systems, Part 3: Introduction to Consistency Levels](https://fauna.com/blog/demystifying-database-systems-introduction-to-consistency-levels)
+[Demystifying Database Systems, Part 4: Isolation level vs. Consistency levels](https://fauna.com/blog/demystifying-database-systems-part-4-isolation-levels-vs-consistency-levels)
 ## AWS RDS
 https://roadmap.sh/aws -> ONLY THE RDS SERVICE
 ## Optimize PostgreSQL to high availability and scalability
@@ -65,6 +74,8 @@ https://roadmap.sh/aws -> ONLY THE RDS SERVICE
 [PostgreSQL performance tuning: Optimize your database server](https://www.enterprisedb.com/postgres-tutorials/introduction-postgresql-performance-tuning-and-optimization)
 ## Knowledge of plpgsql
 
-3 hours of study in the morning
+2h sql
+1h work related
 6 hours of work.
-3 hours of study in the night
+2h postgresql
+1h work related

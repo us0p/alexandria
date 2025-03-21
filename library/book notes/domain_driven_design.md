@@ -27,3 +27,23 @@ Often having the clients tell exactly what the software should do is a bad idea.
 The construction of a model is based on the interaction between domain experts and developers and is done by constantly corrections made by the experts until the developer starts to learn. You should strive to reduce collisions and ambiguities in their terminologies and differences between their technical opinions so they can learn and explain things more precisely and consistently as well.
 You limit yourselves and explore one feature at the time.
 The construction of the model is a process of brainstorming and refining; questioning and explaining.
+
+- Bind model and implementation as soon as possible.
+- Cultivate a language based on the model. Terms taken straight out of the model, organized into sentences consistent with the structure of the model test the viability of the model immediately upon reaching the ears.
+- Knowledge rich model. The objects should have behavior and enforced rules. The model ins't a data schema, it should solve a problem and capture knowledge of various kinds.
+- Important concepts should be added to the model as it become more complete and concepts should be dropped when they don't prove useful or central. If a unneeded concept was tied to one that is needed, a new model should be found that distinguishes the essential concept so that the other could be dropped.
+- Knowledge crunching. The langue combined with sketches and brainstorming turn the discussions into laboratories of the model, experiments can be exercised, tried and judged.
+
+Effective domain modelers search for the simple view that makes sense of the mass. Many models are tried and rejected or transformed. Success comes in an emerging set of abstract concepts that make sense of all the detail.
+
+>Some teams get the experts to describe a desired feature and they go build it. They show the experts the results and ask them what to do next. If the programmers practice refactoring they can keep the software clean enough to continue extending it, but if programmers are not interested in the domain, they only learn what the application should do, not the principles behind it. Useful software can be built that way, but the project will never gain the kind of leverage where powerful new features unfold as corollaries to older features.
+
+If you abstract and develop a model only with technical expertise, without collaboration with domain experts, the concepts are naive. It produces software that does a basic job but lacks a deep connection to the domain expert's way of thinking.
+
+Because the domain experts are feeding into it, it reflects deep knowledge of the business and those abstractions are true business principles.
+
+When we set out to write software, we never know enough. Knowledge on the project is fragmented. Domains that seems less technically daunting can be deceiving -- we don't realize how much we don't know. This leas us to make false assumptions.
+
+Highly productive teams consciously grow their knowledge, practicing continuous learning. This includes technical knowledge, along with general domain modeling. But it also includes serious learning about the specific domain they are working in.
+
+Knowledge is accumulated in the minds of the core team.

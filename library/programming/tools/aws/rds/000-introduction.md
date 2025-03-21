@@ -12,11 +12,70 @@ It also ensures the database is up-to-date with the latest patches, automaticall
 - Manages backups, software patching, automatic failure detection, and recovery.
 - Automated backups can be turned on, or manually create your own backup snapshots. You can use these backups to restore a database.
 - You can get high availability with a primary DB instance and a synchronous secondary DB instance that you can fail over to when problems occur. You can also use read replicas to increase read scaling.
+- You can control access by using AWS Identity and Access Management (IAM) to define users and permissions.
+- You can also help protect your databases by putting them in a VPC.
 
-enhanced monitoring
-Amazon RDS performance insights
-Also supports Amazon CloudWatch metrics
-CloudWatch Database Insights consolidates logs and metrics from your applications, databases, and operating systems.
+With RDS you are only responsible for the application optimization, AWS takes care of the [rest](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Concepts.comparison)
+
+You are responsible for query tuning, which is the process of adjusting SQL queries to improve performance, which is highly dependent on database design, data size, data distribution, application workload, and query patterns. Monitoring and tuning are  highly individualized processes that you own for your RDS databases.
+
+You can use RDS Performance Insights and other tools to identify problematic queries.
+
+[Amazon RDS application architecture: example](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html#Welcome.Concepts.DBInstance.architecture)
+
+Suport for RDS features varies across AWS Regions and specific version of each DB engine.
+[Supported features in RDS by AWS Region and DB engine](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDSFeaturesRegionsDBEngines.grids.html)
+
+A DB instance is an isolated database environment in the AWS Cloud.
+You can create and modify a DB instance by using the AWS CLI, Amazon RDS API, or the AWS Management Console.
+## DB instance classes
+Determines the computation and memory capacity of a DB instance. It consists of both the DB instance class type and size.
+- General purpose - db.m*
+- Memory optimized - db.z*, db.x*, db.r*
+- Compute optimized - db.c*
+- Burstable performance - db.t*
+> (\*) represents the generation, optional attribute, and size.
+
+For example, `db.m7g` is a 7th-generation, general-purpose DB instance class type powered by AWS Graviton3 processors.
+[Hardware specifications for DB instance classes](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.Summary.html)
+## DB instance storage
+You can attach EBS storage volumes to a running instance. DB instance storage comes in the following types:
+- General Purpose (SSD): Ideal for workloads running on medium-sized DB instances. Good for dev and testing environments.
+- Provisioned IOPS (PIOPS): designed to meet I/O-intensive workloads which require low I/O latency and consistent I/O throughput. Best suited for production environments.
+- Magnetic: supported for backwards compatibility, should use SSD or IOPS SSD for new storage needs.
+Each DB instance has min and max storage requirements depending on the storage type and db engine it supports. It's important to have sufficient storage for db grow and for the db engine to write content or log entries.
+[RDS DB instance storage](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html)
+## DB instances in an Amazon VPC
+You can run a DB instance in Amazon VPC service. THe basic functionality of RDS is the same whether running in a VPC or not. There's no additional cost to run your DB instance in a VPC.
+
+RDS uses Network Time Protocol (NTP) to synchronize the time on DB instances.
+[Amazon VPC and Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.html)
+## Multi-AZ deployments
+You can run you DB instance in several AZ, an option called Multi-AZ deployment. When you choose this option, Amazon automatically provisions and maintains one or more secondary standby DB instance in a different AZ. Your primary DB instance is replicated across AZ to each secondary DB instance.
+- Provides data redundancy and failover support
+- Eliminates I/O freezes
+- Minimize latency spikes during system backups
+- Serving read traffic on secondary DB instance (Multi-AZ DB clusters deployment only)
+[Configuring and managing a Multi-AZ deployment for RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html)
+## RDS monitoring
+You can track the performance and health of your DB instances using various automated and manual tools:
+### Amazon RDS DB instance status and recommendations
+View details about the current status of your instance by using the RDS console, AWS CLI, or RDS API.
+[Recommendations from RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/monitoring-recommendations.html)
+### Amazon CloudWatch metrics for Amazon RDS
+You can use CloudWatch service to monitor the performance and health of a DB instance. CloudWatch performance charts are shown in the RDS console.
+RDS automatically sends metrics to CloudWatch every minute for each active database. You don't get additional charges for RDS metrics in CloudWatch.
+Using CloudWatch alarms, you can watch a single Amazon RDS metric over a specific time period. You can then perform one or more actions based on the value of the metric relative to a threshold that you set.
+[Monitoring Amazon RDS metrics with CloudWatch](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/monitoring-cloudwatch.html)
+### Amazon RDS Performance insights and operating-system monitoring
+Performance insights assesses the load on your database, and determine when and where to take action.
+RDS Enhanced Monitoring looks at metrics in real time for the operating system.
+[Monitoring DB load with Performance Insights on RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
+[Monitoring OS metrics with Enhanced Monitoring](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Monitoring.OS.html)
+## How are you charged for RDS
+When you use RDS, you can choose to use on-demand DB instances or reserved DB instances.
+[DB instance billing for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/User_DBInstanceBilling.html)
+[RDS pricing information](https://aws.amazon.com/rds/pricing)
 ## Resources
 [RDS User Guide](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html)
 [Release notes for Amazon relational database service (RDS) for PostgreSQL](https://docs.aws.amazon.com/AmazonRDS/latest/PostgreSQLReleaseNotes/Welcome.html)
