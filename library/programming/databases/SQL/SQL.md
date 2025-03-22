@@ -34,3 +34,6 @@ SQL keywords are capitalized by convention to make queries easier to read.
 SQL treats any number of space or a line break to be the same thing.
 SQL return column names as lower case, if you want to return them capitalized, wrap the column name in double quotes.
 SQL uses single quote to reference column values.
+You can't perform arithmetic operations on NULL values.
+Use `--` to comment a single line and `/* */` to comment multiple lines.
+Aggregate functions only aggregate vertically. If you cant to perform a calculation across rows, you would do this with simple arithmetic.

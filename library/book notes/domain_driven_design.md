@@ -47,3 +47,18 @@ When we set out to write software, we never know enough. Knowledge on the projec
 Highly productive teams consciously grow their knowledge, practicing continuous learning. This includes technical knowledge, along with general domain modeling. But it also includes serious learning about the specific domain they are working in.
 
 Knowledge is accumulated in the minds of the core team.
+
+The model is the set of concepts built up in the heads of people on the project, with terms and relationships that reflect domain insight.
+
+On a project without a common language, developers have to translate for domain experts. Domain experts translate between developers and other domain experts. Translation is always inaccurate and hides disconnects in understanding between the domain experts and developers.
+
+A model can be viewed as a language. The vocabulary includes the names of classes and prominent operations. The model provides the means to discuss rules that have been made explicit in the model. It can be supplemented with terms from high-level organizing principles imposed on the model. Finally, this language is enriched with the names of patterns the team commonly applies to the domain model.
+
+A prerequisite for an adequate model is commitment by the team to rely on that model. Persistent use of the language will force its weakness into the open. As gaps are found, new words will enter the discussion. With a commitment to the model-based language, these changes will be recognized as changes in the domain model and will lead to updates of class diagrams and renaming of classes and methods in the code.
+
+Use the model as the backbone of a language. Commit the team to using that language relentlessly in all communication within the team and in the code. Use the same language in diagrams, writing, and, especially speech.
+
+Domain experts object to terms or structures that are awkward or inadequate to convey domain understanding, while developers watch for ambiguity or inconsistency that will trip up design.
+
+The language is the primary carrier of the aspects of design that don't appear in code.
+Large-scale structures that organize the whole system, and bounded contexts that define the relationships of different systems and models.
