@@ -33,24 +33,15 @@
     - [x] integration testing
 	    - [ ] examples
 	- [ ] Integration testing implications, should you use?
-	- [ ] Mock objects in JS
-		- [ ] Proxy
-		- [ ] Reflect
 	- [ ] Node.js testing frameworks
 		- [ ] Node.js test runner
-		- [ ] Jest
-		- [ ] Mocha
-		- [ ] Sinon.js
-		- [ ] Chai
-		- [ ] Faker.js
-		- [ ] DaSpec
-		- [ ] Jasmine
-		- [ ] Yadda
-		- [ ] Selenium
+		- [ ] Jest - Testing and Assertion Framework
+		- [ ] Faker.js - Fake Framework
+		- [ ] CubumberJS - BDD Framework
 	- [ ] review and summary all the information
+- [ ] lambda
 - [ ] Nest.js
 - [ ] Redis
-- [ ] lambda
 - [ ] Kafka
 - [ ] Kubernetes
 - [ ] GitHub actions
