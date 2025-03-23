@@ -1,4 +1,5 @@
 # Work Planning - Database Engineer
+[SQL Exercises](https://learnsql.com/course/sql-practice-set/select-from-table/introduction/introduction/)
 [PostgreSQL Exercises](https://pgexercises.com/gettingstarted.html)
 [Crunchydata PostgreSQL Playground](https://www.crunchydata.com/developers/tutorials)
 [PostgreSQL Docs: Tutorial & Other Resources](https://www.postgresql.org/docs/online-resources/)

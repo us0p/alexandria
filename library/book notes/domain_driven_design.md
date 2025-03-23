@@ -62,3 +62,19 @@ Domain experts object to terms or structures that are awkward or inadequate to c
 
 The language is the primary carrier of the aspects of design that don't appear in code.
 Large-scale structures that organize the whole system, and bounded contexts that define the relationships of different systems and models.
+
+Play with the model as you talk about the system. Describe scenarios out loud using the elements and interactions of the model, combining concepts in ways allowed by the model. Find easier ways to say what you need to say and then take those new ideas back down to the diagrams and code.
+
+By using this language in discussions with domain experts, you quickly discover areas where your language is inadequate for their needs, or seems wrong to them. You also find areas where the precision of the domain language exposes contradictions or vagueness in thinking.
+
+The domain model will typically derive from the domain expert's jargon, but will be "cleaned up", to have sharper, narrower, definitions. The domain experts can and should learn these modified definitions, and should object if these definitions diverge from the meanings in the field.
+
+Multiplicity of language if often necessary, but the division should never be between the domain experts and the developers.
+
+Simple, informal UML diagrams can anchor a discussion. Sketch a diagram of three to five objects central to the issue at hand, and everyone can stay focused.
+The trouble comes when people feel compelled to convey the whole model or design through UML.
+
+Diagrams are a means of communication and explanation, and they facilitate brainstorming. They serve these ends best if they are minimal. Comprehensive diagrams of the entire object model fail to communicate or explain. They overwhelm the reader with detail and they lack meaning.
+They show design constraints, but they are not design specifications in every detail. They represent the skeletons of ideas.
+
+Always remember that the model is not the diagram. The diagram's purpose is to help communicate and explain the model.
