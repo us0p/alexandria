@@ -1,7 +1,7 @@
 # Test Priorization
 Is the process of assigning priority levels to individual test cases based  on their significance, and potential impact on the software application  being tested.
 
-The goal is to boost effectiveness guaranteing that testing activities are directed toward the most crucial facets of the software.
+The goal is to boost effectiveness ensuring that testing activities are directed toward the most crucial facets of the software.
 
 By prioritizing test cases, testers and developers are able to minimize the time and cost of software testing phase and make sure that the delivered product is of exceptional quality.
 ## What are different Test Case Priority Levels?

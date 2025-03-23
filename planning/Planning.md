@@ -15,7 +15,7 @@
 - [x] OOP
 - [x] SOLID
 - [x] Clean Architecture
-- [ ] Testing strategies
+- [x] Testing strategies
     - [x] Technical debt
     - [x] Test priorization
     - [x] Testing approaches
@@ -24,23 +24,34 @@
         - [x] TDD
         - [x] BDD
     - [x] Test objects
-	- [ ] Test fixtures
-	- [ ] patching
-	- [ ] monkey patching
-	- [ ] Snapshot testing
+	- [x] Test fixtures
+	- [x] patching
+	- [x] monkey patching
+	- [x] Snapshot testing
     - [x] unit testing
-    - [ ] unit testing implications, should you use?
+    - [x] unit testing implications, should you use?
     - [x] integration testing
-	    - [ ] examples
-	- [ ] Integration testing implications, should you use?
+	    - [x] examples
+	- [x] Integration testing implications, should you use?
 	- [ ] Node.js testing frameworks
-		- [ ] Node.js test runner
-		- [ ] Jest - Testing and Assertion Framework
-		- [ ] Faker.js - Fake Framework
-		- [ ] CubumberJS - BDD Framework
-	- [ ] review and summary all the information
-- [ ] lambda
+		- [x] Node.js test runner
+		- [x] Jest
+		- [ ] Sinon.js
+		- [x] Faker.js
+		- [x] Cucumber.js
+	- [x] review and summary all the information
+- [ ] AI Agents
+- [ ] Node.js
+    - [ ] Event Loop
+    - [ ] Buffer
+    - [ ] Event Emitters
+    - [ ] Streams
+    - [ ] child_process
+    - [ ] Clusters
+    - [ ] Memory Leaks
+    - [ ] Scaling a node server.
 - [ ] Nest.js
+- [ ] lambda
 - [ ] Redis
 - [ ] Kafka
 - [ ] Kubernetes
@@ -59,15 +70,6 @@
     - [ ] proxy
     - [ ] command
     - [ ] strategy
-- [ ] Node.js
-    - [ ] Event Loop
-    - [ ] Buffer
-    - [ ] Event Emitters
-    - [ ] Streams
-    - [ ] child_process
-    - [ ] Clusters
-    - [ ] Memory Leaks
-    - [ ] Scaling a node server.
 - [ ] Network basics
 - [ ] Backend: overall backend knowledge
 - [ ] DSA

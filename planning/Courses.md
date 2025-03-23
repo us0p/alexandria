@@ -8,3 +8,5 @@ Monitoring and Observability for Development and DevOps (28/02 - 06/03) - 16h
 
 ## Hugging face - Introduction to AI agents - 05/01
 [link](https://huggingface.co/learn/agents-course/unit0/introduction)
+## Hugging face - NLP Course
+[link](https://huggingface.co/learn/nlp-course/en/chapter1/1)
