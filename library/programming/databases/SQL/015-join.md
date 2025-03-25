@@ -12,6 +12,9 @@ It's used after the `JOIN` and indicates how the table of `FROM` and the table o
 The two columns that map to one another, are referred to as "foreign keys". And their mapping ir written as a conditional statement:
 ```SQL 
 ON p.school_name = s.name
+
+-- You can use any conditional into the ON clause
+ON p.school_name = s.name AND s.founded_at > 2000
 ```
 ## Joined Result
 If there's a match, SQL takes all columns from the `school` table and joins them to all the columns in the `person` table. The result is a table combining all the columns of the `person` table and the `school` table.
@@ -24,3 +27,8 @@ SELECT p.*, t.address FROM person p JOIN school s ON p.school_name = s.name;
 Note that if there's more than one distinct school for a given `p.school_name`, the `person` row that matches those different `schools` is going to get duplicated, so that each school can be successfully displayed in a relationship.
 
 Also note that, if a person school name doesn't exist in the school table, the result depends on the type of join being made. As per the example above, the default join applied is the [INNER JOIN](016-inner_join.md).
+## Joins on Multiple Keys
+There are two reasons why you might want to join tables on multiple keys:
+1. Accuracy
+2. Performance
+Joining on multiple keys can increase the performance of your query if you are joining on multiple indexed columns.

@@ -73,3 +73,4 @@
 - [ ] Network basics
 - [ ] Backend: overall backend knowledge
 - [ ] DSA
+- [ ] Linux - System Administration

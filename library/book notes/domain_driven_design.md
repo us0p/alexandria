@@ -78,3 +78,44 @@ Diagrams are a means of communication and explanation, and they facilitate brain
 They show design constraints, but they are not design specifications in every detail. They represent the skeletons of ideas.
 
 Always remember that the model is not the diagram. The diagram's purpose is to help communicate and explain the model.
+
+A document shouldn't try to do what the code already does well. The code already supplies the detail. It already is the ultimately exact specification of program behavior.
+It falls to other documents to illuminate meaning, to give insight into large-scale structures, and to focus attention on core elements. Written documents should compliment the code and the verbal communication.
+
+The greatest value of a design document is to explain the concepts of the model, perhaps its intended style of use, and to help in navigating the detail of the code.
+
+These diagrams can be somewhat casual, even hand-drawn. In addition to saving labor, hand-drawn diagrams have the advantage of feeling casual and temporary.
+
+A document must be involved in project activities. The document must be written in the language people are **currently** speaking on the project which must reflect the language embedded in the code.
+
+Keeping a document up to date through sheer will and discipline waster effort, if the document isn't playing an important role.
+
+As the domain model comes to reflect the most relevant knowledge of the business, application requirements become scenarios within that model, and the **ubiquitous language** can be used to describe such a scenario in terms that directly connect to the **model-driven design**.
+
+Specifications can often be simpler, since they do not have to convey business knowledge that is behind the model.
+
+Documents should be minimal and focused on complimenting code and conversation.
+
+One model should underlie implementation, design, and team communication.
+
+One particular reason other models are needed is scope. The technical models that drives the software development process must be strictly pared down to the necessary minimum to fulfill its functions. An explanatory model can include aspects of the domain that provide context that clarifies the more narrowly scoped model.
+
+Explanatory models provide the freedom to create much more communicative styles tailored to a particular topic.
+There's no need for these to be object models, and it's generally best they not be. Avoid UML.
+While there often is some correspondence between an explanatory model and the model that drives design, it will seldom be exact.
+
+What good is a model on paper unless it directly aids the development of running software?
+
+Some development processes create an "analysis model", quite distinct from the design, and usually developed by different people. It's called this way because it is the product of analyzing the business domain to organize its concepts without any consideration of the part it will play in a software system. A design should be create later and should have only a loose correspondence to the analysis model.
+An analysis model is not created with design issues in mind and therefore is likely to be quite impractical for those needs.
+Developers are forced to reconceptualize the domain on their own, and there is no guarantee that the insights gained by the analyst and embedded in the model will be retained. And maintaining any mapping between the design and the loosely connected model is a labor that is not cost effective.
+The pure analysis model falls short of its primary goal of understanding the domain, because crucial discoveries always emerge during the design/implementation effort as very specific problems are encountered that were not anticipated.
+Pure analysis models often get abandoned soon after coding starts.
+
+If the design, or some central part of it, does not map to the conceptual domain model, that model is of little value, and the correctness of the software is suspect. At the same time, complex mappings between models and design functions are difficult to understand, and, in practice, impossible to maintain as the design changes. A deadly divide opens between analysis and design so that insight gained in each of those activities does not feed into the other.
+
+Model-driven design discards the dichotomy of analysis model versus design to search out a single model that serves both purposes. Setting aside purely technical issues, each object in the design plays a conceptual role described in the model. This requires us to be more demanding of the chosen model, since it must fulfill two quite different objectives.
+
+This can't be at the cost of a weakened analysis. Nor can we accept clumsy designs. It demands a model that works as both analysis and design. When the model doesn't seem to be practical for implementation, we must search for a new one. When the model doesn't faithfully express the key concepts of the domain, we must search for a new one. The modeling and design process then becomes a single iterative loop.
+
+The design should retain as many of the concepts of the model, as literally as possible, while the model should be chosen such that a practical design model can be created that corresponds to it.

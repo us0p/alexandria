@@ -1,3 +1,11 @@
+- [ ] SQL
+- [ ] PostgreSQL road map
+	- [ ] RDBMS Concepts
+	- [ ] Configuring
+	- [ ] Troubleshooting Techniques
+	- [ ] Infrastructure skills - Backup & Recovery Tools
+	- [ ] Data and Processing
+- [ ] AWS RDS
 # Work Planning - Database Engineer
 [SQL Exercises](https://learnsql.com/course/sql-practice-set/select-from-table/introduction/introduction/)
 [PostgreSQL Exercises](https://pgexercises.com/gettingstarted.html)
