@@ -119,3 +119,14 @@ Model-driven design discards the dichotomy of analysis model versus design to se
 This can't be at the cost of a weakened analysis. Nor can we accept clumsy designs. It demands a model that works as both analysis and design. When the model doesn't seem to be practical for implementation, we must search for a new one. When the model doesn't faithfully express the key concepts of the domain, we must search for a new one. The modeling and design process then becomes a single iterative loop.
 
 The design should retain as many of the concepts of the model, as literally as possible, while the model should be chosen such that a practical design model can be created that corresponds to it.
+
+Trying to create in the UI an illusion of a model other than the domain model will cause confusion unless the illusion is perfect.
+
+When a modeler is separated from the implementation process, he or she never acquires, or quickly loses, a feel for the constraints of implementation. The basic constraint of MDD, that the model supports an effective implementation and abstract key insights into the domain, is half gone, and the resulting models will be impractical. Meanwhile, if the people who write the code do not feel responsible for the model, or don't understand how to make the model work for an application, then the model has nothing to do with the software. If developers don't realize that changing the code changes the model, then their refactoring will weaken the model rather than strengthen it. Finally, the knowledge and skills of experienced designers won't be transferred to other developers if the division of labor prevents the kind of collaboration that conveys the subtleties of coding a MDD.
+
+The effectiveness of an overall design is very sensitive to the quality and consistency of the fine-grained design and implementation decisions.
+With MDD, a portion of the code is an expression of the model, so changing that code changes the model.
+
+Any technical person contributing to the model must spend some time touching the code, whatever primary role he or she plays on the project. Anyone responsible for changing code must learn to express a model through the code. Every developer must be involved in some level of discussion about the model and have contact with domain experts.
+
+DDD puts a model to work to solve problems for an application. Through knowledge crunching, a team distills a torrent of chaotic information into a practical model. A MDD intimately connects the model and the implementation. The Ubiquitous Language is the channel for all that information to flow between developers, domain experts and the software.
