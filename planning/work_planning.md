@@ -7,7 +7,8 @@
 [PostgreSQL Sample Database: AACT](https://aact.ctti-clinicaltrials.org/connect)
 [PostgreSQL Sample Databases: Yugabyte Docs](https://docs.yugabyte.com/preview/sample-data/)
 [PostgreSQL Sample Database: Postgre-air](https://github.com/hettie-d/postgres_air/tree/main)
-[SQLite Sample Database: SQL Mysteries](https://github.com/NUKnightLab/sql-mysteries)
+[SQLite Sample Database: SQL Mysteries: SQL City](https://github.com/NUKnightLab/sql-mysteries)
+[SQLite Sample Database: SQL Mysteries: Fiftyvile]
 [PostgreSQL Sample Database: Neondatabaselabs github](https://github.com/neondatabase-labs/postgres-sample-dbs)
 [PostgreSQL wiki: Sample Database list](https://wiki.postgresql.org/wiki/Sample_Databases)
 [PostgreSQL 17 doc](https://www.postgresql.org/docs/17/index.html)
