@@ -13,3 +13,11 @@ A bot that performs simple trading operations.
 ## Image in SMS
 Send images with SMS, should encode the image with Huffman to text and 
 decode after.
+## CLI Pomodore
+A CLI pomodore, it should:
+- configure pomodore time
+- configure pomodore short break
+- configure pomodore long break
+- break interval
+- sound config
+- display notification when timer's up

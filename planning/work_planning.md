@@ -1,11 +1,3 @@
-- [ ] SQL
-- [ ] PostgreSQL road map
-	- [ ] RDBMS Concepts
-	- [ ] Configuring
-	- [ ] Troubleshooting Techniques
-	- [ ] Infrastructure skills - Backup & Recovery Tools
-	- [ ] Data and Processing
-- [ ] AWS RDS
 # Work Planning - Database Engineer
 [SQL Exercises](https://learnsql.com/course/sql-practice-set/select-from-table/introduction/introduction/)
 [PostgreSQL Exercises](https://pgexercises.com/gettingstarted.html)
@@ -82,9 +74,3 @@ https://roadmap.sh/aws -> ONLY THE RDS SERVICE
 ## Performance tuning
 [PostgreSQL performance tuning: Optimize your database server](https://www.enterprisedb.com/postgres-tutorials/introduction-postgresql-performance-tuning-and-optimization)
 ## Knowledge of plpgsql
-
-2h sql
-1h work related
-6 hours of work.
-2h postgresql
-1h work related
