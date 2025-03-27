@@ -61,6 +61,7 @@
 	- [ ] asyncio
 	- [ ] contextlib
 	- [ ] contextvars
+	- [ ] GIL
 - [ ] Django
 - [ ] AWS lambda
 - [ ] Redis

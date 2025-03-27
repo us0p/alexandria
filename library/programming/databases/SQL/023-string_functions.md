@@ -48,7 +48,7 @@ FROM person;
 
 -- Using STRPOS
 SELECT name,
-	   STRPOS(name, 'Lua')
+	   STRPOS(name, 'Lua') -- It's 1 based.
 FROM person;
 ```
 ## SUBSTR
@@ -59,4 +59,19 @@ The syntax is
 SELECT name,
 	   SUBSTR(name, 6, 5) sub_str -- Return 'Lopes' for 'Luan Lopes de Faria'
 FROM person; 
+```
+## CONCAT
+Combine strings from several columns or provided values together.
+```SQL
+SELECT name,
+	   CONCAT(name, ' ', 'of', city) presentation,
+	   name || ' ' || 'of' || city presentation_2dn_form -- results the same as above
+FROM person;
+```
+## UPPER and LOWER
+Change the casing of the characters on the provided string.
+```SQL
+SELECT UPPER(name),
+       LOWER(name)
+FROM person;
 ```
