@@ -130,3 +130,23 @@ With MDD, a portion of the code is an expression of the model, so changing that 
 Any technical person contributing to the model must spend some time touching the code, whatever primary role he or she plays on the project. Anyone responsible for changing code must learn to express a model through the code. Every developer must be involved in some level of discussion about the model and have contact with domain experts.
 
 DDD puts a model to work to solve problems for an application. Through knowledge crunching, a team distills a torrent of chaotic information into a practical model. A MDD intimately connects the model and the implementation. The Ubiquitous Language is the channel for all that information to flow between developers, domain experts and the software.
+
+Elaborate models only cut through complexity if care is taken with the fundamentals, producing detailed elements that can be confidently combined.
+
+![[Pasted image 20250328062939.png]]
+
+The part of software that specifically solves problems from the domain usually constitutes only a small portion of the software of a system. To apply our best thinking, we need to be able to look at the elements of our model and see them as a system. This requires decoupling the domain objects from other function of the system so they are not lost in the mass and do domain concepts are not blurred and confused with concepts related to software technology.
+
+To achieve this level of decoupling we'll be considering a **layered architecture**. The essential principle is that an element of a **layer** has dependencies only on other elements in the same layer or on elements of the layers "beneath" it.
+
+We'll be considering these four layers:
+- **User interface/Presentation Layer**
+- **Application Layer**
+- **Domain Layer/Model Layer**
+- **Infrastructure Layer**
+
+The crucial point is the separation of the **domain layer** that enables **MDD**.
+
+The infrastructure layer does not initiate action in the domain layer. Such technical capabilities are most often offered as **services**. This decoupling gives some extra versatility. The message-sending interface might be connected to an email or fax sender or whatever is available. The main benefit is that the application layer keep focused on its job, knowing **when** to send a message, but not burdened with **how**.
+
+Not all infrastructure is in the form of services callable from the higher layers. Some technical components are designed to directly support the basic functions of other layers, such as domain objects in the domain layer and provide mechanisms for them to relate.

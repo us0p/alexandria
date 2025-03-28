@@ -21,3 +21,6 @@ A CLI pomodore, it should:
 - break interval
 - sound config
 - display notification when timer's up
+## Search aggregator
+An search aggregator that aggregates search results from Shopee, Mercado Livre, and Amazon
+Can be monetized with ADS.

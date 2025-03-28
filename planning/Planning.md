@@ -1,6 +1,7 @@
 # Planning
+Improve morning routine
 ## Routine - 12h
-06:15 - 06:45 - Reading
+06:15 - 06:45 - Reading - Little time
 07:00 - 08:00 - DSA
 08:00 - 10:00 - Study
 10:00 - 13:00 - work
@@ -72,6 +73,9 @@
 	- [ ] Microservices
 	    - [ ] DDD
     - [ ] Event
+    - [ ] MVC
+    - [ ] Model-View Separation Pattern
+    - [ ] Application Coordinator
 - [ ] Evolutionary Architecture
 - [ ] Design Patterns
     - [ ] factory
