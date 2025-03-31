@@ -150,3 +150,37 @@ The crucial point is the separation of the **domain layer** that enables **MDD**
 The infrastructure layer does not initiate action in the domain layer. Such technical capabilities are most often offered as **services**. This decoupling gives some extra versatility. The message-sending interface might be connected to an email or fax sender or whatever is available. The main benefit is that the application layer keep focused on its job, knowing **when** to send a message, but not burdened with **how**.
 
 Not all infrastructure is in the form of services callable from the higher layers. Some technical components are designed to directly support the basic functions of other layers, such as domain objects in the domain layer and provide mechanisms for them to relate.
+## Architectural Frameworks
+The best architectural frameworks solve complex technical problems while allowing the domain developer to concentrate on expressing a model. But they can easily get in the way, either by making too many assumptions that constrain domain design choices or by making the implementation so heavyweight that developers slow down.
+
+When applying a framework, the team needs to keep focused on the goal of an implementation that expresses a domain model and uses it to solve important problems. The team must seek ways of employing the framework to those ends. This may mean not using all the framework's features. A lot of the downside of frameworks can be avoided by selectively applying them to solve difficult problems without looking for a one-size-fits-all solution. This keeps the implementation less coupled to the framework, which gives some flexibility in later design decisions, but more importantly, since many of the current frameworks are very complicated to use, keeps the business objects readable and expressive.
+## The domain layer is where the model lives
+DDD requires the domain layer to exist. The domain model is a set of concepts. The domain layer is the manifestation of that model and all directly related design elements. The design and implementation of business logic constitute the domain layer. In a MDD, the software constructs of the domain layer will mirror the model concepts.
+Isolating the domain implementation is a prerequisite for a ddd.
+## Smart UI anti-pattern
+Is an alternate, mutually exclusive branch in the road, incompatible with the approach of DDD.
+
+If a project needs to deliver simple functionality, dominated by data-entry and display with few business rules and staff is not composed of advanced object modelers.
+The staff will have a difficult learning curve. The overhead of managing infrastructure and layers make very simple tasks take longer. Simple projects come with short time lines and modest expectations. And in the end, if they do surmount these challenges, they will have produced a simple system. Rich capabilities were never requested.
+
+The point is that  the approach advocated in the rest of this book pays off for ambitious projects, and requires strong skill. And not all projects are ambitious or can muster those skills.
+
+Therefore, when circumstances warrant.
+
+Put all the business logic into the user interface. Chop the application into small functions and implement them as separate user interfaces, embedding the business rules into them. Use a database as a shared repository of the data. Use the most automated UI building and visual programming tools available.
+
+The gospel is that domain and UI should be separate. In fact, it is difficult to apply any of the methods discussed later in this book without that separation. Therefore, this might be considered an "anti-pattern", but it isn't always, and it is important to understand why we want to separate application from domain, even when we might not want to.
+
+Advantages:
+- Productivity is high and immediate for simple applications.
+- Less capable developers can work this way with little training.
+- Even deficiencies in requirements-analysis can be overcome by releasing a prototype to users and then quickly changing the product to fit their requests.
+- Applications are decoupled from each other so that delivery of small modules can be planned relatively accurately, and expansion of the system with additional, simple behavior is easy.
+- When applications are handed off, maintenance programmers will be able to quickly redo portions they can't figure out since the effects should be localized to the UI being worked on.
+Disadvantages:
+- There is no reuse of behavior and no abstraction of the business problem.
+- Rapid prototyping and iteration reach a natural limit because the lack of abstraction limits refactoring options.
+- Complexity buries you quickly, so the growth path is strictly toward additional simple applications. There is no graceful path to richer behavior.
+
+If this pattern is applied conciously, a team can avoid taking on a great deal of overhead that is required to attempt other approaches. 
+The bottom line is this: *If the architecture isolates the domain related code in a way that allows a cohesive domain design loosely coupled to the rest of the system then it can probably support DDD. Other development styles have their place, but you must accept varying limits on complexity and flexibility.*
