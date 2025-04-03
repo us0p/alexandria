@@ -49,15 +49,15 @@ For example, while English has an estimated 600,000 words, an LLM might have a v
 
 For instance, consider how the tokens “interest” and “ing” can be combined to form “interesting”, or “ed” can be appended to form “interested.”
 
-Each LLM has some **special tokens** specific to the model. The LLM use these tokens to open and close the structured components of its generation. Moreover, the input prompts that we pass to the model are also structured with special tokens. The most important is the ** end of sequence token** (EOS).
+Each LLM has some **special tokens** specific to the model. The LLM use these tokens to open and close the structured components of its generation. Moreover, the input prompts that we pass to the model are also structured with special tokens. The most important is the **end of sequence token** (EOS).
 
-|**Model**|**Provider**|**EOS Token**|**Functionality**|
-|---|---|---|---|
-|**GPT4**|OpenAI|`<\|endoftext\|>`|End of message text|
-|**Llama 3**|Meta (Facebook AI Research)|`<\|eot_id\|>`|End of sequence|
-|**Deepseek-R1**|DeepSeek|`<\|end_of_sentence\|>`|End of message text|
-|**SmolLM2**|Hugging Face|`<\|im_end\|>`|End of instruction or message|
-|**Gemma**|Google|`<end_of_turn>`|End of conversation turn|
+| **Model**       | **Provider**                | **EOS Token**           | **Functionality**             |
+| --------------- | --------------------------- | ----------------------- | ----------------------------- |
+| **GPT4**        | OpenAI                      | `<\|endoftext\|>`       | End of message text           |
+| **Llama 3**     | Meta (Facebook AI Research) | `<\|eot_id\|>`          | End of sequence               |
+| **Deepseek-R1** | DeepSeek                    | `<\|end_of_sentence\|>` | End of message text           |
+| **SmolLM2**     | Hugging Face                | `<\|im_end\|>`          | End of instruction or message |
+| **Gemma**       | Google                      | `<end_of_turn>`         | End of conversation turn      |
 You shouldn't memory all the tokens, but you should appreciate their diversity and the role they play in the text generation of LLMs.
 ## Understanding next token prediction
 LLMs are said to be **autoregressive**, meaning that **the output from one pass becomes the input for the next one**. This loop continues until the model predicts the next token to be the EOS token.
@@ -217,3 +217,54 @@ Tool Name: calculator, Description: Multiply two integers., Arguments: a: int, b
 	"""
 }
 ```
+## Understanding Agents through the Thought-Action-Observation Cycle
+### Core components
+Agents works in a continuous cycle of:
+1. **Thinking**: The LLM part of the Agent decides what the next step should be
+2. **Acting**: The Agent takes an action, by calling the tools with the associated arguments
+3. **Observing**: The model reflects on the response from the tool.
+### The Thought-Action-Observation Cycle
+The three components work together in a [continuous loop](https://huggingface.co/datasets/agents-course/course-images/resolve/main/en/unit1/AgentCycle.gif).
+
+In many Agents frameworks, **the rules and guidelines are embedded directly into the system prompt**, ensuring that every cycle adheres to a defined logic.
+
+The system prompt might look like this:
+![[Pasted image 20250403173915.png]]
+
+### Example
+Consider a weather agent, that has access to the weather API tool. and a system prompt similar to the above.
+When a user asks for the weather in a given location the **thought-action-observe cycle** begins.
+The agent start with the **thought** step, in which the agent generates the steps needed to fulfill the task at hand.
+Considering the system prompt above, an possible internal dialogue for the agent could be:
+
+>_The user needs current weather information for New York. I have access to a tool that fetches weather data. First, I need to call the weather API to get up-to-date details._
+
+Based on its reasoning and the fact that the agent knows about the `get_weather` tool, the agent prepares a JSON-formatted command that calls the weather API starting the **action** step:
+```json
+// Note that the action specifies which tool to call and what parameter to pass.
+{
+  "action": "get_weather",
+  "action_input": {
+    "location": "New York"
+  }
+}
+```
+
+When the API responds, the agent starts the final step of the loop, **observation**. It'll reflect on the response of the API and extract relevant information for the task and/or next steps. In this case, will extract the weather information to add the it's final output.
+
+With the **observation** in hand, the agent updates its internal reasoning:
+
+>Now that i have the weather data for New York, I can compile an answer for the user.
+
+In the **final action** the agent then generates a final response formatted as we told it to:
+
+>**Thought**: I have the weather data now. The current weather in New York is ...
+
+>**Final answer**: The current weather in New York is ...
+
+The **final action** sends the answer back to the user, closing the loop.
+
+This example shows:
+1. The agent's process is cyclical: It starts with a thought, then acts by calling a tool, and finally observes the outcome. If the observation had indicated an error or incomplete data, it could have re-entered the cycle to correct its approach.
+2. Tool integration: enables the agent to go beyond static knowledge.
+3. Dynamic reasoning: each cycle allows the agent to incorporate fresh information (**observations**) into its reasoning (**thoughts**), ensuring that the final answer is accurate.
