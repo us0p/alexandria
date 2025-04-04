@@ -268,3 +268,63 @@ This example shows:
 1. The agent's process is cyclical: It starts with a thought, then acts by calling a tool, and finally observes the outcome. If the observation had indicated an error or incomplete data, it could have re-entered the cycle to correct its approach.
 2. Tool integration: enables the agent to go beyond static knowledge.
 3. Dynamic reasoning: each cycle allows the agent to incorporate fresh information (**observations**) into its reasoning (**thoughts**), ensuring that the final answer is accurate.
+## Thought: Internal reasoning and the Re-Act Approach
+Thoughts represents the agents internal reasoning and planning processes to solve the task.
+
+It utilizes the agent's LLM capability to analyze information when presented in its prompt.
+
+Think of it as the agent internal dialogue.
+
+The agent thoughts are responsible for accessing current observations and decide what the next actions should be.
+
+Through this process, the agent can break down complex problems into smaller, more manageable steps, reflect on past experiences, and continuously adjust its plans based on new information.
+## The Re-Act approach
+It's the concatenation of "Reasoning" and "Acting". It's a simple prompting technique that appends "Let's think step by step" before letting the LLM decode the next tokens.
+
+It encourages the model decoding process toward next tokens that generate a plan, rather than a final solution, since the model is encouraged to **decompose** the problem into sub-tasks. Allows the model to consider sub-steps in more detail, which in general lead to less errors than trying to generate the final solution directly.
+![[Pasted image 20250404074120.png]]
+
+>Models like `Deepseek R1` and `OpenAI's o1` have been fine-tuned to "think before answering". These models have been trained to always include specific _thinking_ sections (enclosed between `<think>` and `</think>` special tokens). This is not just a prompting technique like ReAct, but a training method where the model learns to generate these sections after analyzing thousands of examples that show what we expect it to do.
+## Actions: Enabling the agent to engage with its environment
+Actions are the concrete steps an AI agent takes to interact with its environment. Each action is a deliberate operation executed by the agent.
+## Type of Agent Actions
+| Type of Agent          | Description                                                                                                |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------- |
+| JSON Agent             | The Action to take is specified in JSON format.                                                            |
+| Code Agent             | The Agent writes a code block that is interpreted externally.                                              |
+| Function-calling Agent | It is a subcategory of the JSON Agent which has been fine-tuned to generate a new message for each action. |
+One crucial part of an agent is the **ability to STOP generating new tokens when an action is complete**, and that is true for all formats of Agent. This prevents unintended output and ensures that the agent’s response is clear and precise.
+## The stop and parse approach
+It ensures that the agent's output is structured and predictable:
+1. **Generation in structured format**: The agent outputs its intended action in a clear, predetermined format.
+2. **Halting further generation**: Once the action is complete, the agent stops generating additional tokens. This prevents extra or erroneous output.
+3. **Parsing the output**: An external parser reads the formatted action, determines which Tool to call, and extracts the required parameters.
+## Code Agents
+The idea is: instead of outputting a simple JSON object, a Code Agent generates an executable code block—typically in a high-level language like Python.
+![[Pasted image 20250404075701.png]]
+
+This approach offers several advantages:
+- **Expressiveness**: Code can naturally represent complex logic, including loops, conditionals, and nested functions, providing greater flexibility than JSON.
+- **Modularity and Reusability**: Generated code can include functions and modules that are reusable across different actions or tasks.
+- **Enhanced Debuggability**: With a well-defined programming syntax, code errors are often easier to detect and correct.
+- **Direct Integration**: Code Agents can integrate directly with external libraries and APIs, enabling more complex operations such as data processing or real-time decision making.
+## Observe: Integrating Feedback to reflect and adapt
+Observations are how agents perceives the consequences of its actions. They provide crucial information that fuels the Agents's thought process and guides future actions.
+
+They are signals from the environment that guide the next cycle of thought.
+
+In the observation phase, the agent:
+- **Collects Feedback:** Receives data or confirmation that its action was successful (or not).
+- **Appends Results:** Integrates the new information into its existing context, effectively updating its memory.
+- **Adapts its Strategy:** Uses this updated context to refine subsequent thoughts and actions.
+
+The Agent then uses it to decide whether additional information is needed or if it’s ready to provide a final answer.
+
+This **iterative incorporation of feedback ensures the agent remains dynamically aligned with its goals**, constantly learning and adjusting based on real-world outcomes.
+## How Are the Results Appended?
+After performing an action, the framework follows these steps in order:
+1. **Parse the action** to identify the function(s) to call and the argument(s) to use.
+2. **Execute the action.**
+3. **Append the result** as an **Observation
+
+You can check a dummy agent implementation [here](https://github.com/us0p/dummy_agent_library_example)
