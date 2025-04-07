@@ -184,3 +184,20 @@ Disadvantages:
 
 If this pattern is applied conciously, a team can avoid taking on a great deal of overhead that is required to attempt other approaches. 
 The bottom line is this: *If the architecture isolates the domain related code in a way that allows a cohesive domain design loosely coupled to the rest of the system then it can probably support DDD. Other development styles have their place, but you must accept varying limits on complexity and flexibility.*
+## Associations
+A model that shows an association between a customer and a sales representative corresponds to two things:
+- It abstracts a relationship developers deemed relevant between two real people.
+- Corresponds to an object pointer between two objects, or some comparable implementation.
+
+In real life, there are lots of many-to-many associations, and many are naturally bi-directional. These general associations complicate implementation and maintenance. A generic many-to-many relationship is uncommunicative as well as difficult to implement.
+There are at least three ways of making associations more tractable:
+- Imposition of a traversal direction.
+- Addition of a qualifier, effectively reducing multiplicity.
+- Elimination of non-essential associations.
+
+It is important to constrain relationship as much as possible. Bi-directional associations are tricky to implement, and they also mean that both objects can only be understood together. When application requirements do not require traversal in both directions, adding a traversal direction reduces interdependence and simplifies the design.
+
+Very often, deeper understanding leads to a "qualified" relationship (an extra rule that must be met for a relationship).
+For example, a country has had many presidents (one-to-many) but each president has had only one president  at a time (qualified relationship).
+
+The ultimate simplification is to eliminate an association altogether.

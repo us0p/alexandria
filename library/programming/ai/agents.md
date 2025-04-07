@@ -328,3 +328,79 @@ After performing an action, the framework follows these steps in order:
 3. **Append the result** as an **Observation
 
 You can check a dummy agent implementation [here](https://github.com/us0p/dummy_agent_library_example)
+## Function-Calling
+Function-calling gives the model the capacity to take an action on its environment. However, the function calling capacity **is learned by the model**, and relies **less on prompting than other agents techniques**.
+
+According to our previous learning we can clearly see that the agent didn't learn to use Tools, we just provided the list, and relied on the fact that the model was able to generalize on define a plan using these Tools.
+In function-calling the agent is fine-tuned (trained) to use Tools.
+
+Consider the concept of chat templates. In this concept, the conversation with the model is based on roles in the chat (system, assistant, user).
+```python
+conversation = [
+	{"role": "user", "content": "I need help with my order"},
+    {"role": "assistant", "content": "I'd be happy to help. Could you provide your order number?"},
+    {"role": "user", "content": "It's ORDER-123"},
+]
+```
+
+Function-calling brings new roles to the conversation:
+- **Action**
+- **Observation**
+Note that most of the models formats the action to take as an "assistant" message. The chat template will then represent this as **special tokens** for function-calling.
+- `[AVAILABLE_TOOLS]` – Start the list of available tools
+- `[/AVAILABLE_TOOLS]` – End the list of available tools
+- `[TOOL_CALLS]` – Make a call to a tool (i.e., take an “Action”)
+- `[TOOL_RESULTS]` – “Observe” the result of the action
+- `[/TOOL_RESULTS]` – End of the observation (i.e., the model can decode again)
+```python
+conversation = [
+    {
+        "role": "user",
+        "content": "What's the status of my transaction T1001?"
+    },
+    {
+        "role": "assistant",
+        "content": "",
+        "function_call": {
+            "name": "retrieve_payment_status",
+            "arguments": "{\"transaction_id\": \"T1001\"}"
+        }
+    },
+    {
+        "role": "tool",
+        "name": "retrieve_payment_status",
+        "content": "{\"status\": \"Paid\"}"
+    },
+    {
+        "role": "assistant",
+        "content": "Your transaction T1001 has been successfully paid."
+    }
+]
+```
+## Fine-Tune your model for function-calling
+A model training can be divided into 3 steps:
+1. **The model is pre-trained on a large quantity of data**. The output of that step is a **pre-trained model**. For instance, `google/gemma-2-2b`. It’s a base model and only knows how **to predict the next token without strong instruction following capabilities**.
+2. To be useful in a chat context, the model then needs to be **fine-tuned** to follow instructions. In this step, it can be trained by model creators, the open-source community, you, or anyone. For instance, `google/gemma-2-2b-it` is an instruction-tuned model by the Google Team behind the Gemma project. 
+3. The model can then be **aligned** to the creator’s preferences. For instance, a customer service chat model that must never be impolite to customers.
+
+Usually, a complete product like Gemini or Mistral will go trough all 3 steps.
+
+If you start from the pre-trained model it **would require more training in order to learn instruction following, chat AND function-calling**.
+
+By starting from the instruction-tuned model, **we minimize the amount of information that our model needs to learn**.
+## Low-Rank Adaptation of Large Language Models - `LoRA`
+Popular and lightweight training technique that significantly reduces the number of trainable parameters.
+It works by inserting a smaller number of new weights as an adapter into the model to train. This makes training with `LoRA` much faster, memory-efficient, and produces smaller model weights (a few hundred MBs), which are easier to store and share.
+
+LoRA works by adding pairs of rank decomposition matrices to Transformer layers, typically focusing on linear layers. During training, we will “freeze” the rest of the model and will only update the weights of those newly added adapters.
+
+By doing so, the number of **parameters** that we need to train drops considerably as we only need to update the adapter’s weights.
+
+During inference, the input is passed into the adapter and the base model, or these adapter weights can be merged with the base model, resulting in no additional latency overhead.
+
+LoRA is particularly useful for adapting **large** language models to specific tasks or domains while keeping resource requirements manageable. This helps reduce the memory **required** to train a model.
+## Frameworks for AI agents
+An agentic framework is not always needed when building an application around LLMs.
+Sometimes, **predefined workflows are sufficient** to fulfill user requests, and there is no real need for an agentic framework. If the approach to build an agent is simple, like a chain of prompts, using plain code may be enough. The advantage is that the developer will have **full control and understanding of their system without abstractions**.
+
+However, when the workflow becomes more complex, such as letting an LLM call functions or using multiple agents, these abstractions start to become helpful.

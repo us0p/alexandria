@@ -10,3 +10,5 @@ Monitoring and Observability for Development and DevOps (28/02 - 06/03) - 16h
 [link](https://huggingface.co/learn/agents-course/unit0/introduction)
 ## Hugging face - NLP Course
 [link](https://huggingface.co/learn/nlp-course/en/chapter1/1)
+## Hugging face - LLM course
+[link](https://huggingface.co/learn/llm-course/chapter1/1)

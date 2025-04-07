@@ -89,6 +89,7 @@ Improve morning routine
 - [ ] Backend: overall backend knowledge
 - [ ] DSA
 - [ ] Go
+- [ ] OAuth2
 
 ---
 - [ ] Linux - System Administration
