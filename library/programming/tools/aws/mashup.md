@@ -306,37 +306,6 @@ Serverless compute engine for containers. Works with both ECS and EKS.
 When usin Fargate, you do not need to provision or manage servers. Fargate 
 manages your server infrastructure for you.
 You pay only for the resources that are required to run your containers.
-## Edge locations
-Is a site that Amazon CloudFront uses to store cached copies of your 
-content closer to your customers for faster delivery.
-- **Origin:** Is where your content is generated.
-- **Edge location:** Instead of requiring your customers to get their data 
-  from the `origin`, you can cache copy locally at an edge location that is
-  close to your customers.
-- **Customer:** When a customer in another Region requests one of your 
-  files, Amazon CloudFront retrieves the file from the cache in the edge 
-  location and delivers the file to the customer. The file is delivered to 
-  the customer faster because it came from the edge location near the 
-  customer Regions instead of the original source in origin.
-  
-Caching copies of data closer to the customers all around the world uses 
-the concept of content delivery networks, or CDNs.
-The AWS CDN is called `Amazon CloudFront`.
-CDN: A network that delivers edge content to users based on their 
-geographic location.
-Amazon CloudFront is a service that helps deliver data, video, 
-applications, and APIs to customers around the world with low latency and 
-high transfer speeds. Amazon CloudFront uses what are called Edge 
-locations, all around the world, to help accelerate communication with 
-users, no matter where they are.
-WS Edge locations, also run more than just CloudFront. They run a domain 
-name service, or DNS, known as `Amazon Route 53`, helping direct customers 
-to the correct web locations with reliably low latency.
-Introducing AWS Outposts, where AWS will basically install a fully 
-operational mini Region, right inside your own data center. That's owned 
-and operated by AWS, using 100% of AWS functionality, but isolated within 
-your own building.
-
 ## Ways to interact with AWS services
 - **AWS Management Console:** web-based interface for accessing and 
   managing AWS services. You can quickly access recently used services and 
@@ -383,127 +352,11 @@ resources.
 It determines the right operations to perform when managing your stack and 
 rolls back changes automatically if it detects errors.
 
-## Amazon Virtual Private Cloud (VPC)
-A VPC lets you provision a logically isolated section of the AWS Cloud 
-where you can launch AWS resources in a virtual network that you define.
-These resources can be public facing so they have access to the internet, 
-or private with no internet access, usually for backend services like 
-databases or application servers. The public and private grouping of 
-resources are known as subnets and they are ranges of IP addresses in your 
-VPC.
-It's a networking service that you can use to establish boundaries around 
-your AWS resources.
-A subnet is a section of a VPC in which you can group resources based on 
-security or operational needs. Subnets can be public or private.
-In a VPC, subnets can communicate with each other, for example, you might 
-have an application that involves EC2 instances in a public subnet 
-communicating with databases that are located in a private subnet.
-
-## Internet Gateway
-To allow public traffic from the internet to access your VPC, you attach an
-`internet gatway` to the VPC.
-
-!["internet gateway"](https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1732824000/pyQOXWbI_QH3VNbAxvPixQ/tincan/fe470bc5add63f94f005d3da17a6db8131e78b9e/assets/CPE%20Digital%20-%20Module%204%20-%20Internet%20Gateway.png)
-
-Without an internet gateway, no one can access the resources within your 
-VPC.
-If you have a VPC that includes only private resources you can use a 
-virtual private gateway.
-
-## Virtual Private Gateway
-The virtual private gateway is the component that allows protected internet
-traffic to enter into the VPC.
-It enables you to establish a `virtual private network` connection between 
-your VPC and a private network, such as an on-premises data center or 
-internal corporate network.
-It allows traffic into the VPC only if it is comming from an approved 
-network.
-
-!["virtual private gateway"](https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1732824000/pyQOXWbI_QH3VNbAxvPixQ/tincan/fe470bc5add63f94f005d3da17a6db8131e78b9e/assets/CPE%20Digital%20-%20Module%204%20-%20Virtual%20private%20gateway.png)
-
 ## AWS Direct Connect
 Service that lets you establish a dedicated private connection between your
 data center and a VPC.
 
 !["direct connect"](https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1732824000/pyQOXWbI_QH3VNbAxvPixQ/tincan/fe470bc5add63f94f005d3da17a6db8131e78b9e/assets/CPE%20Digital%20-%20Module%204%20-%20AWS%20Direct%20Connect.png)
-
-## Network traffic in a VPC
-When a customer requests data from an application hosted in AWS, this 
-request is sent as a packet.
-It enters into a VPC through an internet gateway. Before a packet can enter
-into a subnet or exit from a subnet, it checks for permissions. These 
-permissions indicate who sent the packet and how the packet is trying to 
-communicate with the resources in a subnet.
-The VPC component that checks packet permissions for subnets is a 
-`network access control list (ACL)`.
-
-## Network ACLs
-It's a `virtual firewal` that controls inbound and outbound traffic at the 
-subnet level.
-  
-Imagine that you are in an airport. In the airport, travelers are trying to
-enter into a different country. You can think of the travelers as packets 
-and the passport control officer as a network ACL. The passport control 
-officer checks travelers’ credentials when they are both entering and 
-exiting out of the country. If a traveler is on an approved list, they are 
-able to get through. However, if they are not on the approved list or are 
-explicitly on a list of banned travelers, they cannot come in.  
-  
-Each AWS account includes a default network ACL. When configuring your VPC,
-you can use your account's default network ACL or create custom network 
-ACLs.  
-By default, your account's default network ACL allows all inboud and 
-outbound traffic, but you can modify it by adding your own rules.
-For custom network ACLs, all inbound and outbound traffic is denied until
-you add rules to specify which traffic to allow. Additionally, all network
-ACLs have an explicit deny rule. This rule ensures that if a packet doesn't
-match any of the other rules on the list, the packet is denied.
-
-## Stateless packet filtering
-ACLs perform stateless packet filtering. They remember nothing and check 
-packets that cross the subnet border each way; inbound and outbound.
-When a packet response for a request comes back to the subnet, the network
-ACL does not remember your previous request. The network ACL checks the 
-packet response against its list of rules to determine whether to allow or 
-deny.
-After a packet has entered a subnet, it must have its permissions evaluated
-for resources within the subnet, such as EC2 instances.
-
-!["ACL stateless filtering"](https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1732824000/pyQOXWbI_QH3VNbAxvPixQ/tincan/fe470bc5add63f94f005d3da17a6db8131e78b9e/assets/CPE%20Digital%20-%20Module%204%20-%20Network%20ACL%202.png)
-
-## Security groups
-Is a virtual firewall that controls inbound and outbound traffic for an EC2
-instance.
-By default, a security group denies all inbound traffic and allows all 
-outbound traffic. You can add custom rules to configure which traffic 
-should be allowed; any other traffic would then be denied.
-If you have multiple EC2 instances within the same VPC, you can associate
-them with the same security group or use different security groups for each
-instance.
-
-## Stateful packet filtering
-Security groups perform stateful packet filtering. They remember previuos 
-decisions made for incoming packets.
-Consider the same example of sending a request from an EC2 instance to the 
-internet.
-When a packet response for that request returns to the instance, the 
-security group remembers your previous request. The security group allows 
-the response to proceed, regardless of inbound security group rules.
-
-!["Security group stateful filtering"](https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1732824000/pyQOXWbI_QH3VNbAxvPixQ/tincan/fe470bc5add63f94f005d3da17a6db8131e78b9e/assets/CPE%20Digital%20-%20Module%204%20-%20Security%20group%202.png)
-
-With both network ACLs and security groups, you can configure custom rules
-for the traffic in your VPC.
-
-## DNS
-You can think of DNS as being the phone book of the internet. DNS is the 
-process of translating a domain name to an IP address.
-- When you enter the domain name into your browser, this request is sent to
-  a customer DNS resolver.
-- The customer DNS resolver asks the company DNS server fo the IP address 
-  that corresponds to the website.
-- The companyy DNS server responds by providing the IP address for the 
-  website, e.g. 192.0.2.0.
 
 ## Amazon Route 53
 Is a DNS web service. Amazon Route 53 connects user requests to 
@@ -833,162 +686,6 @@ stores: Redis and MemCached.
 ## Amazon DynamoDB Accelerator (DAX)
 Is an in-memory cache for DynamoDB. It helps improve response times from 
 single-digit milliseconds to microseconds.
-
-## AWS Shared responsibility model
-In AWS you do not treat your AWS environment as a single object. Rather, 
-you treat the environment as a collection of parts that build upon each 
-other. AWS is responsible for some parts of your environment and you (the 
-customer) are responsible for other parts. This is kown as the 
-`shared responsibility model`.
-
-The `shared responsibility model` divides into customer responsibilities 
-(commonly referred to as `security in the cloud`) and AWS responsibilities 
-(commonly referred to as `security of the cloud`).
-
-!["AWS shared responsibility model"](https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1733270400/aFKyeMnhFK-zt2QeV6N-wQ/tincan/fe470bc5add63f94f005d3da17a6db8131e78b9e/assets/Module%206_AWS%20Shared%20Responsibility%20Model%20Lesson_%20AWS%20SRM%20Image.png)
-
-## Customers: Security IN the cloud
-Customers are responsible for the security of everything that they create 
-and put in the AWS Cloud.
-When using AWS services, you, the customer, maintain complete control over 
-your content. You are responsible for managing security requirements for 
-your content, including which content you choose to store on AWS, which AWS
-service you use, and who has access to that content. You alwo control how 
-access right are granted, managed, and revoked.
-The security steps that you take will depend on factors such as the 
-services that you use, the complexity of your systems, and your company’s 
-specific operational and security needs. Steps include selecting, 
-configuring, and patching the operating systems that will run on Amazon EC2
-instances, configuring security groups, and managing user accounts.
-
-## AWS: Security OF the cloud
-AWS is responsible for security of the cloud.
-AWS operates, manages, and controls the components at all layers of 
-infrastructure. This includes areas such as the host operating system, the 
-virtualization layer, and even the physical security of the data centers 
-from which services operate.
-AWS is responsible for protecting the global infrastructure that runs all 
-of the services offered in the AWS Cloud. This infrastructure includes AWS 
-Regions, Availability Zones, and edge locations.
-
-AWS manages the security of the cloud, specifically the physical 
-infrastructure that hosts your resources, which include:
-- Physical security of data centers
-- Hardware and software infrastructure
-- Network infrastructure
-- Virtualization infrastructure
-
-Although you cannot visit AWS data centers to see this protection 
-firsthand, AWS provides several reports from third-party auditors.
-
-## AWS Identity and access management (IAM)
-Enables you to manage access to aws services and resources securely.
-
-## AWS account root user
-When you first create an AWS account, you begin with an indentity known as 
-the `root user`.
-The `root user` has complete access to all the AWS services and resources 
-in the account.
-
-!["IAM recomendations"](https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1733270400/aFKyeMnhFK-zt2QeV6N-wQ/tincan/fe470bc5add63f94f005d3da17a6db8131e78b9e/assets/CPE%20Digital%20-%20AWS%20account%20root%20user.png)
-
-Do not use the `root user` for everyday tasks. Instead, use the `root user`
-to create your first IAM user and assign it permissions to create other 
-users.
-Only use the root user when you need to perform a limited number of tasks 
-that are only yavailable to the `root user`. Examples of these tasks 
-include changing your `root user` email address and changing your AWS 
-support plan.
-
-## IAM users
-An IAM user is an identity that you create in AWS. It represents the person
-or application that interacts with AWS services and resources. It consists 
-of a name and credentials.
-By default, when you create a new IAM user in AWS, it has no permissions 
-associated with it. To allow the IAM user to perform specific actions in 
-AWS, such as launching an EC2 instance or creating an S3 bucket, you must 
-grant the IAM user the necessary permissions.
-
-It's recommended to create individual IAM users for each person who needs 
-to access AWS.
-Even if you have multiple employees who require the same level of access. 
-This provides additional security by allowing each IAM user to have a 
-unique set of security credentials.
-
-## IAM policies
-Are documents that allows or denies permissions to AWS services and 
-resources.
-It enable you to customize users' levels of access to resources. For 
-example, yyou can allow users to access all of the Amazon S3 buckets within
-your AWS account, or only a specific bucket.
-
-> Follow the security principle of least privilege when granting permissions.
-
-## Example: IAM Policy
-Suppose you have to create an IAM user for a newly hired developer. The 
-developer needs access to some files kept in S3 bucket with the 
-ID: `AWSDOC-EXAMPLE-BUCKET`.
-
-!["IAM policy example"](https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1733270400/aFKyeMnhFK-zt2QeV6N-wQ/tincan/fe470bc5add63f94f005d3da17a6db8131e78b9e/assets/CPE%20Digital%20-%20IAM%20policy%20example.png)
-
-In this example, the IAM policy is allowing a specific action within Amazon
-S3: `ListObject`. The policy also mentions a specific bucket 
-ID: `AWSDOC-EXAMPLE-BUCKET`. When the owner attaches this policy to the 
-developer's IAM user, it'll allow the developer to view all of the objects 
-in the `AWSDOC-EXAMPLE-BUCKET` bucket.
-If the owner wants the developer to be able to access other services and 
-perform other actions in AWS, the owner must attach additional policies to 
-specify these services and actions.
-
-## IAM groups
-It's a collection of IAM users. When you assign an IAM policy to a group, 
-all users in the group are granted permissions specified by the policy.
-ASsigning IAM policies at the group level also makes it easier to adjust 
-permissions when an employee transfers to a different job.
-
-## IAM roles
-It's an identity that you can assume to gain temporary access to 
-permissions.
-An employee rotates to different workstations throughout the day, when the 
-employee needs to switch to a different task, they give up their access to 
-one workstation and gain access to the next workstation. The employee can 
-easily switch between workstations, but at any given point in time, they 
-can have access to only a single workstation.
-Before an IAM user, application, or service can assume an IAM role, they 
-must be granted permissions to switch to the role. When someone assumes an 
-IAM role, they abandon all previous permissions that they had under a 
-previous role and assume the permissions of the new role.
-
-> IAM roles are ideal for situations in which access to services or 
-resources needs to be granted temporarily, instead of long-term.
-
-## AWS Organizations
-If your company has multiple AWS accounts, you can use `AWS Organizations` 
-to consolidate and manage multiple AWS accounts within a central location.
-When you create an organization, AWS Organizations automatically creates a 
-**root**, which is the parent container for all the accounts in your 
-organization.
-
-In AWS Organizations, you can centrally control permissions for the 
-accounts in your organization by using `service control policies (SCPs)`. 
-SCPs enable you to place restrictions on the AWS services, resources, an 
-dindividual API actions that users and roles in each account can access.
-
-> Consolidated billing is another feature of AWS Organizations.
-
-## Organizational units
-In AWS Organizations, you can group accounts into organizational units 
-(`OUs`) to make it easier to manage accounts with similar business or 
-security requirements. When you apply a policy to an `OU`, all the accounts
-in the `OU` automatically inherit the permissions specified in the policy.
-By organizing separate accounts into `OUs`, you can more easily isolate 
-workloads or applications that have specific security requirements.
-
-You can apply `SCPs` to the organization root, an individual member 
-account, or an `OU`. An `SCP` affects all IAM users, groups, and roles 
-within an account, including the AWS account root user.
-You can't apply IAM policies to the AWS account root user.
-
 ## AWS Artifact
 Depending on your company's industry, you may need to uphold specific 
 standards. An audit or inspection will ensure that the company has met 
@@ -1008,7 +705,6 @@ with a variety of global, regional, and industry-specific security
 standards and regulations. AWS Artifact Reports remains up to date with the
 latest reports release. You can provide the AWS audit artifacts to your 
 auditors or regulators as evidence of AWS security controls.
-
 ## Customer Compliance Center
 Contains resources to help you learn more about AWS compliance.
 In there you can read customer compliance stories to discover how companies
@@ -1019,7 +715,6 @@ as:
 - AWS answers to key compliance questions
 - An overview of AWS risk and compliance
 - An auditing security checklist
-
 ## AWS Shield
 Is a service that protects applications against `DDoS` attacks. It provides
 two levels of protection:
@@ -1034,7 +729,6 @@ two levels of protection:
   Route 53, and Elastic Load Balancing. Additionally, you can integrate AWS
   Shield with AWS WAF (Web Application Firewall) by writing custom rules to
   mitigate complex DDoS attacks.
-
 ## AWS Key Management Service (KMS)
 Enables you to perform encryption operations through the use of 
 cryptographic keys. A cryptographic key is a random string of digits used
@@ -1047,7 +741,6 @@ For example, you can specify which IAM users and roles are able to manage
 keys. Alternatively, you can temporarily disable keys so that they are no 
 longer in use by anyone. Your keys never leave AWS KMS, and you are always 
 in control of them.
-
 ## AWS Web Application Firewall
 Lets you monitor network requests that come into your web applications.
 It works together with CloudFront and Load Balancers. Recall the 
@@ -1061,7 +754,6 @@ all requests except those from the IP addresses that you have specified.
 When a request comes into AWS WAF, it checks against the list of rules that
 you have configured in the web ACL. If a request does not come from one of 
 the blocked IP addresses, it allows access to the application.
-
 ## Amazon Inspector
 It helps to improve the security and compliance of applications by running 
 automated security assessments. It checks applications for security 
@@ -1072,7 +764,6 @@ After Amazon Inspector has performed an assessment, it provides you with a
 list of security findings. The list prioritizes by severity level, 
 including a detailed description of each security issue and a 
 recommendation for how to fix it.
-
 ## Amazon GuardDuty
 Is a service that provides intelligent threat detection for your AWS 
 infrastructure and resources. It identifies threats by continuously 

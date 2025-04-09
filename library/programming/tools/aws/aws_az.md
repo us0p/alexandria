@@ -9,6 +9,6 @@ A best practice is to run applications across at least two Availability Zones in
 
 Planning for failure and deploying applications across multiple Availability Zones is an important part of building a resilient and highly available architecture.
 
-Many of the AWS services run at the [Region](aws_region.md) level, meaning they run synchronously across multiple Availability Zones without any additional effort on your  part.
+Many of the AWS services run at the [Region](aws_region.md) level, meaning they run synchronously across multiple Availability Zones without any additional effort on your part.
 
 Regional services are by definition already highly available at no additional cost of effort on your part.

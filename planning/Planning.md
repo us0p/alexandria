@@ -1,26 +1,20 @@
 # Planning
 Improve morning routine
 ## Routine - 12h
-06:15 - 06:45 - Reading - Little time
-07:00 - 08:00 - DSA
+06:30 - 07:00 - Reading
+07:00 - 07:30 - DSA
+07:30 - 08:00 - SQL
 08:00 - 10:00 - Study
-10:00 - 13:00 - work
-13:00 - 14:00 - lunch
-14:00 - 17:00 - work
-17:00 - 18:00 - Study practice
-18:00 - 19:00 - Dinner
-19:00 - 22:00 - Free time
-22:00 - 06:00 - Sleep
+10:00 - 13:00 - Work
+13:00 - 14:00 - Lunch
+14:00 - 17:00 - Work
+17:00 - 19:00 - Work related study
+19:00 - 20:00 - Ricing
+20:00 - 23:00 - Free Time
 ## Pomodoro timers
 - **3h:** 45m/w + 10m/sr + 25m/lr -> 75% work rate
 - **1h:** 50m/w + 10m/lr -> 83% work rate
 - **2h:** 30m/w + 5m/r + 20m/lr -> 75% work rate
-## Work stack
-- [ ] SQL
-- [ ] CI/CD
-- [ ] AWS
-- [ ] RDS
-- [ ] PostgreSQL
 ## To study
 - [x] OOP
 - [x] SOLID
@@ -44,39 +38,34 @@ Improve morning routine
 	    - [x] examples
 	- [x] Integration testing implications, should you use?
 	- [x] review and summary all the information
-- [ ] AI Agents
+- [x] AI Agents - Overview
 - [ ] Python
-	- [ ] modules and packages
 	- [ ] language basics
 	- [ ] exception handling
-	- [ ] OOP
-	- [ ] meta classes
+	- [ ] classes
 	- [ ] testing framework
-	- [ ] bdd framework
+	- [ ] BDD framework
 	- [ ] fake framework
-	- [ ] file handling
-	- [ ] generators and iterators
-	- [ ] decorators
-	- [ ] multithreading
-	- [ ] multiprocessing
-	- [ ] asyncio
-	- [ ] contextlib
-	- [ ] contextvars
-	- [ ] GIL
-- [ ] Django
-- [ ] AWS lambda
-- [ ] Redis
-- [ ] Kafka
 - [ ] Kubernetes
 - [ ] GitHub actions
+- [ ] AWS 
+	- [ ] Lambda
+	- [ ] RDS
+- [ ] FastAPI
 - [ ] Architecture
 	- [ ] Microservices
 	    - [ ] DDD
+
+
+---
+- [ ] More about architecture
     - [ ] Event
     - [ ] MVC
     - [ ] Model-View Separation Pattern
     - [ ] Application Coordinator
-- [ ] Evolutionary Architecture
+	- [ ] Evolutionary Architecture
+- [ ] Redis
+- [ ] Kafka
 - [ ] Design Patterns
     - [ ] factory
     - [ ] builder
@@ -87,20 +76,5 @@ Improve morning routine
     - [ ] command
     - [ ] strategy
 - [ ] Backend: overall backend knowledge
-- [ ] DSA
-- [ ] Go
-- [ ] OAuth2
-
----
 - [ ] Linux - System Administration
 - [ ] Network basics
-- [ ] Node.js
-    - [ ] Event Loop
-    - [ ] Buffer
-    - [ ] Event Emitters
-    - [ ] Streams
-    - [ ] child_process
-    - [ ] Clusters
-    - [ ] Memory Leaks
-    - [ ] Scaling a node server.
-- [ ] Nest.js
