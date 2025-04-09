@@ -404,3 +404,34 @@ An agentic framework is not always needed when building an application around LL
 Sometimes, **predefined workflows are sufficient** to fulfill user requests, and there is no real need for an agentic framework. If the approach to build an agent is simple, like a chain of prompts, using plain code may be enough. The advantage is that the developer will have **full control and understanding of their system without abstractions**.
 
 However, when the workflow becomes more complex, such as letting an LLM call functions or using multiple agents, these abstractions start to become helpful.
+## Retrieval Augmented Generation - RAG
+Combines capabilities of data retrieval and generation models to provide context-aware responses. For example, a user's query is passed to a search engine, and the retrieved results are given to the model along with the query. The model generates a response based on the query and retrieved information.
+
+Traditional RAG systems use an LLM to answer queries based on retrieved data, agentic RAG enables intelligent control of both retrieval and generation processes, improving efficiency and accuracy.
+
+Traditional RAG systems face key limitations, such as **relying on a single retrieval step** and focusing on direct semantic similarity with the user’s query, which may overlook relevant information.
+
+Agentic RAG addresses these issues by allowing the agent to autonomously formulate search queries, critique retrieved results, and conduct multiple retrieval steps for a more tailored and comprehensive output.
+
+Agentic RAG is a powerful way to use agents to answer questions about your data.
+### Example
+Consider an agent equipped with a `DuckDuckGo` web search tool that receives the following prompt:
+
+`Search for luxury superhero-themed party ideas, including decorations, entertainment, and catering.`
+
+The agent follows this process:
+1. **Analyzes the Request:** The agent identifies the key elements of the query—luxury superhero-themed party planning, with focus on decor, entertainment, and catering.
+2. **Performs Retrieval:** The agent leverages `DuckDuckGo` to search for the most relevant and up-to-date information, ensuring it aligns with the agent’s refined preferences for a luxurious event.
+3. **Synthesizes Information:** After gathering the results, the agent processes them into a cohesive, actionable plan, covering all aspects of the party.
+4. **Stores for Future Reference:** The agent stores the retrieved information for easy access when planning future events, optimizing efficiency in subsequent tasks.
+## Custom Knowledge Base Tool
+A vector database stores numerical representations (embedding) of text or other data, created by machine learning models. It enables semantic search by identifying similar meanings in high-dimensional data. 
+## Enhanced Retrieval Capabilities
+When building agentic RAG systems, the agent can employ sophisticated strategies like:
+1. **Query Reformulation:** Instead of using the raw user query, the agent can craft optimized search terms that better match the target documents
+2. **Multi-Step Retrieval:** The agent can perform multiple searches, using initial results to inform subsequent queries
+3. **Source Integration:** Information can be combined from multiple sources like web search and local documentation
+4. **Result Validation:** Retrieved content can be analyzed for relevance and accuracy before being included in responses
+
+Effective agentic RAG systems require careful consideration of several key aspects. The agent **should select between available tools based on the query type and context**. Memory systems help maintain conversation history and avoid repetitive retrievals. Having fallback strategies ensures the system can still provide value even when primary retrieval methods fail. Additionally, implementing validation steps helps ensure the accuracy and relevance of retrieved information.
+![[Pasted image 20250409073600.png]]

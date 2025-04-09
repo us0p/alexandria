@@ -201,3 +201,15 @@ Very often, deeper understanding leads to a "qualified" relationship (an extra r
 For example, a country has had many presidents (one-to-many) but each president has had only one president  at a time (qualified relationship).
 
 The ultimate simplification is to eliminate an association altogether.
+## Entities
+Object modeling tends to lead us to focus on the attributes of an object, but the fundamental concept of an ENTITY is an abstract continuity threading through a life cycle and even multiple forms.
+
+Some objects are not defined primarily by their attributes. They represent a thread of identity that runs through time and often across distinct representations. Sometimes such an object must be matched with another object even though attributes differ. An object must be distinguished from other objects even though they might have the same attributes. Mistaken identity can lead to data corruption.
+
+An object defined primarily by it identity is called an "ENTITY". They have life cycles that can radically change their form and content, while a thread of continuity must be maintained. Their identities must be defined so that they can be effectively tracked. Their class definitions, responsibilities, attributes and associations should revolve around who they are, rather than the particular attributes they carry. Even for Entities that don't transform radically or have such complicated life cycles.
+
+Keep the class definition simple and focused on life cycle continuity and identity. Define a means of distinguishing each object regardless of its form or history. Be alert to requirement to match by attributes. The model must define what it means to be the same thing.
+## Modeling Entities
+Entities are defined by their identities. Attributes tare attached and change. Therefore, strip the Entity object's definition down to the most intrinsic characteristics, particularly those that identify it, or are commonly used to find or match it. Separate other characteristics into other objects associated with the core Entity.
+
+Attributes associated with identity stay with the Entity.
