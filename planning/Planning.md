@@ -11,6 +11,7 @@ Improve morning routine
 17:00 - 19:00 - Work related study
 19:00 - 20:00 - Ricing
 20:00 - 23:00 - Free Time
+
 ## Pomodoro timers
 - **3h:** 45m/w + 10m/sr + 25m/lr -> 75% work rate
 - **1h:** 50m/w + 10m/lr -> 83% work rate
@@ -39,6 +40,12 @@ Improve morning routine
 	- [x] Integration testing implications, should you use?
 	- [x] review and summary all the information
 - [x] AI Agents - Overview
+- [ ] SQL
+	- [ ] Triggers 
+	- [ ] Functions
+- [ ] PostgreSQL
+	- [ ] Data Types
+		- [ ] jsonb fields
 - [ ] Python
 	- [ ] language basics
 	- [ ] exception handling
