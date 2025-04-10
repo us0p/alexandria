@@ -21,7 +21,7 @@ Unique identifier for each record in a table. Ensures that each row within the t
 Columns within a table that establish relationships with the primary key of another table. They create connections between different tables.
 ## Entity-Relationship Diagrams (ERDs)
 Visual representation of the relationship between tables in a database.
-## [Normalization](normalization_denormalization.md)
+## [Normalization](normalization.md)
 ## High-level database concepts
 ### Database and Schema
 A PostgreSQL database is a container for your data, and within it, you have schemas to organize objects like tables, views, and more.
