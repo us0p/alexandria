@@ -43,11 +43,13 @@ Improve morning routine
 	- [ ] language basics
 	- [ ] exception handling
 	- [ ] classes
-	- [ ] testing framework
-	- [ ] BDD framework
-	- [ ] fake framework
+- [ ] pytest
+- [ ] psycopg2
+- [ ] pydantic
+- [ ] pre-commit
 - [ ] Kubernetes
 - [ ] GitHub actions
+- [ ] Terraform
 - [ ] AWS 
 	- [ ] Lambda
 	- [ ] RDS
@@ -56,8 +58,11 @@ Improve morning routine
 	- [ ] Microservices
 	    - [ ] DDD
 
-
 ---
+- [ ] More about Python
+	- [ ] BDD framework
+	- [ ] fake framework
+	- [ ] PEP 8
 - [ ] More about architecture
     - [ ] Event
     - [ ] MVC
@@ -65,6 +70,8 @@ Improve morning routine
     - [ ] Application Coordinator
 	- [ ] Evolutionary Architecture
 - [ ] Redis
+- [ ] AI Agents (Deep Dive)
+- [ ] AI MCP
 - [ ] Kafka
 - [ ] Design Patterns
     - [ ] factory
