@@ -42,10 +42,12 @@ Improve morning routine
 - [x] AI Agents - Overview
 - [ ] SQL
 	- [ ] Triggers 
-	- [ ] Functions
+	- [ ] Indexes
 - [ ] PostgreSQL
 	- [ ] Data Types
 		- [ ] jsonb fields
+	- [ ] Available Indexes and differences
+	- [ ] PL/pgSQL
 - [ ] Python
 	- [ ] language basics
 	- [ ] exception handling

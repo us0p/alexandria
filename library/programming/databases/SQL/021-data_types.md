@@ -3,6 +3,8 @@ It's the type of the data stored in each column of your table.
 There are a lot of data types, and each database provider might have it's own specifications about each type, you should follow the database specification about supported datatypes and their names.
 - [SQLite Data Types Docs](https://www.sqlite.org/datatype3.html)
 - [PostgreSQL Data Types Docs](https://www.postgresql.org/docs/17/datatype.html)
+## Composite Key
+Is a primary key composed of multiple columns. Each column in the composite key can contain duplicate values, but the combination of all the columns in the composite key must be unique.
 ## Changing a column's data type
 It's possible to change the data type of a column in your query. This is done by using `CAST` clauses.
 ```SQL

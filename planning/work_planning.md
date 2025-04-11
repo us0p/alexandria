@@ -1,7 +1,3 @@
-- [ ] SQL
-- [ ] RDS
-- [ ] CI/CD
-- [ ] PostgreSQL
 # Work Planning - Database Engineer
 [SQL Exercises](https://learnsql.com/course/sql-practice-set/select-from-table/introduction/introduction/)
 [PostgreSQL Exercises](https://pgexercises.com/gettingstarted.html)
