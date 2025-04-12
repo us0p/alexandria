@@ -41,7 +41,7 @@ Improve morning routine
 	- [x] review and summary all the information
 - [x] AI Agents - Overview
 - [ ] SQL
-	- [ ] Triggers 
+	- [x] Triggers 
 	- [ ] Indexes
 - [ ] PostgreSQL
 	- [ ] PL/pgSQL
