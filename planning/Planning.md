@@ -44,10 +44,10 @@ Improve morning routine
 	- [ ] Triggers 
 	- [ ] Indexes
 - [ ] PostgreSQL
+	- [ ] PL/pgSQL
 	- [ ] Data Types
 		- [ ] jsonb fields
 	- [ ] Available Indexes and differences
-	- [ ] PL/pgSQL
 - [ ] Python
 	- [ ] language basics
 	- [ ] exception handling
