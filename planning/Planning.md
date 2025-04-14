@@ -40,14 +40,17 @@ Improve morning routine
 	- [x] Integration testing implications, should you use?
 	- [x] review and summary all the information
 - [x] AI Agents - Overview
+- [ ] Data Modeling
+	- [x] Normalization
 - [ ] SQL
 	- [x] Triggers 
 	- [ ] Indexes
 - [ ] PostgreSQL
-	- [ ] PL/pgSQL
 	- [ ] Data Types
 		- [ ] jsonb fields
-	- [ ] Available Indexes and differences
+	- [ ] Most common index
+	- [ ] B-Tree Index
+	- [ ] PL/pgSQL
 - [ ] Python
 	- [ ] language basics
 	- [ ] exception handling
@@ -60,8 +63,13 @@ Improve morning routine
 - [ ] GitHub actions
 - [ ] Terraform
 - [ ] AWS 
+	- [ ] IAM & IAM Identity Center
+	- [ ] ECR
 	- [ ] Lambda
 	- [ ] RDS
+	- [ ] Secret Manager
+	- [ ] AWS CLI
+	- [ ] CloudWatch
 - [ ] FastAPI
 - [ ] Architecture
 	- [ ] Microservices

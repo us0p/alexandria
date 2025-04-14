@@ -213,3 +213,39 @@ Keep the class definition simple and focused on life cycle continuity and identi
 Entities are defined by their identities. Attributes tare attached and change. Therefore, strip the Entity object's definition down to the most intrinsic characteristics, particularly those that identify it, or are commonly used to find or match it. Separate other characteristics into other objects associated with the core Entity.
 
 Attributes associated with identity stay with the Entity.
+## Designing the Identity Operation
+Each Entity must have an operational way of establishing its identity with another object.
+
+The definition of identity emerges from the model. Defining it demands understanding of the domain.
+
+Sometimes certain data attributes, or combination of attributes can be guaranteed to be, or simply constrained to be, unique within the system, and this provides a unique key for the ENTITY.
+
+When there is no true unique key made of the attributes of an object, the most common solution is to attach to each instance a symbol (such as a number or string) that is unique within the class. Once this ID symbol is obtained and stored as an attribute of the Entity, it is designed immutable.
+
+Sometimes, the uniqueness of the ID must be enforced beyond the computer system's boundaries.
+
+When the ID is automatically generated, the user may be uninterested in it. Often it is needed only internally.
+
+There are cases where a generated ID is of interest to the user. When I ship a package through a parcel delivery service.
+## Value Objects
+Many objects have no conceptual identity. Theses objects describe some characteristic of a thing.
+
+These are objects that describe the nature of things.
+
+Since the most conspicuous objects in a model are usually Entities, and it is so important to track their identity, it is natural to start thinking about assigning an identity to all domain objects.
+
+This can be costly in terms of system performance, as the system has to cope with all that tracking, and many possible performance optimizations are ruled out. Equally important, it muddles the model, forcing all objects into the same mold, and tacking on misleading artificial identities.
+
+Value Objects are instantiated to represent elements of the design that we care about only for what they are, not who they are.
+
+A Value Object can be assemblage of other objects. In software for designing house plans, an object could be created for each window style. This ''window style" could be incorporated into a "window" object along with height and width as well as rules governing how these attributes can be changed and combined.
+
+These windows as intricate Value Objects made up of other Value Objects. They in turn would be incorporated into larger elements of a plan, such as "wall" objects.
+
+Value Objects can even reference Entities.
+
+Value Objects are often passed as parameters in messages between objects. They are frequently transient, created for an operation and then discarded. Value Objects are used as attributes of Entities (and other Values).
+
+When you care only about the attributes of an element of the model, classify it as a value object. Making it express the meaning of attributes it conveys and give it related functionality. Treat the Values Objects as immutable. Don't give it any identity and avoid the design complexities necessary to maintain Entities.
+
+The attributes that make up a value object should form a conceptual whole. For example, street, city, and postal code shouldn't be separate attributes of a Person object. They are part of a single, whole address, which makes a simpler Person, and a more coherent Value Object.
