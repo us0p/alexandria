@@ -55,6 +55,13 @@ Improve morning routine
 	- [ ] language basics
 	- [ ] exception handling
 	- [ ] classes
+	- [ ] `__file__`
+	- [ ] modules
+		- [ ] os
+			- [ ] path
+				- [ ] dirname
+				- [ ] realpath
+				- [ ] join
 - [ ] pytest
 - [ ] psycopg2
 - [ ] pydantic
