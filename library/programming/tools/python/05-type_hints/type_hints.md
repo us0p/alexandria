@@ -1,3 +1,4 @@
+```python
 from typing import Callable, ClassVar, Literal, NamedTuple, NewType, ParamSpec, Protocol, Sequence, TypeVar, TypedDict
 
 def moon_weight(earth_weight: float) -> str:
@@ -276,3 +277,4 @@ a: Point2D = {"x": 1, "y": 2, "label": "good"}
 #     x: int
 #     y: int
 #     label: NotRequired[str]
+```
