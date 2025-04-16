@@ -35,7 +35,7 @@ Supported operations include:
 
 Notes about the operations:
 - You can't perform subtraction between **aware** and **naive** `datetime` objects.
-- `datetime` objects are equal if they represent the same date an dtime, taking into account the time zone.
+- `datetime` objects are equal if they represent the same date and time, taking into account the time zone.
 - If `tzinfo` are different between the objects, they are first converted to **UTC datetimes** before the operation.
 - **naive** and **aware* `datetime` objects are never equal.
 - Order comparison between **naive** and **aware** `datetime` objects raises `TypeError`.

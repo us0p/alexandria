@@ -15,9 +15,11 @@ Return the canonical path of the specified filename, eliminating any symbolic li
 If a path doesn’t exist or a symlink loop is encountered, and strict is `True`, `OSError` is raised. If strict is `False` these errors are ignored, and so the result might be missing or otherwise inaccessible.
 ## `path.join(path, *paths)`
 Join one or more path segments intelligently. The return value is the concatenation of path and all members of *paths, with exactly one directory separator following each non-empty part, except the last
+## `path.splitext(path)`
+Split the path name path into a pair (root, ext) such that `root + ext == path`, and the extension, ext, is empty or begins with a period and contains at most one period.
 ## Examples
 ```python
-from os.path import dirname, exists, realpath, join
+from os.path import dirname, exists, realpath, join, splitext
 
 unix_path = "/home/user/projects/python/main.py"
 
@@ -30,4 +32,6 @@ new_path = unix_path + "/.."
 print(realpath(new_path)) # "/home/user/projects/python"
 
 print(join("home", "user")) # "home/user"
+
+print(splitext("/projects/python/main.py")) # ("/projects/python/main", ".py")
 ```
