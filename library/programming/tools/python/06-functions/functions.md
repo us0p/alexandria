@@ -1,3 +1,4 @@
+```python
 # def is an abreviation for define.
 def fib(n: int) -> None:
     """
@@ -128,3 +129,4 @@ print(greet_lamb('luan'))
 # time of the lambda expression.
 # To overcome this issue, you can assign default value to the argument
 # at definition time.
+```
