@@ -55,10 +55,9 @@ Improve morning routine
 	- [ ] language basics
 	- [ ] exception handling
 	- [ ] classes
-- [ ] pytest
-- [ ] psycopg2
-- [ ] pydantic
-- [ ] pre-commit
+	- [ ] mocking
+	- [ ] `pytest`
+	- [ ] `psycopg2`
 - [ ] Kubernetes
 - [ ] GitHub actions
 - [ ] Terraform

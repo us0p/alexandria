@@ -24,3 +24,5 @@ A CLI pomodore, it should:
 ## Search aggregator
 An search aggregator that aggregates search results from Shopee, Mercado Livre, and Amazon
 Can be monetized with ADS.
+## Image converter
+An CLI application that converts image of one format to another, from jpg to png for example.

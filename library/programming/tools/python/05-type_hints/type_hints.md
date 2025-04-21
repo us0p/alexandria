@@ -278,3 +278,19 @@ a: Point2D = {"x": 1, "y": 2, "label": "good"}
 #     y: int
 #     label: NotRequired[str]
 ```
+## `typing.cast(typ, val)`
+Casts `val` to `typ`. It returns the value unchanged. It's only used to signal the type checker that the return value if of the designed type. It intentionally doesn't check anything. It's intended to be as fast as possible.
+
+```python
+from typing import Literal, cast
+
+Adjectives = Literal["good", "bad", "handsome"]
+
+def print_adj(adj: Adjectives):
+	print(adj)
+
+adj: str = "good"
+
+print_adj(adj) # Type checker complains, "str" isn't "Adjectives"
+print_adj(cast(Adjectives, adj)) # Cast "str" to "Adjectives"
+```
