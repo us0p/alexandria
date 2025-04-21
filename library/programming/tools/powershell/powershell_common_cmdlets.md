@@ -1,0 +1,3 @@
+- `Get-Content`: Reads the content of a file.
+- `Remove-Item`: Removes a file or directory.
+- `New-Item`: Creates a file or directory.

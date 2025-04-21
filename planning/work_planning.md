@@ -1,3 +1,14 @@
+## PostgreSQL - Road map
+- [ ] SQL (DDL and DML)
+- [ ] Object Model x Relational Model
+- [ ] Application Skills -> Data and Processing
+- [ ] PL/pgSQL
+- [ ] Procedures and Functions
+- [ ] Triggers
+- [ ] Aggregate and Window Functions
+- [ ] Recursive CTE
+- [ ] Schema Design Patterns / Anti-patterns
+- [ ] Indexes and their Usecases
 # Work Planning - Database Engineer
 [SQL Exercises](https://learnsql.com/course/sql-practice-set/select-from-table/introduction/introduction/)
 [PostgreSQL Exercises](https://pgexercises.com/gettingstarted.html)

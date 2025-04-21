@@ -102,6 +102,20 @@ function Test-PSRequiredParameter {
 
 	Write-Output $ComputerName
 }
+
+# You can use parameter sets to group parameters of different function signatures.
+function Test-ParameterSets {
+	[CmdletBinding(DefaultParameterSetName = 'Brazilian')]
+	param (
+		[Parameter(ParameterSetName = 'Brazilian')]
+		[string] $CPF # If this argument is passed, SSN cannot be passed, and you can only use global arguments and arguments of the 'Brazilian' set.
+
+		[Parameter(ParameterSetName = 'American')]
+		[string] $SSN
+	)
+
+	# Rest of the code ...
+}
 ```
 ## Pipeline input
 Extra code is necessary when you want your function to accept pipeline input. Commands can accept pipeline input **by value** (by type) or **by property name**. You can write your functions like the native commands so they accept either one or both of these input types.
@@ -143,51 +157,6 @@ function Test-PSPipelineInput {
 
 	# Optional, perform cleanup AFTER all items piped in are processed.
 	# end { }
-}
-```
-## Error handling
-In PowerShell, `Try/Catch` is the more modern way to handle errors.
-
-Note about `Try/Catch`. Only  terminating errors are caught.
-```powershell
-function Test-PSErrorHandling {
-
-	[CmdletBinding()]
-	param (
-		[Parameter(Mandatory,
-				   ValueFromPipeline,
-				   ValueFromPipelineByPropertyName)]
-		[string[]]$ComputerName
-	)
-
-	process {
-		foreach ($Computer in $ComputerName) {
-			# Applies try/catch but still generates unhandled exception.
-			# The command doesn't generate a terminating error.
-			try {
-				Test-WSMan -ComputerName $Computer
-			}
-			catch {
-				Write-Warning -Message "Unable to connect to Computer: $Computer"
-			}
-		}
-	}
-}
-
-function Test-PSErrorHandling {
-	# Same as above ...
-	process {
-		foreach ($Computer in $ComputerName) {
-			# Specify ErrorAction with Stop
-			# It turns a nonterminating error into a terminating one.
-			try {
-				Test-WSMan -ComputerName $Computer -ErrorAction Stop
-			}
-			catch {
-				Write-Warning -Message "Unable to connect to Computer: $Computer"
-			}
-		}
-	}
 }
 ```
 ## Comment-based help
