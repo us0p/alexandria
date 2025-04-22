@@ -26,3 +26,9 @@ An search aggregator that aggregates search results from Shopee, Mercado Livre, 
 Can be monetized with ADS.
 ## Image converter
 An CLI application that converts image of one format to another, from jpg to png for example.
+
+--- 
+## Rust project ideas
+- Convert temperatures between Fahrenheit and Celsius.
+- Generate the _n_th Fibonacci number.
+- Print the lyrics to the Christmas carol “The Twelve Days of Christmas,” taking advantage of the repetition in the song.
