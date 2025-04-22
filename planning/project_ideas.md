@@ -29,6 +29,4 @@ An CLI application that converts image of one format to another, from jpg to png
 
 --- 
 ## Rust project ideas
-- Convert temperatures between Fahrenheit and Celsius.
-- Generate the _n_th Fibonacci number.
 - Print the lyrics to the Christmas carol “The Twelve Days of Christmas,” taking advantage of the repetition in the song.
