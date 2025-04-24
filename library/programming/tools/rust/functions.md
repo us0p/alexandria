@@ -75,5 +75,15 @@ fn main() {
 
     println!("The value of x is: {x}");
 }
+```
 
+It's also possible to return multiple values from a function in Rust:
+```rust
+fn multiple_return_fn(n1: u32, n2: u32) -> (u32, u32) {
+	if n2 == 0 {
+		return (n1 * n2, 0);
+	};
+	
+	(n1 * n2, n1 / n2)
+}
 ```
