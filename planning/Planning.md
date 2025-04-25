@@ -3,15 +3,12 @@ Improve morning routine
 ## Routine - 12h
 06:30 - 07:00 - Reading
 07:00 - 07:30 - DSA
-07:30 - 08:00 - SQL
-08:00 - 10:00 - Study
+07:30 - 09:30 - Study
 10:00 - 13:00 - Work
 13:00 - 14:00 - Lunch
 14:00 - 17:00 - Work
 17:00 - 19:00 - Work related study
-19:00 - 20:00 - Ricing
-20:00 - 23:00 - Free Time
-
+19:00 - 23:00 - Free Time
 ## Pomodoro timers
 - **3h:** 45m/w + 10m/sr + 25m/lr -> 75% work rate
 - **1h:** 50m/w + 10m/lr -> 83% work rate
@@ -40,24 +37,14 @@ Improve morning routine
 	- [x] Integration testing implications, should you use?
 	- [x] review and summary all the information
 - [x] AI Agents - Overview
-- [ ] Data Modeling
-	- [x] Normalization
-- [ ] SQL
-	- [x] Triggers 
-	- [ ] Indexes
-- [ ] PostgreSQL
-	- [ ] Data Types
-		- [ ] jsonb fields
-	- [ ] Most common index
-	- [ ] B-Tree Index
-	- [ ] PL/pgSQL
 - [ ] Python
 	- [ ] language basics
 	- [ ] exception handling
 	- [ ] classes
-	- [ ] mocking
+	- [x] mocking
 	- [ ] `pytest`
 	- [ ] `psycopg2`
+- [ ] FastAPI
 - [ ] Kubernetes
 - [ ] GitHub actions
 - [ ] Terraform
@@ -69,7 +56,6 @@ Improve morning routine
 	- [ ] Secret Manager
 	- [ ] AWS CLI
 	- [ ] CloudWatch
-- [ ] FastAPI
 - [ ] Architecture
 	- [ ] Microservices
 	    - [ ] DDD

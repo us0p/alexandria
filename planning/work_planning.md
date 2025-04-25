@@ -1,6 +1,8 @@
 ## PostgreSQL - Road map
 - [x] SQL (DDL and DML)
 - [ ] Object Model x Relational Model
+	- [ ] ARRAY
+	- [ ] ROW
 - [ ] Indexes and their Usecases
 - [ ] Schema Design Patterns / Anti-patterns
 - [ ] Application Skills -> Data and Processing
