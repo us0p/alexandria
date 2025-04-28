@@ -19,6 +19,10 @@ def test_divide_by_zero():
 Every class that starts with `Test*` will be executed.
 
 `pytest` supports the definition of the following methods as fixtures.
+- `setup_module` module function that will be called once before all the functions.
+- `teardown_module` module function will be called once after all the functions.
+- `setup_class` class method that will be called once before all tests of a class.
+- `teardown_class` class method that will be called once after all tests of a class.
 - `setup_method` runs before each test.
 - `teardown_method` runs after each test.
 ## Function based tests

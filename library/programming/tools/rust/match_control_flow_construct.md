@@ -88,3 +88,34 @@ match dice_roll {
     _ => (),
 }
 ```
+## Concise control flow with `if let` and `let else`
+The `if let` syntax lets you combine `if` and `let` into a less verbose way to handle values that match one pattern while ignoring the rest.
+```rust
+let config_max = Some(3u8);
+maatch config_max {
+	Some(max) => println!("The maximum is configured to be {max}"),
+	_ => (),
+}
+
+// Can be shortened to:
+if let Some(max) = config_max {
+	println!("The maximum is configured to be {max}");
+}
+```
+
+We can then use `max` in the body of the `if let` block in the same way we used `max` in the corresponding `match` arm. The code in the `if let` block only runs if the value matches the pattern.
+## `let-else` syntax
+Takes a pattern on the left side and an expression on the right, very similar to `if let`, but it doesn't have an `if` branch, only an `else` branch. If the pattern matches, it will bind the value from the pattern in the outer scope. If the pattern doesn't match, the program will flow into the `else` arm, which must return from the function.
+```rust
+fn describe_state_quarter(coin: Coin) -> Option<String> {
+	let Coin::Quarter(state) = coin else {
+		return None;
+	}
+
+	if state.existed_in(1900) {
+		Some(format!("{state:?} is pretty old, for America!"))
+	} else {
+		Some(format!("{state:?} is relatively new."))
+	}
+}
+```
