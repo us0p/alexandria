@@ -3,6 +3,12 @@
 - [ ] Object Model x Relational Model
 	- [ ] ARRAY
 	- [ ] ROW
+	- [ ] JSONB and operations on this column type
+	- [ ] what is the `SHOW` SQL command.
+	- [ ] `pg_stat_ssl` table
+	- [ ] `pg_extension` table
+	- [ ] `pg_backend_pid()` function
+	- [ ] meta-command
 - [ ] Indexes and their Usecases
 - [ ] Schema Design Patterns / Anti-patterns
 - [ ] Application Skills -> Data and Processing
