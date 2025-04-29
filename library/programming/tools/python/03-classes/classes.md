@@ -1,3 +1,4 @@
+```python
 # class definition:
 class MyClass:
     i = 12345
@@ -338,3 +339,4 @@ class Foo:
 # descriptors are instantiated just once per class. That means that
 # every single instance of a class containing a descriptor shares
 # that descriptor instance.
+```

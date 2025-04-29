@@ -42,10 +42,9 @@ Improve morning routine
 	- [ ] exception handling
 	- [ ] classes
 	- [x] mocking
-	- [ ] `pytest`
+	- [x] `pytest`
 	- [ ] `psycopg2`
 - [ ] FastAPI
-- [ ] Kubernetes
 - [ ] GitHub actions
 - [ ] Terraform
 - [ ] AWS 
@@ -56,6 +55,7 @@ Improve morning routine
 	- [ ] Secret Manager
 	- [ ] AWS CLI
 	- [ ] CloudWatch
+- [ ] Kubernetes
 - [ ] Architecture
 	- [ ] Microservices
 	    - [ ] DDD
