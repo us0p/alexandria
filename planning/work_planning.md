@@ -1,6 +1,8 @@
 ## PostgreSQL - Road map
 - [x] SQL (DDL and DML)
 - [ ] `pgcrypto` extension
+- [ ] information_schema
+	- [ ] columns data set
 - [ ] Object Model x Relational Model
 	- [ ] ARRAY
 	- [ ] ROW
