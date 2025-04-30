@@ -1,8 +1,8 @@
 ## PostgreSQL - Road map
 - [x] SQL (DDL and DML)
-- [ ] `pgcrypto` extension
-- [ ] information_schema
-	- [ ] columns data set
+- [x] `pgcrypto` extension
+- [x] information_schema
+	- [x] columns data set
 - [ ] Object Model x Relational Model
 	- [ ] ARRAY
 	- [ ] ROW
@@ -11,7 +11,7 @@
 	- [ ] `pg_stat_ssl` table
 	- [ ] `pg_extension` table
 	- [ ] `pg_backend_pid()` function
-	- [ ] meta-command
+	- [x] meta-command
 - [ ] Indexes and their Usecases
 - [ ] Schema Design Patterns / Anti-patterns
 - [ ] Application Skills -> Data and Processing
