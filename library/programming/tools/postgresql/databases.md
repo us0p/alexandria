@@ -18,7 +18,7 @@ Database-level security has two components:
 
 Foreign data wrappers like `postgres_fdw` allow for objects within one database to act as a proxies for objects in other database or clusters.
 
-To determine the set of existing databases, examine the `pg_database` system catalog.
+To determine the set of existing databases, examine the `pg_database` [system catalog](system_catalogs_and_views.md).
 ## Creating a Database
 The first database is always created by the `initdb` command when the data storage area is initialized. This database is called `postgres`. So to create the first “ordinary” database you can connect to `postgres`.
 

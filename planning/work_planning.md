@@ -7,10 +7,10 @@
 	- [ ] ARRAY
 	- [ ] ROW
 	- [ ] JSONB and operations on this column type
-	- [ ] what is the `SHOW` SQL command.
-	- [ ] `pg_stat_ssl` table
-	- [ ] `pg_extension` table
-	- [ ] `pg_backend_pid()` function
+	- [x] what is the `SHOW` SQL command.
+	- [x] `pg_stat_ssl` table
+	- [x] `pg_extension` table
+	- [x] `pg_backend_pid()` function
 	- [x] meta-command
 - [ ] Indexes and their Usecases
 - [ ] Schema Design Patterns / Anti-patterns
@@ -19,7 +19,7 @@
 - [ ] PL/pgSQL
 - [ ] Procedures and Functions
 - [ ] Triggers
-- [ ] Aggregate and Window Functions (basic understandin)
+- [ ] Aggregate and Window Functions (basic understanding)
 - [ ] Recursive CTE (know what it's)
 # Work Planning - Database Engineer
 [SQL Exercises](https://learnsql.com/course/sql-practice-set/select-from-table/introduction/introduction/)

@@ -16,17 +16,5 @@ pg_size_pretty (bigint | numeric) -> text
 Converts a size in bytes into a more easily human-readable format with size units (bytes, kB, MB, GB, TB, or PB).
 ```
 
-`pg_catalog` is the default system schema in PostgreSQL. it holds all the internal system tables, views, and functions PostgreSQL uses to manage the database.
-It contain thins like:
-- `pg_class`: info about tables, indexes, sequences
-- `pg_attribute`: info about columns
-- `pg_stat*`: statistical and performance data
-- `pg_tables`, `pg_views`: convenience views for user-facing metadata.
-Usually you don't have to specify `pg_catalog` in queries because it's in the default `search_path`.
-
-`pg_statio_user_tables` is a system view in the `pg_catalog` schema.
-It shows I/O statistics for user-defined tables (not system tables), and includes data like:
-- `schemaname`: name of the schema of the table
-- `relname`: name of the table
-- `relid`: OID (Object ID) of the table.  It's a reference to the `pg_class.oid`, which uniquely identifies a table (or any relation) in the PostgreSQL system catalog.
-- I/O counter like `heap_blks_read`, `idx_blks_hit`, etc.
+## Session Information Functions
+`pg_backend_pid() -> integer`: Returns the process ID of the server process attached to the current session.
