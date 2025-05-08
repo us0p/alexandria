@@ -51,6 +51,8 @@ fn main() {
 | *    | Product    |
 | /    | Quotient   |
 | %    | Remainder  |
+| `&&` | AND        |
+| \|\| | OR         |
 ### Boolean
 Booleans are one byte in size.
 ```rust
