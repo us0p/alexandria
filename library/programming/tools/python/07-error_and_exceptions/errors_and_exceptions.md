@@ -1,3 +1,4 @@
+```python
 # Raising exceptions:
 
 # raise -> allows to force a specified exception to occur.
@@ -88,3 +89,4 @@ except* SystemError as e:
 #     e.add_note('Add some information')
 #     e.add_note('Add some more information')
 #     raise
+```

@@ -1,3 +1,4 @@
+```python
 # Module
 # It's a file with definitions and statements which can be used as a script.
 
@@ -63,3 +64,4 @@
 # These imports use leading dots to indicate the current and parent 
 # packages involved in the relative import.
 # main modules can't use relative imports.
+```

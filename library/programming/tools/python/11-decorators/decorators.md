@@ -1,3 +1,4 @@
+```python
 # Decorator
 # It's a design pattern that allows the user to add new functionality to an
 # existing object without modifying its structure.
@@ -130,3 +131,4 @@ def decorated_function_with_arguments(f_arg1: int, f_arg2: int) -> str:
     return f"arg1: {f_arg1}, arg2: {f_arg2}"
 
 print(decorated_function_with_arguments(5, 10))
+```

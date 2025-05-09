@@ -1,3 +1,4 @@
+```python
 # Abstract Base Classes
 # This module provides the metaclass ABCMeta for defining ABCs and a
 # helper class ABC to alternatively define ABCs through inheritance.
@@ -52,3 +53,4 @@ class C(ABC):
     @my_abstract_property.setter
     @abstractmethod
     def my_abstract_property(self, val): ...
+```

@@ -1,3 +1,4 @@
+```python
 print("""
 Binary Sequence Types:
 """)
@@ -84,3 +85,4 @@ print('v[-1]:', v[-1])
 print('v[1:4]:', v[1:4])
 
 print('bytes(v[1:4]):', bytes(v[1:4]))
+```

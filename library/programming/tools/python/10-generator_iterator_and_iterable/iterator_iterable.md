@@ -1,3 +1,4 @@
+```python
 # Iterators
 # Is an object which implements the iterator protocol, which consists of 
 # the methods __iter__() which defines the iterator and __next__() which
@@ -25,3 +26,4 @@
 
 # Raising an StopIteration is how you prevent a iterator from going on
 # forever.
+```

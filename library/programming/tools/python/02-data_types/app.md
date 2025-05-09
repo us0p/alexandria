@@ -1,3 +1,4 @@
+```python
 print("Data Types\n")
 
 print("Text => luan:", type('luan'))
@@ -70,3 +71,4 @@ x = bytes(5)
 x = bytearray(5)
 
 x = memoryview(bytes(5))
+```

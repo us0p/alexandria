@@ -1,3 +1,4 @@
+```python
 # Generators
 # Generator objects are iterators.
 
@@ -23,3 +24,4 @@ type(squares) # generator
 
 for sqr in squares:
     print(sqr)
+```

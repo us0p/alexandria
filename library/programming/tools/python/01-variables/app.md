@@ -1,3 +1,4 @@
+```python
 print("Variables\n")
 
 name = full_name = 'Luan'
@@ -81,3 +82,4 @@ Accordingly to PEP 8:
 Snake Case should be used for functions and variable names.
 Pascal Case should be used for class names. (e.g. CapWords).
 """)
+```

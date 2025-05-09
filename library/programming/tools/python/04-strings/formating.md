@@ -1,3 +1,4 @@
+```python
 # Formated strings literals / F-strings:
 # Lets you include the value of Python expressions inside a string 
 # by prefixing the string with f or F and writing expresions as {expression}.
@@ -22,7 +23,7 @@
 # always be the same size as the data to fill it.
 
 # prints positive_value surouded by $ until reaches length 10.
-print(f'{1:$^10}') 
+print(f'{1:$^10}') # '$$$$1$$$$$'
 
 # sign            ::=  "+" | - sign should be used for all numbers.
 #                      "-" | - (default) sign should be used for negative 
@@ -31,7 +32,7 @@ print(f'{1:$^10}')
 #                            on negative numbers
 
 # prints positive_value with a leading space as it's positive.
-print(f'{1: }')
+print(f'{1: }') # ' 1'
 
 # 'z'             ::= In Python, there is a distinction between positive 
 #                     zero (0) and negative zero (-0). The z option in the 
@@ -56,8 +57,8 @@ print(f'{10:#o}')
 # specified, then the field width will be determined by the content.
 
 # align different width text to a same width at the right.
-print(f'{"align this":>20}')
-print(f'{"align those":>20}')
+print(f'{"align this":>20}') # '          align this'
+print(f'{"align those":>20}') # '         align those'
 
 # grouping_option ::=  "_" | - uses underscore for thousands separator.
 #                      "," - uses comma for thousands separator.
@@ -74,7 +75,7 @@ print(f'{1000:_}')
 # precision is not allowed for integer presentation types.
 
 # prints only 2 characters from the string
-print(f'{"cat":.2}')
+print(f'{"cat":.2}') # 'ca'
 
 # type            ::=  "b" | - binary format. outputs number in base 2.
 print(f'{10:b}') # converts 10 to binary.
@@ -135,3 +136,4 @@ print(f'{10:X}') # print 10 in base 16. Using uppercase letters.
 #                            displays in 'f' format, followed by a percent
 #                            sign.
 print(f'{0.05:.2%}') # print float 0.05 as percentage with precision 2.
+```

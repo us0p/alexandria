@@ -1,3 +1,4 @@
+```python
 # PIP
 # It's a package manager for Python. It allows you to install and manage
 # libraries that aren't distributed as part of the standard library.
@@ -85,3 +86,4 @@
 # Because requirements_dev.txt contains the -r requirements.txt line, 
 # you’ll install not only pytest but also the pinned requirements of 
 # requirements.txt.
+```

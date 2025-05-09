@@ -1,3 +1,4 @@
+```python
 # Set:
 # A set object is an unordered collection of distinct hashable objects.
 # Common uses include removing duplicates from a sequence and etc.
@@ -23,3 +24,4 @@ literal_set = {1, 2, 3, 3} # {1, 2, 3}
 constructed_set = set([1,2,3])
 comprehensive_set = {i for i in [1, 2, 3]}
 constructed_frozenset = frozenset([1,2,3])
+```

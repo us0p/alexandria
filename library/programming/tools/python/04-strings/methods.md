@@ -1,3 +1,4 @@
+```python
 print('capitalize ->', 'capitalize'.capitalize()) # Capitalize
 
 print('LOWER ->', 'LOWER'.lower()) # lower
@@ -106,3 +107,4 @@ print(src,
 print('upper ->', 'upper'.upper())
 
 print("pad start with 0's until width 10 =", '50'.zfill(10)) #0000000050
+```

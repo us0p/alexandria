@@ -1,3 +1,4 @@
+```python
 # List comprehension
 # produces a list from 0-9.
 l = [x for x in range(10)] 
@@ -22,3 +23,4 @@ d = {chr(k + 65):k+1 for k in range(26)}
 s = {x % 2 for x in range(10)} 
 
 # Note that comprehensios are faster than loops.
+```

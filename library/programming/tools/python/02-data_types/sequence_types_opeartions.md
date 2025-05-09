@@ -1,3 +1,4 @@
+```python
 from collections import namedtuple
 
 list1 = [1, 2]
@@ -78,15 +79,15 @@ print("list4", list4)
 
 list4.insert(1, 0)
 
-print("list4.insert(1, 0), list4:", list4)
+print("list4.insert(1, 0), list4:", list4) # [1, 0, 2, 3, 4, 5]
 
-list4.pop(1)
+list4.pop(1) # 5
 
-print("list4.pop(1), list4:", list4)
+print("list4.pop(1), list4:", list4) # [1, 0, 2, 3, 4]
 
 list4.reverse()
 
-print("list4.reverse(), list4:", list4)
+print("list4.reverse(), list4:", list4) # [4, 3, 2, 0, 1]
 
 print("""Lists:
 Are mutable sequencies, typically used to store collections of similar items
@@ -125,3 +126,4 @@ range object will always take the same amount of memory, no matter the size of
 the range it represents as it only stores the start, stop and step values,
 calculating individual items and subranges as needed
 """)
+```

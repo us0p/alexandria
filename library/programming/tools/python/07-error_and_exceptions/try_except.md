@@ -1,3 +1,4 @@
+```python
 # There are two distinguishable kinds of errors:
 # Sintax errors - parsing errors
 # Exceptions - errors detected during execution.
@@ -94,3 +95,4 @@ for cls in [B, C, D]:
         print("C")
     except B:
         print("B")
+```
