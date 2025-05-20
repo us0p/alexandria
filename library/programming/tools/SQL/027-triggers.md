@@ -38,7 +38,7 @@ To change the trigger definition, you use the `CREATE OR REPLACE TRIGGER` statem
 ## Removing SQL Triggers
 To drop a trigger from a database, you use the `DROP TRIGGER` statement with the following syntax:
 ```SQL
-DROP TRIGGER [IF EXISTS] trigger_name;
+DROP TRIGGER [IF EXISTS] trigger_name ON table_name;
 ```
 
 Without the `IF EXISTS` option, the database may issue an error if you try to drop a non-existing trigger.
