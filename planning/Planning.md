@@ -37,43 +37,30 @@ Improve morning routine
 	- [x] Integration testing implications, should you use?
 	- [x] review and summary all the information
 - [x] AI Agents - Overview
-- [ ] Python
-	- [ ] language basics
-	- [ ] exception handling
-	- [ ] classes
+- [x] Python
+	- [x] language basics
+	- [x] exception handling
+	- [x] classes
 	- [x] mocking
-	- [x] `pytest`
-	- [ ] `psycopg2`
+- [x] `pytest`
 - [ ] FastAPI
+- [ ] `psycopg2`
 - [ ] GitHub actions
 - [ ] Terraform
 - [ ] AWS 
 	- [ ] IAM & IAM Identity Center
-	- [ ] ECR
 	- [ ] Lambda
-	- [ ] RDS
-	- [ ] Secret Manager
 	- [ ] AWS CLI
 	- [ ] CloudWatch
-- [ ] Kubernetes
-- [ ] Architecture
-	- [ ] Microservices
-	    - [ ] DDD
-
 ---
+- [ ] AI Agents (Deep Dive)
+- [ ] AI MCP
 - [ ] More about Python
 	- [ ] BDD framework
 	- [ ] fake framework
 	- [ ] PEP 8
-- [ ] More about architecture
-    - [ ] Event
-    - [ ] MVC
-    - [ ] Model-View Separation Pattern
-    - [ ] Application Coordinator
-	- [ ] Evolutionary Architecture
+- [ ] Kubernetes
 - [ ] Redis
-- [ ] AI Agents (Deep Dive)
-- [ ] AI MCP
 - [ ] Kafka
 - [ ] Design Patterns
     - [ ] factory

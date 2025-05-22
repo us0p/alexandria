@@ -20,8 +20,12 @@ CREATE TRIGGER trigger_name
 -- trigger_type is either 'FOR EACH ROW' or 'FOR EACH STATEMENT'
 -- table_column is optional.
 OF table_column ON table_name trigger_type 
--- BEGIN...END block, user-defined function or stored procedure.
+-- WHEN (condition) can be used to apply the trigger only when some condition is met
+-- BEGIN...END block, 
+-- EXECUTE user-defined function or stored procedure.
 ```
+
+You can use `OLD` and `NEW` records in `ROW`-level triggers to reference the data being changed and perform comparison or insertions in another tables.
 ## Row-level
 Executes each time a row is affected by a DML statement.
 

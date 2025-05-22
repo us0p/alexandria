@@ -1,24 +1,10 @@
 ## PostgreSQL - Road map
 - [x] SQL (DDL and DML)
-- [x] `pgcrypto` extension
-- [x] information_schema
-	- [x] columns data set
 - [ ] Object Model x Relational Model
-	- [ ] ARRAY
-	- [ ] ROW
-	- [ ] JSONB and operations on this column type
-	- [x] what is the `SHOW` SQL command.
-	- [x] `pg_stat_ssl` table
-	- [x] `pg_extension` table
-	- [x] `pg_backend_pid()` function
-	- [x] meta-command
-- [ ] Indexes and their Usecases
-- [ ] Schema Design Patterns / Anti-patterns
-- [ ] Application Skills -> Data and Processing
-- [ ] SQL Query Patterns / Anti-patterns
 - [ ] PL/pgSQL
-- [ ] Procedures and Functions
-- [ ] Triggers
+- [ ] Schema Design Patterns / Anti-patterns
+- [ ] SQL Query Patterns / Anti-patterns
+- [x] Triggers
 - [ ] Aggregate and Window Functions (basic understanding)
 - [ ] Recursive CTE (know what it's)
 # Work Planning - Database Engineer

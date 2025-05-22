@@ -8,7 +8,7 @@ action;
 SQL allows you to perform the following actions:
 - `ADD COLUMN column_name datatype constraint`
 - `DROP COLUMN column_name`
-- `ALTER COLUMN column_name SET datatype`
+- `ALTER COLUMN column_name SET DATA TYPE datatype`
 - `RENAME COLUMN column_name TO new_name `
 - `ADD CONSTRAINT constraint_name constraint`
 - `DROP CONSTRAINT constraint_name`
