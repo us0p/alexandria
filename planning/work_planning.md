@@ -1,12 +1,14 @@
 ## PostgreSQL - Road map
 - [x] SQL (DDL and DML)
+- [x] Triggers
+- [ ] Aggregate and Window Functions (basic understanding)
+- [x] CTE and Recursive CTE
+- [x] Views
+- [ ] ETL
 - [ ] Object Model x Relational Model
 - [ ] PL/pgSQL
 - [ ] Schema Design Patterns / Anti-patterns
 - [ ] SQL Query Patterns / Anti-patterns
-- [x] Triggers
-- [ ] Aggregate and Window Functions (basic understanding)
-- [ ] Recursive CTE (know what it's)
 # Work Planning - Database Engineer
 [SQL Exercises](https://learnsql.com/course/sql-practice-set/select-from-table/introduction/introduction/)
 [PostgreSQL Exercises](https://pgexercises.com/gettingstarted.html)
