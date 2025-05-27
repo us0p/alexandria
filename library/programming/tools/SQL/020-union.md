@@ -25,3 +25,12 @@ SELECT * FROM person WHERE id > 25;
 
 -- Duplicates registers with id 26-50
 ```
+## Ordering Unions
+You need to apply the `ORDER BY` clause after the full union block.
+
+```SQL
+SELECT employee_id FROM Employees
+UNION
+SELECT employee_id FROM Salaries
+ORDER BY employee_id;
+```
