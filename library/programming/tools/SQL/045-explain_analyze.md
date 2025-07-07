@@ -61,6 +61,8 @@ The estimate of output rows has been reduced because of the `WHERE` clause. Howe
 - Sort: Represent the sorting of the data set by some criteria.
 - Incremental Sort: Used when part of the plan guarantees an ordering on a prefix of the required sort keys. It further the data set.
 - BitmapAnd/BitmapOr: Can be used to combine indexes if there are indexes on several columns in the `WHERE`.
+- Limit: Limits the number registers retrieved, it can reduce the number of units of computations in terms of disk reads.
+- Nested Loop: Runs the inner child once for each row obtained from the outer child (the latest node in the Nested Loop plan). The costs of the loop are the cost of the outer scan plus one repetition of th einner scan
 
 
 - Table rows fetched in index order are expensive to read because rows are fetched separately. By sorting the row physical locations before reading the planner can minimize the cost of separate fetches
