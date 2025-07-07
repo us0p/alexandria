@@ -27,27 +27,6 @@ Every class that starts with `Test*` will be executed.
 - `teardown_method` runs after each test.
 ## Function based tests
 Every function that starts with `test_*` will be executed.
-### Fixtures for function tests
-```python
-import pytest
-
-# Fixture definition
-@pytest.fixture
-def my_rectangle():
-	return Rectangle(10, 20)
-
-# Our functions can receive the fixture name as parameter
-# This paremeter will be the return value of our fixture
-def test_area(my_rectangle):
-	assert my_rectangle.area() == 10 * 20
-
-def test_perimeter(my_rectangle):
-	assert my_rectangle.perimeter() == (10 * 2) * (20 * 2)
-```
-
-Fixtures can be made global by defining them in a `conftest.py` file.
-
-Global fixture can be used anywhere, even within class based tests. In this case, the method should receive the name of the fixture as parameter just like function based tests.
 ## Mark
 The mark mechanism provides a way to add metadata to your tests.
 ```python

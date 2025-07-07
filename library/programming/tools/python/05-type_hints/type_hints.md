@@ -294,3 +294,25 @@ adj: str = "good"
 print_adj(adj) # Type checker complains, "str" isn't "Adjectives"
 print_adj(cast(Adjectives, adj)) # Cast "str" to "Adjectives"
 ```
+## Annotating generators and coroutines
+```python
+from typing import Iterable, Iterator, Generator
+
+# A generator can be annotated with Generator[YieldType, SendType, ReturnType]:
+def echo_round() -> Generator[int, float, str]:
+	sent = yield 0
+	while sent >= 0:
+		sent = yield round(sent)
+	return 'Done'
+
+# The SendType and ReturnType are default to None:
+def infinite_stream(start: int) -> Generator[int]:
+	while True:
+		yield start
+		start += 1
+
+# Simple generators that only ever yield values can be annotated with either
+# Iterable[YieldType] or Iterator[YieldType]
+def iterable(start: int) -> Iterator[int]:
+	...
+```

@@ -1,0 +1,6 @@
+- `stdlib.h`
+	- Memory functions.
+	- `qsort`
+	- `abs`
+- `string.h`
+	- `memcpy`

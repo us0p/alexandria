@@ -1,4 +1,10 @@
 #include <stdio.h>
+#include <string.h>
+
+int getStrLen(char *str) {
+  // Returns the length of the str.
+  return strlen(str);
+}
 
 int main(void) {
   char name[5] = {'L', 'u', 'a', 'n'};

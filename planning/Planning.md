@@ -39,19 +39,20 @@ Improve morning routine
 - [x] AI Agents - Overview
 - [x] Python
 	- [x] language basics
+		- [ ] dictionary methods
+		- [ ] Enum
+		- [ ] requests
+		- [ ] psycopg2
+		- [ ] FastAPI
 	- [x] exception handling
 	- [x] classes
 	- [x] mocking
 - [x] `pytest`
-- [ ] FastAPI
-- [ ] `psycopg2`
-- [ ] GitHub actions
 - [ ] Terraform
+- [ ] GitHub actions
 - [ ] AWS 
-	- [ ] IAM & IAM Identity Center
-	- [ ] Lambda
-	- [ ] AWS CLI
 	- [ ] CloudWatch
+	- [ ] Fargate
 ---
 - [ ] AI Agents (Deep Dive)
 - [ ] AI MCP
@@ -74,3 +75,29 @@ Improve morning routine
 - [ ] Backend: overall backend knowledge
 - [ ] Linux - System Administration
 - [ ] Network basics
+
+1. DSA (practice every day)
+2. System Design (get an overall knowledge, then start creating designs)
+3. Backend General Knowledge (fundamental base knowledge, get an overall knowledge, deepen as needed)
+	- Internet
+	- Learn about APIs
+	- Web Security
+4. Software Architecture (More advanced knowledge, get an overall knowledge specially to know when and where to apply it, study implementation as needed)
+	- Architectural Styles
+	- Architectural Patterns
+5. Software Design (More advanced knowledge, get an overall knowledge specially to know when and where to apply it, study implementation as needed)
+	- Design Patterns
+	- Development Principles
+6. Technologies (low level knowledge, hard to reuse as it depends on each team, get an overall knowledge, study as needed)
+	- Terraform
+	- GitHub Actions
+	- AWS
+		- Fargate
+		- CloudWatch
+		- Event Bridge
+
+You want to be really good in:
+1. DSA
+2. Software Design and Architecture
+
+Once you get a good overall understanding of all of this topics, if you work in a small single project every weekend, you'll be able to work points 2 to 5 together as needed and deepen your knowledge in the areas you need the most at that time.

@@ -39,6 +39,7 @@ FROM
 ```
 
 The rows considered by a window function are those of the "virtual table" produced by the query's `FROM` clause as filtered by its `WHERE`, `GOUP BY`, and `HAVING` clauses if any.
+
 A query can contain multiple window functions that slice up the data in different ways using different `OVER` clauses, but they all act on the same collection of rows defined by this virtual table.
 ## Window Frame
 We already saw that `ORDER BY` can be omitted if the ordering of rows is not important. It is also possible to omit `PARTITION BY`, in which case there is a single partition containing all rows.
@@ -114,14 +115,16 @@ The above query groups and orders the query by `start_terminal`. Within each va
 
 When `start_terminal` value changes you will notice that `running_total` starts over. That's what happens when you group using `PARTITION BY`.
 
-In case you're still stumped by `ORDER BY`, it simply orders by the designated column(s) the same way the `ORDER BY` clause would, except that it treats every partition as separate. It also creates the running total, without `ORDER BY`, each value will simply be a sum of all the `duration_seconds` values in its respective `start_terminal`.
-
 >You can't include window functions in a `GROUP BY` clause.
 ## Window function structure
 ```SQL
-SELECT Gender, Name, Total, 
-	   ROW_NUMBER() OVER(ORDER BY Total DESC) AS Popularity
-FROM baby_names;
+SELECT 
+	Gender,
+	Name,
+	Total, 
+	ROW_NUMBER() OVER(ORDER BY Total DESC) AS Popularity
+FROM 
+	baby_names;
 ```
 - `ROW_NUMBER`: Is the **function**
 - `OVER(ORDER BY Total DESC)`: Is the **window**
@@ -131,7 +134,7 @@ In the query above, when the `ROW_NUMBER()` is applied, the data of the table sh
 
 The goal of a window function is to make some calculation for each row of your data.
 
-The view is essentially the view of the table you want when you are applying your function.
+The window is essentially the view of the table you want when you are applying your function.
 
 Inside your window you can also split your data into groups and your functions are going to start over whenever a new group starts.
 ```SQL
@@ -163,14 +166,17 @@ For each row, the window function is computed across the rows that fall into the
 - Use window functions when you want row-level detail + group stats.
 ## Builtin Window Functions
 In addition to these functions, any built-in or user-defined ordinary aggregate (i.e., not ordered-set or hypothetical-set aggregates) can be used as a window function;
-- `ROW_NUMBER()`: Returns the number of the current row within its partition, counting from 1.
-- `RANK()`: Returns the rank of the current row, with gaps(the row number of the first row is per group (partition)).
-- `DENSE_RANK()`: Returns the rank of the current row, without gaps.
-- `PERCENT_RANK()`: Returns the relative rank of the current row, that is $\frac{(rank - 1)}{(totalPartitionRows - 1)}$. The value ranges from 0 to 1 inclusive.
-- `CUME_DIST()`: Returns the cumulative distribution, that is (number of partition rows preceding or peers with current row) / (total partition rows). The value thus ranges from 1/_`N`_ to 1.
-- `ntile(num_buckets integer)`: Returns an integer ranging from 1 to the argument value, dividing the partition as equally as possible.
-- `lag(value anycompatible [, offset integer [, default anycompatible ]])`: Returns _`value`_ evaluated at the row that is _`offset`_ rows before the current row within the partition; if there is no such row, instead returns _`default`_ (which must be of a type compatible with _`value`_). Both _`offset`_ and _`default`_ are evaluated with respect to the current row. If omitted, _`offset`_ defaults to 1 and _`default`_ to `NULL`.
-- `lead(value anycompatible [, offset integer [, default anycompatible ]])`: Returns _`value`_ evaluated at the row that is _`offset`_ rows after the current row within the partition; if there is no such row, instead returns _`default`_ (which must be of a type compatible with _`value`_). Both _`offset`_ and _`default`_ are evaluated with respect to the current row. If omitted, _`offset`_ defaults to 1 and _`default`_ to `NULL`.
-- `first_value(value anyelement)`: Returns _`value`_ evaluated at the row that is the first row of the window frame.
-- `last_value(value anyelement)`: Returns _`value`_ evaluated at the row that is the last row of the window frame.
-- `nth_value(value anyelement, n integer)`: Returns _`value`_ evaluated at the row that is the _`n`_'th row of the window frame (counting from 1); returns `NULL` if there is no such row.
+
+| Function Name                         | Behavior                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ROW_NUMBER()`                        | Returns the number of the current row within its partition, counting from 1.                                                                                                                                                                                                                                                                                         |
+| `RANK()`                              | Returns the rank of the current row, with gaps(the row number of the first row is per group (partition)).                                                                                                                                                                                                                                                            |
+| `DENSE_RANK()`                        | Returns the rank of the current row, without gaps.                                                                                                                                                                                                                                                                                                                   |
+| `PERCENT_RANK()`                      | Returns the relative rank of the current row, that is $\frac{(rank - 1)}{(totalPartitionRows - 1)}$. The value ranges from 0 to 1 inclusive.                                                                                                                                                                                                                         |
+| `CUME_DIST()`                         | Returns the cumulative distribution, that is $\frac{NPRPoPWR}{TPR}$. Where `NPRPoPWR`: number of partition rows preceding or peers with current row, and `TPR`: total partition rows. The value thus ranges from $\frac{1}{N}$ to 1.                                                                                                                                 |
+| `NTILE(num_buckets)`                  | Returns an integer ranging from 1 to the argument value, dividing the partition as equally as possible.                                                                                                                                                                                                                                                              |
+| `LAG(value [, offset [, default]])`   | Returns _`value`_ evaluated at the row that is _`offset`_ rows before the current row within the partition; if there is no such row, instead returns _`default`_ (which must be of a type compatible with _`value`_). Both _`offset`_ and _`default`_ are evaluated with respect to the current row. If omitted, _`offset`_ defaults to 1 and _`default`_ to `NULL`. |
+| `LEAD(value, [, offset [, default]])` | Returns _`value`_ evaluated at the row that is _`offset`_ rows after the current row within the partition; if there is no such row, instead returns _`default`_ (which must be of a type compatible with _`value`_). Both _`offset`_ and _`default`_ are evaluated with respect to the current row. If omitted, _`offset`_ defaults to 1 and _`default`_ to `NULL`.  |
+| `FIRST_VALUE(value)`                  | Returns _`value`_ evaluated at the row that is the first row of the window frame.                                                                                                                                                                                                                                                                                    |
+| `LAST_VALUE(value)`                   | Returns _`value`_ evaluated at the row that is the last row of the window frame.                                                                                                                                                                                                                                                                                     |
+| `NTH_VALUE(value, n)`                 | Returns _`value`_ evaluated at the row that is the _`n`_'th row of the window frame (counting from 1); returns `NULL` if there is no such row.                                                                                                                                                                                                                       |

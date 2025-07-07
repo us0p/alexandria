@@ -1,0 +1,1 @@
+Destroys **everything** within that configuration that's associated with the project.

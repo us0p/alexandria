@@ -44,6 +44,7 @@ Notes about the operations:
 ## Class Methods
 ```python
 import datetime
+from datetime import timezone
 
 dt = datetime.datetime
 t = datetime.time
@@ -54,12 +55,12 @@ local_now = dt.today()
 # current local date and time, accepts 'tzinfo'
 # preferred over today() and utcnow()
 same_as_above = dt.now()
-utc_now = dt.now(datetime.UTC)
+utc_now = dt.now(timezone.utc)
 
 # local date and time corresponding to the POSIX timestamp
 # may return instances with 'fold' set to 1.
 from_timestamp = dt.fromtimestamp(t.time())
-from_timestamp_with_tz = dt.fromtimestamp(t.time(), datetime.UTC)
+from_timestamp_with_tz = dt.fromtimestamp(t.time(), timezone.utc)
 
 # converts the proleptic Gregorian ordinal to datetime
 # 'hour', 'minute', 'second' and 'microsecond' are all 0, 'tzinfo' if None
@@ -90,10 +91,11 @@ from_date_string = dt.strptime("05/10/1998", "%d/%m/%Y")
 ## Instance methods
 ```python
 import datetime
+from datetime import timezone
 
 dt = datetime.datetime
 
-utc_now = dt.now(datetime.UTC)
+utc_now = dt.now(timezone.utc)
 
 # Return a date object
 date = utc_now.date()
@@ -112,7 +114,7 @@ updated_dt = utc_now.replace(year=1998)
 # If called without arguments or tz=None the system local time zone is used.
 # If the provided tz is equal to the oridinal object, no adjustment is performed.
 today = dt.today()
-updated_tz_dt = today.astimezone(datetime.UTC)
+updated_tz_dt = today.astimezone(timezone.utc)
 
 # Returns a the offset of the UTC time.
 offset = updated_tz_dt.utcoffset()

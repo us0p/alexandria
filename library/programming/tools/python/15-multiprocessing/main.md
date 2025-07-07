@@ -1,3 +1,4 @@
+```python
 # Multiprocessing
 # Refers to ability of a system to support more than one processor at the
 # same time.
@@ -66,3 +67,4 @@ def different_process_execution_demonstration():
     print(f"Is p4 alive: {p4.is_alive()}")
 
 different_process_execution_demonstration()
+```

@@ -1,4 +1,6 @@
 ```python
+from typing import Self
+
 # class definition:
 class MyClass:
     i = 12345
@@ -151,7 +153,7 @@ class Employee:
 
     # class methods can also be used as alternative constructors.
     @classmethod
-    def from_string(cls, emp_str):
+    def from_string(cls, emp_str) -> Self:
         first, last, pay = emp_str.split("-")
         return cls(first, last, pay)
 

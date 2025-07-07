@@ -1,3 +1,4 @@
+```python
 from multiprocessing import Process, Array, Value
 
 result = []
@@ -193,3 +194,4 @@ def demonstrating_multiprocessing_pipe():
     p2.join()
 
 demonstrating_multiprocessing_pipe()
+```

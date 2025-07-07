@@ -1,3 +1,4 @@
+```python
 # Synchronization between processes
 
 from multiprocessing import Process, Value
@@ -95,3 +96,4 @@ def demonstrating_multiprocessing_pool():
   
     print(result)
 demonstrating_multiprocessing_pool()
+```

@@ -1,3 +1,4 @@
+```python
 # Process
 # a process is an instance of a computer program that is being executed.
 # any process has 3 components:
@@ -137,3 +138,4 @@ thread_local = local()
 # You only want to create one of local object, not one for each thread. 
 # The object itself takes care of separating accesses from different 
 # threads to different data.
+```

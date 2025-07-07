@@ -5,7 +5,9 @@
 void merge(int arr[], int start, int middle, int inclusive_end) {
   // if division is not equal it's possible to left and right side
   // to have different sizes.
-  int arr_left_size = middle - start + 1; // why + 1?
+  // In this case, when middle == start (first operation) or when division
+  // is unnequal, we make left side bigger.
+  int arr_left_size = middle - start + 1;
   int arr_right_size = inclusive_end - middle;
 
   int temp_left_arr[arr_left_size];
@@ -17,6 +19,7 @@ void merge(int arr[], int start, int middle, int inclusive_end) {
   }
 
   // copy respective elements from original arr to temp right array;
+  // middle + 1 bc middle element is already covered by left side
   for (int i = 0; i < arr_right_size; i++) {
     temp_right_arr[i] = arr[middle + 1 + i];
   }
