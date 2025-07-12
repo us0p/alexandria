@@ -1,3 +1,8 @@
+analyze slow queries using EXPLAIN plans
+validate data integrity and check for anomalies
+assist with schema changes, write queries, or review SQL for new features.
+update ER diagrams, schema documentation
+monitor storage usage, forecast growth, and recommend scaling strategies.
 ## PostgreSQL - Road map
 - [x] SQL (DDL and DML)
 - [x] Triggers

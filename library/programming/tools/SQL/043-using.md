@@ -34,3 +34,12 @@ USING convert_to(my_column::text, 'UTF8');
 
 Here, `USING` defines the expression used to transform `my_column` from its current type (e.g., `jsonb`) to the new type (`bytea`).
 If you don't use `USING` when it's required (i.e., when PostgreSQL cannot safely cast the types automatically), you'll get a type conversion error.
+## SQL USING in DELETE Statements
+Works like a `JOIN` in a `SELECT` statement, you can reference columns from the "joined" table in the `WHERE` clause to determine which rows in the target table should be deleted.
+```SQL
+DELETE FROM orders o
+USING canceled_orders c
+WHERE o.id = c.order_id;
+```
+
+>`USING` in `DELETE` statements is specific to PostgreSQL

@@ -13,6 +13,47 @@ Improve morning routine
 - **3h:** 45m/w + 10m/sr + 25m/lr -> 75% work rate
 - **1h:** 50m/w + 10m/lr -> 83% work rate
 - **2h:** 30m/w + 5m/r + 20m/lr -> 75% work rate
+## Design Hierarchy
+- System Design: Encompasses everything needed to build and run the system. Includes hardware, infrastructure, networking, APIs, and software architecture.
+	- Software Architecture: Focuses on software system structure and how components interact. Defines service boundaries, data flow, tech stack, architectural patterns.
+		- Software Design: Concerned with the implementation details inside each component or module. Cover class-level design, design patterns, data structures, and detailed workflows.
+
+Software Architecture Patterns: High-level blueprints for structuring systems.
+- Microservices
+- Monolithic
+- Event-Driven Architecture
+- CQRS
+- Client-Server
+- Layered Architecture
+- etc
+
+Software Architecture Principles: Guide architecture decision-making and ensure system qualities (performance, maintainability, etc.)>
+- Separation of concerns (SoC)
+- Scalability
+- CAP Theorem
+- Loose Coupling & High Cohesion
+- Resilience
+- etc
+
+Software Design Patterns: Reusable solutions to common programming problems:
+- Singleton
+- Factory
+- Strategy
+- Observer
+- Adapter
+- Decorator
+- etc
+
+Software Design Principles: Guidelines that promote clean, maintainable, and scalable code
+- SOLID
+- DRY
+- KISS
+- YAGNI
+- etc
+## Visual metaphor:
+- System Design: Designing an entire city (roads, power grid, zones).
+- Software Architecture: Designing a building within that city (layout, plumbing, electrical plans).
+- Software Design: Designing the interior rooms (furniture placement, wiring, lighting).
 ## To study
 - [x] OOP
 - [x] SOLID

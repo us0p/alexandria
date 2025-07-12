@@ -88,9 +88,13 @@ FROM
 --    6000 | 47100
 ```
 
-Window functions are permitted only in the `SELECT` list and the `ORDER BY` clause of the query. They are forbidden elsewhere, such as `GROUP BY`, `HAVING` and `WHERE` clauses. This is because they logically execute after the processing of those clauses. Also, window functions execute after non-window aggregate functions. This means it is valid to include an aggregate function call in the arguments of a window function, but not the opposite.
+Window functions are permitted only in the `SELECT` list and the `ORDER BY` clause of the query. They are forbidden elsewhere, such as `GROUP BY`, `HAVING` and `WHERE` clauses. This is because they logically execute after the processing of those clauses. 
 
-When a query involves multiple window functions, it is possible to write out each one with a separate `OVER` clause, but this is duplicative and error-prone if the same windowing behavior is wanted for several functions. Instead, each windowing behavior can be named in a `WINDOW` clause and then referenced in `OVER`. For example:
+Also, window functions execute after non-window aggregate functions. This means it is valid to include an aggregate function call in the arguments of a window function, but not the opposite.
+
+When a query involves multiple window functions, it is possible to write out each one with a separate `OVER` clause, but this is duplicative and error-prone if the same windowing behavior is wanted for several functions. 
+
+Instead, each windowing behavior can be named in a `WINDOW` clause and then referenced in `OVER`. For example:
 
 ```SQL
 SELECT sum(salary) OVER w, avg(salary) OVER w

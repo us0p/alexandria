@@ -5,7 +5,7 @@ Exists only for the duration of the current database session and it's automatica
 
 ```SQL
 -- Create a temporary table
-CREATE TEMP TABLE temp_users (
+CREATE TEMP TABLE temp_users AS (
 	id SERIAL,
 	name TEXT
 ) [ON COMMIT [DROP] | [[PRESERVE, DELETE] ROWS];
