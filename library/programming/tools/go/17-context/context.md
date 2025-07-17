@@ -25,10 +25,10 @@ specified, `Cause(ctx)` returns the same value as `ctx.Err()`.
 
 Programs that use `Contexts` should follow these rules to keep interfaces 
 consistent across packages and enable static analysis tools to check 
-context propagation.  
-Do not store `Contexts` inside a struct type; instead, pass a `Context` 
-explicitly to each function that needs it. The `Context` should be the 
-first parameter, typically named `ctx`.
+context propagation:  
+- Do not store `Contexts` inside a struct type; instead, pass a `Context` 
+explicitly to each function that needs it.
+- The `Context` should be the first parameter, typically named `ctx`.
 
 ```go
 func DoSomething(ctx context.Context, arg Arg) error {
@@ -36,15 +36,13 @@ func DoSomething(ctx context.Context, arg Arg) error {
 }
 ```
 
-Do not pass a nil Context, even if a function permits it. Pass 
+- Do not pass a nil Context, even if a function permits it. Pass 
 `context.TODO` if you are unsure about which `Context` to use.  
-
-The same `Context` may be passed to functions running in different 
-goroutines; `Contexts` are safe for simultaneous use by multiple 
-goroutines.  
-Propagated `Context` must be checked upon `ctx.Done()` to validade context
-cancelation throughout the routines.  
-
+- The same `Context` may be passed to functions running in different 
+goroutines;
+- `Contexts` are safe for simultaneous use by multiple goroutines.  
+- Propagated `Context` must be checked upon `ctx.Done()` to validade 
+context cancelation throughout the routines.  
 ## Context Factories
 **Background**  
 Returns a non-nil, empty `Context`, It's never canceled, has no values, and
