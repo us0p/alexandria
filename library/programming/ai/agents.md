@@ -435,3 +435,5 @@ When building agentic RAG systems, the agent can employ sophisticated strategies
 
 Effective agentic RAG systems require careful consideration of several key aspects. The agent **should select between available tools based on the query type and context**. Memory systems help maintain conversation history and avoid repetitive retrievals. Having fallback strategies ensures the system can still provide value even when primary retrieval methods fail. Additionally, implementing validation steps helps ensure the accuracy and relevance of retrieved information.
 ![[Pasted image 20250409073600.png]]
+
+![[Pasted image 20250714184431.png]]

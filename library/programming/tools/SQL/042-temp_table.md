@@ -14,3 +14,14 @@ CREATE TEMP TABLE temp_users AS (
 - `ON COMMIT PRESERVE ROWS`: Keeps rows across transactions.
 - `ON COMMIT DELETE ROWS`: Deletes rows after commit.
 - `ON COMMIT DROP`: Drops table after commit.
+## Temp table from a query
+You can use a query to create your temporary table
+```SQL
+CREATE TEMP TABLE temp_users AS
+SELECT
+	id,
+	name
+FROM users;
+```
+
+The column names and datatype will be the same of the data returned by the query.

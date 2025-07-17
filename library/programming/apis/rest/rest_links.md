@@ -1,0 +1,1 @@
+- [Know your HTTP methods well](https://github.com/for-GET/know-your-http-well/blob/master/headers.md)

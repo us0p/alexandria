@@ -13,3 +13,12 @@ VALUES
 	('Mariana', 'Batistone', 'Gf', 2)
 	...;
 ```
+## INSERT from a SELECT
+```SQL
+INSERT INTO t (column1, column2, ...)
+SELECT
+	column1,
+	column2,
+	...
+FROM t2;
+```

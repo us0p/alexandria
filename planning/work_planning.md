@@ -10,10 +10,11 @@ monitor storage usage, forecast growth, and recommend scaling strategies.
 - [x] CTE and Recursive CTE
 - [x] Views
 - [x] ETL
-- [ ] Object Model x Relational Model
-- [ ] PL/pgSQL
+- [ ] How to improve query performance
+	- [ ] Understand the Query Planner and how to use it to improve query performance.
+- [ ] How to monitor and explore PostgreSQL databases
 - [ ] Schema Design Patterns / Anti-patterns
-- [ ] SQL Query Patterns / Anti-patterns
+- [ ] PL/pgSQL
 # Work Planning - Database Engineer
 [SQL Exercises](https://learnsql.com/course/sql-practice-set/select-from-table/introduction/introduction/)
 [PostgreSQL Exercises](https://pgexercises.com/gettingstarted.html)

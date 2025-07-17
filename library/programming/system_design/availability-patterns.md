@@ -1,7 +1,8 @@
 # Availability Patterns
 ## Fail-Over
+Heartbeats are sent between the active and the passive server on standby.
 ### Active-Passive
-Heartbeats are sent between the active and the passive server on standby. If the heartbeat is interrupted, the passive server takes over the active's IP address and resumes service.
+ If the heartbeat is interrupted, the passive server takes over the active's IP address and resumes service.
 
 The length of downtime is determined by whether the passive server is already running in 'hot' standby or whether it needs to start up from 'cold' standby. Only the active server handles traffic.
 
