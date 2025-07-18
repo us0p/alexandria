@@ -171,16 +171,93 @@ For each row, the window function is computed across the rows that fall into the
 ## Builtin Window Functions
 In addition to these functions, any built-in or user-defined ordinary aggregate (i.e., not ordered-set or hypothetical-set aggregates) can be used as a window function;
 
-| Function Name                         | Behavior                                                                                                                                                                                                                                                                                                                                                             |
-| ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ROW_NUMBER()`                        | Returns the number of the current row within its partition, counting from 1.                                                                                                                                                                                                                                                                                         |
-| `RANK()`                              | Returns the rank of the current row, with gaps(the row number of the first row is per group (partition)).                                                                                                                                                                                                                                                            |
-| `DENSE_RANK()`                        | Returns the rank of the current row, without gaps.                                                                                                                                                                                                                                                                                                                   |
-| `PERCENT_RANK()`                      | Returns the relative rank of the current row, that is $\frac{(rank - 1)}{(totalPartitionRows - 1)}$. The value ranges from 0 to 1 inclusive.                                                                                                                                                                                                                         |
-| `CUME_DIST()`                         | Returns the cumulative distribution, that is $\frac{NPRPoPWR}{TPR}$. Where `NPRPoPWR`: number of partition rows preceding or peers with current row, and `TPR`: total partition rows. The value thus ranges from $\frac{1}{N}$ to 1.                                                                                                                                 |
-| `NTILE(num_buckets)`                  | Returns an integer ranging from 1 to the argument value, dividing the partition as equally as possible.                                                                                                                                                                                                                                                              |
-| `LAG(value [, offset [, default]])`   | Returns _`value`_ evaluated at the row that is _`offset`_ rows before the current row within the partition; if there is no such row, instead returns _`default`_ (which must be of a type compatible with _`value`_). Both _`offset`_ and _`default`_ are evaluated with respect to the current row. If omitted, _`offset`_ defaults to 1 and _`default`_ to `NULL`. |
-| `LEAD(value, [, offset [, default]])` | Returns _`value`_ evaluated at the row that is _`offset`_ rows after the current row within the partition; if there is no such row, instead returns _`default`_ (which must be of a type compatible with _`value`_). Both _`offset`_ and _`default`_ are evaluated with respect to the current row. If omitted, _`offset`_ defaults to 1 and _`default`_ to `NULL`.  |
-| `FIRST_VALUE(value)`                  | Returns _`value`_ evaluated at the row that is the first row of the window frame.                                                                                                                                                                                                                                                                                    |
-| `LAST_VALUE(value)`                   | Returns _`value`_ evaluated at the row that is the last row of the window frame.                                                                                                                                                                                                                                                                                     |
-| `NTH_VALUE(value, n)`                 | Returns _`value`_ evaluated at the row that is the _`n`_'th row of the window frame (counting from 1); returns `NULL` if there is no such row.                                                                                                                                                                                                                       |
+| Function Name         | Behavior                                                                                                                                                                                                                             |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ROW_NUMBER()`        | Returns the number of the current row within its partition, counting from 1.                                                                                                                                                         |
+| `RANK()`              | Returns the rank of the current row, with gaps(the row number of the first row is per group (partition)).                                                                                                                            |
+| `DENSE_RANK()`        | Returns the rank of the current row, without gaps.                                                                                                                                                                                   |
+| `PERCENT_RANK()`      | Returns the relative rank of the current row, that is $\frac{(rank - 1)}{(totalPartitionRows - 1)}$. The value ranges from 0 to 1 inclusive.                                                                                         |
+| `CUME_DIST()`         | Returns the cumulative distribution, that is $\frac{NPRPoPWR}{TPR}$. Where `NPRPoPWR`: number of partition rows preceding or peers with current row, and `TPR`: total partition rows. The value thus ranges from $\frac{1}{N}$ to 1. |
+| `NTILE(num_buckets)`  | Returns an integer ranging from 1 to the argument value, dividing the partition as equally as possible.                                                                                                                              |
+| `LAST_VALUE(value)`   | Returns _`value`_ evaluated at the row that is the last row of the window frame.                                                                                                                                                     |
+| `NTH_VALUE(value, n)` | Returns _`value`_ evaluated at the row that is the _`n`_'th row of the window frame (counting from 1); returns `NULL` if there is no such row.                                                                                       |
+## LAG
+Used to access data from a **previous** row within the result set.
+Helpful when comparing values across rows in a specific order
+
+```SQl
+-- LAG(column_name, offset, default_value)
+
+SELECT
+	month,
+	sales,
+	LAG(sales) OVER (ORDER BY month) as prev_sales,
+	sales - LAG(sales) OVER (ORDER BY month) as diff
+FROM monthly_sales;
+```
+
+The query above will compare the sales of the current month with the sales of the previous month.
+
+The result might be something like:
+```plaintext
+|month|sales|prev_sales|diff|
+|-----|-----|----------|----|
+|Jan  |  100|      null|null|
+|Feb  |  150|       100|  50|
+|Mar  |  130|       150| -20|
+```
+## LEAD
+Opposite of `LAG`, lets you access a value from a future row within the same result set.
+
+```sql
+-- LEAD(column_name, offset, default_value)
+
+
+SELECT
+	month,
+	sales,
+	LEAD(sales) OVER (ORDER BY month) AS next_month_sales,
+	LEAD(sales) OVER (ORDER BY month) - sales AS delta_to_next
+FROM monthly_sales;
+```
+
+The query above will compare the sales of the next month with the sales of the current month.
+
+The result might be something like:
+```plaintext
+|month|sales|next_month_sales|delta_to_next|
+|-----|-----|----------------|-------------|
+|Jan  |  100|             150|           50|
+|Feb  |  150|             130|          -20|
+|Mar  |  130|            NULL|         NULL|
+```
+## FIRST_VALUE
+Returns the first value in an ordered partition of rows.
+
+```sql
+-- FIRST_VALUE(column_name)
+
+SELECT
+	region,
+	salesperson,
+	sale_amount,
+	FIRST_VALUE(sale_amount) OVER (
+		PARTITION BY region
+		ORDER BY sale_amount DESC
+	) as highest_first_sale
+FROM sales;
+```
+
+The query above retrieves the highest sale per region by retrieving the first value of the rows ordered by amount in descending order.
+
+Without partition it'll repeat the highest sale for every row, independent of region.
+
+The result might be something like:
+```plaintext
+|region|salesperson|sale_amount|highest_first_sale|
+|------|-----------|-----------|------------------|
+|East  |Alice      |        500|               500|
+|East  |Bob        |        400|               500|
+|West  |Carol      |        700|               700|
+|West  |Dave       |        650|               700|
+```

@@ -1,3 +1,13 @@
+## To view
+- `jsonb_each_text`
+- `jsonb_array_elements`
+- `jsonb_array_elements_text`
+- `cardinality`
+- `unnest`
+- `jsonb_object_keys`
+- `jsonb_array_lenght`
+- `decode`
+- `encode`
 # String 
 ## `string_to_array`
 Splits the string at `delimiter` into a **text array**. 
