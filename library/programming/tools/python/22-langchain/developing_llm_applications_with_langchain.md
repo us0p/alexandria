@@ -168,3 +168,97 @@ def financial_report(company_name: str, revenue: int, expenses: int) -> str:
 # we can add our tool in the list of tool for our agent
 agent = create_react_agent(llm, [financial_report])
 ```
+## RAG
+Use embeddings to retrieve relevant information to integrate into the prompt.
+
+There are three primary steps to RAG development in LangChain:
+1. Loading the document into LangChain with document loaders.
+2. Splitting the documents into chunks (units of information we can index and process individually), particularly useful for breaking up long documents so that they fit within a LLM's context window.
+3. Encoding and storing the chunks for retrieval, which could utilize a vector database.
+
+LangChain document loaders are classes designed to load and configure documents for system integration.
+LangChain provide document loaders for common file types:
+- `.pdf`
+- `.csv`
+
+There are also 3rd party loaders that can provide support for many other files as well.
+### PDF document loader
+```python
+from langchain_community.document_loaders import PyPDFLoader
+loader = PyPDFLoader("path/to/file")
+
+data = loader.load() # loads the document into memory
+```
+### CSV document loader
+```python
+from langchain_community.document_loaders.csv_loader import CSVLoader
+
+loader = CSVLoader("file.csv")
+
+data = loader.load()
+```
+### HTML document loader
+```python
+from langchain_community.document_loaders import UnstructuredHTMLLoader
+
+loader = UnstructuredHTMLLoader("file.html")
+data = loader.load()
+```
+## Splitting
+There isn't one document splitting strategy that works for all situations. We should experiment with multiple methods, and see which one strikes the right balance between retaining context and managing chunk size.
+
+For example, splitting a document line by line is simple, but since sentences are often split over multiple lines, and because those lines are processed separately, key context might be lost. 
+To counteract lost context during chunk splitting, a chunk overlap is often implemented. In this, between two chunks, there's an overlap which is replicated in both chunks to help keep context.
+![[Pasted image 20250720092927.png]]
+
+If a model shows signs of losing context and misunderstanding information when answering from external sources, you may need to increase this chunk overlap.
+
+We will compare two document splitting methods:
+- `CharacterTextSplitter`
+- `RecursiveCharacterTextSplitter`
+
+>Optimizing this document splitting is an active area of research, so keep an eye out for new developments!
+## `CharacterTextSplitter`
+Splits on the separator first, then evaluates `chunk_size` and `chunk_overlap` to check if it's satisfied.
+```python
+from langchain_text_splitters import CharacterTextSplitter
+
+ct_splitter = CharacterSplitter(
+	separator='.',
+	chunk_size=chunk_size,
+	chunk_overlap=chunk_overlap
+)
+
+docs = ct_splitter.split_text(quote)
+```
+
+It tries to split on the separator so < `chunk_size`, but may not always succeed.
+## `RecursiveCharacterSplitter`
+Takes a list of separators to split on, and it works through the list from left to right, splitting the document using each separator in turn, and seeing if these chunks can be combined while remaining under `chunk_size`.
+```python
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+rc_splitter = RecursiveCharacterTextSplitter(
+	separators=["\n\n", "\n", " ", ""],
+	chunk_size=chunk_size,
+	chunk_overlap=chunk_overlap
+)
+
+docs = rc_splitter.split_text(quote)
+```
+## `RecursiveCharacterTextSplitter` with HTML
+
+```python
+from langchain_community.document_loaders import UnstructuredHTMLLoader
+
+loader = UnstructuredHTMLLoader("white_house_execution_order_nov_2023.html")
+data = loader.load()
+
+rc_splitter = RecursiveCharacterTextSplitter(
+	chunk_size=chunk_size,
+	chunk_overlap=chunk_overlap,
+	separators=['.']
+)
+
+docs = rc_splitter.split_documents(data)
+```
