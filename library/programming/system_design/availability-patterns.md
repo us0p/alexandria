@@ -1,4 +1,5 @@
 # Availability Patterns
+You need to understand RTO and RPO requirements for your system to define a high availability architecture.
 ## Fail-Over
 Heartbeats are sent between the active and the passive server on standby.
 ### Active-Passive

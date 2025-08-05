@@ -29,7 +29,7 @@ let team_name = String::from("Blue");
 
 // The get method returns an Option<&V>.
 // copied() is used to get an Option<i32> rather tahn an Option<&i32>.
-// unwrap_or() returns 0 is option returns None.
+// unwrap_or() returns 0 if option returns None.
 let score = scores.get(&team_name).copied().unwrap_or(0);
 
 // Iteraing over each key-value pair:

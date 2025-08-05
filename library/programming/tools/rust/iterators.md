@@ -65,7 +65,7 @@ v1.iter().map(|x| x + 1);
 
 The `map` method returns a new iterator that produces the modified items.
 
-This code produces as warning as iterators are lazy, we need to consume the iterator.
+This code produces a warning as iterators are lazy, we need to consume the iterator.
 ```rust
 let v1: Vec<i32> = vec![1, 2, 3];
 

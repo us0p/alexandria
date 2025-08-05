@@ -37,3 +37,56 @@ CREATE TABLE IF NOT EXISTS table_name (
 ```
 
 The default value to a column can be an expression, which will be evaluated whenever the default is inserted. A common example is for a `timestamp` column to have a default of `CURRENT_TIMESTAMP`.
+## Table relationship
+You cannot create a foreign key that references multiple different tables.
+## One-to-Many
+```SQL
+CREATE TABLE customers (
+	customer_id INT PRIMARY KEY,
+	name VARCHAR(100)
+);
+
+CREATE TABLE orders (
+	order_id INT PRIMARY KEY,
+	order_date DATE,
+	customer_id INT, -- can appear multiple times
+	FOREIGN KEY (customer_id) REFERENCES customers(customer_id) -- FK
+);
+```
+## One-to-One
+```SQL
+CREATE TABLE users (
+	user_id INT PRIMARY KEY,
+	username VARCHAR(50)
+);
+
+CREATE TABLE profiles (
+	profile_id INT PRIMARY KEY,
+	user_id INT UNIQUE -- can appear only once per user
+	bio TEXT,
+	FOREIGN KEY (user_id) REFERENCES users(user_id)	
+);
+```
+## Many-to-Many
+```SQL
+-- Students table
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+-- Courses table
+CREATE TABLE Courses (
+    course_id INT PRIMARY KEY,
+    title VARCHAR(100)
+);
+
+-- Junction table (many-to-many relationship)
+CREATE TABLE Enrollments (
+    student_id INT,
+    course_id INT,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+```

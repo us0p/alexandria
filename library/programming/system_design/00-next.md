@@ -1,0 +1,6 @@
+- [ ] When to cache at:
+	- Client
+	- CDN
+	- Web Server
+	- Application (Memcached, Redis)
+- [ ] What is MapReduce

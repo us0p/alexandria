@@ -94,3 +94,136 @@ let y: Option<i8> = Some(5);
 // Error: cannot add `Option<i8>` to `i8`
 let sum = x + y;
 ```
+# Option Combinators
+## `Option::map()`
+Lets you transform the `Some` value inside an Option using a function.
+
+It's useful because it lets you work directly with the value inside an Option without unwrapping or doing explicit matching.
+
+- If the Option is `Some(x)`, it applies the function to `x` and returns `Some(new_value)`.
+- If the Option is None, it just returns None.
+```Rust
+let number = Some(4);
+
+let squared = number.map(|x| x * x); // Some(16)
+
+let nothing: Option<i32> = None;
+
+let squared = nothing.map(|x| x * x); // None
+```
+## `Option::and_then()`
+Using `Option::map()` in a function that returns an `Option<T>` results in the nested `Option<Option<T>>`.
+
+`Option::and_then()` calls its function input with the wrapped value and returns the result. If the `Option` is None, then it returns None instead.
+```Rust
+enum Food { CordonBleu, Steak, Sushi }
+enum Day { Monday, Tuesday, Wednesday }
+
+// We don't have the ingredients to make Sushi.
+fn have_ingredients(food: Food) -> Option<Food> {
+    match food {
+        Food::Sushi => None,
+        _           => Some(food),
+    }
+}
+
+// We have the recipe for everything except Cordon Bleu.
+fn have_recipe(food: Food) -> Option<Food> {
+    match food {
+        Food::CordonBleu => None,
+        _                => Some(food),
+    }
+}
+
+// To make a dish, we need both the recipe and the ingredients.
+// We can represent the logic with a chain of `match`es:
+fn cookable_v1(food: Food) -> Option<Food> {
+    match have_recipe(food) {
+        None       => None,
+        Some(food) => have_ingredients(food),
+    }
+}
+
+// This can conveniently be rewritten more compactly with `and_then()`:
+fn cookable_v3(food: Food) -> Option<Food> {
+    have_recipe(food).and_then(have_ingredients)
+}
+```
+## Unpacking Options and defaults
+There is more than one way to unpack an `Option` and fall back on a default if it's None. You should consider:
+- Do we need eager or lazy evaluation?
+- Do we need to keep the original empty value intact, or modify it in place?
+### `Option::or()`
+Is chainable and eagerly evaluates its argument.
+
+Note that because `Option::or()`'s arguments are evaluated eagerly, the variable passed to `or` is moved.
+```Rust
+enum Fruit { Apple, Orange, Banana, Kiwi, Lemon }
+
+fn main() {
+    let apple = Some(Fruit::Apple);
+    let orange = Some(Fruit::Orange);
+    let no_fruit: Option<Fruit> = None;
+
+    // first_available_fruit: Some(Orange)
+    let first_available_fruit = no_fruit
+	    .or(orange)
+	    .or(apple);
+    println!("first_available_fruit: {:?}", first_available_fruit);
+
+    // `or` moves its argument.
+    // In the example above, `or(orange)` returned a `Some`, so `or(apple)` was not invoked.
+    // But the variable named `apple` has been moved regardless, and cannot be used anymore.
+ }
+```
+### `Option::or_else()`
+Is also chainable but evaluates lazily.
+```Rust
+let get_kiwi_as_fallback = || {
+	println!("Providing kiwi as fallback");
+	Some(Fruit::Kiwi)
+};
+let get_lemon_as_fallback = || {
+	println!("Providing lemon as fallback");
+	Some(Fruit::Lemon)
+};
+
+// first_available_fruit: Some(Kiwi)
+let first_available_fruit = no_fruit
+	.or_else(get_kiwi_as_fallback)
+	.or_else(get_lemon_as_fallback);
+	
+println!("first_available_fruit: {:?}", first_available_fruit);
+```
+### `Option::get_or_insert()`
+Makes sure an Option has a value by modifying in place with a fallback value.
+
+Note that it eagerly evaluates its parameter, so variables are moved.
+```Rust
+let mut my_fruit: Option<Fruit> = None;
+let apple = Fruit::Apple;
+let first_available_fruit = my_fruit.get_or_insert(apple);
+println!("first_available_fruit is: {:?}", first_available_fruit);
+println!("my_fruit is: {:?}", my_fruit);
+// first_available_fruit is: Apple
+// my_fruit is: Some(Apple)
+//println!("Variable named `apple` is moved: {:?}", apple); -> ERROR
+```
+### `Option::get_or_insert_with()`
+Same as `Option::get_or_insert()` but evaluates lazily.
+
+It the Option has a value, the closure is not invoked and the value is left unchanged.
+```Rust
+let mut my_fruit: Option<Fruit> = None;
+let get_lemon_as_fallback = || {
+    println!("Providing lemon as fallback");
+    Fruit::Lemon
+};
+let first_available_fruit = my_fruit
+    .get_or_insert_with(get_lemon_as_fallback);
+println!("first_available_fruit is: {:?}", first_available_fruit);
+println!("my_fruit is: {:?}", my_fruit);
+// Providing lemon as fallback
+// first_available_fruit is: Lemon
+// my_fruit is: Some(Lemon)
+```

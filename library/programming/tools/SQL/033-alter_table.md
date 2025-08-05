@@ -12,7 +12,7 @@ SQL allows you to perform the following actions:
 - `RENAME COLUMN column_name TO new_name `
 - `ADD CONSTRAINT constraint_name constraint`
 - `DROP CONSTRAINT constraint_name`
-- Renaming the Table
+- `RENAME table TO new_name`
 - `ADD PRIMARY KEY (column_name)`
 - `DROP PRIMARY KEY`
 - `ADD CONSTRAINT constraing_name FOREIGN KEY (column1) REFERENCES table2(column2)`
@@ -42,3 +42,12 @@ USING (
 		END
 );
 ```
+## Add foreign key constraint
+```SQL
+ALTER TABLE table_name
+ADD CONSTRAINT constraint_name
+FOREIGN KEY (column_name)
+REFERENCES parent_table (referenced_column);
+```
+
+> Not supported in SQLite, must create new table, copy data and drop old one.

@@ -1,5 +1,5 @@
 - **Start from the crate root**: When compiling a crate, the compiler first looks in the crate root file for code to compile
-- **Declaring modules**: In the crate root file, you can declare new modules. The compiles will look for the module's code in these places:
+- **Declaring modules**: In the crate root file, you can declare new modules. The compiler will look for the module's code in these places:
 	- Inline, within curly brackets that replace the semicolon following `mod <module_name>`
 	- In the `src/<module_name>.rs`
 	- In the file `src/<module_name>/mod.rs` -> old style

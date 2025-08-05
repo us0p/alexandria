@@ -128,3 +128,76 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 The program resulted in a _runtime_ error at the point of using an invalid value in the indexing operation.
 
 When you attempt to access an element using indexing, Rust will check that the index you’ve specified is less than the array length. If the index is greater than or equal to the length, Rust will panic. This check has to happen at runtime, especially in this case, because the compiler can’t possibly know what value a user will enter when they run the code later.
+## Type Casting
+- **Coercion**: Implicit type conversion.
+- **Casting**: Explicit type conversion.
+
+Rust provides **no coercion** between primitive types. But, **casting** can be performed using the `as` keyword.
+
+**Limitations in casting rules**
+- Floats cannot be directly converted to a char.
+```Rust
+fn main() {
+	let decimal = 65.4321_f32;
+
+	let integer = decimal as u8;
+	let character = integer as char;
+}
+```
+
+When casting any value to an **unsigned type**, `T`, `T::MAX + 1` is added or subtracted until the value fits into the new type.
+```Rust
+fn main() {
+	let mile = 1000;
+	// u8::MAX is 255
+	// subtract u8::MAX + 1 (256) until mile fits in u8::MAX
+	// 1000 -256 - 256 - 256 = 232
+	let mile_as_character = mile as u8;
+	println!("{mile_as_character}");
+}
+```
+
+Under the hood, the first significant bits (in this case, 8) are kept, the rest towards the most significant get truncated.
+
+When casting to a **signed type**, the two's complement representation is applied. If the most significant bit of that value is 1, then the value is negative.
+```Rust
+fn main() {
+	println!("128 as i8 is: {}", 128 as i8); // -128
+	println!("232 as i8 is: {}", 232 as i8); // -24
+}
+```
+
+Since Rust 1.45, the `as` keyword performs a **saturating cast** when casting from **float** to **int**.
+
+If the floating point value exceeds the upper bound or ir less than the lower bound, the returned value will be equal to the bound crossed.
+```Rust
+fn main() {
+	println!("300.0 as u8 is: {}", 300.0_f32 as u8); // 255
+	println!("-100.0 as u8 is: {}", -100.0_f32 as u8); // 0
+	println!("nan as u8 is: {}", f32::NAN as u8); // 0
+}
+```
+## Aliasing
+When you give a name to an existing type.
+
+The `type` statement can be used to give a new name to an existing type.
+
+Types, except primitive types, **must have** `UpperCamelCase` names.
+```Rust
+use std::num::ParseIntError;
+
+type NanoSecond = u64;
+type Inch = u64;
+type U64 = u64;
+
+type AliasedResult<T> = Result<T, ParseIntError>;
+
+// Can use AliasedResult as it matches the returned underlying type
+fn parse(n: &str) -> AliasedResult<i32> {
+	n.parse::<i32>() // returns Result<i32, ParseIntError>
+}
+
+fn main() {
+	let nanoseconds: NanoSecond = 5 as u64;
+}
+```

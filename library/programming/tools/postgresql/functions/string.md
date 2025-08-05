@@ -1,14 +1,3 @@
-## To view
-- `jsonb_each_text`
-- `jsonb_array_elements`
-- `jsonb_array_elements_text`
-- `cardinality`
-- `unnest`
-- `jsonb_object_keys`
-- `jsonb_array_lenght`
-- `decode`
-- `encode`
-# String 
 ## `string_to_array`
 Splits the string at `delimiter` into a **text array**. 
 - if delimiter is `NULL`, each character in the string will become a separate element in the array. 
@@ -29,16 +18,4 @@ Splits `str` at occurrences of `delimiter` and returns the `nth` field
 -- split_part(str text, delimiter text, n int) -> text
 SELECT split_part('asdf,fdsa', ',', 1); -- 'asdf'
 SELECT split_part('asdf,fdsa', ',', 2); -- 'fdsa'
-```
-# JSON/JSONB
-## `to_jsonb`
-Takes a PostgreSQL value (like a number, text, array, row, etc.) and converts it into a `JSONB` value.
-```SQL
--- Signature
--- to_jsonb(anyelement) -> jsonb
-SELECT to_jsonb("hello world"); -- "hello world"
-SELECT to_jsonb(42); -- 42
-SELECT to_jsonb(true); -- true
-SELECT to_jsonb(ARRAY['apple', 'banana']) -- ["apple", "banana"]
-SELECT to_jsonb(ROW[1, 'book', true]); -- [1, "book", true]
 ```

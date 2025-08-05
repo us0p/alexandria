@@ -1,4 +1,4 @@
-A trait defined the functionality a particular type has and can share with other types.
+A trait defines the functionality a particular type has and can share with other types.
 
 Traits are similar to **interfaces** in other languages, although with some differences.
 ## Defining a Trait

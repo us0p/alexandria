@@ -6,6 +6,7 @@ give you the most recent information about the tech world.
 Provide code changes to the LLM and let it create the commit message.
 ## AI docs
 Use an AI assistant to generate an OpenAPI spec based on your project types.
+Could also suggest clean code and clean architecture improvements.
 ## Trading bot
 A bot that performs simple trading operations.
 ## MTP implementation
@@ -26,3 +27,5 @@ An search aggregator that aggregates search results from Shopee, Mercado Livre, 
 Can be monetized with ADS.
 ## Image converter
 An CLI application that converts image of one format to another, from jpg to png for example.
+## Rinha de backend
+https://github.com/zanfranceschi/rinha-de-backend-2025?tab=readme-ov-file

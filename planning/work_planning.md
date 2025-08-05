@@ -12,21 +12,21 @@ monitor storage usage, forecast growth, and recommend scaling strategies.
 - [x] ETL
 - [x] How to improve query performance
 	- [x] Understand the Query Planner and how to use it to improve query performance.
-- [ ] Consolidate Knowledge
-	- [ ] System Catalogs
-	- [ ] System Views
-	- [ ] Information Schema
-	- [ ] JSONB operators
-	- [ ] ARRAY operators
-	- [ ] PostgreSQL function and operators
-	- [ ] Review optimization techniques learned from [query optimization course](improving_query_performance_in_postgresql.md)
-	- [ ] Review Query Planner
+- [x] Consolidate Knowledge
+	- [x] System Catalogs
+		- [x] `pg_catalog` schema
+		- [x] How tables under `pg_catalog` schema references each other.
+	- [x] System Views
+		- [x] Information Schema
+	- [x] JSONB operators
+	- [x] ARRAY operators
+	- [x] PostgreSQL function and operators
+		- [x] `convert_from`
+	- [x] Review optimization techniques learned from [query optimization course](statement_tips.md)
+	- [x] Review Query Planner
 - [ ] Study about RDS management.
 	- [ ] Role management PostgreSQL.
-- [ ] Schema Design Patterns / Anti-patterns
 - [ ] PL/pgSQL
+- [ ] Schema Design Patterns / Anti-patterns
 ## RDS FREE Training from AWS
-1. [Fundamentals of Amazon RDS for PostgreSQL](https://skillbuilder.aws/learn/AK479CRG5K/fundamentals-of-amazon-rds-for-postgresql/FB4ZR9N2DU)
-2. [Amazon Relational Database Service (Amazon RDS) for PostgreSQL - Troubleshooting](https://skillbuilder.aws/learn/GN8V5D3YQA/amazon-relational-database-service-amazon-rds-for-postgresql--troubleshooting/6PYYKHYNUW)
-3. [PostgreSQL Security](https://skillbuilder.aws/learn/TZSMG74HRY/postgresql-security/3DE2X5TBJB)
-4. [Amazon Aurora PostgreSQL and Amazon RDS PostgreSQL](https://skillbuilder.aws/learn/AN5AXYBBAV/amazon-aurora-postgresql-and-amazon-rds-postgresql/YWDQ2HPQHK?parentId=NSMM7PSA52)
+1. [Amazon Aurora PostgreSQL and Amazon RDS PostgreSQL](https://skillbuilder.aws/learn/AN5AXYBBAV/amazon-aurora-postgresql-and-amazon-rds-postgresql/YWDQ2HPQHK?parentId=NSMM7PSA52)

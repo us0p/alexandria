@@ -394,29 +394,6 @@ computer for an EC2 instance, and therefore has the same lifespan as the
 instance.
 AWS recommends instances stores for use cases that involve temporary data 
 that you do not need in the long term.
-
-## Amazon Elastic Block Store (EBS)
-A service that provides block-level storage volumes that you can use with 
-EC2 instances. If you stop or terminate an EC2 instance, all the data on 
-the attached EBS volume remains available.
-Because EBS volumes are for data that needs to persist, it's important to 
-back up the data. You can take incremental backups of EBS volumes by 
-creating EBS snapshots.
-
-!["EBS snapshot"](https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1733162400/ukxv5YovX_2x68VXheSfAg/tincan/fe470bc5add63f94f005d3da17a6db8131e78b9e/assets/EBS_snapshots.png)
-
-An EBS snapshot is an incremental backup. This means that the first backupt
-taken of a volume copies all the data. For subsequents backups, only the 
-blocks of data that have changed since the most recent.
-Incremental backups are different from full backups, in which all the data 
-in a storage volume copies each time a backup occurs. 
-
-## EBS characteristics
-- Sizes up to 16 TiB
-- Survive termination of their EC2 instance
-- Solid state by default
-- HDD options
-
 ## Object storage
 In object storage, each object consists of data, metadata, and a key.
 The data might be an image, video, text document, or any other type of 
