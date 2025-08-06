@@ -1,0 +1,1 @@
+Occur when an operation needs to [lock](mutexes.md) two resources and two threads have each acquired one of the locks, causing them to wait for each other forever.
