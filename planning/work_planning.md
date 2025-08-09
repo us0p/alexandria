@@ -27,6 +27,7 @@ monitor storage usage, forecast growth, and recommend scaling strategies.
 - [ ] Study about RDS management.
 	- [ ] Role management PostgreSQL.
 - [ ] PL/pgSQL
+	- [ ] Grand Unified Configuration (GUC), custom setting, can be used like dynamic env variables.
 - [ ] Schema Design Patterns / Anti-patterns
 ## RDS FREE Training from AWS
 1. [Amazon Aurora PostgreSQL and Amazon RDS PostgreSQL](https://skillbuilder.aws/learn/AN5AXYBBAV/amazon-aurora-postgresql-and-amazon-rds-postgresql/YWDQ2HPQHK?parentId=NSMM7PSA52)
