@@ -1,0 +1,1 @@
+Is a way of limiting the rate at which a function/action will be called/executed.

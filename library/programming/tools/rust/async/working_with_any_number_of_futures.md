@@ -64,7 +64,7 @@ We annotate the type of `futures` so the compiler can know that each box points 
 
 But, we still receive compile errors from this code.
 
-The the message tell us that the first async block does not implement the `Unpin` trait and suggests using `pin!` or `Box::pin` to resolve it.
+The message tell us that the first async block does not implement the `Unpin` trait and suggests using `pin!` or `Box::pin` to resolve it.
 ```Rust
 use std::pin::Pin;
 
