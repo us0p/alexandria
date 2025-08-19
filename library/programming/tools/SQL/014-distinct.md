@@ -13,7 +13,7 @@ You'll probably use it most commonly with the `COUNT` function.
 -- Counts the number of distinct names in the table
 SELECT COUNT(DISTINCT name) FROM table_name;
 ```
-## DISTINCT ON
+## DISTINCT ON (NOT SQLite STANDARD)
 Allows us to retrieve unique rows based on specific columns. Allow us to specify which row to keep for each unique value based on an [`ORDER BY`](006-order_by.md) clause.
 
 Allows fetching the first unique row based on specified columns.

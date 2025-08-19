@@ -39,3 +39,14 @@ SELECT pg_typeof(3.14);
 SELECT pg_typeof('hello');
 -- Output: text
 ```
+## `pg_cancel_backend` and `pg_terminate_backend`
+Sends a `SIGINT` or `SIGTERM` (repectivelly) signal to backend process identified by the process ID.
+
+The process ID of an active process can be found in the **pid** column in the **pg_stat_activity** view or by listing the PostgreSQL processes on the server.
+
+The role of an active backend can be found in the **usename** column in the **pg_stat_activity** view.
+```PostgreSQL
+SELECT pg_cancel_backend(8000);
+```
+
+>Ending a connection will launch a rollback for any transactions that are in process when the connection is closed.

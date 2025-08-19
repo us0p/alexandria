@@ -1,5 +1,5 @@
 # COUNT
-An SQL aggregate function for counting the number of non-null rows in a particular column.
+An SQL aggregate function for counting the number of **non-null** rows in a particular column.
 ```SQL
 -- Returns only a single row with a single column 'count' with the number of results of the whole set.
 SELECT COUNT(*) FROM table_name;
@@ -9,4 +9,11 @@ SELECT COUNT(name) FROM table_name;
 
 -- Renaming column name to be more explicit.
 SELECT COUNT(name) name_count FROM table_name;
+
+-- Applying condition to count
+SELECT
+	COUNT(*) total_people
+	-- COUNT ignores NULL values, so people under 50 are not counted here.
+	COUNT(CASE WHEN age > 50 THEN 1 END) over_50
+FROM people;
 ```

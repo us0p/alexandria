@@ -10,6 +10,10 @@
 Database parameters specify how the database is configured. For example, database parameters can specify the amount of resources, such as memory, to allocate to a database.
 
 A DB parameter group acts as a container for engine configuration values that are applied to one or more DB instances.
+
+A default DB parameter group is created when you create your DB instance. This default group contains database engine defaults and Amazon RDS system defaults based on the engine, instance class, and allocated storage of the instance.
+
+	Default parameter groups cannot be modified. To set your own parameter group settings, you must create your own DB parameter group.
 ## RDS security and compliance
 RDS instances are in a [VPC](aws_networking.md#Amazon%20Virtual%20Private%20Cloud%20(VPC)) which you can control using [firewalls](firewall.md) and [security groups](aws_networking.md#Security%20Groups) to determine who has access to the instances.
 
@@ -544,3 +548,358 @@ CREATE POLICY poll ON bar
 	FOR ALL
 USING (a IN (SELECT col1 FROM foo WHERE row_owner = CURRENT_USER));
 ```
+## Failover conditions
+RDS automatically performs a failover in the event of:
+- Loss of availability in the primary zone
+- Loss of network connectivity to the primary zone
+- Compute unit failure on the primary zone
+- Storage failure on the primary zone
+![[Pasted image 20250812080131.png]]
+## Automated backups
+RDS provides **one schedules backup per day**.
+
+You can choose the time frame.
+
+Also provides backups of the entire instance and transaction logs.
+
+The features and benefits of the automated backups are:
+- Scheduled daily volume backup of the entire instance
+- Monitored backup completion status and runtime
+- Archived database change logs
+- Configurable maximum 35-day backup retention
+
+When you run a Multi-AZ deployment, RDS takes the backup from the standby. This limits any performance impact on the primary database.
+## Read Replicas
+RDS will:
+- Relieve pressure on your primary database with additional read capacity.
+- Create continuously synced read-only copies of the primary database.
+- Locate read replicas in a single Availability Zone, across Availability Zones, or across Regions.
+- Promote a read replica to a primary for faster recovery in the event of a disaster.
+-  Upgrade a read replica to a new engine version.
+
+>Amazon RDS allows up to 15 read replicas for Aurora and up to 5 for other database engines.
+
+![[Pasted image 20250812080658.png]]
+## Security
+RDS Offers:
+- Network isolation with Amazon Virtual Private Cloud (Amazon VPC)
+- AWS Identity and Access Management (IAM)-based resource-level permission controls
+- Encryption at rest using AWS Key Management Service (AWS KMS)
+- Secure Sockets Layer (SSL) protection for data in transit
+## RDS Proxy
+Is a fully managed, highly available database proxy for Amazon RDS. The proxy uses connection pooling for multiple applications to share connections to the DB instance.
+- Increases scalability, resiliency to a database failure, and security
+- Supports pooling and sharing of application connections for increased efficiency
+- Deploys across multiple Availability Zones, reducing failover times by up to 66 percent
+- Integrates with AWS Secrets Manager and IAM
+- Helps users get started quickly in the console
+- Provides all the benefits of a database proxy without patching or management overhead
+## Aurora
+Aurora is a MySQL- and PostgreSQL-compatible relational database built for the cloud.
+
+Aurora is fully managed by Amazon RDS.
+
+Aurora offers five times the throughput of standard MySQL and three times the throughput of standard PostgreSQL.
+
+Aurora offers fault-tolerant, self-healing storage; six copies of data across three Availability Zones; and continuous backup to Amazon Simple Storage Service (Amazon S3).
+
+It can replicate your data across multiple Regions for fast local performance and disaster recovery.
+
+For unpredictable workloads, you can use Aurora serverless to automatically start, scale, and shut down a database to match application demand.
+
+The architectural structure of Aurora separates it from the typical database deployment. The database tier and storage tiers are separate. Each tier can scale out independently of the other.
+
+![[Pasted image 20250812082336.png]]
+
+The following graphics contain a comparison of a typical Amazon RDS Multi-AZ deployment and an Aurora Multi-AZ deployment.
+
+The graphic bellow represents a typical Amazon RDS deployment.
+
+![[Pasted image 20250812082645.png]]
+
+The primary database and the standby database each have their own storage. The primary database is mirrored for redundancy.
+
+The graphic bellow represents an Aurora deployment. 
+
+![[Pasted image 20250812082821.png]]
+
+There is a primary database and two read replicas. The primary database writes data to a shared and distributed storage system.
+
+The shared storage system provides higher availability and optimization, which leads to higher performance.
+
+When the Aurora primary database node receives a transaction, it sends the transaction logs asynchronously to all six storage nodes. Aurora uses a write quorum algorithm to guarantee acknowledgment from at least four of the six nodes before it commits the transaction.
+## Aurora storage engine overview
+In Aurora, a DB cluster volume consists of a collection of logical blocks or protection groups, where each block or group represents 10 GB of allocated storage.
+
+Aurora replicates the data in each protection group and then spreads it across six physical storage devices, or storage nodes. These storage nodes are allocated across three Availability Zones in the Region where the DB cluster resides. Each storage node contains one or more logical blocks of data for the DB clusters.
+
+![[Pasted image 20250812084136.png]]
+
+>Storage volume can automatically grows up to 128 TB
+## Aurora read replicas
+In Aurora, read replicas serve two purposes:
+- **Query Offloading**
+	- Users can run light analytics.
+	- Users can query for reporting.
+	- Users can analyze real-time business intelligence.
+	- Users can balance workload through auto scaling. 
+- **Availability**
+	- Read replicas act as the failover targets.
+	- Aurora will automatically point the cluster endpoint to the newly promoted primary.
+	- Users can specify the failover order.
+	
+To meet connectivity and workload requirements, AWS Auto Scaling dynamically adjusts the number of Aurora replicas provisioned for an Aurora DB cluster using single-primary database replication.
+
+With AWS Auto Scaling, your Aurora DB cluster can adjust to help handle sudden increases in connectivity or workload.
+
+When the connectivity or workload decreases, AWS Auto Scaling removes unnecessary Aurora replicas so you don't pay for unused provisioned DB instances.
+
+![[Pasted image 20250812084927.png]]
+## Aurora Feature Highlights
+Aurora has two important optimization features. First, Aurora only writes logs. Second, Aurora batches logs together in _boxcars_.
+
+WAL files are PostgreSQL transaction logs used to write I/O traffic in Aurora. Before writing data changes to permanent storage, these changes are first recorded in WAL files. These log records are organized through log sequence numbers (LSNs) to identify the transaction records for future reference.
+
+When a transaction comes into the primary Availability Zone database, these logs are sent to the six storage nodes asynchronously. 
+
+Because the focus is on writing logs and batching them in boxcars, the result is nine times less network traffic with six times more log writes. This optimization results in a much higher write throughput than a typical MySQL or PostgreSQL implementation. 
+
+Aurora storage nodes are intelligent Amazon EC2 instances. They are storage optimized and as such can isolate garbage collection, cross-storage gossip, and log coalescence from the database to avoid congestion. This enables the database to focus on writing and managing transactions without having to perform unnecessary background operations.
+
+Aurora delivers more than two times the peak performance of PostgreSQL, and five times at high client counts. 
+
+![[Pasted image 20250812090750.png]]
+
+Notice that as the number of clients, or connections, increases, Aurora performance continues to increase.
+## Aurora database cloning
+You can quickly and cost-effectively create clones of all the databases in an Aurora DB cluster.
+
+The cloned databases require only minimal additional space when first created.
+
+Database cloning uses a copy-on-write protocol. When data changes, it is copied on the source databases or cloned databases.
+- The creation of a clone is nearly instantaneous and uses pointers to the primary database storage, eliminating the need to copy data.
+- Data copy happens only on write when the original and cloned volume data differ.
+
+You can make multiple clones from the same DB cluster. You can also create additional clones from other clones.
+
+![[Pasted image 20250812091325.png]]
+
+This feature can also be used to save a point-in-time snapshot for analysis without impacting the production system.
+## Aurora Global Database
+Aurora Global Database is a feature that spans multiple AWS Regions, creating low-latency global reads and disaster recovery from outages across an AWS Regions.
+
+It houses a primary cluster in one Region and several secondary clusters in other Regions.
+
+Theses secondary clusters act as DR Regions in case the primary Region goes down.
+
+Aurora Global Database might include more than one secondary AWS Region.
+
+If so, a user can choose which AWS Region to failover to if an outage affects the primary Region.
+
+To help determine which secondary Region to choose, users can monitor the replication lag for all secondary Regions.
+# Setup and configure RDS PostgreSQL
+## Creating a PostgreSQL DB Instace
+**Multi-AZ deployment**: This is turned off for the free tier. Using a Multi-AZ deployment automatically provisions and maintains a synchronous standby replica in a different Availability Zone.
+### Authentication
+There are three options for authentication:
+- **Password**: Manage your database user credentials through the native password authentication features on your DB engine.
+- **Password and IAM database authentication**: Manage your database user credentials using the native password authentication features and AWS Identity and Access Management (IAM) users and roles through your DB engine.
+- **Password and Kerberos authentication**: This feature is available for certain Amazon RDS and Amazon Aurora versions. Manage your database user credentials through the native password authentication features and an AWS Directory Service for Microsoft Active Directory created with AWS Directory Service on your DB engine. This way, you can centrally store and manage user credentials, instead of individually for each DB instance.
+### Advanced options
+- **Option group**: Used to enable and configure additional features.
+- **Backup**: Can configure retention period and backup window.
+- **Performance Insights**: Can control performance insights.
+- **Monitoring**: Can control enhanced monitoring and log exports (default to Postgresql log).
+- **Maintenance**: Can control auto minor version upgrade.
+- **Deletion Protection**: Can enable deletion protection.
+
+>Remember to review the **Estimated monthly costs** section.
+## Delete the DB instance
+When you delete a DB instance, you have the following choices:
+- **Create final snapshot**: To be able to restore your deleted DB instance later, create a final DB snapshot. To delete a DB instance quickly, you can skip creating a final DB snapshot.
+- **Retain automated backups**: You can choose to retain automated backups when you delete a DB instance. Your automated backups are kept for the retention period that is set on the DB instance at the time that you delete it.
+# Security
+Security for Amazon RDS and Aurora PostgreSQL can be managed at three levels:
+## AWS Identity and Access Management (IAM)
+Your AWS account must have IAM policies that grant the permissions required to perform Amazon RDS management operations.
+## Amazon Virtual Private Cloud (Amazon VPC) 
+Aurora DB clusters must be created using Amazon VPC. Devices and Amazon Elastic Compute Cloud (Amazon EC2) instances can open connections to the endpoint and port of the DB instance for Aurora DB clusters in a virtual private cloud (VPC). You must use an Amazon VPC security group to control these connections.
+
+These endpoint and port connections can be made using SSL. In addition, firewall rules can control whether devices running at your company can open connections to a DB instance.
+
+Aurora PostgreSQL supports instance classes that use the default Amazon VPC only. With the default Amazon VPC tenancy, the VPC runs on shared hardware. With a dedicated Amazon VPC tenancy, the VPC runs on a dedicated hardware instance.
+## Standard PostgreSQL security management
+To authenticate login and permissions for an Aurora DB cluster, you can take the same approach as with a standalone instance of PostgreSQL.
+
+Commands such as CREATE ROLE, ALTER ROLE, GRANT, and REVOKE work just as they do in on-premises databases, as does directly modifying database schema tables.
+## `rdsadmin` default privileges
+When each new object is created, the _rdsadmin_ role is automatically created as a security measure. The database administrator (DBA) is assigned the role of _rdsadmin._ DBAs have default privileges to manage the database and other users. This gives the DBA the ability to create other users and roles. The DBA can also determine which users can change passwords.
+## Connecting to PostgreSQL over SSL
+Amazon RDS creates an SSL certificate for your Aurora DB cluster when the cluster is created.
+
+Amazon RDS has certificate authority (CA) certificates for connecting to your RDS DB instances using SSL.
+
+If you enable SSL certificate verification, the SSL certificate includes the DB instance endpoint as the common name (CN) for the SSL certificate. This guards against spoofing attacks.
+### Requiring an SSL connection
+You can require that connections to your Amazon RDS instance or Aurora PostgreSQL DB cluster use SSL by using the `rds.force_ssl` parameter.
+
+By default, the `rds.force_ssl` parameter is set to 0 (off). You can set it to 1 (on) to require SSL for connections to your DB cluster.
+
+You can set the `rds.force_ssl` parameter value by updating the DB cluster parameter group for your DB cluster. 
+
+You must reboot your DB cluster for the change to take effect.
+## Object Security
+- Object security is driven by roles (users and groups).
+- Each object can have separate privileges that provide flexible control of the database.
+### Owners
+Objects need owners.
+
+Whenever a user creates an object, they become the owner by default. Users can also create an object on behalf of another user.
+
+The owner has full control over the object. Only the owner of an object can drop the object.
+### Privileges
+`GRANT` and `REVOKE` are the commands that assign privileges to the roles for objects.
+#### DB Privileges
+- `CREATE`: User can create a new database.
+- `CONNECT`: User can connect to the database.
+- `TEMP`: The use can create temporary tables while using the database.
+#### Schema privileges
+- `CREATE`: The user can create a new schema.
+- `USAGE`: The user can use the schema, and see objects such as tables.
+#### Table privileges
+- `SELECT`
+- `INSERT`
+- `UPDATE`
+- `DELETE`
+- `TRUNCATE`
+- `REFERENCES`
+- `TRIGGER`
+#### Function privileges
+- `EXECUTE`: Allows the user to run a function.
+#### Column privileges
+- `INSERT`
+- `UPDATE`
+- `DELETE`
+#### Sequence privileges
+Sequence privileges have an auto-increment field.
+- `USAGE`: The user can run `currval` and `nextval`.
+- `SELECT`: The user can run `currval`.
+- `UPDATE`: The user can run `nextval` and `setval`. Allows to reset the sequences if needed.
+### Less widely assigned user privileges
+Grant usage defines whether a role can use one of these objects.
+- Domain
+- Foreign data wrapper
+- Foreign server
+- Language
+## Row Level Security with Security Policies
+Enables restrictions to row-level data based on user's identity or role.
+
+It's enforced at the table level.
+
+To enforce row level security we use the command `CREATE POLICY`
+## Database activity streams
+Sends out data using Amazon Kinesis Data Streams. From Kinesis, the data can be sent out to Amazon CloudWatch or to another security service that has been tied in as a part of the security.
+# Backups
+Can be either physical or logical.
+
+Physical backups are known as **file-system-level snapshots**.
+
+Physical backups use the Write Ahead Log (WAL) to generate a consistent, file-system-level backup of the data directory.
+
+Logical backups are known as **SQL dumps**.
+
+Logical backups use multiversion concurrency control (MVCC) to generate a consistent, logical backup of data from inside the database.
+## Physical backups
+**PROS**:
+- Can quickly create copies and plan to keep the system running during backup.
+- Fast recovery  because there is no need to recalculate indexes.
+- Can tell PostgreSQL to stop replaying WAL at a specific time.
+
+**CONS**:
+- You can only restore the database in the same PostgreSQL version, on the same operating system.
+- You must backup the entire cluster with all the databases, tables, and objects.
+- You can only copy and restore the backup as is, even with flaws and errors.
+
+Amazon RDS and Aurora use the **PITR** backup strategy.
+
+![[Pasted image 20250818093303.png]]
+## Automated backups
+Available for RDS and Aurora by default.
+
+It backs up your databases and transaction logs. It automatically creates a storage volume snapshot of your DB instance, backing up the entire DB instance not just individual databases.
+- Snapshots are taken each night during the backup window.
+- Transaction logs are stored in S3 to support PITR.
+- Retention Window per instance defaults to 7 days.
+- Maximum retention for automated backups and log records is 35 days.
+- Automated backups are deleted when you delete an instance.
+## Logical backups
+**PROS**:
+- Maintain portability across platforms.
+- Help users modify data.
+- Supports selective backup and restore of tables.
+
+**CONS**:
+- Perform a full query of all tables being backup, which takes longer to run.
+- Requires more time to restore.
+- Contain no incremental or differential options.
+### `pg_dump`
+Logical backups are taken with a PostgreSQL utility `pg_dump`.
+
+It performs a text extract of all the data.
+
+The dump includes METADATA, ROWS, GRANTS, and NODATA objects like functions, views, triggers, and rules.
+
+Logical backups can be performed at the table, schema, database, instance, and metadata level. A snapshot of the object is taken.
+
+![[Pasted image 20250818094755.png]]
+
+New transactions will not be part of the backup. With MVCC, a logical export will see a snapshot as of the beginning of the backup.
+
+To perform a logical backup, you'll need a separate machine or EC2 instance.
+## Manual Snapshots
+Takes an image of the disks and creates a manual backup.
+- Manual snapshots are kept until you delete them.
+- You can backup nonproduction and test environments, and make a final copy before deleting a database.
+- Snapshots can be copied across Regions or shared with other accounts.
+- Encrypted snapshots copied across Regions are full copies.
+## SQL Dump
+Oldest method of creating a backup. It has been around since the beginning of PostgreSQL project.
+
+It's the logical backup utility. It creates consistent backups, even if the database is being used concurrently.
+
+It has three backup modes.
+**Plain text**
+- SQL files of the objects and data.
+- Simplifies manual modification.
+- Adds white space overhead.
+- Requires psql to restore.
+
+**Compressed**
+- Is typically around 90% smaller than the DB instance.
+- Generates a compressed and indexed backup file.
+- Supports selective restoration.
+- Slower backup creation and restoration compared to other modes.
+- Requires the use of the `pg_restore` command.
+
+**Directory**
+The `Fd` command creates a backup in a directory containing a couple of files.
+- Support the use of the parallel backup feature.
+- Requires use of the `pg_restore` command.
+## `pg_dumpall`
+Must be used to back up a entire instance.
+
+Works the same as `pg_dump` but it's designed to dump the full contents of an entire database instance into a text file.
+
+No other formats are available.
+
+Can also get the CREATE USER statements that are not available with `pg_dump`
+## Restoring Backups
+When you restore a snapshot or PITR from Aurora or Amazon RDS, the restore process always creates a new database.
+### Restore with Amazon RDS
+You can restore a DB instance from a DB snapshot using the AWS Management Console.
+### **Restore with Aurora** 
+You can recover your data by creating a new Aurora DB cluster from the backup data that Aurora retains or from a saved DB cluster snapshot.
+
+Aurora backups are continuous and incremental in nature during the backup retention period. This means you don't need to take frequent snapshots of your data to help improve restore times.
+
+You can find the _Latest Restorable Time_ or _Earliest Restorable Time_ values on the Amazon RDS console. The latest restorable time for a DB cluster is the most recent point at which you can restore your DB cluster. This is typically within 5 minutes of the current time. The earliest restorable time specifies how far back in the backup retention period you can restore your cluster volume.
