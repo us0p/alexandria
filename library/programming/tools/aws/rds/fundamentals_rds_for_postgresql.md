@@ -903,3 +903,36 @@ You can recover your data by creating a new Aurora DB cluster from the backup da
 Aurora backups are continuous and incremental in nature during the backup retention period. This means you don't need to take frequent snapshots of your data to help improve restore times.
 
 You can find the _Latest Restorable Time_ or _Earliest Restorable Time_ values on the Amazon RDS console. The latest restorable time for a DB cluster is the most recent point at which you can restore your DB cluster. This is typically within 5 minutes of the current time. The earliest restorable time specifies how far back in the backup retention period you can restore your cluster volume.
+# Monitoring
+You can use the following monitoring tools to monitor Aurora and report when something is wrong.
+## RDS Events
+Subscribes users to receive notifications when changes occur with a DB instance, DB cluster, DB cluster snapshot, DB parameter group, or DB security group.
+## Database log files
+You can view, download, or monitor database log files using the RDS console. You can also query some database log files that are loaded into database tables.
+
+Logs will load to CloudWatch.
+## Enhanced monitoring
+Provides metrics in real time for the operating system. Can also monitor database performance.
+
+Must be selected during instance creation.
+
+Also allows for process monitoring. Users can see which specific process is using more CPU and how much memory.
+
+Key points about process monitoring:
+- PostgreSQL is a process-based architecture
+- All connections and utility processes run as separate OS processes.
+- A process list view is visible from the Amazon RDS console.
+## Performance Insights
+Accesses the load on your database and determines when and where to take action.
+
+Combines some enhanced monitoring metrics with actual database activity, down to individual queries.
+
+Uses lightweight data collection methods that don't affect the performance of your applications.
+
+Requires no configuration or maintenance.
+## RDS Recommendations
+Those recommendations look at automated recommendations for database resources, such as DB instances, DB cluster, and DB cluster parameter groups.
+## Process list
+- Postmaster: Main entry point for the process list. Anytime there's a connection to the database on the default port, it connects to the `portmaster`. From there, it spawns another Per-User Backend process.
+- Utility processes: Backend maintenance processes that PostgreSQL needs to run itself. These include the auto-vacuum process, check pointer, wall rider, and several other processes.
+- Per-User Backend: Every database connection is a Per-User Backend process. If you have 100 connections in a database, there will be 100 Per-User Backend processes plus one `postmaster`.

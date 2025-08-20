@@ -76,6 +76,8 @@ The `monkeypatch` fixture provides these helper methods for safely patching and 
 - `monkeypatch.context()`
 
 For usage examples refer to the documentation [here](https://docs.pytest.org/en/stable/how-to/monkeypatch.html)
+
+>`pytest.monkeypatch` uses the same reference principle as [`unittest.mock.patch`](mock_introduction.md#patching%20external%20libraries%20imports).
 ## Capturing `stdout/stderr` output
 During test execution any output sent to `stdout` and `stderr` is captured. In addition, `stdin` is set to a "null" object which will fail on attempts to read from it.
 

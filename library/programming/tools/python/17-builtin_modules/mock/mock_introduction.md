@@ -74,6 +74,63 @@ with patch.object(ProductionClass, 'method', return_value=None) as mock_method:
     thing = ProductionClass()
     thing.method(1, 2, 3)
 ```
+## patching external libraries imports
+When you import a function from a library like this:
+```python
+# main.py
+import library
+
+def some_fn():
+	library.library_fn()
+	# ...
+```
+You bind the name `library` in your current module's namespace to the module object.
+
+This way you can patch any method of `library` used in your module.
+```python
+# test_main.py
+from unittest.mock import patch
+
+from main import some_fn
+
+@patch("library.library_fn")
+def test_some_fn(mock_lb_library_fn):
+	# make assertions
+```
+
+This works because there's still a reference to the actual module object that contains `library_fn`.
+
+What happens when you use `from library import library_fn` instead?
+
+In this import format, you're copying the reference to `library.library_fn` into your current namespace under the name `library_fn`. In your module, `bar` is just a local name pointing to the original function object at the time of import.
+
+**It's no longer tied to `library.library_fn`**.
+
+Using `@patch("library.library_fn")` doesn't work because **your module has its own reference to the original function**.
+
+`@patch` **replace attribute on modules or classes**. So patching only works if the code you are testing **accesses the function through the module attribute**.
+
+To make it work, you need to **patch your module's reference**.
+```python
+# main.py
+from library import library_fn
+
+def some_fn():
+	library_fn()
+	# ...
+
+# test_main.py
+from unittest.mock import patch
+
+import main
+
+# references your module's reference to the object.
+@patch('main.library_fn')
+def test_some_fn(mock_lb_library_fn):
+	# make assertions
+```
+
+>**Rule of thumb**: Patch where the function is looked up, not where it's defined.
 ## Auto-speccing
 Ensures that the mock objects in your tests have the same API as the objects they are replacing. Functions and methods (including constructors) have the same call signature as the real object.
 
