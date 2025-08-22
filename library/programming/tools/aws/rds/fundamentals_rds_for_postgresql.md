@@ -936,3 +936,72 @@ Those recommendations look at automated recommendations for database resources, 
 - Postmaster: Main entry point for the process list. Anytime there's a connection to the database on the default port, it connects to the `portmaster`. From there, it spawns another Per-User Backend process.
 - Utility processes: Backend maintenance processes that PostgreSQL needs to run itself. These include the auto-vacuum process, check pointer, wall rider, and several other processes.
 - Per-User Backend: Every database connection is a Per-User Backend process. If you have 100 connections in a database, there will be 100 Per-User Backend processes plus one `postmaster`.
+## Native monitoring
+Real-time database monitoring is accomplished using the PostgreSQL statistics collector views.
+
+`pg_stat_activity` provides a snapshot of all the database operations at that moment.
+
+Views such as `pg_stat_all` and `pg_stat_user_tables` are cumulative since the statistics counter was reset or from the point of inception.
+
+`pg_stat_progress_vacuum` will read much like a status bar.
+
+For example, if a DBA wanted to see the number of selects per minute, they would query `pg_stat_user_tables` every minute. The user could then find the delta between what it was and what it is now to get the number of selects per minute on a table.
+
+The list represents commonly used `pg_stat_commands`, for the full list, see [`pg_stats`](https://www.postgresql.org/docs/17/view-pg-stats.html)
+- `pg_stat_activity`
+- `pg_stat_all_tables`
+- `pg_stat_user_tables`
+- `pg_stat_all_indexes`
+- `pg_stat_user_functions`
+- `pg_stat_xact_all_tables`
+- `pg_stat_xact_sys_tables`
+- `pg_stat_xact_user_functions`
+## Process monitoring
+Goes deeper into `pg_stat_activity`.
+
+`pg_stat_activity` has one row per server process, showing information related to the current activity of that process.
+
+We can use process monitoring to see the number of active connections, how long connections are open. Besides the active state, statements can be waiting. Lock contention is a type of wait event.
+
+Wait events are something that the database is waiting on. Can be any operation that is not actively processing in the CPU.
+
+```PostgreSQL
+-- The query bellow shows active connection that are waiting.
+SELECT
+	pid,
+	state,
+	wait_event,
+	query::varchar(20)
+FROM pg_stat_activity
+WHERE state = 'active'
+	AND wait_event IS NOT NULL;
+
+-- Monitors process duration
+SELECT
+	pid,
+	now() - backend_start as connect_time
+FROM pg_stat_activity
+ORDER BY connect_time DESC;
+
+-- Monitoring number of connections
+SELECT COUNT(*) FROM pg_stat_activity;
+```
+
+From `pg_stat_activity`, the `state` field shows the status of the connection.
+
+There are three states:
+- `active`
+- `idle`
+- `idle in transaction`
+
+The goal is to have a status of `active` or `idle`, and have **as few `idle in transaction` connections as possible**.
+
+Too many connections that have the `idle in transaction` status can reduce database efficiency.
+
+Having a high number of idle connections is also not ideal. Too many `idle` connections means that there is a high use of resources in the database resulting in unnecessary overhead.
+
+`idle in transaction` means the query is in the middle of a transaction, but is not currently doing anything. An example would be if a user typed `BEGIN`, and then walked away for lunch.
+
+The _wait_event_ and state columns are independent. If a backend is in the active state, it might or might not be waiting for an event. If the state is active and `wait_event` is non-null, it means that a query is being run but is being blocked somewhere in the system.
+
+For more details, review Section 2 of the PostgreSQL chapter on [Monitoring Database Activity](https://www.postgresql.org/docs/current/monitoring-stats.html).
