@@ -1005,3 +1005,189 @@ Having a high number of idle connections is also not ideal. Too many `idle` conn
 The _wait_event_ and state columns are independent. If a backend is in the active state, it might or might not be waiting for an event. If the state is active and `wait_event` is non-null, it means that a query is being run but is being blocked somewhere in the system.
 
 For more details, review Section 2 of the PostgreSQL chapter on [Monitoring Database Activity](https://www.postgresql.org/docs/current/monitoring-stats.html).
+## Wait Events
+Give details about what a connection is currently waiting on.
+
+Performance Insights has a stacked graph. It breaks down what a query is waiting on at any given point.
+
+The `wait_event_type` indicates the type of event for which the backend is waiting.
+
+There are wait event types and wait event names (`wait_event`). For example, there might be an `LWLock`. This type of wait event might have 1 of 65 wait event names.
+
+The wait event name indicates what exactly is being waited on.
+
+There are nine different wait event types. For the full documentation see [Statistics Collector Chapter](https://www.postgresql.org/docs/current/monitoring-stats.html).
+
+| Type      | Description                                        |
+| --------- | -------------------------------------------------- |
+| LWLock    | Lock protecting a data structure in shared memory  |
+| Lock      | Lock protecting SQL-visible objects such as tables |
+| BufferPin | Waiting for access to a data buffer                |
+| Activity  | Waiting for system processes                       |
+| Extension | Waiting for activity in an extension module        |
+| Client    | Waiting for some activity on a socket              |
+| IPC       | Waiting for another process in the server          |
+| Timeout   | Waiting for a timeout to expire                    |
+| IO        | Waiting for an IO to complete                      |
+A lock is a heavyweight lock. Heavyweight locks are primarily used to protect structured query language (SQL)-visible objects, such as tables. `wait_event` will indicate the type of lock and name to identify the purpose of the lock.
+
+| Type     | Description                                       |
+| -------- | ------------------------------------------------- |
+| Advisory | Waiting to acquire an advisory user lock          |
+| Page     | Waiting to acquire a lock on a page of a relation |
+| Userlock | Waiting to acquire a user lock                    |
+| Relation | Waiting to acquire a lock on a relation           |
+| Tuple    | Waiting to acquire a lock on a tuple              |
+A lightweight lock refers to a quick event. `LWLock` indicates a lightweight lock.
+
+|Type|Description|
+|---|---|
+|AutoFile|Waiting to update the PostgreSQL.auto.conf file|
+|TablespaceCreate|Waiting to create or drop a tablespace|
+|WALWrite|Waiting for Write Ahead Log (WAL) buffers to be written to disk|
+## SSL Monitoring
+The `pg_stat_ssl` view shows whether the connections are using SSL. The view will contain one row per backend or Write Ahead Log, or WAL, sender process.
+
+It's also possible to join to `pg_stat_activity` or `pg_stat_replication` in the `pid` column to get more details about the connection.
+## Query Monitoring
+Queries can be monitored using the `pg_stat_activity` view. It displays one row per backend and shows information related to the current activity of the backend, such as state and current query.
+
+To view usage statistics for their database tables you can use the `pg_stat_user_tables` view. The view contains one row for each table that is in the database. The results contain information and usage from the individual schema and the included tables.
+
+It's possible to get information such as the number of sequential scans and the number of rows read in those sequential scans. It also delivers information about the number of live tuples and the last time the table was vacuumed or analyzed.
+
+Also shows the number of updates, inserts, and deletes there have been since the inception or reset of a database.
+
+Using `pg_stat_user_tables` an user can monitor data flow and application behavior. The user can add the number of sequential scans and index scans, the query will reveal a clear number of read queries on the database. To learn the number of writes, add the number of inserts, updates, and deletes.
+```PostgreSQL
+SELECT
+	(seq_scan + idx_scan) as "Total_Reads",
+	(n_tup_ins, n_tup_upd, n_tup_del) as "Total Writes"
+FROM pg_stat_user_tables;
+```
+
+The `pg_stat_progress_vacuum` view shows which phase a vacuum is in. It first scan the heap (tables). Next, it will scan the indexes. Finally, it will go back and scan the heap again. Based on what phase the process is in, users can see the total number of blocks and the total number of blocks scanned.
+```PostgreSQL
+SELECT * FROM pg_stat_progress_vacuum;
+```
+
+Contrib modules are optional PostgreSQL extensions that give users more robust information about specific aspects of the database. These extension typically have a small memory of CPU penalty.
+
+A frequently used contrib module is `pg_stat_statements` which provides information about all the statements run in the database, such as the total number of times the statement was run.
+
+To access and manipulate theses statistics, the module must be enabled for a specific database using the `CREATE EXTENSION` command.
+```PostgreSQL
+-- Provides information about which queries take the most time.
+SELECT
+	query,
+	calls,
+	total_time,
+	rows,
+	(100.0 * shared_blks_hit / 
+	nullif(shared_blks_hit + shared_blks_read, 0)) hit_percent
+FROM pg_stat_statements
+ORDER BY total_time DESC;
+```
+## PostgreSQL System Catalog
+Is a schema with tables and views that contain metadata about all objects in the database.
+
+In addition to public and user-created schemas, each database contains a `pg_catalog` schema, which contains the system tables and all the built-in data types, functions, and operators. This is where all metadata is contained for any given database.
+
+There are 60 catalogs, which can be categorized as:
+- **Structural**: Used to manage the RDBMS.
+- **Informational**: Used to view table size and monitor activity.
+- **Performance**: Used to monitor performance statistics about queries, tables, and indexes.
+
+Full details of the system catalogs, visit [Chapter 51 of the PostgreSQL documentation](https://www.postgresql.org/docs/12/catalogs.html).
+- [System Functions](https://www.postgresql.org/docs/current/functions-admin.html)
+- [System Monitoring](https://www.postgresql.org/docs/current/monitoring.html)
+- [System Catalog](https://www.postgresql.org/docs/current/catalogs.html)
+
+The **American National Standards Institute (ANSI)** `information_schema` is available in each PostgreSQL database. It offers another way for users to view the information in the system catalog.
+Most of the tables in the `information_schema` are views over the `pg_catalog` equivalent.
+
+Users can describe these views and see exactly how they use the `pg_catalog` to generate their data.
+
+Most of the tables you can query in the catalog are system-wide tables. This means it doesn't matter which database you are connected to. The data represents the whole cluster, not a single database. Shared tables focus on roles, tablespaces, and databases.
+
+Some examples of shared catalog tables are:
+- `pg_database`: Stores information about the available databases.
+- `pg_db_role_setting`: Records the default values that have been set for runtime configuration variables.
+- `pg_auth_members`: Shows the membership between roles.
+## Object Identifiers (OID)
+The names for any type of object or element in a database. Are used internally by PostgreSQL as primary keys for system tables.
+
+You can have more info about OID in [Chapter 8.9 of PostgreSQL documentation](https://www.postgresql.org/docs/current/datatype-oid.html)
+
+![[Pasted image 20250902140820.png]]
+
+The OID alias types have no operations of their own except for specialized input and output routines. These routines are able to accept and display symbolic names for system objects rather than the raw numeric value that a specific type of OID would use.
+```PostgreSQL
+-- Query using OID alias
+SELECT * FROM pg_attribute WHERE attrelid = 'mytable'::regclass;
+
+-- Query Not using OID alias
+SELECT 
+	* 
+FROM pg_attribute 
+WHERE attrelid = (SELECT oid from pg_class WHERE relname = 'mytable');
+```
+## Structural catalogs
+Provide information about all the objects in the current database.
+
+It maintain the structure of the user data model and include:
+- A list of tables
+- A list of columns
+- A list of relationships between tables
+- Function definitions
+### `pg_class`
+Most important system catalog. Contains all the tables, indexes, and sequences. Anything that holds data has a reference in it.
+
+To get an understanding of the relational column types, check the PostgreSQL documentation, chapter [51.11](https://www.postgresql.org/docs/current/catalog-pg-class.html).
+
+Using this catalog you can get information about table relationships and table sizes.
+### `pg_attribute`
+Stores information about table columns. There will be only one `pg_attribute` row for every column in every table in the database.
+
+You can get more info in the docs [here](https://www.postgresql.org/docs/current/catalog-pg-attribute.html).
+## Informational Catalogs
+Focus on activity in the database.
+
+There are two views that show current user activity:
+- `pg_stat_activity`: Shows information about current connections to databases. You can get more info [here](https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW)
+- `pg_locks`: Provides access to information about the locks held by active processes in the database server. Contains one row per active lockable object, requested lock mode, and relevant processes. The same lockable object might appear many times if multiple processes are holding or waiting for locks on it. For more, make sure to read the documentation [here](https://www.postgresql.org/docs/current/view-pg-locks.html)
+## Performance Catalogs
+Used to monitor runtime performance and usage metrics in the database.
+
+The monitoring stats can be placed into three groups:
+- Database specific
+- Table specific
+- Query specific
+### PostgreSQL statistics collector
+Aggregates statistics on a per-table, per-database, or per-index basis, ,depending on the metric.
+
+Users can find information about performance by querying the following catalogs:
+- `pg_stat_database`: Collects statistics about each database in the cluster.
+- `pg_stat_user_tables`: Displays statistics for each user table in a particular database.
+- `pg_stat_user_indexes`: Shows how often each index in any database is used.
+- `pg_stat_bgwriter`: Returns one row of data that shows the number of total checkpoints occurring across all databases in your cluster.
+- `pg_statio_user_tables`: Helps you analyze how often your queries are using the shared buffer cache.
+### PostgreSQL functions
+The catalog `pg_proc` stores information about functions. You can get more form the documentation [here](https://www.postgresql.org/docs/current/functions.html).
+
+You can use `pg_size_pretty()` to format the results of a query into a human-readable format.
+You can use use the following queries to get information about the size of tables:
+- `pg_relation_size`: shows just the relation.
+- `pg_table_size`: shows relation, TOAST, free-space map (FSM), and visibility map (VM).
+- `pg_total_relation_size`: Relation, TOAST, FSM, VM, and Indexes.
+## Routine Database Maintenance Optimization
+There are four required maintenance tasks:
+- Create backup copies: For more see the documentation [here](https://www.postgresql.org/docs/current/backup.html).
+- Vacuum the database: For more see the documentation [here](https://www.postgresql.org/docs/current/routine-vacuuming.html)
+- Manage log files: Set a retention period for system logs by using the `rds.log_retention_period` parameter. Can also be managed by RDS and Aurora.
+- Update planner statistics: The query planner relies on statistical information about the contents of tables to generate good plans for queries. It's important to have accurate statistics.
+## Bloat
+Bloat, or fragmentation, can happen in tables and indexes. It is a side effect of the PostgreSQL [MVCC](MVCC.md). When a user runs UPDATE or DELETE statements, dead space is left behind. This dead space is unavailable and takes up disk space.
+If the database is maintained properly using VACUUM and the workload permits, this dead space can be reused. However, this leftover, unused space can occupy unnecessary disk space for INSERT, UPDATE, DELETE, and SELECT commands.
+
+When you delete a row, it is not actually deleted. It is only marked as unavailable to future transactions. This dead space is bloat. Every time you run a query against a table, the query checks the visibility flags on individual rows and index entries to determine whether they are available to the transaction. Dead rows add time to a transaction. This is an example of how bloat can lead to poor performance.

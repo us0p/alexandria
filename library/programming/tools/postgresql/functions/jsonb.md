@@ -146,3 +146,34 @@ FROM Example e;
 -- | 2   | ["plpgsql"]                  | 1         |
 -- | 3   | []                           | 0         |
 ```
+## `jsonb_agg`
+Set-aggregation function. It takes all the input values from the aggregate group and produces a single **JSONB array** containing those values.
+```PostgreSQL
+SELECT
+	jsonb_agg(id)
+FROM (VALUES (1), (2), (3)) t(id);
+
+-- [1, 2, 3]
+
+-- You can aggregate whole rows into JSONB objects
+SELECT
+	jsonb_agg(to_jsonb(u))
+FROM users u;
+
+-- [
+--   {"id": 1, "name": "Alice"},
+--   {"id": 2, "name": "Bob"}
+-- ]
+
+-- You can use it with GROUP BY to collect values per group.
+SELECT
+	department,
+	jsonb_agg(name ORDER BY name) employees
+FROM employees
+GROUP BY department;
+
+-- [
+--   {"department": "HR", "employees": ["Alice", "Bob"]},
+--   {"department": "IT", "employees": ["Charlie", "Dave"]}
+-- ]
+```
