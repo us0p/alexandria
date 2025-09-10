@@ -41,3 +41,11 @@ Server that runs your workflows when they're triggered. Each runner can run a si
 Each workflow run executes in a fresh, newly-provisioned virtual machine.
 
 If you need a different operating system or require a specific hardware configuration, you can host your own runners.
+## Using open-source GitHub Actions
+- Review the action's `action.yml` file for inputs, outputs, and to make sure the code does what it says it does.
+- Include the version of the action you're using by specifying a Git ref, SHA ,or tag.
+## Types of GitHub Actions
+There are three types of GitHub Actions:
+- Container actions: Environment is part of the action's code. Can only be run in a Linux environment that GitHub hosts. Support many different languages.
+- JavaScript actions: Don't include the environment in the code. You have to specify the environment to execute these actions. Can be run in VM, cloud or on-prem. Supports Linux, macOS and Windows environments.
+- Composite actions: Allow you to combine multiple workflow steps within one action.

@@ -2,11 +2,6 @@ package main
 
 import "fmt"
 
-// The size of the Array is encoded in its type. If you try to pass an [4]int
-// into a function that expects [5]int, it won't compile.
-// They are different types so it's just the same as trying to pass a string
-// into a function that wants an int.
-
 // You can't use slices with arrays as they are from different types;
 // []int cannot be used with [5]int;
 func Sum(numbers []int) int {
