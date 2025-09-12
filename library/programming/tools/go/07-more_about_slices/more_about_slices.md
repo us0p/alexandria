@@ -1,3 +1,4 @@
+```go
 package main
 
 import (
@@ -134,3 +135,4 @@ func main() {
 	fmt.Printf("Occasionally this can cause the program to hold all the data in memory when only a small piece of it is needed.\n\n")
 	fmt.Printf("To fix this problem one can copy the interesting data to a new slice with make and return it.\n")
 }
+```

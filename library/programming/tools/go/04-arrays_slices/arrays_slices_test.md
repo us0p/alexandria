@@ -1,3 +1,4 @@
+```go
 package main
 
 import (
@@ -47,4 +48,4 @@ func TestSumAllTails(t *testing.T){
         checkSums(t, got, want)
     })
 }
-
+```
