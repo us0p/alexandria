@@ -1,0 +1,1 @@
+Contains all triggers defined into the database.

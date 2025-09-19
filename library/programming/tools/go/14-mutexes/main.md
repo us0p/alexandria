@@ -1,3 +1,4 @@
+```go
 package main
 
 import (
@@ -49,3 +50,4 @@ func readLoop(m map[int]int, mu *sync.Mutex) {
         mu.Unlock()
 	}
 }
+```

@@ -2,7 +2,7 @@
 Executes a query without returning any rows.  
   
 It can also receive parameters for query placeholders.
-```golang
+```go
 import (
     "database/sql"
     "context"

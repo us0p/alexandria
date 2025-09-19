@@ -11,7 +11,7 @@ You fetch the results of the query by calling:
 - `QueryContext`
 - `QueryRowContext`
   
-```golang
+```go
 import(
     "database/sql"
     "context"

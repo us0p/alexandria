@@ -50,3 +50,26 @@ SELECT pg_cancel_backend(8000);
 ```
 
 >Ending a connection will launch a rollback for any transactions that are in process when the connection is closed.
+## `pg_get_functiondef`
+Returns the definition of the provided function `oid`.
+
+The `oid` can be retrieved from the [System catalog `pg_proc`](pg_catalog_pg_proc.md).
+```PostgreSQL
+SELECT
+	p.oid,
+	p.proname, -- procedure name
+	pg_get_functiondef(p.oid) -- function definitions
+FROM pg_catalog.pg_proc p
+WHERE p.prokind != 'a' -- ignores aggregate functions
+	AND pg_get_functiondef(p.oid) ilike '%some statement%'; -- returns functions that contains this statement.
+```
+## `pg_get_triggerdef`
+Returns the definition of the provided trigger `oid`.
+
+The `oid` can be retrieved from the [System catalog `pg_trigger`](pg_catalog_pg_trigger.md).
+```PostgreSQL
+SELECT
+	tgname,
+	pg_get_triggerdef(oid) -- trigger definition
+FROM pg_catalog.pg_trigger;
+```

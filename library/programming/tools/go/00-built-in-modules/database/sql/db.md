@@ -1,19 +1,15 @@
 # `sql/DB`
-This type represents a database handle with a pool of zero or more 
-underlying connections. It's safe for concurrent use by multiple 
-goroutines.
+This type represents a database handle with a pool of zero or more  underlying connections. It's safe for concurrent use by multiple  goroutines.
 ## `sql/Open`
 Opens a database specified by its database driver needed info.  
   
 Returns an instance of `*sql.DB`.  
   
-Note that this function doesn't open a database connection, this is 
-deffered until a query is made.
+Note that this function doesn't open a database connection, this is  deffered until a query is made.
 ## `*DB.PingContext`
-Verifies a connection to the database is still alive, establishing a 
-connection if necessary.
+Verifies a connection to the database is still alive, establishing a  connection if necessary.
 ## Examples
-```golang
+```go
 import (
     "database/sql"
     "driver"

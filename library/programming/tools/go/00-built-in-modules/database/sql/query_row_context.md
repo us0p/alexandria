@@ -10,7 +10,7 @@ If the query selects no rows, the `*Row.Scan` will return `ErrNoRows`.
 Otherwise, `*Row.Scan` scans the first selected row and discards the rest.
 ## Examples
 ### Separate columns
-```golang
+```go
 import (
     "context"
     "database/sql"

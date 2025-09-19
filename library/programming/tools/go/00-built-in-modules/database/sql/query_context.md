@@ -2,7 +2,7 @@
 Execute a query that returns rows.  
   
 It can receive the query placeholders as arguments.
-```golang
+```go
 import (
     "database/sql"
     "context"

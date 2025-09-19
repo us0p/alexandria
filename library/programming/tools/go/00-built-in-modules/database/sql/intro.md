@@ -3,14 +3,12 @@ Provides a generic interface around SQL databases.
   
 The SQL package must be used in conjunction with a [database driver](https://go.dev/wiki/SQLDrivers).  
   
-Drivers that do not support context cancellation will not return until 
-after the query is completed.  
+Drivers that do not support context cancellation will not return until  after the query is completed.  
 ## Dealing with `NULL`
-If a database column is nullable, one of the types supporting null values 
-should be passed to Scan.  
+If a database column is nullable, one of the types supporting null values  should be passed to Scan.  
   
 For example, if the name column in the names table is nullable.
-```golang
+```go
 import "database/sql"
 
 func main() {
@@ -42,8 +40,6 @@ Default `database/sql` Nullable types implementation:
 - `NullString`
 - `NullTime`
   
-User types supporting NULL can be created by implementing 
-interfaces `sql/driver.Valuer` and `sql.Scanner`.
+User types supporting NULL can be created by implementing  interfaces `sql/driver.Valuer` and `sql.Scanner`.
   
->You can also pass pointer types. Be careful for performance issues as it 
-requires extra memory allocations.
+>You can also pass pointer types. Be careful for performance issues as it requires extra memory allocations.
