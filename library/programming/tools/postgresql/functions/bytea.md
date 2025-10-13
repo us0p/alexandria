@@ -47,3 +47,17 @@ Converts text into a binary data using a specified character encoding:
 -- Converting the string "Hello, World!" using the UTF-8 encoding.
 SELECT convert_to('Hello, World!', 'UTF8');
 ```
+## Removing unwanted bytes before using `convert_from`
+```PostgreSQL
+SELECT convert_from( -- converts bytea column to TEXT using a particular encoding
+	decode( -- converts text data of a particular format into bytea
+		replace( -- replaces unwanted data with empty character
+			encode(bytea_column, 'escape'), -- converts bytea column into text using espace format to escape all bytes
+			'\u0000', -- empty byte, usually not supported into textual data
+			''
+		),
+		'escape'
+	),
+	'UTF8'
+)
+```
