@@ -1,3 +1,4 @@
+```go
 package main
 
 import "math"
@@ -126,3 +127,4 @@ func GetArea(form InterfacePointer) int {
 // Example:
 // var sq2 = &square{1}
 // GetArea(b)
+```

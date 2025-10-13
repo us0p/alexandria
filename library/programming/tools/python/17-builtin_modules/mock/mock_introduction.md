@@ -1,4 +1,4 @@
-Is a library for testing in Python. It allows you to replace parts of your system under test with mock objects and make assertions about how they have been used.
+.Is a library for testing in Python. It allows you to replace parts of your system under test with mock objects and make assertions about how they have been used.
 
 Mock is designed for use with `unittest` and is based on the `action -> assertion` pattern instead of `record -> replay` used by many mocking frameworks.
 

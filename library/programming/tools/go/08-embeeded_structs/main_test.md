@@ -1,3 +1,4 @@
+```go
 package main
 
 import "testing"
@@ -54,3 +55,4 @@ func TestPerson(t *testing.T) {
         t.Errorf("Expecting car maker to be %s, got %s", "Ford", person.car.maker)
     }
 }
+```

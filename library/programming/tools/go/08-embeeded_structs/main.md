@@ -1,3 +1,4 @@
+```go
 package main
 
 type Occupation struct {
@@ -24,3 +25,4 @@ type Person struct {
 
 // All the methods present in the embedded Occupation struct will be
 // accesssible from the Person struct too.
+```

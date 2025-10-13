@@ -1,3 +1,4 @@
+```go
 package main
 
 import "fmt"
@@ -5,7 +6,9 @@ import "fmt"
 type Enum int // creating specific type for type safety
 
 const (
-	StateActive Enum = iota // iota generates successive constant values automatically.
+	// iota generates successive constant values automatically.
+	// Starts from 0.
+	StateActive Enum = iota 
 	StateAway
 	StateOffline
 )
@@ -26,3 +29,4 @@ func main() {
 	fmt.Println(StateAway)    // should print "away"
 	fmt.Println(StateOffline) // should print "offline"
 }
+```

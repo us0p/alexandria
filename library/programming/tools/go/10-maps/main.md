@@ -1,3 +1,4 @@
+```go
 package main
 
 import "fmt"
@@ -92,3 +93,4 @@ func main() {
 type key struct {
 	path, country string
 }
+```

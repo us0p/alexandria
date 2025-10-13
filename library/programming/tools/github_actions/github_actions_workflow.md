@@ -18,6 +18,18 @@ on:
 	pull_request:
 		branches: [ "main", "releases/**" ] # Using JSON sequence style
 ```
+## `on.workflow_dispatch`
+Allows you to manually trigger a workflow. Unlike automatic triggers, this one requires a user to explicitly start it from the GitHub UI, API, or CLI.
+
+Can also be used when you don't want a workflow to run automatically on every commit or PR.
+
+Allows you to define parameters with descriptions, default values and required/optional flags.
+
+In GitHub UI, when you enabled `workflow_dispatch`, in the **Actions** tab, when clicking **Run Workflow** you'll be able to manually run the workflow. If inputs are defined, you'll get a form to fill them in.
+
+It can be empty, which means that the workflow can be manually triggered, but it won't ask the user for any parameters.
+
+This trigger only receives events when the workflow file is on the default branch.
 ### `jobs`
 Components of a `workflow`.
 
@@ -28,6 +40,14 @@ Each job runs in a runner environment specified by `runs-on`.
 Used to give your job a unique identifier.
 
 `<job_id>` is a string and its value is a map of the job's configuration data. It must start with a letter or `_` and contain only alphanumeric characters, `-`, or `_`.
+#### `jobs.<job_id>.environment`
+Defines the environment that the job references.
+```yaml
+# using environment name and URL
+environment:
+	name: production_environment
+	url: https://github.com
+```
 #### `jobs.<job_id>.runs-on`
 Used to define the type of machine to run the job on.
 
@@ -39,6 +59,23 @@ jobs:
 	build: # job_id
 		runs-on: ubuntu-latest # Will run on a GitHub hosted machine.
 ```
+#### `jobs.<job_id>.needs`
+Used to identify any jobs that must complete successfully before this job will run.
+
+It can be a string or array of strings.
+
+If a job fails or is skipped, all jobs that need it are skipped unless the jobs use a conditional expression that causes the job to continue.
+
+If a run contains a series of jobs that need each other, a failure or skip applies to all jobs in the dependency chain from the point of failure or skip onwards.
+```yaml
+jobs:
+	job1:
+	job2:
+		needs: job1
+	job3:
+		needs: [job1, job2]
+```
+In this example, `job1` must complete successfully before `job2` begins, and `job3` waits for both `job1` and `job2` to complete.
 #### `jobs.<job_id>.steps`
 Sequence of tasks assigned to a job.
 
@@ -53,6 +90,8 @@ steps:
 ```
 
 If you define a `run` step, the name will default to the text specified in the `run` command.
+#### `jobs.<job_id>.steps[*].id`
+A unique identifier for the step. You can use the `id` to reference the step in contexts.
 #### `jobs.<job_id>.steps[*].uses`
 Selects an action to run as part of a step in your job. An action is a reusable unit of code.
 
@@ -101,6 +140,15 @@ jobs:
 				  middle_name: The
 				  last_name: Octocat
 ```
+#### `job.<job_id>.steps[*].working-directory`
+Allows specifying the working directory of where to run the command.
+```yaml
+- name: Clean temp directory
+  run: rm -rf *
+  working-directory: ./temp
+```
+#### `job.<job_id>.steps[*].continue-on-error`
+Prevents a job from failing when a step fails. Set to `true` to allow a job to pass when this step fails.
 #### `job.<job_id>.strategy`
 Sets a matrix strategy for your jobs.
 

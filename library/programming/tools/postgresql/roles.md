@@ -39,3 +39,60 @@ The GRANT command assigns specific privileges to an object, one or more users, o
 The REVOKE command removes a previously granted privilege from a user or group.
 
 A user has the sum of privileges granted directly to them, privileges granted to any group they belong to, and privileges granted to PUBLIC (the implicitly defined group of all users).
+## Listing Database Roles
+Roles are listed under the [`pg_roles`](pg_catalog_pg_roles.md) system catalog:
+```PostgreSQL
+SELECT * FROM pg_roles;
+
+-- Joining with pg_database and pg_nasmespace we can check each role permission for schema and database.
+SELECT
+	d.datname,
+	n.nspname,
+	r.rolname,
+	has_database_privilege(r.rolname, d.datname, 'CONNECT') can_connect_db,
+	has_database_privilege(r.rolname, d.datname, 'CREATE') can_create_db,
+	has_database_privilege(r.rolname, d.datname, 'TEMP') can_create_temp_db,
+	has_schema_privilege(r.rolname, n.nspname, 'CREATE') can_create_schema,
+	has_schema_privilege(r.rolname, n.nspname, 'USAGE') can_use_schema
+FROM pg_database d
+CROSS JOIN pg_roles r
+CROSS JOIN pg_namespace n
+ORDER BY d.datname, n.nspname, r.rolname
+```
+## Granting privileges
+```PostgreSQL
+-- Granting privileges on table to several roles at once
+GRANT SELECT, INSERT
+ON TABLE customers
+TO role_name1, role_name2;
+
+-- Granting permission to all tables in schema
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO role_name1, role_name2;
+
+-- Defining default permissions to all future tables in the schema
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+GRANT SELECT ON TABLES TO role_name1, role_name2;
+
+-- Granting database-level permissions
+GRANT CONNECT, TEMP ON DATABASE salesdb TO role_name1, role_name2;
+
+-- Granting all privileges to single table
+GRANT ALL PRIVILEGES ON TABLE customers TO role_name1, role_name2;
+
+-- Granting all privileges to all tables in a schema
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO role_name1, role_name2;
+
+-- Granting all privileges on schema
+-- Grants CREATE and USAGE
+GRANT ALL PRIVILEGES ON SCHEMA public TO role_name1, role_name2;
+
+-- Granting all privileges on a database
+-- Grants CONNECT, CREATE and TEMP
+GRANT ALL PRIVILEGES ON DATABASE db_name TO role_name1, role_name2;
+
+-- Granting all privileges for sequences in a schema
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO role_name1, role_name2;
+
+-- Granting all privileges for all functions in a schema
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO role_name1, role_name2;
+```

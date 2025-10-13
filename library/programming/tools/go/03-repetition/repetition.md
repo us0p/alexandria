@@ -1,3 +1,4 @@
+```go
 package iteration
 
 import "strings"
@@ -22,3 +23,4 @@ func Reverse(str []byte) {
 func NativeRepeat(character string, times int) string {
 	return strings.Repeat(character, times)
 }
+```
