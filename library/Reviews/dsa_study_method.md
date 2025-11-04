@@ -1,0 +1,3 @@
+- Use C to force fundamentals.
+- Don't waste too much time on the same algorithm, do one for each variation of the algorithm or 5 to 10 exercises and go to the next, keep a rotative routine on the basics. E.g. Two pointers can be used to find pairs or to partition arrays, doing 5 to 10 exercises on each of those variations should be good enough.
+- Should always determine what the problem is about, the most difficult exercises are all about interpretation rather than implementation.
