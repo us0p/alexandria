@@ -1,0 +1,20 @@
+# Singleton
+Is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.
+
+This pattern violates the single responsibility principle as it solves two problems at the same time:
+- Ensure that a class has just a single instance, this is done when you want to control access to some shared resource like a database or file.
+- Provide a global access point to that instance, this pattern lets you access some object from anywhere in the program. However, it also protects that instance from being overwritten by other code.
+- Use the Singleton pattern when you need stricter control over global variables. Unlike global variables, the Singleton pattern guarantees that there’s just one instance of a class. Nothing, except for the Singleton class itself, can replace the cached instance.
+## How
+- Make the default constructor private, to prevent other objects from using the new operator with the Singleton class.
+- Create a static creation method that acts as a constructor. Under the hood, this method calls the private constructor to create an object and saves it in a static field. All following calls to this method return the cached object.
+## Advantages:
+- You can be sure that a class has only a single instance.
+- You gain a global access point to that instance.
+- The singleton object is initialized only when it's requested for the first time.
+## Disadvantages:
+- The pattern requires special treatment in a multithread environment so that multiple threads won't create a singleton object several times.
+- The Singleton pattern can mask bad design, for instance, when the components of
+- It may be difficult to unit test the client code of the Singleton because many test framework rely on inheritance when producing mock objects. Since the constructor of the singleton class is private and overriding static methods is impossible in most languages, you will need to think of a creative way to mock the singleton.
+- Violates the single responsibility principle, solve two problems at the same time.
+  the program know too much about each other.
