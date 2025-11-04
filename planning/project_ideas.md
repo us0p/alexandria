@@ -1,4 +1,8 @@
 # Project ideas
+## Indexed search
+How an indexed search works? What about a relevance search? How to design it? How to implement it?
+## Shortening URL service
+A service that shortens an URL
 ## Stay up to date
 A software that pulls updates about specified techs from many sources to 
 give you the most recent information about the tech world.
