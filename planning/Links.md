@@ -1,4 +1,10 @@
 # Links
+### System Design
+[System Design Interview Prep](https://github.com/donnemartin/system-design-primer)
+[How to learn Software Design and Architecture | Design & Architecture Map](https://khalilstemmler.com/articles/software-design-architecture/full-stack-software-design/)
+[Layrs | Leet Code for system design](https://layrs.me/)
+
+---
 ## Articles
 [Dependency Injection](https://angular.dev/guide/di)
 [Formatting vs. Linters](https://prettier.io/docs/en/comparison.html)
@@ -22,7 +28,5 @@
 ### System Programming
 [MIT xv6 for OS Programming](https://github.com/mit-pdos/xv6-riscv)
 [MIT xv6 book](https://github.com/mit-pdos/xv6-riscv-book)
-### System Design
-[System Design Interview Prep](https://github.com/donnemartin/system-design-primer)
 ## Videos
 [Web AI: Client Side Machine Learning](https://goo.gle/WebAIVideos)
