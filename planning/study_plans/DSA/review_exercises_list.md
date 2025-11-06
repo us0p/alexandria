@@ -1,2 +1,3 @@
 - 11/04/2025: [Longest Palindromic Substring - LeetCode](https://leetcode.com/problems/longest-palindromic-substring/description/?envType=problem-list-v2&envId=two-pointers)
 - 11/05/2025: [4Sum - LeetCode](https://leetcode.com/problems/4sum/description/?envType=problem-list-v2&envId=two-pointers)
+- 11/06/2025: [Two Sum - LeetCode](https://leetcode.com/problems/two-sum/)
