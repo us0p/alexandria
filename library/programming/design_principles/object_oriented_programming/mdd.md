@@ -1,5 +1,9 @@
 # Model Driven Design (MDD)
-Methodology in which the design of a system is represented by a set of models, and the models are used to drive the development of the system.
+Methodology in which the design of a system is represented by a set of models (e.g.: UML diagrams), and the models are used to drive the development of the system.
+### History
+Launched as part of Model-Driven Architecture (MDA) in 2001. It is a form of automation to generate code from models (class diagramas like UML).
+#### Relationship with DDD
+Domain-Driven Design was created in 2003 by Eric Evans and it was a result of the very abstract work MDD was creating. It aims to move the diagrams as a living language and model within the codebase to avoid generic abstractions.
 ## Domain Models
 Used to provide a clear and consistent representation of the problem domain, and to capture the business requirements and constraints of the system.
 

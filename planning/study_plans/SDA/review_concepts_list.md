@@ -1,2 +1,5 @@
 - [Object Oriented Programming (OOP)](oop.md)
 - [Clean Code](clean_code.md)
+- [Model-Driven Design (MDD)](mdd.md)
+- [Domai-Driven Design (DDD)](ddd.md)
+- [Clean Architecture](clean_architecture.md)
