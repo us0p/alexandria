@@ -177,3 +177,27 @@ GROUP BY department;
 --   {"department": "IT", "employees": ["Charlie", "Dave"]}
 -- ]
 ```
+## `jsonb_object_agg`
+Set-aggregation function. It takes two columns (or expressions) — one for keys, one for values — and combines all rows into a single JSONB object.
+```PostgreSQL
+-- Considering the followgint input
+-- | customer | product  | quantity |
+-- | Alice    | Apple    | 3        |
+-- | Alice    | Banana   | 2        |
+-- | Bob      | Apple    | 5        |
+
+SELECT
+  customer,
+  jsonb_object_agg(product, quantity) AS order_summary
+FROM orders
+GROUP BY customer;
+
+-- The query provides the following output
+-- | customer | order_summary             |
+-- | Alice    | {"Apple": 3, "Banana": 2} |
+-- | Bob      | {"Apple": 5}              |
+```
+### Notes
+- If the **key** expression produces duplicates, the last one wins.
+- If the **key** expression is `null`, the row is ignored.
+- If the **value** expression is `null`, the key's value is stored as JSON `null` value.
