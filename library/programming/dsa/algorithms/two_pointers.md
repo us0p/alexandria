@@ -1,4 +1,4 @@
-	# Two Pointers
+# Two Pointers
 Is a technique that uses two pointers to track pairs in a structure and it should be used when you see a question that involves searching for a pair (or more!) of elements in an array that meet a certain criteria.
 
 This technique is efficient because it focuses in **eliminating** unnecessary pairs from the search usually producing an O(n) running time.
