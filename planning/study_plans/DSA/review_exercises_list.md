@@ -7,3 +7,4 @@
 	- 11/11/2025: [Two Sum - LeetCode](https://leetcode.com/problems/two-sum/)
 - 11/16/2025: [Sort Colors - LeetCode](https://leetcode.com/problems/sort-colors/submissions/1831649712/?envType=problem-list-v2&envId=two-pointers)
 - 11/16/2025: [Remove Duplicates from Sorted List 2](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/?envType=problem-list-v2&envId=two-pointers)
+	- 11/17/2025: [Remove Duplicates from Sorted List 2](https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/?envType=problem-list-v2&envId=two-pointers)
