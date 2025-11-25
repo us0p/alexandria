@@ -184,6 +184,101 @@ When a new object is to be added to the Repository, it should be created first u
 Another way this is noted is that Factories are “pure domain”, but that Repositories can contain links to the infrastructure.
 
 ![[Pasted image 20251117073843.png]]
+## Refactoring Towards Deeper Insight
+### Bring Key Concepts Into Light
+Refactoring through small steps yield incremental improvements, occasionally producing a **Breakthrough**. Each refinement clarifies the design and might reveal **implicit concepts**. When those hidden concepts prove essential, we should make them explicit through new classes, relationships, and languages terms.
+
+Some concept types are especially valuable to make explicit:
+- **Constraints**: invariants
+- **Processes**: best implemented as Services or Strategies when multiple algorithms exist for a given process. Processes should only become explicit when the Ubiquitous Language names them.
+
+Finally, **Specifications** encapsulate complex business rules that would otherwise bloat Entities or Value Objects. Those rules might seems to stretch beyond the domain level making us think it should be moved to the application layer. Actually, the rule should be encapsulated into an object of its own, which becomes the Specification of the original object, and should be kept in the domain layer.
+
+The new object will contain a series of Boolean methods which test if a certain object is eligible for credit or not. Each method plays the role of a small test, and all methods combined give the answer to the original question.
+
+If the business rule is not comprised in one Specification object, the corresponding code will end up being spread over a number of objects, making it inconsistent.
+```go
+customer := customerRepository.findCustomer(customerIdentiy)
+
+customerEligibleForRefund := NewSpecification( 
+	NewCustomerPaidHisDebtsInThePast(), 
+	NewCustomerHasNoOutstandingBalances(),
+)
+
+if customerEligibleForRefund.isSatisfiedBy(customer) { 
+	refundService.issueRefundTo(customer)
+}
+```
+## Preserving Model Integrity
+When multiple teams work on a project, code development is done in parallel, each team is assigned to a specific part of the model. Those parts are more or less interconnected. Different teams making changes to different parts of the model can cause the functionality to break and effectively changing the model.
+
+The first requirement of a model is to be consistent, with invariable terms and no contradictions. The internal consistency of a model is called **unification**.
+
+We shouldn't aim for a unified enterprise model because it's not easily accomplished, and sometimes not even worth trying. 
+
+Instead, we should consciously divide it into several models. Several models well integrated can evolve independently as long as they obey the contract they are bound to. Each model should have a clearly delimited border, and the relationships between models should be defined with precision.
+### Bounded Context
+Each model has a context. When we deal with a single model, the context is implicit and we don't need to define it. When we work on a large enterprise application, we need to define the context for each model we create.
+
+In most cases, try to put a model, elements which are related, and which form a natural concept. A model should be small enough to be assigned to one team.
+
+The context of a model is the set of conditions which need to be applied to make sure that the terms used in the model have a specific meaning. For that we need to draw up the boundaries of its context, then keep it unified.
+
+Explicitly set boundaries in terms of team organization, usage within specific parts of the application, and physical manifestations such as code bases and database schemas.
+
+A Bounded Context is not a Module. Modules are used to organize the elements of a model, so Bounded Context encompasses the Module.
+
+There is a price to pay for having multiple models. We need to define the borders and the relationships between different models. This requires extra work and design effort, and there will be perhaps some translation between different models. But this is not a very difficult task, and the benefits are worth taking the trouble.
+### Context Map
+Document which outlines the different Bounded Contexts and the relationships between them. Each bounded context name should be part of the Ubiquitous Language.
+
+Everyone should know the boundaries of each context and the mapping between contexts and code.
+
+![[Pasted image 20251118180703.png]]
+
+We present a series of patterns which can be used to create Context Maps where contexts have clear roles and their relationships are pointed out:
+- Shared Kernel and Customer-Supplier are patterns with a high degree of interaction between contexts.
+- Separate Ways is a pattern used when we want the contexts to be highly independent and evolve separately.
+
+There are another two patterns dealing with the interaction between a system and a legacy system or an external one, and they are Open Host Services and Anticorruption Layers.
+#### Shared Kernel
+When functional integration is limited, the overhead of continuous integration may be deemed too high. So separate Bounded Contexts might be defined and multiple teams formed.
+
+Therefore, designate some subset of the domain model that the two teams agree to share.
+
+Of course this includes, along with this subset of the model, the subset of code or of the database design associated with that part of the model. This explicitly shared stuff has special status, and shouldn’t be changed without consultation with the other team.
+
+The purpose of the Shared Kernel is to reduce duplication, but still keep two separate contexts. Development on a Shared Kernel needs a lot of care. Both teams may modify the kernel code, and they have to integrate the changes. During these integrations, run the tests of both teams.
+
+Any change of the kernel should be communicated to another team, and the teams should be informed, making them aware of the new functionality.
+#### Customer-Supplier
+Is a pattern that depicts two subsystems that have have a dependency relationship. One depends a lot on the other.
+
+The contexts in which those two subsystems exist are different, and the processing result of one system is fed into the other.
+
+They do not have a Shared Kernel, because it may not be conceptually correct to have one, or it may not even be technically possible for the two subsystems to share common code.
+
+The customer team should present its requirements, while the supplier team should make the plans accordingly. 
+
+While all the customer team’s requirements will have to be met in the end, the timetable for doing that is decided by the supplier team. If some requirements are considered really important, they should be implemented sooner, while other requirements might be postponed.
+
+The customer team will also need input and knowledge to be shared by the supplier team. This process flows one way, but it is necessary in some cases.
+
+The interface between the two subsystems needs to be precisely defined. A conformity test suite should be created and used to test at any time if the interface requirements are respected.
+
+> This pattern works well when the teams are under the same management.
+##### E-Commerce example
+Let's consider two models, **web shopping** and **reporting** of an e-commerce application.
+
+Notice that the web shopping is not at all concerned about the reporting module data but the reporting module is very much concerned about the web shopping data and actually might need some extra data to take on it's tasks.
+
+Following that, the supplier subsystem (web-shopping) has to implement some specifications which are needed by the customer subsystem (reporting). 
+
+Another requirement is related to the database used, more exactly its schema. Both applications will make use of the same database.
+
+If the e-shopping subsystem was the only one to access the database, the database schema could be changed any time to reflect its needs. But the reporting subsystem needs to access the database too, so it needs some stability of its schema.
+
+The two teams will need to communicate, probably they will have to work on the database together, and decide when the change is to be performed. This will act as a limitation for the reporting subsystem, because that team would prefer to swiftly do the change and move on with the development, instead of waiting on the e-shopping app.
 ## Notes
 - Subdomain: A domain consists of several subdomains that refer to different parts of the business logic.
 - Bounded context: This is where you implement the code, after you’ve defined the domain and the subdomains. Bounded contexts actually represent boundaries in which a certain subdomain is defined and applicable.
