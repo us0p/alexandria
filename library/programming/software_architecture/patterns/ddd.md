@@ -279,11 +279,81 @@ Another requirement is related to the database used, more exactly its schema. Bo
 If the e-shopping subsystem was the only one to access the database, the database schema could be changed any time to reflect its needs. But the reporting subsystem needs to access the database too, so it needs some stability of its schema.
 
 The two teams will need to communicate, probably they will have to work on the database together, and decide when the change is to be performed. This will act as a limitation for the reporting subsystem, because that team would prefer to swiftly do the change and move on with the development, instead of waiting on the e-shopping app.
+### Conformist
+The model Customer-Supplier only works if both teams are under the same management. If management is poor or the teams belong to different companies the Supplier has no motivation to provide for the Customer team's needs, leaving the customer team helpless. An interface tailored to the customer's needs is not in the cards.
+
+The Customer team can only use the Supplier team's interface as part of their model, and build on their existing code provided.
+
+When somebody providers a rich component with an interface, we can build our model including the respective component as it would be our own. If the component has a small interface, it might be better to simply create an adapter for it, and translate between our model and the component's model. This isolates our model, and we can develop it with a high degree of freedom.
+#### Anticorruption Layer
+There are different ways for our client system to interact with an external one, network or database. In both cases we are dealing with primitive data being transferred between the systems. The truth is that primitive data does not contain any information about the models.
+
+We cannot take data from a database and treat it all as primitive data. There is a lot of semantics hidden behind the data. The client application cannot access the database and write to it without understanding the meaning of the data used. There is the risk for the external model to alter the client model if we allow that to happen.
+
+We cannot ignore the interaction with the external model, but we should be careful to isolate our own model from it.
+
+An Anticorruption Layer stands between our client and the external models.
+
+From our model's perspective, it does not look like something foreign. But, for the external system, it talks using the external language not the client one. 
+
+It works as a two way translator between two domains and languages. The client model remains pure and consistent without being contaminated by the external one.
+
+Usually, the **Anticorruption Layer** should be seen as a **Service** from the client model. In the actual implementation, the Service will be done as a **Facade**. Besides that, the Anticorruption Layer will most likely need an **Adapter**. In our case the Adapter does not necessarily wrap a class, because its job is to translate between two systems.
+
+It can also contain more than one Service. For each Service there is a corresponding Facade, and for each Facade we add an Adapter. We also need **object and data conversion**. This is done using a **Translator**. A very simple object, with little functionality, serving the basic need of data translation.
+
+![[Pasted image 20251121160133.png]]
+#### Separate Ways
+Addresses the case when an enterprise application can be made up of several smaller applications which have little or nothing in common from a modeling perspective.
+
+We should look at the requirements and see if they can be divided in two or more sets which do not have much in common. If that can be done, then we can create separate Bounded Contexts and do the modeling independently. Before going on Separate Ways we need to make sure that we won’t be coming back to an integrated system. Models developed independently are very difficult to integrate.
+#### Open Host Service
+When we try to integrate two subsystems, we usually create a translation layer between them. If the external subsystem turns out to be used not by one client subsystem, but by several ones, we need to create translation layers for all of them.
+
+The solution is to see the external subsystem as a provider of services.
+
+Define a protocol that gives access to your subsystem as a set of Services. Open the protocol so that all who need to integrate with you can use it. Enhance and expand the protocol to handle new integration requirements, except when a single team has idiosyncratic needs. Then, use a one-off translator to augment the protocol for that special case so that the shared protocol can stay simple and coherent.
+
+If we can wrap a set of Services around it, then all the other subsystems will access these Services, and we won’t need any translation layer.
+### Distillation
+A large domain has a large model even after we have refined it and created many abstractions. It can remain big even after many refactors. In situations like this, it may be time for a distillation. The idea is to define a Core Domain which represents the essence of the domain. The byproducts of the distillation process will be Generic Subdomains which will comprise the other parts of the domain.
+
+The Core Domain of a system depends on how we look at the system.
+
+The Core Domain of an application may become a generic subdomain of another. It is important to correctly identify the Core, and determine the relationships it has with other parts of the model. Emphasize the most valuable and specialized concepts.
+
+Identify cohesive subdomains that are not the motivation for your project. Factor out generic models of these subdomains and place them in separate Modules. Leave no trace of your specialties in them.
+
+Consider off-the shelf solutions or published models for these Generic Subdomains.
+
+There are different ways to implement a Generic Subdomain:
+- **Off-the-shelf Solution**: This one has the advantage of having the entire solution already done by someone else. There is still a learning curve associated with it, and such a solution introduces some dependencies.
+- **Outsourcing**: The design and implementation is given to another team, probably from another company. There is still the inconvenience of integrating the outsourced code. The interface used to communicate with the subdomain needs to be defined and communicated to the other team.
+- **Existing Model**: One handy solution is to use an already created model.
+- **In-House Implementation**: This solution has the advantage of achieving the best level of integration. It does mean extra effort, including the maintenance burden.
+##### Distillation example
+Let's consider an example of an air traffic monitoring system. 
+
+A Flight Plan contains the designed Route the plane must follow.
+
+The Route seems to be an ever present concept in this system. Actually, this concept is a generic one, and not an essential one. The Route concept is used in many domains, and a generic model can be designed to describe it.
+
+The essence of the air traffic monitoring is somewhere else.
+
+The monitoring system knows the route that the plane should follow, but it also receives input from a network of radars tracking the plane in the air. This data shows the actual path followed by the plane, and it is usually different from the prescribed one.
+
+The system will have to compute the trajectory of the plane based on its current flight parameters, plane characteristics and weather. The trajectory is a four dimensional path which completely describes the route that the plane will travel in time.
+
+The module which synthesizes the plane trajectory from the available data is the heart of the business system here. This should be marked out as the core domain.
 ## Notes
 - Subdomain: A domain consists of several subdomains that refer to different parts of the business logic.
-- Bounded context: This is where you implement the code, after you’ve defined the domain and the subdomains. Bounded contexts actually represent boundaries in which a certain subdomain is defined and applicable.
 Advantages:
 - Simpler communication: Thanks to the Ubiquitous Language, communication between developers and teams becomes much easier.
+- Keep in mind some of the pitfalls of domain modeling:
+	1) Stay hands-on. Modelers need to code.
+	2) Focus on concrete scenarios. Abstract thinking has to be anchored in concrete cases.
+	3) Don't try to apply DDD to everything. Draw a context map and decide on where you will make a push for DDD and where you will not. And then don't worry about it outside those boundaries.
+	4) Experiment a lot and expect to make lots of mistakes. Modeling is a creative process.
 
 Downsides:
 - Deep domain knowledge is needed. Even for the most technologically advanced teams working on development, there has to be at least one domain specialist on the team who understands the precise characteristics of the subject area that’s the center of the application. Sometimes there’s a need for several team members who thoroughly know the domain to incorporate in the development team.

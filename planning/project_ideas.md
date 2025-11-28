@@ -1,4 +1,6 @@
 # Project ideas
+## Timesheet Automation
+Automatically fill timesheets, request approval and send it through e-mail.
 ## Indexed search
 How an indexed search works? What about a relevance search? How to design it? How to implement it?
 ## Shortening URL service
@@ -13,19 +15,6 @@ Use an AI assistant to generate an OpenAPI spec based on your project types.
 Could also suggest clean code and clean architecture improvements.
 ## Trading bot
 A bot that performs simple trading operations.
-## MTP implementation
-## VIM clone
-## Image in SMS
-Send images with SMS, should encode the image with Huffman to text and 
-decode after.
-## CLI Pomodore
-A CLI pomodore, it should:
-- configure pomodore time
-- configure pomodore short break
-- configure pomodore long break
-- break interval
-- sound config
-- display notification when timer's up
 ## Search aggregator
 An search aggregator that aggregates search results from Shopee, Mercado Livre, and Amazon
 Can be monetized with ADS.
