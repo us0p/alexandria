@@ -29,7 +29,10 @@ In the example bellow all operators used in JSON are also available for JSONB.
 '{"a": {"b": "foo"}}'::json->'a' -- {"b": "foo"}
 
 -- '->>' Get JSON array element AS text
-'[1,2,3]'::json->>2 -- 3
+'[1,2,3]'::json->>3 -- 3
+
+-- '->>' Get JSON array elements starting from the back
+'[1,2,3]'::jsonb ->> -1 -- 3
 
 -- '->>' Get JSON object field AS text
 '{"a": 1, "b": 2}'::json->>'b' -- 2
