@@ -10,7 +10,7 @@ DDD is not a technology, rather it introduces terms, practices and principles to
 - Complex designs are based on models of the domain.
 - Collaboration between technical and domain experts is crucial to creating an application model that will solve particular domain problems.
 ## Domain model
-A system of abstractions that describes selected aspects of a domain and can be used to solve problems related to that domain.
+A system of abstractions that describes **selected aspects** of a domain and can be used to solve problems related to that domain.
 
 The domain model isn't an diagram, it's the idea the diagram is intended to convey.
 
@@ -20,7 +20,7 @@ The domain model is the internal representation of the target domain. To do that
 
 Usually there are long discussions between software architects or developers and the domain experts. The software specialists want to extract knowledge from the domain experts, and they also have to transform it into a useful form. At some point, they might want to create an early prototype to see how it works so far. While doing that they may find some issues with their model, or their approach, and may want to change the model. The communication is not only one way. There is also feedback, which helps create a better model. This might seem like a very time consuming process, and it is, but this is how it should be
 
-The advisable way of communicating the model is to use small UML diagrams each containing a subset of the model with text that explains that explains behavior and constraints the diagram cannot. Each subsection attempts to explain one important aspect of the domain. The documents can be hand-draw, because that transmits the feeling that they are temporary and might be changed in the near future, which is true.
+The advisable way of communicating the model is to use small UML diagram each containing a subset of the model with text that explains behavior and constraints the diagram cannot. Each subsection attempts to explain one important aspect of the domain. The documents can be hand-draw, because that transmits the feeling that **they are temporary** and might be changed in the near future, which is true.
 ### How to approach the transition from model to code
 1. Design a portion of the software system to reflect the domain model in a very literal way, so that mapping is obvious.
 2. Revisit the model and modify it to be implemented more naturally in software, even as you seek to make it reflect deeper insight into the domain.
@@ -30,9 +30,9 @@ The advisable way of communicating the model is to use small UML diagrams each c
  
  All the terms in the ubiquitous language are structured around the domain model.
 
-The team needs to use this language consistently and in all communications and in the code.
+The team needs to use this language consistently in all communications and in the code.
 
-A change in the language should become a change to the model which represents a change into the model. If domain experts cannot understand something in the model or the language, then it is most likely that there is something is wrong with it.
+A change in the language should become a change to the model which represents a change into the code. If domain experts cannot understand something in the model or the language, then it is most likely that there is something is wrong with it.
 ## Building Blocks of Model-Driven Design
 ### [Layered Architecture](layer_architecture.md)
 Concentrate all the code related to the domain model in one layer and isolate it from the user interface, application, and infrastructure code. Consider using [Clean Architecture](clean_architecture.md).

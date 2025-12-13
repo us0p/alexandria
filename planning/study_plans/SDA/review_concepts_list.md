@@ -3,3 +3,7 @@
 - [Model-Driven Design (MDD)](mdd.md)
 - [Domai-Driven Design (DDD)](ddd.md)
 - [Clean Architecture](clean_architecture.md)
+## Next Steps
+- Review [Layered Architecture](layer_architecture.md)
+- Review [Clean Architecture](clean_architecture.md)
+- Practical implementation of DDD
