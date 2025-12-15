@@ -23,3 +23,13 @@ Allows Requests to skip specific layers. Usually applied when extra layers are a
 
 ![[Pasted image 20251214143007.png]]
 > Note that by having open layers increase the coupling in the system as now layers must be aware of open layers.
+## Applicable problems
+- Software that requires separate layers of processing and security.
+- Data Driven Software, CRUD applications.
+## Supported Non-Functional-Properties (NFPs)
+- Easy to implement/test. Since every layer has a specific function, testing is easy since layers can be mocked.
+- Flexibility. Any software can be abstracted into layers.
+- Security can be implemented at every layer.
+## Inhibited NFPs
+- Low scalability. It results in highly coupled software groups, resulting in a system that is hard to scale and hard to update. A change to a single layer must be verified that it doesn't crash the entire system.
+- Low performance. Data must travel through every layer and processed, slowing down the performance.

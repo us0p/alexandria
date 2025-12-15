@@ -1,4 +1,3 @@
-Value Objects?
 # Clean Architecture
 
 !["clean architecture diagram"](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
@@ -29,11 +28,9 @@ Value Objects?
 
 **Flow of data:**
 Data that crosses the boundaries are simple data structures. You can use basic structs, simple DTO's, or simply arguments in function calls. The important thing is that isolated, simple, data structures are passed across the boundaries. Don’t pass Entities or Database rows.
-  
----
 ## Getting deeper
-It's a mix of ideas regarding the architecture of software. It's built 
-upon:
+### What is Clean Architecture
+It's a mix of ideas regarding the architecture of software. It's built upon:
 - Hexagonal Architecture
 - Onion Architecture
 - Screaming Architecture
@@ -53,7 +50,7 @@ Each of these architectures produce systems that are:
 
 Note that there's no rule that says you must always have just these four circles. However the **dependency rule** always applies. Source code dependencies always point inwards.
 
-As you move inwards the level of abstraction increases. The outermost circle is low level concrete detail.  As you move inwards the software grows more abstract, and encapsulates higher level policies. The inner most circle is the most gerenal.
+As you move inwards the level of abstraction increases. The outermost circle is low level concrete detail.  As you move inwards the software grows more abstract, and encapsulates higher level policies. The inner most circle is the most general.
 ## The Dependency Rule
 The concentric circles represent different areas of software. In general, the further in you go, the higher level the software becomes. The outer circles are mechanisms. The inner circles are policies.
 
@@ -92,7 +89,7 @@ Common responsibilities:
 - Each use case handles one specific workflow or action.
 - Perform validation on data to ensure the data is valid for the given use case.
 
-For example, an user login use case, uses the `User` entity to validade username and password, then applies the use case business rule and generates a JWT and returns the token or an error message.
+For example, an user login use case, uses the `User` entity to validate username and password, then applies the use case business rule and generates a JWT and returns the token or an error message.
 
 **A use case must be a class with only one exec() method?**
 - It's not a rule rather a recommendation.

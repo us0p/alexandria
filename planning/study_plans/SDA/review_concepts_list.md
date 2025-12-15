@@ -1,9 +1,11 @@
 - [Object Oriented Programming (OOP)](oop.md)
 - [Clean Code](clean_code.md)
 - [Model-Driven Design (MDD)](mdd.md)
-- [Domai-Driven Design (DDD)](ddd.md)
+- [Domain-Driven Design (DDD)](ddd.md)
+- [Clean Architecture](clean_architecture.md)
+- [Layered Architecture](layer_architecture.md)
 - [Clean Architecture](clean_architecture.md)
 ## Next Steps
-- Review [Layered Architecture](layer_architecture.md)
-- Review [Clean Architecture](clean_architecture.md)
 - Practical implementation of DDD
+	- [Clean Architecture vs DDD](https://www.youtube.com/watch?v=eUW2CYAT1Nk)
+	- [DDD: The Last Explanation You'll Ever Need](https://www.youtube.com/watch?v=o-ym035R1eY)
