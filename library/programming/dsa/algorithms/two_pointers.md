@@ -69,3 +69,6 @@ void sortNums(int* nums, int numsLen) {
 	}
 }
 ```
+## Patterns
+### Triplets
+For problems where you need to find triplets, and the rule for moving the pointers are the same, you can move one pair of pointers first and then move the other instead of trying to move all at once.
