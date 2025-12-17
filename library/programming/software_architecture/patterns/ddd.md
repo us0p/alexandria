@@ -345,6 +345,181 @@ The monitoring system knows the route that the plane should follow, but it also 
 The system will have to compute the trajectory of the plane based on its current flight parameters, plane characteristics and weather. The trajectory is a four dimensional path which completely describes the route that the plane will travel in time.
 
 The module which synthesizes the plane trajectory from the available data is the heart of the business system here. This should be marked out as the core domain.
+
+---
+## Domain-Driven Design (DDD)
+DDD is commonly divided into **two complementary parts**:
+### 1. Strategic Design
+High-level view of the domain.  
+Focused on **understanding the business**, not on implementation details.  
+Usually done **first**.
+### 2. Tactical Design
+Low-level view of the domain.  
+Focused on **modeling and implementing** the solution in code.  
+Done **after** Strategic Design.
+## Strategic Design
+Strategic Design operates primarily in the **Problem Space**.  
+Here we are concerned with **what the problem is**, not how we solve it.
+### Problem Space Concepts
+#### 1. Value
+- The business value the application is meant to create.
+- Answers: _Why does this system exist?_
+#### 2. Knowledge Discovery
+A collaborative learning process between developers and domain experts.
+- **Domain Experts**
+    - People with deep knowledge of the business domain.
+    - Not necessarily technical.
+- **Event Storming**
+    - A collaborative modeling technique.
+    - Focuses on **Domain Events** (things that _have happened_).
+    - Similar to brainstorming, but structured around time and causality.
+    **Key elements:**
+    - **Domain Events**: Facts that happened in the domain.
+    - **Commands**: Intent to perform an action (often lead to events).
+    - **Policies / Business Rules**: Rules that react to events and trigger commands.
+    - **Aggregates / Entities**: Identified later as behavior clusters.
+- Conducted by **developers and business experts together**
+- Goal: Achieve a **shared understanding** of the domain and problem space.
+#### 3. Communication
+- Achieved through **Ubiquitous Language**
+- A shared language used:
+    - In conversations
+    - In documentation
+    - In code
+- Eliminates translation between business and technical terms.
+#### 4. Domain Analysis
+Information is clustered to identify **Subdomains**:
+- **Core Subdomain**
+    - The heart of the business.
+    - Main source of competitive advantage.
+    - Must be developed in-house.
+    - Where most of the effort and expertise goes.
+- **Supporting Subdomains**
+    - Necessary to support the core.
+    - Not a competitive advantage.
+    - Can be built internally or partially outsourced.
+- **Generic Subdomains**
+    - Well-known, common problems.
+    - Can be fully outsourced (e.g., authentication, billing, logging).
+Once we understand **what problem we’re solving**, we move to the **Solution Space**.
+## Tactical Design
+Tactical Design operates in the **Solution Space**.  
+It focuses on **how** we model and implement the domain.
+### Solution Space Concepts
+#### 1. Bounded Context
+- A **boundary** within which:
+    - A specific model applies
+    - The Ubiquitous Language has a precise meaning
+- Identified based on **Strategic Design insights**.
+**Context interaction patterns include:**
+- **Direct Invocation** (synchronous)
+- **Domain Events** (asynchronous)
+- **Shared Kernel** (shared model, used sparingly)
+- **Anti-Corruption Layer (ACL)**
+    - Translates one context’s model into another
+    - Prevents model pollution
+#### 2. Entities
+- Have a **distinct identity** that persists over time.
+- Identity matters more than attribute values.
+- **Do NOT span multiple Bounded Contexts**  
+#### 3. Value Objects
+- Immutable
+- No identity
+- Equality is based on value
+- Used as building blocks for entities.
+#### 4. Aggregates
+- A **consistency boundary**.
+- A cluster of entities and value objects with:
+    - One **Aggregate Root**
+    - All access from outside goes through the root.
+- Enforces invariants.
+- Usually defines a **transaction boundary**.
+```go
+type Delivery struct {
+ 	// fields 
+}  
+
+type Drone struct {
+	// fields 
+}
+
+type DeliveryAggregate struct {
+	// Aggregate Root 	
+	Delivery Delivery 	
+	drone    Drone 
+}
+// Methods on the aggregate enforce rules and coordinate changes.`
+```
+> Rule: Only the Aggregate Root can be referenced from outside.
+#### 5. Domain Events
+- Represent something that _has happened_ in the domain.
+- Used for:
+    - Decoupling bounded contexts
+    - Asynchronous communication
+- Expressed in the Ubiquitous Language.
+#### 6. Services
+Services are **stateless** and represent operations that don’t naturally belong to an entity or value object.
+- **Domain Services**
+    - Pure domain logic
+    - Use only domain concepts
+    - Often coordinate multiple aggregates
+- **Application Services**
+    - Orchestrate use cases
+    - Handle concerns like:
+        - Transactions
+        - Authentication
+        - Emailing
+        - Calling repositories
+    - Do not contain domain rules.
+## Anemic vs Rich Domain Model
+### Anemic Model
+- Data-only structures
+- Business logic lives elsewhere
+- Often resembles CRUD + DTOs
+```go
+type Drone struct {
+ 	id string 
+ 	model string
+ 	status string
+ 	batteryLevel int 
+}
+```
+**Problems:**
+- No invariants
+- No encapsulation
+- Hard to maintain business rules
+### Rich Domain Model
+- Behavior and data live together
+- Invariants enforced inside the model
+- Uses meaningful types
+```go
+type Drone struct {
+ 	id string
+ 	model string
+ 	status Status
+ 	batteryLevel BatteryLevel 
+}
+func NewDrone(
+	id, model string,
+	status Status,
+	batteryLevel BatteryLevel
+) (Drone, error) {
+	if model == "" {
+	 	return Drone{}, errors.New("model is required")
+	}
+	return Drone{
+		id: id,
+		model: model,
+		status: status,
+		batteryLevel: batteryLevel,
+	}, nil }
+```
+**Benefits:**
+- Business rules are explicit
+- Safer and more expressive code
+- Easier evolution of the domain
+
+---
 ## Notes
 - Subdomain: A domain consists of several subdomains that refer to different parts of the business logic.
 Advantages:
