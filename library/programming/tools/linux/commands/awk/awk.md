@@ -87,8 +87,8 @@ The `awk` utility reads the input files one line at a time. For each line, awk t
 ```
 
 If a line contains `12` and `21` it's going to be printed two times.
-### Actions
-awk is a **line-oriented** language. Each rule's action has to begin on the same line as the pattern. To have it on separate lines you **must** use [Backslash Continuation](#Backslash%20continuation).
+#### Actions
+	awk is a **line-oriented** language. Each rule's action has to begin on the same line as the pattern. To have it on separate lines you **must** use [Backslash Continuation](#Backslash%20continuation).
 
 ```bash
 awk 'BEGIN {
@@ -96,7 +96,7 @@ awk 'BEGIN {
 		"hello, world"
 }'
 ```
-### Variables
+#### Variables
 In `awk`, variables are automatically initialized to zero.
 
 ```bash
@@ -106,7 +106,7 @@ ls -l | awk '{ sum += $5 }; END { print sum }'
 This command is going to sum the size of all the files in the current directory and print the total sum.
 
 Note that `sum` is initialized to 0.
-### Line continuation
+#### Line continuation
 Most often, each line in an awk program is a separate statement or rule.
 
 ```bash
@@ -120,7 +120,7 @@ However, `gawk` ignores newlines after any of the following symbols and keywords
 ```
 
 A newline at any other point is considered the end of the statement.
-#### Backslash continuation
+##### Backslash continuation
 You can continue a line by ending the first line with a backslash. A backslash followed by a newline is allowed anywhere in the statement, even in the middle of a string or regular expressions.
 
 ```bash
@@ -131,9 +131,31 @@ awk '/This regular expression is too long, so continue it\
 >For maximum portability of your awk programs, it is best to split your lines in the middle of a regular expression or a string.
 
 >Backslash Continuation and [Comments](#Comments) do not mix.
-#### Semicolon continuation
+##### Semicolon continuation
 You can put more than one statement on a single line. This is accomplished by separating the statements with a `;`.
 
 ```bash
 awk '/12/ { print $0 } ; /21/ { print $0 }'
 ```
+### Command-Line
+Any additional arguments on the command line are normally treated as input files to be processed in the order specified. However, an argument that has the form `var=value`, assigns the value `value` to the variable `var`.
+
+```bash
+awk -f program.awk file1 count=1 file2
+```
+
+`file1` and `file2` are input files, `count=1` is a variable declaration.
+
+If you need to process a file whose name looks like a variable assignment, precede the file name with `./`.
+
+```bash
+awk -f program.awk file1 ./count=1 file2
+```
+
+`file1`, `./count=1` and `file2` are all input files to this program.
+
+>All the command-line arguments are made available to your `awk` program in the `ARGV` array. CMD options and the program text are omitted from `ARGV`. All other arguments, including variable assignments, are included. As each element of `ARGV` is processed, `gawk` sets `ARGID` to the index in `ARGV` of the current element.
+
+The variables actually receive the given values after all previously specified files have been read. In particular, the values of variables assigned in this fashion are not available inside a `BEGIN` rule.
+
+If you need those variables to be available for `BEGIN` consider using the `-v` option.
