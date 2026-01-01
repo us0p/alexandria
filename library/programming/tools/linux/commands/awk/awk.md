@@ -137,6 +137,37 @@ You can put more than one statement on a single line. This is accomplished by se
 ```bash
 awk '/12/ { print $0 } ; /21/ { print $0 }'
 ```
+#### Including other files into your program (`gawk` only)
+The `@include` directive can be used to read external `awk` source files. It can be used in conjunction with the `AWKPATH` environment variable.
+
+>Source files may also be included using the `-i` option.
+
+```awk
+# test1
+BEGIN {
+	print "This is script test1."
+}
+
+# test2
+@include "test1"
+BEGIN {
+	print "This is script test2."
+}
+
+# test3
+# The file name can, of course, be a pathname
+@include "../test2"
+BEGIN {
+	print "This is script test3."
+}
+
+$ gawk -f test3
+-| This is script test1.
+-| This is script test2.
+-| This is script test3.
+```
+
+>The rules for finding a source file described in [AWKPATH](#The%20AWKPATH%20ENV%20in%20gawk) also apply to files loaded with `@include`.
 ### Command-Line
 Any additional arguments on the command line are normally treated as input files to be processed in the order specified. However, an argument that has the form `var=value`, assigns the value `value` to the variable `var`.
 
@@ -159,3 +190,26 @@ awk -f program.awk file1 ./count=1 file2
 The variables actually receive the given values after all previously specified files have been read. In particular, the values of variables assigned in this fashion are not available inside a `BEGIN` rule.
 
 If you need those variables to be available for `BEGIN` consider using the `-v` option.
+#### Naming Standard Input
+You may wish to read one file, read standard input coming from a pipe, and then read another file.
+
+The way to name the standard input, is to use a single, standalone dash `-`.
+
+```bash
+some_command | awk -f myprog.awk file1 - file2
+```
+
+Here, awk first reads `file1`, then it reads the output of `some_command`, and finally it reads `file2`.
+
+You can never use `-` with the `-f` option to read program source code from standard input.
+#### The `AWKPATH` ENV in `gawk`
+with gawk, if the file name supplied to the -f or -i options does not contain a directory separator ‘/’, then gawk searches a list of directories (called the search path) one by one, looking for a file with the specified name.
+
+The search path is a string consisting of directory names separated by colons.13 gawk gets its search path from the AWKPATH environment variable. If that variable does not exist, or if it has an empty value, gawk uses a default path
+
+The default value for `AWKPATH` is `.:/usr/local/share/awk`. Since `.` is included at the beginning, gawk searches first in the current directory and then in `/usr/local/share/awk`
+#### Exit Status
+- `gawk` exits with the numeric value given to `exit statement`.
+- If there were no problems, exits with `0`.
+- If an error occurs, gawk exits with 1.
+- If gawk exits because of a fatal error, the status is 2.
