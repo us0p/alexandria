@@ -213,3 +213,19 @@ The default value for `AWKPATH` is `.:/usr/local/share/awk`. Since `.` is includ
 - If there were no problems, exits with `0`.
 - If an error occurs, gawk exits with 1.
 - If gawk exits because of a fatal error, the status is 2.
+### RegEXP
+In `awk` the two operators `~` and `!~` perform regular expression comparisons. Expressions using these operators can be used as patterns, or `if`, `while`, `for`, and `do` statements.
+
+This example matches, all input records with the uppercase letter `J` somewhere in the first field.
+```bash
+awk '$1 ~ /J/' input-file
+
+# Same functionality
+awk '{ if ($1 ~ /J/) print }' input-file
+```
+
+The right hand side of a `~` or `!~` operator need not be a regexp constant. It may be any expression. The expression is evaluated and converted to a string if necessary, the contents of the string are then used as the regexp. A regexp computed in this way is called a *dynamic regexp*.
+
+>Always prefer to use regexp constants instead of string constants. In string constants you need to duplicate your escape sequences as string constants are processed twice.
+
+>For complete portability, do not use a backslash before any character not shown in the previous list or that is not an operator.
