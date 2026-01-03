@@ -168,6 +168,53 @@ $ gawk -f test3
 ```
 
 >The rules for finding a source file described in [AWKPATH](#The%20AWKPATH%20ENV%20in%20gawk) also apply to files loaded with `@include`.
+#### Reading Input Files
+If you specify input files, `awk` reads them in order, processing all the data from one before going on to the next.
+
+The input is read in units called **records**, and is processed by the rules of your program one record at a time. By default, each record is one line. Each record is automatically split into chunks called **fields**.
+##### How Input is Split into Records
+The records and fields received from your program are kept track on a variable called `FNR`, which is reset to zero every time a new file is started.
+###### Record Splitting with `awk`
+Records are separated by a character called the *record separator* (`RS`). By default, the record separator is the newline character.
+
+To use a different character for the record separator, simply assign that character to the predefined variable `RS`.
+
+You can change the value of `RS` in the [BEGIN](awk.md#BEGIN) section, in which case it **must** be enclosed in double quotes.
+
+```bash
+awk 'BEGIN { RS = "u" } { print $0 }' file-input
+```
+
+Another way to change it is on the [command-line](awk.md#Command-Line), using the variable-assignment feature:
+
+```bash
+awk '{print $0 }' RS="u" file-input
+```
+
+Reaching the end of an input file terminates the current input record, even if the last character in the file is not the character in `RS`.
+###### Record Splitting with `gawk`
+The value of `RS` is not limited to a one-character string. If it contains more than one character, it's treated as a regular expression.
+
+In general, each record ends at the next string that matches the regular expression. The next record starts at the end of the matching string.
+
+When `RS` is a single character, `RT` contains the same single character. However, when `RS` is a regular expression, `RT` contains the actual input text that matched the regular expression.
+
+If the input file ends without any text matching `RS`, `gawk` sets `RT` to the null string.
+
+```bash
+echo record 1 AAAA record 2 BBBB record 3 |
+gawk 'BEGIN { RS = "\n|( *[[:upper:]]+ *)" }
+			{ print "Record =", $0, "and RT = [" RT "]" }'
+```
+
+```text
+-| Record = record 1 and RT = [ AAAA ]
+-| Record = record 2 and RT = [ BBBB ]
+-| Record = record 3 and RT = [ 
+-| ]
+```
+
+> The use of `RS` as a regular expression and the `RT` variable are `gawk` extensions, they are not available in compatibility mode.
 ### Command-Line
 Any additional arguments on the command line are normally treated as input files to be processed in the order specified. However, an argument that has the form `var=value`, assigns the value `value` to the variable `var`.
 
@@ -229,3 +276,21 @@ The right hand side of a `~` or `!~` operator need not be a regexp constant. It 
 >Always prefer to use regexp constants instead of string constants. In string constants you need to duplicate your escape sequences as string constants are processed twice.
 
 >For complete portability, do not use a backslash before any character not shown in the previous list or that is not an operator.
+#### Controlling character interpretation via command-line
+- **No options** (default): `gawk` provides all the facilities of POSIX regexps and the GNU operators.
+- `--posix`: Match only POSIX regexps, GNU operators are not special (e.g., `\w` matches a literal `w`).
+- `--traditional`: Match traditional Unix awk regexps. GNU operators are not special. POSIX [character classes](regexp_intro.md#Character%20Classes) are available.
+#### Case Sensitivity in Matching
+You can perform case-insensitive match at a particular point in the program by converting the data to a single case, using the `tolower()` or `toupper` functions:
+
+```bash
+awk `tolower($1) ~ /foo/ { ... }`
+```
+
+This converts the first field to lowercase before matching against it.
+
+Another method, specific to `gawk`, is to set the variable `IGNORECASE` to a nonzero value. When set, all regexp string operations ignore case.
+
+`IGNORECASE` can be set on the command line or in a `BEGIN` rule. Setting `IGNORECASE` from the command line is a way to make a program case insensitive without having to edit it.
+
+>The value of `IGNORECASE` has no effect in `gawk` in its compatibility mode.
