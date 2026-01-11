@@ -11,8 +11,10 @@
 	- 01/02/2026: 22m 22s
 - 12/14/2025: [Remove Prefix of Word](https://leetcode.com/problems/reverse-prefix-of-word/description/?envType=problem-list-v2&envId=two-pointers) 10m 55s
 	- 12/19/2025: 06m 42s
+	- 01/03/2026: 10m 28s
 - 12/15/2025: [Find All K-Distant Indices in an Array](https://leetcode.com/problems/find-all-k-distant-indices-in-an-array/submissions/?envType=problem-list-v2&envId=two-pointers) 12m 42s
 	- 12/19/2025: 21m 01s
+	- 01/03/2026: 36m 42s
 - 12/15/2025: [Number of Arithmetic Triplets](https://leetcode.com/problems/number-of-arithmetic-triplets/?envType=problem-list-v2&envId=two-pointers) 30m 22s
 ### Medium
 - 11/04/2025: [Longest Palindromic Substring - LeetCode](https://leetcode.com/problems/longest-palindromic-substring/description/?envType=problem-list-v2&envId=two-pointers)
