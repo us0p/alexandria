@@ -6,3 +6,5 @@ WHERE condition;
 ```
 
 The `WHERE` clause is optional. If you omit the `WHERE` clause, the `DELETE` statement will delete all rows from the table.
+
+Can also delete records based on other table with [USING](043-using.md)
